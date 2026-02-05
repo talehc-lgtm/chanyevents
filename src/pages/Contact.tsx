@@ -243,10 +243,10 @@ const Contact: React.FC = () => {
                   <span className="text-foreground font-medium">Email</span>
                 </div>
                 <a
-                  href="mailto:contact@chanyevents.com"
+                  href="mailto:contacts@chanyevents.com"
                   className="text-primary hover:underline"
                 >
-                  contact@chanyevents.com
+                  contacts@chanyevents.com
                 </a>
               </div>
             </motion.div>
