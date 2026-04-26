@@ -12,6 +12,9 @@ import informationDeskImage from '@/assets/chany-information-desk.jpg';
 import registrationTeamImage from '@/assets/chany-registration-team.jpg';
 import brandTeamImage from '@/assets/chany-brand-team.jpg';
 import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
+import exnessConsultationImage from '@/assets/chany-exness-consultation.jpg';
+import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
+import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
 
 const Services: React.FC = () => {
   const { t } = useLanguage();
@@ -21,7 +24,7 @@ const Services: React.FC = () => {
       icon: Building2,
       title: t('services.corporate.title'),
       description: t('services.corporate.desc'),
-      image: promote2017TeamImage,
+      image: exnessConsultationImage,
       features: [
         'Conférences & séminaires',
         'Team building',
@@ -34,7 +37,7 @@ const Services: React.FC = () => {
       icon: Crown,
       title: t('services.weddings.title'),
       description: t('services.weddings.desc'),
-      image: weddingAisleImage,
+      image: luxuryWeddingCoupleImage,
       features: [
         'Cérémonies traditionnelles',
         'Réceptions sur mesure',
@@ -47,7 +50,7 @@ const Services: React.FC = () => {
       icon: Sparkles,
       title: t('services.vip.title'),
       description: t('services.vip.desc'),
-      image: tableDecorImage,
+      image: weddingFireworksImage,
       features: [
         'Galas & soirées de prestige',
         'Événements privés',
