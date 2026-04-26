@@ -133,7 +133,7 @@ const Index: React.FC = () => {
 
         {/* Content */}
         <div className="relative z-10 container-luxury w-full px-6 pt-32 pb-28">
-          <div className="grid min-h-[68vh] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+          <div className="grid min-h-[68vh] items-center">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentHeroSlide.title}
@@ -179,28 +179,6 @@ const Index: React.FC = () => {
               </motion.div>
             </AnimatePresence>
 
-            <div className="hidden lg:block">
-              <div className="ml-auto max-w-md space-y-3 border-l border-primary/30 pl-6">
-                {heroSlides.map((slide, index) => (
-                  <button
-                    key={slide.title}
-                    type="button"
-                    onClick={() => setActiveHeroSlide(index)}
-                    className={`group flex w-full items-center gap-4 rounded-sm border px-4 py-4 text-left transition-all duration-300 ${
-                      activeHeroSlide === index
-                        ? 'border-primary bg-primary/12 shadow-[0_0_28px_hsl(var(--primary)/0.16)]'
-                        : 'border-border/60 bg-card/30 hover:border-primary/50 hover:bg-card/60'
-                    }`}
-                  >
-                    <span className="font-serif text-2xl text-primary/80">0{index + 1}</span>
-                    <span>
-                      <span className="block font-serif text-lg text-foreground">{slide.title}</span>
-                      <span className="block text-sm text-muted-foreground line-clamp-2">{slide.description}</span>
-                    </span>
-                  </button>
-                ))}
-              </div>
-            </div>
           </div>
 
           <div className="absolute bottom-10 left-6 right-6 z-20 lg:hidden">
