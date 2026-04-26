@@ -45,7 +45,7 @@ const Header: React.FC = () => {
         <nav className="flex items-center justify-between h-20 md:h-24 px-6 md:px-12">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <span className="flex h-14 w-40 md:h-16 md:w-48 items-center justify-center overflow-hidden rounded-sm bg-cream px-3 py-2 shadow-[0_0_28px_hsl(var(--primary)/0.16)] ring-1 ring-primary/20">
+            <span className="flex h-14 w-40 md:h-16 md:w-48 items-center justify-center overflow-hidden px-1 py-1 drop-shadow-[0_0_18px_hsl(var(--primary)/0.22)]">
               <img
                 src={logoChanyEvents}
                 alt="CHANY EVENT'S"
