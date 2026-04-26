@@ -13,6 +13,9 @@ import promote2017TeamImage from '@/assets/chany-promote-2017-team.jpg';
 import informationDeskImage from '@/assets/chany-information-desk.jpg';
 import brandTeamImage from '@/assets/chany-brand-team.jpg';
 import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
+import exnessConsultationImage from '@/assets/chany-exness-consultation.jpg';
+import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
+import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
 
 const Index: React.FC = () => {
   const { t } = useLanguage();
@@ -49,28 +52,28 @@ const Index: React.FC = () => {
   ];
 
   const portfolioItems = [
-    { image: informationDeskImage, title: 'Accueil conférences', category: 'Corporate' },
-    { image: brandTeamImage, title: 'Activation de marque', category: 'Salon' },
-    { image: weddingAisleImage, title: 'Cérémonie privée', category: 'Mariage' },
+    { image: exnessConsultationImage, title: 'Stand Exness', category: 'Corporate' },
+    { image: luxuryWeddingCoupleImage, title: 'Mariage de prestige', category: 'Mariage' },
+    { image: weddingFireworksImage, title: 'Final spectaculaire', category: 'VIP' },
   ];
 
   const heroSlides = [
     {
-      image: promote2017TeamImage,
+      image: exnessConsultationImage,
       icon: Building2,
       label: t('services.corporate.title'),
       title: 'Événements Corporate',
       description: 'Conférences, séminaires et lancements de produits conçus pour renforcer votre image et marquer vos invités.',
     },
     {
-      image: weddingAisleImage,
+      image: luxuryWeddingCoupleImage,
       icon: Crown,
       label: t('services.weddings.title'),
       title: 'Mariages & Célébrations',
       description: 'Des célébrations raffinées, profondément humaines, orchestrées avec élégance et précision jusque dans le moindre détail.',
     },
     {
-      image: tableDecorImage,
+      image: weddingFireworksImage,
       icon: Sparkles,
       label: t('services.vip.title'),
       title: 'Événements VIP',
