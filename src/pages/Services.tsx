@@ -11,6 +11,12 @@ import weddingImage from '@/assets/wedding-event.jpg';
 import vipImage from '@/assets/vip-event.jpg';
 import fairImage from '@/assets/fair-event.jpg';
 import staffImage from '@/assets/staff-event.jpg';
+import traditionalHostessesImage from '@/assets/chany-hostesses-traditional.jpg';
+import promoteTeamImage from '@/assets/chany-promote-team.jpg';
+import exnessHostessesImage from '@/assets/chany-exness-hostesses.jpg';
+import maleHostsImage from '@/assets/chany-male-hosts.jpg';
+import weddingHostessesImage from '@/assets/chany-wedding-hostesses.jpg';
+import vipReceptionImage from '@/assets/chany-vip-reception.jpg';
 
 const Services: React.FC = () => {
   const { t } = useLanguage();
@@ -20,7 +26,7 @@ const Services: React.FC = () => {
       icon: Building2,
       title: t('services.corporate.title'),
       description: t('services.corporate.desc'),
-      image: corporateImage,
+      image: promoteTeamImage,
       features: [
         'Conférences & séminaires',
         'Team building',
@@ -33,7 +39,7 @@ const Services: React.FC = () => {
       icon: Crown,
       title: t('services.weddings.title'),
       description: t('services.weddings.desc'),
-      image: weddingImage,
+      image: weddingHostessesImage,
       features: [
         'Cérémonies traditionnelles',
         'Réceptions sur mesure',
@@ -46,7 +52,7 @@ const Services: React.FC = () => {
       icon: Sparkles,
       title: t('services.vip.title'),
       description: t('services.vip.desc'),
-      image: vipImage,
+      image: traditionalHostessesImage,
       features: [
         'Galas & soirées de prestige',
         'Événements privés',
@@ -59,7 +65,7 @@ const Services: React.FC = () => {
       icon: Megaphone,
       title: t('services.fairs.title'),
       description: t('services.fairs.desc'),
-      image: fairImage,
+      image: exnessHostessesImage,
       features: [
         'Conception de stands',
         'Logistique complète',
@@ -72,7 +78,7 @@ const Services: React.FC = () => {
       icon: Globe,
       title: t('services.translation.title'),
       description: t('services.translation.desc'),
-      image: corporateImage,
+      image: vipReceptionImage,
       features: [
         'Interprétation simultanée',
         'Traduction de documents',
@@ -85,7 +91,7 @@ const Services: React.FC = () => {
       icon: Users,
       title: t('services.staffing.title'),
       description: t('services.staffing.desc'),
-      image: staffImage,
+      image: maleHostsImage,
       features: [
         'Hôtesses & stewards',
         'Mannequins professionnels',
