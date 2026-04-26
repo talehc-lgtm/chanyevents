@@ -42,10 +42,10 @@ const Header: React.FC = () => {
       }`}
     >
       <div className="container-luxury">
-        <nav className="flex items-center justify-between h-20 md:h-24 px-6 md:px-12">
+        <nav className="flex items-center justify-between h-28 md:h-36 px-6 md:px-12">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <span className="flex h-14 w-40 md:h-16 md:w-48 items-center justify-center overflow-hidden px-1 py-1 drop-shadow-[0_0_18px_hsl(var(--primary)/0.22)]">
+            <span className="flex h-28 w-80 md:h-32 md:w-96 items-center justify-center overflow-hidden px-1 py-1 drop-shadow-[0_0_18px_hsl(var(--primary)/0.22)]">
               <img
                 src={logoChanyEvents}
                 alt="CHANY EVENT'S"
