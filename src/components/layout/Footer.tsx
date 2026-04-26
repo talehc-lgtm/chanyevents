@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, Instagram, Facebook, Linkedin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
+import logoChanyEvents from '@/assets/logo-chany-events.png';
 
 const Footer: React.FC = () => {
   const { t } = useLanguage();
@@ -19,9 +20,13 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <h3 className="font-serif text-3xl font-semibold text-gradient-gold mb-4">
-              CHANY EVENT'S
-            </h3>
+            <Link to="/" className="mb-5 flex h-24 w-56 items-center justify-center overflow-hidden rounded-sm bg-cream px-4 py-3 shadow-[0_0_34px_hsl(var(--primary)/0.18)] ring-1 ring-primary/20">
+              <img
+                src={logoChanyEvents}
+                alt="CHANY EVENT'S"
+                className="h-full w-full object-contain"
+              />
+            </Link>
             <p className="text-muted-foreground text-lg mb-6 max-w-md">
               {t('footer.tagline')}
             </p>
