@@ -13,6 +13,11 @@ import exnessHostessesImage from '@/assets/chany-exness-hostesses.jpg';
 import maleHostsImage from '@/assets/chany-male-hosts.jpg';
 import weddingHostessesImage from '@/assets/chany-wedding-hostesses.jpg';
 import vipReceptionImage from '@/assets/chany-vip-reception.jpg';
+import tableDecorImage from '@/assets/chany-table-decor.jpg';
+import promote2017TeamImage from '@/assets/chany-promote-2017-team.jpg';
+import informationDeskImage from '@/assets/chany-information-desk.jpg';
+import brandTeamImage from '@/assets/chany-brand-team.jpg';
+import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
 
 const Index: React.FC = () => {
   const { t } = useLanguage();
@@ -49,42 +54,42 @@ const Index: React.FC = () => {
   ];
 
   const portfolioItems = [
-    { image: traditionalHostessesImage, title: 'Accueil protocolaire', category: 'VIP' },
-    { image: promoteTeamImage, title: 'Activation de marque', category: 'Salon' },
-    { image: weddingHostessesImage, title: 'Cérémonie privée', category: 'Mariage' },
+    { image: informationDeskImage, title: 'Accueil conférences', category: 'Corporate' },
+    { image: brandTeamImage, title: 'Activation de marque', category: 'Salon' },
+    { image: weddingAisleImage, title: 'Cérémonie privée', category: 'Mariage' },
   ];
 
   const heroSlides = [
     {
-      image: promoteTeamImage,
+      image: promote2017TeamImage,
       icon: Building2,
       label: t('services.corporate.title'),
       title: 'Événements Corporate',
       description: 'Conférences, séminaires et lancements de produits conçus pour renforcer votre image et marquer vos invités.',
     },
     {
-      image: weddingHostessesImage,
+      image: weddingAisleImage,
       icon: Crown,
       label: t('services.weddings.title'),
       title: 'Mariages & Célébrations',
       description: 'Des célébrations raffinées, profondément humaines, orchestrées avec élégance et précision jusque dans le moindre détail.',
     },
     {
-      image: traditionalHostessesImage,
+      image: tableDecorImage,
       icon: Sparkles,
       label: t('services.vip.title'),
       title: 'Événements VIP',
       description: 'Réceptions privées, galas et soirées exclusives avec un service discret, fluide et irréprochable.',
     },
     {
-      image: exnessHostessesImage,
+      image: brandTeamImage,
       icon: Megaphone,
       label: t('services.fairs.title'),
       title: 'Salons & Foires',
       description: 'Des espaces événementiels premium pensés pour attirer, engager et convertir votre audience professionnelle.',
     },
     {
-      image: maleHostsImage,
+      image: informationDeskImage,
       icon: Users,
       label: t('services.staffing.title'),
       title: 'Personnel Événementiel',
