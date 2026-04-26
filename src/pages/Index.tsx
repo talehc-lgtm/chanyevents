@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight, Crown, Users, Sparkles, Building2, Globe, Star } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { ArrowRight, Crown, Users, Sparkles, Building2, Globe, Star, Megaphone } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -10,9 +10,12 @@ import heroImage from '@/assets/hero-event.jpg';
 import weddingImage from '@/assets/wedding-event.jpg';
 import corporateImage from '@/assets/corporate-event.jpg';
 import vipImage from '@/assets/vip-event.jpg';
+import fairImage from '@/assets/fair-event.jpg';
+import staffImage from '@/assets/staff-event.jpg';
 
 const Index: React.FC = () => {
   const { t } = useLanguage();
+  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
 
   const services = [
     {
@@ -49,6 +52,62 @@ const Index: React.FC = () => {
     { image: corporateImage, title: 'Symposium International', category: 'Corporate' },
     { image: vipImage, title: 'Gala de Charité', category: 'VIP' },
   ];
+
+  const heroSlides = [
+    {
+      image: corporateImage,
+      icon: Building2,
+      label: t('services.corporate.title'),
+      title: 'Événements Corporate',
+      description: 'Conférences, séminaires et lancements de produits conçus pour renforcer votre image et marquer vos invités.',
+    },
+    {
+      image: weddingImage,
+      icon: Crown,
+      label: t('services.weddings.title'),
+      title: 'Mariages & Célébrations',
+      description: 'Des célébrations raffinées, profondément humaines, orchestrées avec élégance et précision jusque dans le moindre détail.',
+    },
+    {
+      image: vipImage,
+      icon: Sparkles,
+      label: t('services.vip.title'),
+      title: 'Événements VIP',
+      description: 'Réceptions privées, galas et soirées exclusives avec un service discret, fluide et irréprochable.',
+    },
+    {
+      image: fairImage,
+      icon: Megaphone,
+      label: t('services.fairs.title'),
+      title: 'Salons & Foires',
+      description: 'Des espaces événementiels premium pensés pour attirer, engager et convertir votre audience professionnelle.',
+    },
+    {
+      image: staffImage,
+      icon: Users,
+      label: t('services.staffing.title'),
+      title: 'Personnel Événementiel',
+      description: 'Hôtesses, stewards, mannequins et équipes qualifiées pour représenter votre marque avec distinction.',
+    },
+    {
+      image: heroImage,
+      icon: Globe,
+      label: t('services.translation.title'),
+      title: 'Traduction FR/EN',
+      description: 'Une communication fluide pour vos symposiums, conférences et événements internationaux.',
+    },
+  ];
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
+    }, 6500);
+
+    return () => window.clearInterval(timer);
+  }, [heroSlides.length]);
+
+  const currentHeroSlide = heroSlides[activeHeroSlide];
+  const HeroIcon = currentHeroSlide.icon;
 
   return (
     <Layout>
