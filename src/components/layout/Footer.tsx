@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* Brand */}
           <div className="lg:col-span-2">
-            <Link to="/" className="mb-5 flex h-24 w-56 items-center justify-center overflow-hidden rounded-sm bg-cream px-4 py-3 shadow-[0_0_34px_hsl(var(--primary)/0.18)] ring-1 ring-primary/20">
+            <Link to="/" className="mb-5 flex h-24 w-56 items-center justify-center overflow-hidden px-1 py-1 drop-shadow-[0_0_22px_hsl(var(--primary)/0.22)]">
               <img
                 src={logoChanyEvents}
                 alt="CHANY EVENT'S"
