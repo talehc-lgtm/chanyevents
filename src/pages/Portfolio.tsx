@@ -4,12 +4,13 @@ import { X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
-import traditionalHostessesImage from '@/assets/chany-hostesses-traditional.jpg';
-import promoteTeamImage from '@/assets/chany-promote-team.jpg';
-import exnessHostessesImage from '@/assets/chany-exness-hostesses.jpg';
-import maleHostsImage from '@/assets/chany-male-hosts.jpg';
-import weddingHostessesImage from '@/assets/chany-wedding-hostesses.jpg';
-import vipReceptionImage from '@/assets/chany-vip-reception.jpg';
+import tableDecorImage from '@/assets/chany-table-decor.jpg';
+import promote2017TeamImage from '@/assets/chany-promote-2017-team.jpg';
+import informationDeskImage from '@/assets/chany-information-desk.jpg';
+import registrationTeamImage from '@/assets/chany-registration-team.jpg';
+import centralInfoTeamImage from '@/assets/chany-central-info-team.jpg';
+import brandTeamImage from '@/assets/chany-brand-team.jpg';
+import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
 
 interface PortfolioItem {
   id: number;
@@ -29,10 +30,10 @@ const Portfolio: React.FC = () => {
   const portfolioItems: PortfolioItem[] = [
     {
       id: 1,
-      title: 'Accueil protocolaire premium',
+      title: 'Accueil conférences & débats',
       category: 'corporate',
-      image: traditionalHostessesImage,
-      description: "Équipe d'hôtesses formées pour un accueil élégant, coordonné et parfaitement aligné avec l'image de marque de l'événement.",
+      image: informationDeskImage,
+      description: "Point d'information structuré pour orienter les invités, fluidifier les accès et renforcer l'expérience protocolaire.",
       location: 'Douala, Cameroun',
       guests: '500+',
     },
@@ -40,44 +41,44 @@ const Portfolio: React.FC = () => {
       id: 2,
       title: 'Cérémonie privée élégante',
       category: 'wedding',
-      image: weddingHostessesImage,
-      description: "Présence raffinée et service d'accueil discret pour une réception privée organisée avec soin et sens du protocole.",
+      image: weddingAisleImage,
+      description: "Accueil raffiné et coordination de cérémonie dans un décor soigné, avec une présence élégante et discrète.",
       location: 'Bafoussam, Cameroun',
       guests: '350',
     },
     {
       id: 3,
-      title: 'Activation PROMOTE',
+      title: 'Équipe PROMOTE 2017',
       category: 'corporate',
-      image: promoteTeamImage,
-      description: "Déploiement d'une équipe terrain dynamique pour accompagner l'animation de stand et l'expérience visiteur.",
+      image: promote2017TeamImage,
+      description: "Déploiement d'une large équipe terrain pour encadrer l'accueil, l'orientation et l'accompagnement des visiteurs.",
       location: 'Yaoundé, Cameroun',
       guests: '200',
     },
     {
       id: 4,
-      title: 'Réception VIP',
+      title: 'Décoration de réception',
       category: 'vip',
-      image: vipReceptionImage,
-      description: "Gestion d'accueil et d'orientation pour une cérémonie officielle avec exigence de ponctualité, tenue et discrétion.",
+      image: tableDecorImage,
+      description: "Mise en scène de table élégante pour une réception chaleureuse, festive et parfaitement coordonnée.",
       location: 'Yaoundé, Cameroun',
       guests: '150',
     },
     {
       id: 5,
-      title: 'Stand Exness',
+      title: 'Point central d’information',
       category: 'fair',
-      image: exnessHostessesImage,
-      description: "Hôtesses de marque mobilisées pour renforcer la visibilité du stand et fluidifier les interactions avec les visiteurs.",
+      image: centralInfoTeamImage,
+      description: "Mobilisation d'une équipe complète pour informer, accueillir et accompagner les visiteurs sur un grand salon.",
       location: 'Yaoundé, Cameroun',
       guests: '10,000+',
     },
     {
       id: 6,
-      title: 'Équipe de stewards',
+      title: 'Activation de marque terrain',
       category: 'corporate',
-      image: maleHostsImage,
-      description: "Stewards professionnels en tenue coordonnée pour soutenir l'accueil, l'orientation et le protocole événementiel.",
+      image: brandTeamImage,
+      description: "Équipe mixte coordonnée pour représenter la marque, soutenir l'accueil et créer une présence professionnelle forte.",
       location: 'Douala, Cameroun',
       guests: '300',
     },
