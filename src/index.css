@@ -66,25 +66,25 @@
   }
 
   .dark {
-    --background: 0 0% 4%;
-    --foreground: 45 20% 95%;
-    --card: 0 0% 6%;
-    --card-foreground: 45 20% 95%;
-    --popover: 0 0% 6%;
-    --popover-foreground: 45 20% 95%;
-    --primary: 43 74% 53%;
-    --primary-foreground: 0 0% 4%;
-    --secondary: 0 0% 10%;
-    --secondary-foreground: 45 20% 95%;
-    --muted: 0 0% 12%;
-    --muted-foreground: 45 10% 60%;
-    --accent: 43 74% 53%;
-    --accent-foreground: 0 0% 4%;
+    --background: 210 28% 4%;
+    --foreground: 210 18% 96%;
+    --card: 210 24% 7%;
+    --card-foreground: 210 18% 96%;
+    --popover: 210 24% 7%;
+    --popover-foreground: 210 18% 96%;
+    --primary: 199 78% 56%;
+    --primary-foreground: 210 28% 4%;
+    --secondary: 210 18% 12%;
+    --secondary-foreground: 210 18% 96%;
+    --muted: 210 16% 14%;
+    --muted-foreground: 210 9% 67%;
+    --accent: 199 78% 56%;
+    --accent-foreground: 210 28% 4%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
-    --border: 43 30% 20%;
-    --input: 0 0% 15%;
-    --ring: 43 74% 53%;
+    --border: 199 36% 22%;
+    --input: 210 16% 15%;
+    --ring: 199 78% 56%;
   }
 }
 
@@ -110,15 +110,15 @@
 @layer components {
   .text-gradient-gold {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(43 74% 53%) 0%, hsl(43 74% 65%) 100%);
+    background-image: linear-gradient(135deg, hsl(197 86% 68%) 0%, hsl(199 78% 56%) 54%, hsl(210 9% 82%) 100%);
   }
 
   .border-gradient-gold {
-    border-image: linear-gradient(135deg, hsl(43 74% 53%) 0%, hsl(43 74% 40%) 100%) 1;
+    border-image: linear-gradient(135deg, hsl(197 86% 68%) 0%, hsl(200 82% 42%) 100%) 1;
   }
 
   .bg-gradient-gold {
-    background: linear-gradient(135deg, hsl(43 74% 53%) 0%, hsl(43 74% 40%) 100%);
+    background: linear-gradient(135deg, hsl(197 86% 68%) 0%, hsl(199 78% 56%) 48%, hsl(200 82% 42%) 100%);
   }
 
   .hover-gold-glow {
@@ -126,7 +126,7 @@
   }
 
   .hover-gold-glow:hover {
-    box-shadow: 0 0 30px hsl(43 74% 53% / 0.4);
+    box-shadow: 0 0 34px hsl(199 78% 56% / 0.45);
   }
 
   .section-padding {
