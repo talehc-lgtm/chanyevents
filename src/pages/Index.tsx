@@ -12,6 +12,12 @@ import corporateImage from '@/assets/corporate-event.jpg';
 import vipImage from '@/assets/vip-event.jpg';
 import fairImage from '@/assets/fair-event.jpg';
 import staffImage from '@/assets/staff-event.jpg';
+import traditionalHostessesImage from '@/assets/chany-hostesses-traditional.jpg';
+import promoteTeamImage from '@/assets/chany-promote-team.jpg';
+import exnessHostessesImage from '@/assets/chany-exness-hostesses.jpg';
+import maleHostsImage from '@/assets/chany-male-hosts.jpg';
+import weddingHostessesImage from '@/assets/chany-wedding-hostesses.jpg';
+import vipReceptionImage from '@/assets/chany-vip-reception.jpg';
 
 const Index: React.FC = () => {
   const { t } = useLanguage();
@@ -48,49 +54,49 @@ const Index: React.FC = () => {
   ];
 
   const portfolioItems = [
-    { image: weddingImage, title: 'Mariage Royal Douala', category: 'Mariage' },
-    { image: corporateImage, title: 'Symposium International', category: 'Corporate' },
-    { image: vipImage, title: 'Gala de Charité', category: 'VIP' },
+    { image: traditionalHostessesImage, title: 'Accueil protocolaire', category: 'VIP' },
+    { image: promoteTeamImage, title: 'Activation de marque', category: 'Salon' },
+    { image: weddingHostessesImage, title: 'Cérémonie privée', category: 'Mariage' },
   ];
 
   const heroSlides = [
     {
-      image: corporateImage,
+      image: promoteTeamImage,
       icon: Building2,
       label: t('services.corporate.title'),
       title: 'Événements Corporate',
       description: 'Conférences, séminaires et lancements de produits conçus pour renforcer votre image et marquer vos invités.',
     },
     {
-      image: weddingImage,
+      image: weddingHostessesImage,
       icon: Crown,
       label: t('services.weddings.title'),
       title: 'Mariages & Célébrations',
       description: 'Des célébrations raffinées, profondément humaines, orchestrées avec élégance et précision jusque dans le moindre détail.',
     },
     {
-      image: vipImage,
+      image: traditionalHostessesImage,
       icon: Sparkles,
       label: t('services.vip.title'),
       title: 'Événements VIP',
       description: 'Réceptions privées, galas et soirées exclusives avec un service discret, fluide et irréprochable.',
     },
     {
-      image: fairImage,
+      image: exnessHostessesImage,
       icon: Megaphone,
       label: t('services.fairs.title'),
       title: 'Salons & Foires',
       description: 'Des espaces événementiels premium pensés pour attirer, engager et convertir votre audience professionnelle.',
     },
     {
-      image: staffImage,
+      image: maleHostsImage,
       icon: Users,
       label: t('services.staffing.title'),
       title: 'Personnel Événementiel',
       description: 'Hôtesses, stewards, mannequins et équipes qualifiées pour représenter votre marque avec distinction.',
     },
     {
-      image: heroImage,
+      image: vipReceptionImage,
       icon: Globe,
       label: t('services.translation.title'),
       title: 'Traduction FR/EN',
