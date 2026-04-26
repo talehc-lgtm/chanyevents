@@ -115,34 +115,48 @@ const Index: React.FC = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background Image */}
         <div className="absolute inset-0">
-          <img
-            src={heroImage}
-            alt="Luxury event"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={currentHeroSlide.title}
+              src={currentHeroSlide.image}
+              alt={currentHeroSlide.title}
+              className="absolute inset-0 w-full h-full object-cover"
+              initial={{ opacity: 0, scale: 1.04 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 1.1, ease: 'easeOut' }}
+            />
+          </AnimatePresence>
+          <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/68 to-background" />
+          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-background/80 via-background/35 to-transparent" />
         </div>
 
         {/* Content */}
-        <div className="relative z-10 container-luxury text-center px-6 pt-32 pb-20">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <span className="inline-block text-primary text-sm font-semibold tracking-[0.3em] uppercase mb-6">
-              {t('hero.subtitle')}
-            </span>
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-foreground mb-8 leading-tight">
-              {t('hero.title').split(' ').slice(0, 2).join(' ')}
-              <span className="block text-gradient-gold">
-                {t('hero.title').split(' ').slice(2).join(' ')}
-              </span>
-            </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed">
-              {t('hero.description')}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="relative z-10 container-luxury w-full px-6 pt-32 pb-28">
+          <div className="grid min-h-[68vh] items-center gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentHeroSlide.title}
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -18 }}
+                transition={{ duration: 0.65, ease: 'easeOut' }}
+                className="max-w-3xl"
+              >
+                <span className="mb-6 inline-flex items-center gap-3 text-primary text-sm font-semibold tracking-[0.28em] uppercase">
+                  <HeroIcon className="h-5 w-5" />
+                  {currentHeroSlide.label}
+                </span>
+                <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-foreground mb-8 leading-tight">
+                  {currentHeroSlide.title.split(' ').slice(0, 1).join(' ')}
+                  <span className="block text-gradient-gold">
+                    {currentHeroSlide.title.split(' ').slice(1).join(' ')}
+                  </span>
+                </h1>
+                <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
+                  {currentHeroSlide.description}
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4">
               <Link to="/quote">
                 <Button
                   size="lg"
@@ -161,8 +175,49 @@ const Index: React.FC = () => {
                   {t('hero.cta.discover')}
                 </Button>
               </Link>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            <div className="hidden lg:block">
+              <div className="ml-auto max-w-md space-y-3 border-l border-primary/30 pl-6">
+                {heroSlides.map((slide, index) => (
+                  <button
+                    key={slide.title}
+                    type="button"
+                    onClick={() => setActiveHeroSlide(index)}
+                    className={`group flex w-full items-center gap-4 rounded-sm border px-4 py-4 text-left transition-all duration-300 ${
+                      activeHeroSlide === index
+                        ? 'border-primary bg-primary/12 shadow-[0_0_28px_hsl(var(--primary)/0.16)]'
+                        : 'border-border/60 bg-card/30 hover:border-primary/50 hover:bg-card/60'
+                    }`}
+                  >
+                    <span className="font-serif text-2xl text-primary/80">0{index + 1}</span>
+                    <span>
+                      <span className="block font-serif text-lg text-foreground">{slide.title}</span>
+                      <span className="block text-sm text-muted-foreground line-clamp-2">{slide.description}</span>
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
-          </motion.div>
+          </div>
+
+          <div className="absolute bottom-10 left-6 right-6 z-20 lg:hidden">
+            <div className="flex justify-center gap-2">
+              {heroSlides.map((slide, index) => (
+                <button
+                  key={slide.title}
+                  type="button"
+                  onClick={() => setActiveHeroSlide(index)}
+                  aria-label={`Slide ${index + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    activeHeroSlide === index ? 'w-10 bg-primary' : 'w-2 bg-foreground/40'
+                  }`}
+                />
+              ))}
+            </div>
+          </div>
         </div>
 
         {/* Scroll Indicator */}
