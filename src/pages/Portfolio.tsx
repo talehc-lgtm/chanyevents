@@ -4,12 +4,12 @@ import { X } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
-import heroImage from '@/assets/hero-event.jpg';
-import weddingImage from '@/assets/wedding-event.jpg';
-import corporateImage from '@/assets/corporate-event.jpg';
-import vipImage from '@/assets/vip-event.jpg';
-import fairImage from '@/assets/fair-event.jpg';
-import staffImage from '@/assets/staff-event.jpg';
+import traditionalHostessesImage from '@/assets/chany-hostesses-traditional.jpg';
+import promoteTeamImage from '@/assets/chany-promote-team.jpg';
+import exnessHostessesImage from '@/assets/chany-exness-hostesses.jpg';
+import maleHostsImage from '@/assets/chany-male-hosts.jpg';
+import weddingHostessesImage from '@/assets/chany-wedding-hostesses.jpg';
+import vipReceptionImage from '@/assets/chany-vip-reception.jpg';
 
 interface PortfolioItem {
   id: number;
@@ -29,55 +29,55 @@ const Portfolio: React.FC = () => {
   const portfolioItems: PortfolioItem[] = [
     {
       id: 1,
-      title: 'Gala Annuel MTN',
+      title: 'Accueil protocolaire premium',
       category: 'corporate',
-      image: heroImage,
-      description: "Soirée de gala prestigieuse pour 500 invités avec décoration noir et or, animation live et restauration haut de gamme.",
+      image: traditionalHostessesImage,
+      description: "Équipe d'hôtesses formées pour un accueil élégant, coordonné et parfaitement aligné avec l'image de marque de l'événement.",
       location: 'Douala, Cameroun',
       guests: '500+',
     },
     {
       id: 2,
-      title: 'Mariage Traditionnel Bamiléké',
+      title: 'Cérémonie privée élégante',
       category: 'wedding',
-      image: weddingImage,
-      description: "Célébration traditionnelle sublimée par une décoration moderne et élégante, alliant traditions et raffinement.",
+      image: weddingHostessesImage,
+      description: "Présence raffinée et service d'accueil discret pour une réception privée organisée avec soin et sens du protocole.",
       location: 'Bafoussam, Cameroun',
       guests: '350',
     },
     {
       id: 3,
-      title: 'Conférence Internationale',
+      title: 'Activation PROMOTE',
       category: 'corporate',
-      image: corporateImage,
-      description: "Organisation complète d'une conférence avec traduction simultanée, logistique et accueil VIP.",
+      image: promoteTeamImage,
+      description: "Déploiement d'une équipe terrain dynamique pour accompagner l'animation de stand et l'expérience visiteur.",
       location: 'Yaoundé, Cameroun',
       guests: '200',
     },
     {
       id: 4,
-      title: 'Soirée Privée Ambassade',
+      title: 'Réception VIP',
       category: 'vip',
-      image: vipImage,
-      description: "Réception diplomatique exclusive avec protocole strict, service discret et excellence culinaire.",
+      image: vipReceptionImage,
+      description: "Gestion d'accueil et d'orientation pour une cérémonie officielle avec exigence de ponctualité, tenue et discrétion.",
       location: 'Yaoundé, Cameroun',
       guests: '150',
     },
     {
       id: 5,
-      title: 'PROMOTE 2023',
+      title: 'Stand Exness',
       category: 'fair',
-      image: fairImage,
-      description: "Conception et animation de stands pour le plus grand salon économique d'Afrique Centrale.",
+      image: exnessHostessesImage,
+      description: "Hôtesses de marque mobilisées pour renforcer la visibilité du stand et fluidifier les interactions avec les visiteurs.",
       location: 'Yaoundé, Cameroun',
       guests: '10,000+',
     },
     {
       id: 6,
-      title: 'Lancement Orange Money',
+      title: 'Équipe de stewards',
       category: 'corporate',
-      image: staffImage,
-      description: "Événement de lancement produit avec activation de marque, hôtesses et couverture médiatique.",
+      image: maleHostsImage,
+      description: "Stewards professionnels en tenue coordonnée pour soutenir l'accueil, l'orientation et le protocole événementiel.",
       location: 'Douala, Cameroun',
       guests: '300',
     },
