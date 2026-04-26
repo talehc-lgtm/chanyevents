@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Button } from '@/components/ui/button';
+import logoChanyEvents from '@/assets/logo-chany-events.png';
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -44,8 +45,12 @@ const Header: React.FC = () => {
         <nav className="flex items-center justify-between h-20 md:h-24 px-6 md:px-12">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <span className="font-serif text-2xl md:text-3xl font-semibold text-gradient-gold">
-              CHANY EVENT'S
+            <span className="flex h-14 w-40 md:h-16 md:w-48 items-center justify-center overflow-hidden rounded-sm bg-cream px-3 py-2 shadow-[0_0_28px_hsl(var(--primary)/0.16)] ring-1 ring-primary/20">
+              <img
+                src={logoChanyEvents}
+                alt="CHANY EVENT'S"
+                className="h-full w-full object-contain"
+              />
             </span>
           </Link>
 
