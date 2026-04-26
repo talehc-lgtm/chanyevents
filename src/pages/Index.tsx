@@ -16,6 +16,8 @@ import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
 import exnessConsultationImage from '@/assets/chany-exness-consultation.jpg';
 import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
 import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
+import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
+import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
 
 const Index: React.FC = () => {
   const { t } = useLanguage();
@@ -53,7 +55,7 @@ const Index: React.FC = () => {
 
   const portfolioItems = [
     { image: exnessConsultationImage, title: 'Stand Exness', category: 'Corporate' },
-    { image: luxuryWeddingCoupleImage, title: 'Mariage de prestige', category: 'Mariage' },
+    { image: weddingArchCoupleImage, title: 'Mariage de prestige', category: 'Mariage' },
     { image: weddingFireworksImage, title: 'Final spectaculaire', category: 'VIP' },
   ];
 
@@ -66,7 +68,7 @@ const Index: React.FC = () => {
       description: 'Conférences, séminaires et lancements de produits conçus pour renforcer votre image et marquer vos invités.',
     },
     {
-      image: luxuryWeddingCoupleImage,
+      image: weddingArchCoupleImage,
       icon: Crown,
       label: t('services.weddings.title'),
       title: 'Mariages & Célébrations',
@@ -87,7 +89,7 @@ const Index: React.FC = () => {
       description: 'Des espaces événementiels premium pensés pour attirer, engager et convertir votre audience professionnelle.',
     },
     {
-      image: informationDeskImage,
+      image: promoteInformationTeamImage,
       icon: Users,
       label: t('services.staffing.title'),
       title: 'Personnel Événementiel',
@@ -375,7 +377,7 @@ const Index: React.FC = () => {
             >
               <div className="aspect-square rounded-sm overflow-hidden">
                 <img
-                  src={vipImage}
+                  src={promoteInformationTeamImage}
                   alt="Excellence événementielle"
                   className="w-full h-full object-cover"
                 />

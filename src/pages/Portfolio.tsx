@@ -14,6 +14,8 @@ import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
 import exnessConsultationImage from '@/assets/chany-exness-consultation.jpg';
 import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
 import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
+import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
+import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
 
 interface PortfolioItem {
   id: number;
@@ -44,7 +46,7 @@ const Portfolio: React.FC = () => {
       id: 2,
       title: 'Mariage de prestige',
       category: 'wedding',
-      image: luxuryWeddingCoupleImage,
+      image: weddingArchCoupleImage,
       description: "Mise en scène romantique et coordination élégante pour une célébration de mariage mémorable et raffinée.",
       location: 'Bafoussam, Cameroun',
       guests: '350',
@@ -71,7 +73,7 @@ const Portfolio: React.FC = () => {
       id: 5,
       title: 'Point central d’information',
       category: 'fair',
-      image: centralInfoTeamImage,
+      image: promoteInformationTeamImage,
       description: "Mobilisation d'une équipe complète pour informer, accueillir et accompagner les visiteurs sur un grand salon.",
       location: 'Yaoundé, Cameroun',
       guests: '10,000+',

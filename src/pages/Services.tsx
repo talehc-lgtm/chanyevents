@@ -15,6 +15,8 @@ import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
 import exnessConsultationImage from '@/assets/chany-exness-consultation.jpg';
 import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
 import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
+import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
+import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
 
 const Services: React.FC = () => {
   const { t } = useLanguage();
@@ -37,7 +39,7 @@ const Services: React.FC = () => {
       icon: Crown,
       title: t('services.weddings.title'),
       description: t('services.weddings.desc'),
-      image: luxuryWeddingCoupleImage,
+      image: weddingArchCoupleImage,
       features: [
         'Cérémonies traditionnelles',
         'Réceptions sur mesure',
@@ -89,7 +91,7 @@ const Services: React.FC = () => {
       icon: Users,
       title: t('services.staffing.title'),
       description: t('services.staffing.desc'),
-      image: registrationTeamImage,
+      image: promoteInformationTeamImage,
       features: [
         'Hôtesses & stewards',
         'Mannequins professionnels',
