@@ -11,6 +11,9 @@ import registrationTeamImage from '@/assets/chany-registration-team.jpg';
 import centralInfoTeamImage from '@/assets/chany-central-info-team.jpg';
 import brandTeamImage from '@/assets/chany-brand-team.jpg';
 import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
+import exnessConsultationImage from '@/assets/chany-exness-consultation.jpg';
+import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
+import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
 
 interface PortfolioItem {
   id: number;
@@ -30,19 +33,19 @@ const Portfolio: React.FC = () => {
   const portfolioItems: PortfolioItem[] = [
     {
       id: 1,
-      title: 'Accueil conférences & débats',
+      title: 'Stand Exness',
       category: 'corporate',
-      image: informationDeskImage,
-      description: "Point d'information structuré pour orienter les invités, fluidifier les accès et renforcer l'expérience protocolaire.",
+      image: exnessConsultationImage,
+      description: "Accompagnement professionnel sur stand avec accueil, information client et représentation de marque dans un cadre corporate.",
       location: 'Douala, Cameroun',
       guests: '500+',
     },
     {
       id: 2,
-      title: 'Cérémonie privée élégante',
+      title: 'Mariage de prestige',
       category: 'wedding',
-      image: weddingAisleImage,
-      description: "Accueil raffiné et coordination de cérémonie dans un décor soigné, avec une présence élégante et discrète.",
+      image: luxuryWeddingCoupleImage,
+      description: "Mise en scène romantique et coordination élégante pour une célébration de mariage mémorable et raffinée.",
       location: 'Bafoussam, Cameroun',
       guests: '350',
     },
@@ -57,10 +60,10 @@ const Portfolio: React.FC = () => {
     },
     {
       id: 4,
-      title: 'Décoration de réception',
+      title: 'Final spectaculaire',
       category: 'vip',
-      image: tableDecorImage,
-      description: "Mise en scène de table élégante pour une réception chaleureuse, festive et parfaitement coordonnée.",
+      image: weddingFireworksImage,
+      description: "Effet de scène, entrée remarquable et atmosphère premium pour sublimer les moments forts d'une soirée privée.",
       location: 'Yaoundé, Cameroun',
       guests: '150',
     },
