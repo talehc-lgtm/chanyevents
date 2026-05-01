@@ -121,6 +121,11 @@ const Footer: React.FC = () => {
             Fondée par Mario Chany Nguetmi
           </p>
         </div>
+        <div className="pt-4 text-center">
+          <p className="text-muted-foreground text-xs">
+            Powered by <span className="text-primary font-semibold">IRIXCOM</span>
+          </p>
+        </div>
       </div>
     </footer>
   );
