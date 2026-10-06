@@ -18,9 +18,10 @@ import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
 import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
 import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
 import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
+import invinoPosterAsset from '@/assets/invino-douala-poster-portrait.png.asset.json';
 
 const Index: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
 
   const services = [
