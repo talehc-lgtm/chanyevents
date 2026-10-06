@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, CalendarDays, MapPin, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
+import { Button } from '@/components/ui/button';
 import tableDecorImage from '@/assets/chany-table-decor.jpg';
 import promote2017TeamImage from '@/assets/chany-promote-2017-team.jpg';
 import informationDeskImage from '@/assets/chany-information-desk.jpg';
@@ -16,6 +18,7 @@ import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
 import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
 import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
 import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
+import invinoPosterAsset from '@/assets/invino-douala-poster-portrait.png.asset.json';
 
 interface PortfolioItem {
   id: number;
