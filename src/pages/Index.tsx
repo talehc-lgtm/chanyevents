@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Crown, Users, Sparkles, Building2, Globe, Star, Megaphone } from 'lucide-react';
+import { ArrowRight, Crown, Users, Sparkles, Building2, Globe, Star, Megaphone, CalendarDays, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -18,9 +18,10 @@ import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
 import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
 import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
 import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
+import invinoPosterAsset from '@/assets/invino-douala-poster-portrait.png.asset.json';
 
 const Index: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
 
   const services = [
@@ -214,6 +215,97 @@ const Index: React.FC = () => {
             <div className="w-1.5 h-3 bg-primary rounded-full mt-2" />
           </div>
         </motion.div>
+      </section>
+
+      {/* Featured Event — In Vino Italia Douala */}
+      <section className="section-padding bg-charcoal border-y border-border relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-gradient-gold" />
+        </div>
+        <div className="container-luxury relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative mx-auto w-full max-w-md"
+            >
+              <div className="rounded-sm overflow-hidden border border-primary/30 shadow-2xl">
+                <img
+                  src={invinoPosterAsset.url}
+                  alt="In Vino Italia Douala — 1er salon du vin italien au Cameroun"
+                  className="w-full h-auto object-cover"
+                />
+              </div>
+              <div className="absolute -top-4 -right-4 bg-primary px-5 py-3 rounded-sm shadow-lg">
+                <p className="text-primary-foreground text-sm font-semibold tracking-wider uppercase">
+                  {language === 'fr' ? 'Événement à la une' : 'Featured event'}
+                </p>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">
+                {language === 'fr' ? 'Nous organisons' : 'We are organizing'}
+              </span>
+              <h2 className="font-serif text-4xl md:text-5xl font-semibold text-foreground mb-6 leading-tight">
+                In Vino Italia Douala
+                <span className="block text-gradient-gold text-2xl md:text-3xl mt-3">
+                  {language === 'fr'
+                    ? '1er salon du vin italien au Cameroun'
+                    : 'The first Italian wine fair in Cameroon'}
+                </span>
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                {language === 'fr'
+                  ? "CHANY EVENT'S accompagne l'organisation du tout premier salon des vins italiens en Afrique Centrale. Trois journées d'exception pour vivre l'Italie à Douala : vins d'exception, gastronomie, masterclasses, show-cooking, rencontres privilégiées et business club B2B, dans le cadre prestigieux du Best Western Plus Soaha Hotel."
+                  : "CHANY EVENT'S is supporting the organization of the very first Italian wine fair in Central Africa. Three exceptional days to experience Italy in Douala: exceptional wines, gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaha Hotel."}
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <div className="flex items-center gap-3 text-foreground">
+                  <CalendarDays className="w-5 h-5 text-primary" />
+                  <span className="font-medium">
+                    26 – 28 {language === 'fr' ? 'novembre' : 'November'} 2026
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 text-foreground">
+                  <MapPin className="w-5 h-5 text-primary" />
+                  <span className="font-medium">Best Western Plus Soaha Hotel, Douala</span>
+                </div>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://www.invinodouala.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button
+                    size="lg"
+                    className="bg-gradient-gold text-primary-foreground hover-gold-glow"
+                  >
+                    {language === 'fr' ? 'Découvrir le salon' : 'Discover the fair'}
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </a>
+                <Link to="/careers">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="border-primary text-primary hover:bg-primary/10"
+                  >
+                    {language === 'fr' ? 'Rejoindre l’équipe du salon' : 'Join the event team'}
+                  </Button>
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
       </section>
 
       {/* Stats Section */}
