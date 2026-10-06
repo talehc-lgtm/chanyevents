@@ -31,7 +31,7 @@ interface PortfolioItem {
 }
 
 const Portfolio: React.FC = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [selectedItem, setSelectedItem] = useState<PortfolioItem | null>(null);
   const [activeFilter, setActiveFilter] = useState('all');
 
