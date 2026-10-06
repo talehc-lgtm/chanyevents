@@ -26,6 +26,7 @@ const Header: React.FC = () => {
     { href: '/services', label: t('nav.services') },
     { href: '/portfolio', label: t('nav.portfolio') },
     { href: '/quote', label: t('nav.quote') },
+    { href: '/careers', label: t('nav.careers') },
     { href: '/contact', label: t('nav.contact') },
   ];
 
