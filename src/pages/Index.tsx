@@ -8,6 +8,10 @@ import conference from '@/assets/biz-conference.jpg';
 import tradeshow from '@/assets/biz-tradeshow.jpg';
 import b2b from '@/assets/biz-b2b.jpg';
 import delegation from '@/assets/biz-delegation.jpg';
+import corporateSeminar from '@/assets/biz-corporate-seminar.jpg';
+import workshop from '@/assets/biz-workshop.jpg';
+import gala from '@/assets/biz-gala.jpg';
+import vipReception from '@/assets/chany-vip-reception.jpg';
 import weddingArch from '@/assets/chany-wedding-arch-couple.png';
 import invinoPosterAsset from '@/assets/invino-douala-poster-portrait.png.asset.json';
 
