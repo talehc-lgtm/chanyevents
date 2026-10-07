@@ -447,7 +447,7 @@ const Careers: React.FC = () => {
 
             <div className="grid sm:grid-cols-3 gap-6">
               <div>
-                <Label htmlFor="cv" className="text-foreground">{language === 'fr' ? 'CV actualisé (PDF, Word ou image) *' : 'Updated CV (PDF, Word or image) *'}</Label>
+                <Label htmlFor="cv" className="text-foreground">{language === 'fr' ? 'CV actualisé *' : 'Updated CV *'}</Label>
                 <Input id="cv" type="file" accept=".pdf,.doc,.docx,image/*" onChange={(e) => setCvFile(e.target.files?.[0] ?? null)} className="mt-2" />
               </div>
               <div>
