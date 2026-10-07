@@ -1,11 +1,12 @@
-import React, { useMemo, useState } from 'react';
-import { Lock, Loader2, MessageCircle, RefreshCw, Send, Trophy } from 'lucide-react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { Loader2, LogOut, MessageCircle, RefreshCw, Send, Trophy } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/integrations/supabase/client';
+import AdminLogin from '@/components/admin/AdminLogin';
+import { useAdminAccess } from '@/hooks/useAdminAccess';
 
 interface App {
   id: string; created_at: string; position: string; full_name: string; phone: string; email: string | null;
@@ -33,20 +34,21 @@ const share = (text: string) => window.open(`https://wa.me/?text=${encodeURIComp
 
 const AdminRanking: React.FC = () => {
   const { toast } = useToast();
-  const [code, setCode] = useState('');
-  const [ok, setOk] = useState(false);
+  const admin = useAdminAccess();
   const [loading, setLoading] = useState(false);
   const [apps, setApps] = useState<App[]>([]);
   const [minScore, setMinScore] = useState(0);
 
-  const load = async (c: string) => {
+  const load = async () => {
     setLoading(true);
-    const { data, error } = await supabase.functions.invoke('admin-applications', { headers: { 'x-admin-code': c } });
+    const { data, error } = await supabase.functions.invoke('admin-applications');
     setLoading(false);
-    if (error) { toast({ title: 'Accès refusé', description: 'Code incorrect.', variant: 'destructive' }); return false; }
+    if (error) { toast({ title: 'Accès refusé', description: 'Votre session a expiré.', variant: 'destructive' }); return false; }
     setApps(data?.applications ?? []);
     return true;
   };
+
+  useEffect(() => { if (admin.authenticated) load(); }, [admin.authenticated]);
 
   const groups = useMemo(() => {
     const m = new Map<string, App[]>();
@@ -55,21 +57,7 @@ const AdminRanking: React.FC = () => {
     return [...m.entries()];
   }, [apps, minScore]);
 
-  if (!ok) {
-    return (
-      <Layout>
-        <section className="pt-40 pb-24 container-luxury px-6 max-w-md">
-          <form onSubmit={async (e) => { e.preventDefault(); if (await load(code)) setOk(true); }} className="p-8 bg-card border border-border rounded-sm space-y-5">
-            <Lock className="w-8 h-8 text-primary" />
-            <h1 className="text-section font-serif text-foreground">Classement des candidatures</h1>
-            <p className="text-sm text-muted-foreground">Espace privé. Entrez le code d'accès.</p>
-            <Input type="password" value={code} onChange={(e) => setCode(e.target.value)} placeholder="Code d'accès" />
-            <Button type="submit" disabled={loading || !code} className="w-full">{loading ? <Loader2 className="w-4 h-4 animate-spin" /> : 'Accéder'}</Button>
-          </form>
-        </section>
-      </Layout>
-    );
-  }
+  if (!admin.authenticated) return <AdminLogin checking={admin.checking} hasAdmin={admin.hasAdmin} onSignIn={admin.signIn} onSetup={admin.createFirstAdmin} />;
 
   return (
     <Layout>
@@ -85,7 +73,8 @@ const AdminRanking: React.FC = () => {
             <select value={minScore} onChange={(e) => setMinScore(Number(e.target.value))} className="h-10 rounded-sm border border-border bg-background px-3 text-sm">
               {[0, 45, 70, 85].map((v) => <option key={v} value={v}>{v}</option>)}
             </select>
-            <Button variant="outline" onClick={() => load(code)}><RefreshCw className="w-4 h-4 mr-2" />Actualiser</Button>
+            <Button variant="outline" onClick={() => load()}><RefreshCw className="w-4 h-4 mr-2" />Actualiser</Button>
+            <Button variant="outline" onClick={admin.signOut} aria-label="Se déconnecter"><LogOut className="w-4 h-4" /></Button>
           </div>
         </div>
 
