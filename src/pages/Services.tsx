@@ -1,235 +1,44 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Building2, Crown, Sparkles, Users, Megaphone, CheckCircle2 } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
-import SectionHeading from '@/components/common/SectionHeading';
-import { Button } from '@/components/ui/button';
-import tableDecorImage from '@/assets/chany-table-decor.jpg';
-import promote2017TeamImage from '@/assets/chany-promote-2017-team.jpg';
-import registrationTeamImage from '@/assets/chany-registration-team.jpg';
-import brandTeamImage from '@/assets/chany-brand-team.jpg';
-import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
-import exnessConsultationImage from '@/assets/chany-exness-consultation.jpg';
-import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
-import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
-import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
-import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
+import { useL, Seo, PageHero, Reveal, Chips, CtaBand } from '@/components/common/Blocks';
+import tradeshow from '@/assets/biz-tradeshow.jpg';
 
 const Services: React.FC = () => {
-  const { t } = useLanguage();
-
-  const services = [
-    {
-      icon: Building2,
-      title: t('services.corporate.title'),
-      description: t('services.corporate.desc'),
-      image: exnessConsultationImage,
-      features: [
-        'Conférences & séminaires',
-        'Team building',
-        'Lancements de produits',
-        'Réunions stratégiques',
-        'Conventions d\'entreprise',
-      ],
-    },
-    {
-      icon: Crown,
-      title: t('services.weddings.title'),
-      description: t('services.weddings.desc'),
-      image: weddingArchCoupleImage,
-      features: [
-        'Cérémonies traditionnelles',
-        'Réceptions sur mesure',
-        'Décoration florale',
-        'Coordination jour J',
-        'Lune de miel organisée',
-      ],
-    },
-    {
-      icon: Sparkles,
-      title: t('services.vip.title'),
-      description: t('services.vip.desc'),
-      image: weddingFireworksImage,
-      features: [
-        'Galas & soirées de prestige',
-        'Événements privés',
-        'Anniversaires exclusifs',
-        'Réceptions diplomatiques',
-        'Service de conciergerie',
-      ],
-    },
-    {
-      icon: Megaphone,
-      title: t('services.fairs.title'),
-      description: t('services.fairs.desc'),
-      image: brandTeamImage,
-      features: [
-        'Conception de stands',
-        'Logistique complète',
-        'Animation sur site',
-        'Signalétique personnalisée',
-        'Gestion des exposants',
-      ],
-    },
-    {
-      icon: Users,
-      title: t('services.staffing.title'),
-      description: t('services.staffing.desc'),
-      image: promoteInformationTeamImage,
-      features: [
-        'Hôtesses & stewards',
-        'Mannequins professionnels',
-        'Figurants qualifiés',
-        'Personnel d\'accueil',
-        'Formation sur mesure',
-      ],
-    },
+  const L = useL();
+  const poles = [
+    { t: 'Strategy & Planning', d: L('Conseil, concept et pilotage', 'Advice, concept and steering'), i: [L('Conseil événementiel', 'Event consulting'), L('Direction de projet', 'Project management'), 'Budget', 'Planning', L('Programme', 'Programme')] },
+    { t: 'Event Production', d: L('Scène, décor et technique', 'Stage, decor and technology'), i: [L('Scénographie', 'Scenography'), L('Décoration', 'Decoration'), L('Production technique', 'Technical production'), L('Son', 'Sound'), L('Lumière', 'Lighting'), 'LED', 'Stands', L('Signalétique', 'Signage')] },
+    { t: 'Event Logistics', d: L('Tout ce qui fait tourner l’événement', 'Everything that keeps it running'), i: ['Catering', 'Transport', L('Hébergement', 'Accommodation'), L('Sécurité', 'Security'), L('Coordination terrain', 'On-site coordination'), L('Régie', 'Stage management')] },
+    { t: 'Event Technology', d: L('Inscriptions et outils digitaux', 'Registration and digital tools'), i: [L('Accréditation', 'Accreditation'), L('Billetterie', 'Ticketing'), L('Invitations', 'Invitations'), 'Streaming', 'Business matching'] },
+    { t: 'Guest & VIP Management', d: L('Accueil et protocole', 'Hospitality and protocol'), i: [L('Hôtesses', 'Hostesses'), 'Staff', L('Gestion VIP', 'VIP management'), L('Accueil aéroport', 'Airport welcome'), L('Protocole', 'Protocol')] },
+    { t: 'Exhibitor Management', d: L('Exposants et stands', 'Exhibitors and stands'), i: [L('Recrutement exposants', 'Exhibitor recruitment'), L('Coordination exposants', 'Exhibitor coordination'), 'Stands', L('Douanes', 'Customs')] },
+    { t: 'Sponsorship', d: L('Partenaires et financement', 'Partners and funding'), i: ['Sponsors', L('Partenaires', 'Partners'), L('Offres de visibilité', 'Visibility packages'), L('Bilan partenaires', 'Partner reporting')] },
+    { t: 'Communication', d: L('Faire rayonner l’événement', 'Amplifying the event'), i: [L('Relations médias', 'Media relations'), L('Communication digitale', 'Digital communication'), 'Photo', L('Vidéo', 'Video'), 'Speakers', 'Reporting'] },
+    { t: 'Translation & Interpretation', d: L('Faire dialoguer les publics', 'Bridging audiences'), i: [L('Interprétation simultanée', 'Simultaneous interpretation'), L('Interprétation de liaison', 'Liaison interpretation'), L('Traduction de documents', 'Document translation'), L('Équipements de cabine', 'Booth equipment')] },
   ];
-
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="pt-40 md:pt-44 pb-20 bg-gradient-to-b from-charcoal to-background">
-        <div className="container-luxury px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-4xl mx-auto"
-          >
-            <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-6 block">
-              {t('services.subtitle')}
-            </span>
-            <h1 className="text-display font-serif font-semibold text-foreground mb-8">
-              {t('services.title')}
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              De la conception à la réalisation, nous offrons une gamme complète de services 
-              événementiels pour répondre à toutes vos exigences avec excellence.
-            </p>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Services List */}
+      <Seo title={L("Services événementiels — de la stratégie à l'exécution | CHANY EVENT'S", "Event services — from strategy to execution | CHANY EVENT'S")}
+        description={L('Conseil, production, logistique, technologie, accueil VIP, exposants, sponsoring, communication, traduction et interprétation.', 'Consulting, production, logistics, technology, VIP management, exhibitors, sponsorship, communication, translation and interpretation.')} />
+      <PageHero eyebrow={L('Nos services', 'Our services')}
+        title={<>{L('Confiez-nous tout. Ou ', 'Trust us with everything. Or ')}<em>{L('la partie qui vous manque', 'the part you are missing')}</em></>}
+        lead={L('Neuf pôles de compétences mobilisables ensemble ou séparément, selon votre besoin.', 'Nine areas of expertise you can engage together or separately, as you need.')}
+        image={tradeshow} alt="Event production" />
       <section className="section-padding">
-        <div className="container-luxury">
-          <div className="space-y-24">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className={`grid grid-cols-1 lg:grid-cols-2 gap-12 items-center ${
-                  index % 2 === 1 ? 'lg:flex-row-reverse' : ''
-                }`}
-              >
-                <div className={index % 2 === 1 ? 'lg:order-2' : ''}>
-                  <div className="flex items-center gap-4 mb-6">
-                    <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
-                      <service.icon className="w-7 h-7 text-primary" />
-                    </div>
-                    <h2 className="text-section font-serif font-semibold text-foreground">
-                      {service.title}
-                    </h2>
-                  </div>
-                  <p className="text-lg text-muted-foreground leading-relaxed mb-8">
-                    {service.description}
-                  </p>
-                  <ul className="space-y-3 mb-8">
-                    {service.features.map((feature) => (
-                      <li key={feature} className="flex items-center gap-3 text-foreground">
-                        <CheckCircle2 className="w-5 h-5 text-primary flex-shrink-0" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-
-                </div>
-
-                <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
-                  <div className="aspect-[4/3] rounded-sm overflow-hidden">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                    />
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
+        <div className="container-luxury grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border rounded-sm overflow-hidden">
+          {poles.map((p, n) => (
+            <Reveal key={p.t} delay={(n % 3) * 0.08} className="bg-card p-8 h-full">
+              <span className="text-xs font-semibold tracking-widest text-primary">{String(n + 1).padStart(2, '0')}</span>
+              <h3 className="font-serif text-2xl text-foreground mt-3 mb-1">{p.t}</h3>
+              <p className="text-muted-foreground mb-6">{p.d}</p>
+              <Chips items={p.i} />
+            </Reveal>
+          ))}
         </div>
       </section>
-
-      {/* Process Section */}
-      <section className="section-padding bg-charcoal">
-        <div className="container-luxury">
-          <SectionHeading
-            subtitle="Notre Approche"
-            title="Un Processus Éprouvé"
-            description="De la première rencontre à la réalisation finale, nous vous accompagnons à chaque étape."
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            {[
-              { step: '01', title: 'Consultation', desc: 'Nous écoutons vos besoins et vos rêves.' },
-              { step: '02', title: 'Conception', desc: 'Nous créons un concept sur mesure.' },
-              { step: '03', title: 'Planification', desc: 'Nous organisons chaque détail.' },
-              { step: '04', title: 'Réalisation', desc: 'Nous donnons vie à votre événement.' },
-            ].map((item, index) => (
-              <motion.div
-                key={item.step}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <span className="font-serif text-5xl text-gradient-gold font-semibold block mb-4">
-                  {item.step}
-                </span>
-                <h3 className="font-serif text-xl text-foreground font-semibold mb-2">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground text-sm">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="section-padding">
-        <div className="container-luxury">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="bg-card border border-border p-12 md:p-16 rounded-sm text-center"
-          >
-            <h2 className="text-section font-serif font-semibold text-foreground mb-6">
-              Vous avez un projet ?
-            </h2>
-            <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
-              Discutons ensemble de votre vision. Notre équipe est prête à transformer 
-              vos idées en une expérience exceptionnelle.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
-                <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10">
-                  Nous contacter
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+      <CtaBand title={L('Vous avez un projet ?', 'Have a project?')} text={L('Dites-nous de quoi vous avez besoin.', 'Tell us what you need.')}
+        button={L('Démarrer un projet', 'Start a project')} to="/contact#projet" />
     </Layout>
   );
 };
-
 export default Services;
