@@ -258,7 +258,7 @@ const Index: React.FC = () => {
               <span className="flex items-center gap-2"><MapPin className="w-5 h-5 text-primary" />Best Western Plus Soaho Hotel, Douala</span>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a href="https://www.invinodouala.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-7 py-3.5 bg-primary text-primary-foreground rounded-sm font-semibold hover-gold-glow">{L('Découvrir le salon', 'Discover the fair')} <ArrowRight className="ml-2 w-4 h-4" /></a>
+              <Link to="/in-vino-italia-douala-2026" className="inline-flex items-center justify-center px-7 py-3.5 bg-primary text-primary-foreground rounded-sm font-semibold hover-gold-glow">{L('Découvrir le salon', 'Discover the fair')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
               <Link to="/careers" className="inline-flex items-center justify-center px-7 py-3.5 border border-primary text-primary rounded-sm font-semibold hover:bg-primary/10">{L("Rejoindre l'équipe du salon", 'Join the event team')}</Link>
             </div>
           </Reveal>

@@ -15,6 +15,8 @@ import Careers from "./pages/Careers";
 import AdminApplications from "./pages/AdminApplications";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import AdminRanking from "./pages/AdminRanking";
+import InVinoItalia from "./pages/InVinoItalia";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,9 @@ const App = () => (
             <Route path="/corporate-institutional" element={<CorporateInstitutional />} />
             <Route path="/weddings" element={<Weddings />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/in-vino-italia-douala-2026" element={<InVinoItalia />} />
+            <Route path="/in-vino" element={<Navigate to="/in-vino-italia-douala-2026" replace />} />
+            <Route path="/admin/classement" element={<AdminRanking />} />
             <Route path="/admin/candidatures" element={<AdminApplications />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />

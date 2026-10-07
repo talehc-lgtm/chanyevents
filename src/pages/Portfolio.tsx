@@ -223,11 +223,7 @@ const Portfolio: React.FC = () => {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="https://www.invinodouala.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link to="/in-vino-italia-douala-2026">
                   <Button
                     size="lg"
                     className="bg-gradient-gold text-primary-foreground hover-gold-glow"
@@ -235,7 +231,7 @@ const Portfolio: React.FC = () => {
                     {language === 'fr' ? 'Découvrir le salon' : 'Discover the fair'}
                     <ArrowRight className="ml-2 w-5 h-5" />
                   </Button>
-                </a>
+                </Link>
                 <Link to="/careers">
                   <Button
                     size="lg"
