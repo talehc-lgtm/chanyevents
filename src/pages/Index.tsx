@@ -291,7 +291,18 @@ const Index: React.FC = () => {
                 className="text-center"
               >
                 <span className="block font-serif text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
-                  {stat.number}
+                  {stat.number
+                    .split('+')
+                    .flatMap((part, i) => (i === 0 ? [part] : ['+', part]))
+                    .map((part, i) =>
+                      part === '+' ? (
+                        <span key={i} className="font-sans">
+                          +
+                        </span>
+                      ) : (
+                        <span key={i}>{part}</span>
+                      )
+                    )}
                 </span>
                 <span className="text-muted-foreground text-sm md:text-base">{stat.label}</span>
               </motion.div>
