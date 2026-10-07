@@ -212,7 +212,7 @@ const Services: React.FC = () => {
             className="bg-card border border-border p-12 md:p-16 rounded-sm text-center"
           >
             <h2 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-6">
-              Vous avez un projet en tête ?
+              Vous avez un projet ?
             </h2>
             <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">
               Discutons ensemble de votre vision. Notre équipe est prête à transformer 
