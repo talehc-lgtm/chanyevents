@@ -37,15 +37,15 @@ const Header: React.FC = () => {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
         isScrolled
-          ? 'bg-background/95 backdrop-blur-md border-b border-border'
-          : 'bg-transparent'
+          ? 'bg-background/90 backdrop-blur-md border-b border-border shadow-[0_6px_24px_-18px_hsl(var(--ink)/0.35)]'
+          : 'bg-background/60 backdrop-blur-sm'
       }`}
     >
       <div className="container-luxury">
-        <nav className="flex items-center justify-between h-28 md:h-36 px-6 md:px-12">
+        <nav className="flex items-center justify-between h-20 md:h-24 px-6 md:px-12">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3">
-            <span className="flex h-28 w-80 md:h-32 md:w-96 items-center justify-center overflow-hidden px-1 py-1 drop-shadow-[0_0_18px_hsl(var(--primary)/0.22)]">
+            <span className="flex h-16 w-48 md:h-20 md:w-64 items-center justify-start overflow-hidden">
               <img
                 src={logoChanyEvents}
                 alt="CHANY EVENT'S"
