@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Globe } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Button } from '@/components/ui/button';
 import logoChanyEvents from '@/assets/logo-chany-events.png';
 
 const Header: React.FC = () => {
@@ -87,11 +86,6 @@ const Header: React.FC = () => {
               <Globe className="w-4 h-4" />
               <span>{language.toUpperCase()}</span>
             </button>
-            <Link to="/quote">
-              <Button variant="default" className="bg-gradient-gold text-primary-foreground hover-gold-glow">
-                {t('hero.cta.quote')}
-              </Button>
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -136,11 +130,6 @@ const Header: React.FC = () => {
                   <Globe className="w-4 h-4" />
                   <span>{language === 'fr' ? 'Français' : 'English'}</span>
                 </button>
-                <Link to="/quote" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="default" size="sm" className="bg-gradient-gold text-primary-foreground">
-                    {t('hero.cta.quote')}
-                  </Button>
-                </Link>
               </div>
             </div>
           </motion.div>
