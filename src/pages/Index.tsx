@@ -244,9 +244,8 @@ const Index: React.FC = () => {
       <section className="section-padding">
         <div className="container-luxury grid lg:grid-cols-2 gap-12 items-center">
           <Reveal className="relative mx-auto w-full max-w-md lg:max-w-lg">
-            <div className="frame-offset rounded-sm">
-              <img src={invinoLogoAsset.url} alt="In Vino Italia Douala — Salon des vins italiens en Afrique Centrale" loading="lazy" className="w-full h-auto rounded-sm border border-champagne/40 shadow-[var(--shadow-elegant)]" />
-            </div>
+            <div aria-hidden="true" className="absolute inset-0 translate-x-4 translate-y-4 border border-champagne rounded-sm" />
+            <img src={invinoLogoAsset.url} alt="In Vino Italia Douala — Salon des vins italiens en Afrique Centrale" loading="lazy" className="relative w-full h-auto rounded-sm border border-champagne/40 shadow-[var(--shadow-elegant)]" />
             <span className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-5 py-3 rounded-sm text-sm font-semibold uppercase tracking-wider">{L('Événement à la une', 'Featured event')}</span>
           </Reveal>
           <Reveal delay={0.1}>
