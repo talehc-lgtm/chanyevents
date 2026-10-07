@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Crown, Sparkles, Globe, Users, Megaphone, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Building2, Crown, Sparkles, Globe, Users, Megaphone, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -161,12 +161,7 @@ const Services: React.FC = () => {
                       </li>
                     ))}
                   </ul>
-                  <Link to="/quote">
-                    <Button className="bg-gradient-gold text-primary-foreground hover-gold-glow">
-                      Demander un devis
-                      <ArrowRight className="ml-2 w-4 h-4" />
-                    </Button>
-                  </Link>
+
                 </div>
 
                 <div className={index % 2 === 1 ? 'lg:order-1' : ''}>
@@ -238,11 +233,6 @@ const Services: React.FC = () => {
               vos idées en une expérience exceptionnelle.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/quote">
-                <Button size="lg" className="bg-gradient-gold text-primary-foreground hover-gold-glow">
-                  Demander un devis gratuit
-                </Button>
-              </Link>
               <Link to="/contact">
                 <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10">
                   Nous contacter

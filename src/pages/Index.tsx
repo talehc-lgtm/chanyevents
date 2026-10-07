@@ -164,15 +164,6 @@ const Index: React.FC = () => {
                   {currentHeroSlide.description}
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/quote">
-                <Button
-                  size="lg"
-                  className="bg-gradient-gold text-primary-foreground hover-gold-glow text-lg px-8 py-6"
-                >
-                  {t('hero.cta.quote')}
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
               <Link to="/services">
                 <Button
                   size="lg"
