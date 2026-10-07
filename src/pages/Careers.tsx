@@ -43,7 +43,8 @@ const Careers: React.FC = () => {
   };
   const [form, setForm] = useState(emptyForm);
   const [cvFile, setCvFile] = useState<File | null>(null);
-  const [photoFiles, setPhotoFiles] = useState<File[]>([]);
+  const [photoPro, setPhotoPro] = useState<File | null>(null);
+  const [photoVille, setPhotoVille] = useState<File | null>(null);
 
   const offers: JobOffer[] = [
     {
@@ -120,7 +121,8 @@ const Careers: React.FC = () => {
     if (!form.experience.trim()) return fail('Décrivez votre expérience.', 'Describe your experience.');
     if (isHostess && (!form.age || !form.height_cm)) return fail('Indiquez votre âge et votre taille.', 'Enter your age and height.');
     if (!cvFile) return fail('Joignez votre CV.', 'Attach your CV.');
-    if (isHostess && photoFiles.length < 2) return fail('Joignez deux photos récentes en pied.', 'Attach two recent full-length photos.');
+    if (isHostess && (!photoPro || !photoVille)) return fail('Joignez une photo professionnelle et une photo en tenue de ville.', 'Attach a professional photo and a casual-outfit photo.');
+    const photoFiles = [photoPro, photoVille].filter(Boolean) as File[];
     const tooBig = [cvFile, ...photoFiles].some((f) => f.size > 10 * 1024 * 1024);
     if (tooBig) return fail('Chaque fichier doit faire moins de 10 Mo.', 'Each file must be under 10 MB.');
 
@@ -130,7 +132,7 @@ const Careers: React.FC = () => {
     try {
       const folder = crypto.randomUUID();
       cv_path = await upload(cvFile, folder);
-      if (isHostess) photo_paths = await Promise.all(photoFiles.map((f) => upload(f, folder)));
+      if (photoFiles.length) photo_paths = await Promise.all(photoFiles.map((f) => upload(f, folder)));
     } catch {
       setIsSubmitting(false);
       toast({ title: language === 'fr' ? 'Erreur' : 'Error', description: language === 'fr' ? "L'envoi des fichiers a échoué. Réessayez ou postulez via WhatsApp." : 'File upload failed. Try again or apply via WhatsApp.', variant: 'destructive' });
@@ -462,17 +464,19 @@ const Careers: React.FC = () => {
               />
             </div>
 
-            <div className="grid sm:grid-cols-2 gap-6">
+            <div className="grid sm:grid-cols-3 gap-6">
               <div>
                 <Label htmlFor="cv" className="text-foreground">{language === 'fr' ? 'CV actualisé (PDF, Word ou image) *' : 'Updated CV (PDF, Word or image) *'}</Label>
                 <Input id="cv" type="file" accept=".pdf,.doc,.docx,image/*" onChange={(e) => setCvFile(e.target.files?.[0] ?? null)} className="mt-2" />
               </div>
-              {isHostess && (
-                <div>
-                  <Label htmlFor="photos" className="text-foreground">{language === 'fr' ? 'Deux photos récentes en pied *' : 'Two recent full-length photos *'}</Label>
-                  <Input id="photos" type="file" accept="image/*" multiple onChange={(e) => setPhotoFiles(Array.from(e.target.files ?? []).slice(0, 2))} className="mt-2" />
-                </div>
-              )}
+              <div>
+                <Label htmlFor="photo-pro" className="text-foreground">{language === 'fr' ? 'Photo professionnelle' : 'Professional photo'}{isHostess ? ' *' : ''}</Label>
+                <Input id="photo-pro" type="file" accept="image/*" onChange={(e) => setPhotoPro(e.target.files?.[0] ?? null)} className="mt-2" />
+              </div>
+              <div>
+                <Label htmlFor="photo-ville" className="text-foreground">{language === 'fr' ? 'Photo en tenue de ville' : 'Photo in casual outfit'}{isHostess ? ' *' : ''}</Label>
+                <Input id="photo-ville" type="file" accept="image/*" onChange={(e) => setPhotoVille(e.target.files?.[0] ?? null)} className="mt-2" />
+              </div>
             </div>
             <p className="text-xs text-muted-foreground">
               {language === 'fr' ? 'Seules les candidatures complètes répondant aux critères seront examinées. Les profils présélectionnés seront contactés.' : 'Only complete applications meeting the criteria will be reviewed. Shortlisted candidates will be contacted.'}
