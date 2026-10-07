@@ -60,6 +60,7 @@ const Header: React.FC = () => {
     { href: '/services', label: t('nav.services') },
     { href: '/portfolio', label: t('nav.portfolio') },
     { href: '/about', label: t('nav.about') },
+    { href: '/careers', label: t('nav.careers') },
     { href: '/contact', label: t('nav.contact') },
   ];
 
@@ -155,7 +156,6 @@ const Header: React.FC = () => {
                   )}
                 </div>
               ))}
-              <Link to="/careers" className="block py-2.5 text-lg text-foreground/85">{t('nav.careers')}</Link>
               <Link to="/contact#projet" className="block mt-4 text-center px-5 py-3 bg-primary text-primary-foreground rounded-sm font-semibold">{L('Démarrer un projet', 'Start a project')}</Link>
               <button onClick={() => setLanguage(fr ? 'en' : 'fr')} className="flex items-center gap-2 pt-4 text-sm text-foreground/80">
                 <Globe className="w-4 h-4" />{fr ? 'English' : 'Français'}
