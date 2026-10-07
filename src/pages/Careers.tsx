@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
+import CastingProfileFields, { emptyProfile, ageFromBirthDate, type CastingProfile } from '@/components/careers/CastingProfileFields';
 
 const WHATSAPP_NUMBER = '237675788550';
 
@@ -42,6 +43,9 @@ const Careers: React.FC = () => {
     age: '', height_cm: '', speaks_french: false, speaks_english: false, full_availability: false,
   };
   const [form, setForm] = useState(emptyForm);
+  const [profile, setProfile] = useState<CastingProfile>(emptyProfile);
+  const setP = (patch: Partial<CastingProfile>) => setProfile((p) => ({ ...p, ...patch }));
+  const L = (fr: string, en: string) => (language === 'fr' ? fr : en);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [photoPro, setPhotoPro] = useState<File | null>(null);
   const [photoVille, setPhotoVille] = useState<File | null>(null);
@@ -118,8 +122,14 @@ const Careers: React.FC = () => {
 
     const parsed = applicationSchema.safeParse(form);
     if (!parsed.success) return fail(parsed.error.errors[0]?.message ?? '', parsed.error.errors[0]?.message ?? '');
-    if (!form.experience.trim()) return fail('Décrivez votre expérience.', 'Describe your experience.');
-    if (isHostess && (!form.age || !form.height_cm)) return fail('Indiquez votre âge et votre taille.', 'Enter your age and height.');
+    const age = ageFromBirthDate(profile.birth_date);
+    if (age === null) return fail('Indiquez votre date de naissance.', 'Enter your date of birth.');
+    if (!profile.sex) return fail('Indiquez votre sexe.', 'Select your sex.');
+    if (isHostess && !form.height_cm) return fail('Indiquez votre taille.', 'Enter your height.');
+    if (!profile.experience_1.trim()) return fail('Décrivez au moins une expérience récente.', 'Describe at least one recent experience.');
+    if (!profile.lang_fr || !profile.lang_en) return fail('Indiquez votre niveau en français et en anglais.', 'Select your French and English level.');
+    if (!profile.image_rights || profile.signature_name.trim().length < 2) return fail("Acceptez le droit à l'image et signez avec votre nom.", 'Accept the image rights and sign with your name.');
+    if (age < 18 && (!profile.parent_name.trim() || !profile.parent_of.trim() || !profile.parent_signature.trim())) return fail("L'autorisation parentale est obligatoire pour les mineurs.", 'Parental authorisation is required for minors.');
     if (!cvFile) return fail('Joignez votre CV.', 'Attach your CV.');
     if (isHostess && (!photoPro || !photoVille)) return fail('Joignez une photo professionnelle et une photo en tenue de ville.', 'Attach a professional photo and a casual-outfit photo.');
     const photoFiles = [photoPro, photoVille].filter(Boolean) as File[];
@@ -139,21 +149,25 @@ const Careers: React.FC = () => {
       return;
     }
 
+    const experience = [profile.experience_1, profile.experience_2, profile.experience_3]
+      .map((x, i) => x.trim() && `${i + 1}. ${x.trim()}`).filter(Boolean).join('\n').slice(0, 1500);
+    const okLevel = (l: string) => l === 'courant' || l === 'moyen';
     const payload = {
       position: selectedPosition,
       full_name: parsed.data.full_name,
       phone: parsed.data.phone,
       email: parsed.data.email || null,
       city: parsed.data.city || null,
-      experience: parsed.data.experience || null,
+      experience,
       message: parsed.data.message || null,
-      age: form.age ? Number(form.age) : null,
-      height_cm: isHostess && form.height_cm ? Number(form.height_cm) : null,
-      speaks_french: form.speaks_french,
-      speaks_english: form.speaks_english,
+      age: Math.max(16, Math.min(70, age)),
+      height_cm: form.height_cm ? Number(form.height_cm) : null,
+      speaks_french: okLevel(profile.lang_fr),
+      speaks_english: okLevel(profile.lang_en),
       full_availability: form.full_availability,
       cv_path,
       photo_paths,
+      profile,
     };
     const { error } = await supabase.from('job_applications').insert(payload);
     setIsSubmitting(false);
