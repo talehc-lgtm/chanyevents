@@ -34,7 +34,7 @@ const Header: React.FC = () => {
       { href: '/business-events#pavillons', label: L('Pavillons & Expositions', 'Pavilions & Exhibitions') },
       { href: '/business-events#investment', label: 'Investment Events' },
     ] },
-    { href: '/corporate-institutional', label: L('Institutionnel', 'Institutional'), children: [
+    { href: '/corporate-institutional', label: L('Corporate & Institutionnel', 'Corporate & Institutional'), children: [
       { href: '/corporate-institutional#corporate', label: 'Corporate Events' },
       { href: '/corporate-institutional#institutionnel', label: L('Événements institutionnels', 'Institutional Events') },
       { href: '/corporate-institutional#diplomatique', label: L('Événements diplomatiques', 'Diplomatic Events') },
