@@ -124,8 +124,9 @@ const Portfolio: React.FC = () => {
               {t('portfolio.title')}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-              Découvrez une sélection de nos réalisations les plus marquantes. 
-              Chaque projet témoigne de notre engagement envers l'excellence.
+              {language === 'fr'
+                ? "Découvrez une sélection de nos réalisations les plus marquantes. Chaque projet témoigne de notre engagement envers l'excellence."
+                : 'Discover a selection of our most notable projects. Each one reflects our commitment to excellence.'}
             </p>
           </motion.div>
         </div>

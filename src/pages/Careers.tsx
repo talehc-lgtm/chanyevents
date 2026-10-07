@@ -54,38 +54,38 @@ const Careers: React.FC = () => {
     {
       id: 'hotesses',
       title: 'Hôtesse événementielle',
-      intro:
-        "Pour le 1er Salon des Vins Italiens en Afrique Centrale, nous recrutons notre équipe opérationnelle : hôtesses expérimentées résidant à Douala.",
+      intro: L(
+        "Pour le 1er Salon des Vins Italiens en Afrique Centrale, nous recrutons notre équipe opérationnelle : hôtesses expérimentées résidant à Douala.", "For the 1st Italian Wine Fair in Central Africa, we are recruiting our operations team: experienced hostesses based in Douala."),
       missions: [
-        'Accueil, orientation et information des visiteurs',
-        'Gestion des entrées et du stand des verres',
-        'Appui aux activités du salon',
+        L('Accueil, orientation et information des visiteurs', 'Welcoming, guiding and informing visitors'),
+        L('Gestion des entrées et du stand des verres', 'Managing entrances and the glass stand'),
+        L('Appui aux activités du salon', 'Supporting fair activities'),
       ],
       profile: [
-        'Âgée de 21 à 30 ans',
-        'Résidant à Douala',
-        'Mesurant au minimum 1,75 m',
-        'Bonne présentation',
-        "Expérience dans l'événementiel",
-        "Disponible pendant toute la période de l'événement",
-        "Dynamique, organisée et à l'aise avec le public",
+        L('Âgée de 21 à 30 ans', 'Aged 21 to 30'),
+        L('Résidant à Douala', 'Based in Douala'),
+        L('Mesurant au minimum 1,75 m', 'At least 1.75 m tall'),
+        L('Bonne présentation', 'Well-presented'),
+        L("Expérience dans l'événementiel", 'Experience in events'),
+        L("Disponible pendant toute la période de l'événement", 'Available for the entire event period'),
+        L("Dynamique, organisée et à l'aise avec le public", 'Energetic, organised and comfortable with the public'),
       ],
     },
     {
       id: 'personnel-appui',
       title: "Personnel d'appui",
-      intro:
-        "Pour le 1er Salon des Vins Italiens en Afrique Centrale, nous recrutons notre personnel d'appui expérimenté, résidant à Douala.",
+      intro: L(
+        "Pour le 1er Salon des Vins Italiens en Afrique Centrale, nous recrutons notre personnel d'appui expérimenté, résidant à Douala.", "For the 1st Italian Wine Fair in Central Africa, we are recruiting experienced support staff based in Douala."),
       missions: [
-        'Préparation et organisation du salon',
-        'Secrétariat, coordination et suivi logistique',
-        'Interface avec exposants, partenaires et prestataires',
+        L('Préparation et organisation du salon', 'Fair preparation and organisation'),
+        L('Secrétariat, coordination et suivi logistique', 'Secretarial work, coordination and logistics follow-up'),
+        L('Interface avec exposants, partenaires et prestataires', 'Liaison with exhibitors, partners and suppliers'),
       ],
       profile: [
-        'Résidant à Douala',
-        'Expérience en événementiel, logistique ou secrétariat',
-        "Disponible pendant toute la période de l'événement",
-        "Organisé, ponctuel et à l'aise en équipe",
+        L('Résidant à Douala', 'Based in Douala'),
+        L('Expérience en événementiel, logistique ou secrétariat', 'Experience in events, logistics or secretarial work'),
+        L("Disponible pendant toute la période de l'événement", 'Available for the entire event period'),
+        L("Organisé, ponctuel et à l'aise en équipe", 'Organised, punctual and a good team player'),
       ],
     },
   ];
@@ -272,7 +272,7 @@ const Careers: React.FC = () => {
                 className="p-8 md:p-10 bg-card border border-border rounded-sm hover:border-primary/50 transition-all duration-300 flex flex-col"
               >
                 <h3 className="font-serif text-3xl font-semibold text-foreground mb-4">
-                  {offer.title}
+                  {L(offer.title, offer.id === 'hotesses' ? 'Event Hostess' : 'Support Staff')}
                 </h3>
                 <p className="text-muted-foreground leading-relaxed mb-8">{offer.intro}</p>
 
@@ -367,7 +367,7 @@ const Careers: React.FC = () => {
                 </option>
                 {offers.map((offer) => (
                   <option key={offer.id} value={offer.title}>
-                    {offer.title}
+                    {L(offer.title, offer.id === 'hotesses' ? 'Event Hostess' : 'Support Staff')}
                   </option>
                 ))}
               </select>
