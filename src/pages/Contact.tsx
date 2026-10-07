@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
 
 const Contact: React.FC = () => {
   const { t } = useLanguage();
@@ -22,9 +24,20 @@ const Contact: React.FC = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log('Contact form submitted:', formData);
+    const name = formData.name.trim(), email = formData.email.trim(), message = formData.message.trim();
+    if (!name || !/^\S+@\S+\.\S+$/.test(email) || !message) {
+      toast({ title: 'Veuillez remplir tous les champs correctement.', variant: 'destructive' });
+      return;
+    }
+    const { error } = await supabase.from('contact_messages').insert({
+      name: name.slice(0, 150), email: email.slice(0, 255), message: message.slice(0, 4000),
+    });
+    if (error) {
+      toast({ title: "L'envoi a échoué, veuillez réessayer.", variant: 'destructive' });
+      return;
+    }
     setIsSubmitted(true);
   };
 

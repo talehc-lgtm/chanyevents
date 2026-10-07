@@ -8,6 +8,13 @@
       "when": 1791262843693,
       "tag": "0000_create_job_applications",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1791361957008,
+      "tag": "0001_quotes_and_messages",
+      "breakpoints": true
     }
   ]
 }

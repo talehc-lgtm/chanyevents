@@ -14,6 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
+      contact_messages: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          status: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          status?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          status?: string
+        }
+        Relationships: []
+      }
       job_applications: {
         Row: {
           ai_recommendation: string | null
@@ -59,6 +86,54 @@ export type Database = {
           phone?: string
           position?: string
           score?: number | null
+        }
+        Relationships: []
+      }
+      quote_requests: {
+        Row: {
+          budget: string | null
+          company: string | null
+          created_at: string
+          details: string | null
+          email: string
+          event_date: string | null
+          event_type: string | null
+          guests: string | null
+          id: string
+          location: string | null
+          name: string
+          phone: string | null
+          status: string
+        }
+        Insert: {
+          budget?: string | null
+          company?: string | null
+          created_at?: string
+          details?: string | null
+          email: string
+          event_date?: string | null
+          event_type?: string | null
+          guests?: string | null
+          id?: string
+          location?: string | null
+          name: string
+          phone?: string | null
+          status?: string
+        }
+        Update: {
+          budget?: string | null
+          company?: string | null
+          created_at?: string
+          details?: string | null
+          email?: string
+          event_date?: string | null
+          event_type?: string | null
+          guests?: string | null
+          id?: string
+          location?: string | null
+          name?: string
+          phone?: string | null
+          status?: string
         }
         Relationships: []
       }

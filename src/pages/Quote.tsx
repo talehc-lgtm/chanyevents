@@ -7,6 +7,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
+import { supabase } from '@/integrations/supabase/client';
+import { toast } from '@/hooks/use-toast';
 import {
   Select,
   SelectContent,
@@ -39,10 +41,27 @@ const Quote: React.FC = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [sending, setSending] = useState(false);
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Here you would typically send the data to your backend
-    console.log('Form submitted:', formData);
+    const f = formData;
+    const clip = (v: string, n = 200) => v.trim().slice(0, n) || null;
+    if (!f.name.trim() || !/^\S+@\S+\.\S+$/.test(f.email.trim())) {
+      toast({ title: 'Veuillez indiquer un nom et un email valides.', variant: 'destructive' });
+      return;
+    }
+    setSending(true);
+    const { error } = await supabase.from('quote_requests').insert({
+      name: f.name.trim().slice(0, 150), email: f.email.trim().slice(0, 255),
+      phone: clip(f.phone, 40), company: clip(f.company), event_type: clip(f.eventType),
+      event_date: clip(f.eventDate, 40), guests: clip(f.guests, 40), budget: clip(f.budget),
+      location: clip(f.location), details: clip(f.details, 4000),
+    });
+    setSending(false);
+    if (error) {
+      toast({ title: "L'envoi a échoué, veuillez réessayer.", variant: 'destructive' });
+      return;
+    }
     setIsSubmitted(true);
   };
 
