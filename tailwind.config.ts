@@ -14,8 +14,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
+        sans: ['Manrope', 'sans-serif'],
+        serif: ['Fraunces', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -57,6 +57,7 @@ export default {
           dark: "hsl(var(--gold-dark))",
         },
         silver: "hsl(var(--silver))",
+        champagne: "hsl(var(--champagne))",
         ink: "hsl(var(--ink))",
         cream: "hsl(var(--cream))",
         charcoal: {

@@ -376,7 +376,7 @@ const Index: React.FC = () => {
                   alt={item.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-background via-background/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-90 transition-opacity" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
                   <span className="text-primary text-sm font-medium tracking-wider uppercase">
                     {item.category}
