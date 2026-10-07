@@ -26,9 +26,8 @@ const Footer: React.FC = () => {
   ];
 
   const socials = [
-    { href: 'https://instagram.com', Icon: Instagram, name: 'Instagram' },
-    { href: 'https://facebook.com', Icon: Facebook, name: 'Facebook' },
-    { href: 'https://linkedin.com', Icon: Linkedin, name: 'LinkedIn' },
+    { href: 'https://www.instagram.com/chanyevents/', Icon: Instagram, name: 'Instagram' },
+    { href: 'https://www.facebook.com/chanyevents/', Icon: Facebook, name: 'Facebook' },
   ];
 
   return (
