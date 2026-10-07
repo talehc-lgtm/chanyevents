@@ -16,37 +16,49 @@ export type Database = {
     Tables: {
       job_applications: {
         Row: {
+          ai_recommendation: string | null
+          ai_summary: string | null
           city: string | null
           created_at: string
           email: string | null
+          evaluated_at: string | null
           experience: string | null
           full_name: string
           id: string
           message: string | null
           phone: string
           position: string
+          score: number | null
         }
         Insert: {
+          ai_recommendation?: string | null
+          ai_summary?: string | null
           city?: string | null
           created_at?: string
           email?: string | null
+          evaluated_at?: string | null
           experience?: string | null
           full_name: string
           id?: string
           message?: string | null
           phone: string
           position: string
+          score?: number | null
         }
         Update: {
+          ai_recommendation?: string | null
+          ai_summary?: string | null
           city?: string | null
           created_at?: string
           email?: string | null
+          evaluated_at?: string | null
           experience?: string | null
           full_name?: string
           id?: string
           message?: string | null
           phone?: string
           position?: string
+          score?: number | null
         }
         Relationships: []
       }
