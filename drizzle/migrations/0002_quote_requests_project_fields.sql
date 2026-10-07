@@ -1,0 +1,1 @@
+ALTER TABLE public.quote_requests ADD COLUMN IF NOT EXISTS organization text, ADD COLUMN IF NOT EXISTS job_title text, ADD COLUMN IF NOT EXISTS country text, ADD COLUMN IF NOT EXISTS city text, ADD COLUMN IF NOT EXISTS needs text[];

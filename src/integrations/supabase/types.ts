@@ -92,7 +92,9 @@ export type Database = {
       quote_requests: {
         Row: {
           budget: string | null
+          city: string | null
           company: string | null
+          country: string | null
           created_at: string
           details: string | null
           email: string
@@ -100,14 +102,19 @@ export type Database = {
           event_type: string | null
           guests: string | null
           id: string
+          job_title: string | null
           location: string | null
           name: string
+          needs: string[] | null
+          organization: string | null
           phone: string | null
           status: string
         }
         Insert: {
           budget?: string | null
+          city?: string | null
           company?: string | null
+          country?: string | null
           created_at?: string
           details?: string | null
           email: string
@@ -115,14 +122,19 @@ export type Database = {
           event_type?: string | null
           guests?: string | null
           id?: string
+          job_title?: string | null
           location?: string | null
           name: string
+          needs?: string[] | null
+          organization?: string | null
           phone?: string | null
           status?: string
         }
         Update: {
           budget?: string | null
+          city?: string | null
           company?: string | null
+          country?: string | null
           created_at?: string
           details?: string | null
           email?: string
@@ -130,8 +142,11 @@ export type Database = {
           event_type?: string | null
           guests?: string | null
           id?: string
+          job_title?: string | null
           location?: string | null
           name?: string
+          needs?: string[] | null
+          organization?: string | null
           phone?: string | null
           status?: string
         }
