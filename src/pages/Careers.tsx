@@ -421,48 +421,18 @@ const Careers: React.FC = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="age" className="text-foreground">{language === 'fr' ? 'Âge' : 'Age'}{isHostess ? ' *' : ''}</Label>
-                <Input id="age" type="number" min={16} max={70} value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} className="mt-2" />
+                <Label htmlFor="height" className="text-foreground">{language === 'fr' ? 'Taille (cm)' : 'Height (cm)'}{isHostess ? ' *' : ''}</Label>
+                <Input id="height" type="number" min={140} max={220} placeholder="175" value={form.height_cm} onChange={(e) => setForm({ ...form, height_cm: e.target.value })} className="mt-2" />
               </div>
-              {isHostess && (
-                <div>
-                  <Label htmlFor="height" className="text-foreground">{language === 'fr' ? 'Taille (cm) *' : 'Height (cm) *'}</Label>
-                  <Input id="height" type="number" min={140} max={220} placeholder="175" value={form.height_cm} onChange={(e) => setForm({ ...form, height_cm: e.target.value })} className="mt-2" />
-                </div>
-              )}
             </div>
 
-            <div className="grid sm:grid-cols-3 gap-3">
-              {([
-                ['speaks_french', language === 'fr' ? 'Je maîtrise le français' : 'I am fluent in French'],
-                ['speaks_english', language === 'fr' ? "Je maîtrise l'anglais" : 'I am fluent in English'],
-                ['full_availability', language === 'fr' ? 'Disponible les 26, 27 et 28 nov.' : 'Available on 26, 27 & 28 Nov.'],
-              ] as const).map(([k, label]) => (
-                <label key={k} className="flex items-center gap-2 text-sm text-foreground border border-border rounded-sm px-3 py-3 cursor-pointer">
-                  <input type="checkbox" checked={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.checked })} className="accent-primary w-4 h-4" />
-                  {label}
-                </label>
-              ))}
-            </div>
+            <CastingProfileFields section="personal" p={profile} set={setP} L={L} />
+            <CastingProfileFields section="rest" p={profile} set={setP} L={L} />
 
-            <div>
-              <Label htmlFor="experience" className="text-foreground">
-                {language === 'fr' ? 'Expérience (événementiel, logistique, secrétariat) *' : 'Experience (events, logistics, secretarial) *'}
-              </Label>
-              <Textarea
-                id="experience"
-                value={form.experience}
-                onChange={(e) => setForm({ ...form, experience: e.target.value })}
-                maxLength={500}
-                rows={3}
-                className="mt-2"
-                placeholder={
-                  language === 'fr'
-                    ? 'Décrivez brièvement vos expériences…'
-                    : 'Briefly describe your experience…'
-                }
-              />
-            </div>
+            <label className="flex items-center gap-2 text-sm text-foreground border border-border rounded-sm px-3 py-3 cursor-pointer">
+              <input type="checkbox" checked={form.full_availability} onChange={(e) => setForm({ ...form, full_availability: e.target.checked })} className="accent-primary w-4 h-4" />
+              {language === 'fr' ? 'Je suis disponible les 26, 27 et 28 novembre 2026 (In Vino Italia Douala)' : 'I am available on 26, 27 & 28 November 2026 (In Vino Italia Douala)'}
+            </label>
 
             <div className="grid sm:grid-cols-3 gap-6">
               <div>
