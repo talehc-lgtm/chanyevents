@@ -91,7 +91,7 @@ const Services: React.FC = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="pt-32 pb-20 bg-gradient-to-b from-charcoal to-background">
+      <section className="pt-40 md:pt-44 pb-20 bg-gradient-to-b from-charcoal to-background">
         <div className="container-luxury px-6">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
