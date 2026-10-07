@@ -131,11 +131,6 @@ const Header: React.FC = () => {
                   <Globe className="w-4 h-4" />
                   <span>{language === 'fr' ? 'Français' : 'English'}</span>
                 </button>
-                <Link to="/quote" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Button variant="default" size="sm" className="bg-gradient-gold text-primary-foreground">
-                    {t('hero.cta.quote')}
-                  </Button>
-                </Link>
               </div>
             </div>
           </motion.div>
