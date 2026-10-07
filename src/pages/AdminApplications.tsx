@@ -24,6 +24,8 @@ interface Application {
   ai_summary: string | null;
   ai_recommendation: string | null;
   evaluated_at: string | null;
+  age?: number | null; height_cm?: number | null; speaks_french?: boolean | null; speaks_english?: boolean | null;
+  full_availability?: boolean | null; cv_url?: string | null; photo_urls?: string[];
 }
 
 interface QuoteRequest {
@@ -344,6 +346,21 @@ const AdminApplications: React.FC = () => {
                         </span>
                       )}
                     </div>
+
+                    <div className="flex flex-wrap gap-2 text-xs mb-3">
+                      {app.age != null && <span className="px-2 py-1 border border-border rounded-sm">{app.age} {language === 'fr' ? 'ans' : 'y/o'}</span>}
+                      {app.height_cm != null && <span className="px-2 py-1 border border-border rounded-sm">{app.height_cm} cm</span>}
+                      <span className="px-2 py-1 border border-border rounded-sm">FR {app.speaks_french ? '✓' : '✗'} · EN {app.speaks_english ? '✓' : '✗'}</span>
+                      <span className="px-2 py-1 border border-border rounded-sm">{language === 'fr' ? 'Disponible 26–28 nov.' : 'Available 26–28 Nov.'} {app.full_availability ? '✓' : '✗'}</span>
+                      {app.cv_url && <a href={app.cv_url} target="_blank" rel="noopener noreferrer" className="px-2 py-1 bg-primary text-primary-foreground rounded-sm">CV</a>}
+                    </div>
+                    {!!app.photo_urls?.length && (
+                      <div className="flex gap-2 mb-3">
+                        {app.photo_urls.map((u) => (
+                          <a key={u} href={u} target="_blank" rel="noopener noreferrer"><img src={u} alt="" className="h-28 w-20 object-cover rounded-sm border border-border" /></a>
+                        ))}
+                      </div>
+                    )}
 
                     {app.experience && (
                       <p className="text-foreground/80 text-sm mb-2">
