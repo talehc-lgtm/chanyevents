@@ -5,8 +5,9 @@ import { Menu, X, Globe, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import logoChanyEvents from '@/assets/logo-chany-events.png';
 
-type Sub = { href: string; label: string; accent?: boolean };
-type NavItem = { href: string; label: string; mega?: { title: string; href: string; subs: Sub[] }[] };
+type Sub = { href: string; label: string };
+type MegaCol = { title: string; href: string; subs: Sub[]; feature?: { title: string; href: string; label: string } };
+type NavItem = { href: string; label: string; mega?: MegaCol[] };
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -41,7 +42,6 @@ const Header: React.FC = () => {
             { href: '/business-events#roadshows', label: 'Roadshows' },
             { href: '/business-events#pavillons', label: L('Pavillons & Expositions', 'Pavilions & Exhibitions') },
             { href: '/business-events#investment', label: 'Investment Events' },
-            { href: '/weddings', label: L('Weddings & Private Events', 'Weddings & Private Events'), accent: true },
           ],
         },
         {
@@ -54,6 +54,7 @@ const Header: React.FC = () => {
             { href: '/corporate-institutional#delegations', label: L('Délégations', 'Delegations') },
             { href: '/corporate-institutional#lancements', label: L('Lancements & inaugurations', 'Launches & Inaugurations') },
           ],
+          feature: { title: 'Private Event', href: '/weddings', label: 'Wedding Planning' },
         },
       ],
     },
@@ -91,13 +92,16 @@ const Header: React.FC = () => {
                           <Link to={col.href} className="block font-serif text-lg text-foreground hover:text-primary mb-4 pb-3 border-b border-border">{col.title}</Link>
                           <div className="space-y-1">
                             {col.subs.map((c) => (
-                              <Link key={c.href} to={c.href}
-                                className={c.accent
-                                  ? 'block mt-3 px-4 py-2.5 text-sm font-semibold rounded-sm bg-champagne/25 text-foreground border border-champagne/60 hover:bg-champagne/40 hover:text-foreground transition-colors'
-                                  : 'block px-1 py-1.5 text-sm text-foreground/75 hover:text-primary transition-colors'}>
+                              <Link key={c.href} to={c.href} className="block px-1 py-1.5 text-sm text-foreground/75 hover:text-primary transition-colors">
                                 {c.label}
                               </Link>
                             ))}
+                            {col.feature && (
+                              <Link to={col.feature.href} className="block mt-6 pt-5 border-t border-champagne/50 text-foreground hover:text-primary transition-colors">
+                                <span className="block font-serif text-3xl leading-tight">{col.feature.title}</span>
+                                <span className="block mt-2 text-sm font-semibold uppercase tracking-[0.12em] text-primary">{col.feature.label}</span>
+                              </Link>
+                            )}
                           </div>
                         </div>
                       ))}
@@ -143,13 +147,16 @@ const Header: React.FC = () => {
                         <div key={col.title}>
                           <Link to={col.href} className="block py-1 font-serif text-lg text-foreground">{col.title}</Link>
                           {col.subs.map((c) => (
-                            <Link key={c.href} to={c.href}
-                              className={c.accent
-                                ? 'block my-2 px-4 py-2.5 text-sm font-semibold rounded-sm bg-champagne/25 border border-champagne/60 text-foreground'
-                                : 'block py-1.5 text-muted-foreground'}>
+                            <Link key={c.href} to={c.href} className="block py-1.5 text-muted-foreground">
                               {c.label}
                             </Link>
                           ))}
+                          {col.feature && (
+                            <Link to={col.feature.href} className="block mt-4 pt-4 border-t border-champagne/50 text-foreground">
+                              <span className="block font-serif text-2xl leading-tight">{col.feature.title}</span>
+                              <span className="block mt-1.5 text-sm font-semibold uppercase tracking-[0.12em] text-primary">{col.feature.label}</span>
+                            </Link>
+                          )}
                         </div>
                       ))}
                     </div>
