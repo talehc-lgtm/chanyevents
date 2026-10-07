@@ -19,14 +19,14 @@ const Index: React.FC = () => {
   const L = useL();
 
   const expertises = [
-    { t: L('Foires & Salons professionnels', 'Trade fairs & exhibitions'), i: L('Foires internationales · Salons sectoriels · Trade shows · Pavillons pays · ConfEx', 'International fairs · Sector shows · Trade shows · Country pavilions · ConfEx'), to: '/business-events#salons' },
-    { t: L('Conférences & grands rendez-vous', 'Conferences & major gatherings'), i: L('Forums économiques · Sommets · Congrès · Symposiums · Assises', 'Economic forums · Summits · Congresses · Symposiums'), to: '/business-events#conferences' },
-    { t: 'B2B & Business Matching', i: 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings', to: '/business-events#b2b' },
-    { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Roadshows', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions' },
-    { t: 'Corporate Events', i: L('Conventions · Séminaires · Kick-off · AG · Incentives · Team building', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate' },
-    { t: 'Networking', i: 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking', to: '/corporate-institutional#corporate' },
-    { t: L('Innovation & formation', 'Innovation & training'), i: L('Workshops · Masterclasses · Bootcamps · Tech Summits (IA, sécurité, productivité) · Startup events', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services' },
-    { t: 'Awards & Galas', i: L('Remises de prix · Galas · Trophées · Dîners officiels · Réceptions VIP', 'Awards · Galas · Trophies · Official dinners · VIP receptions'), to: '/corporate-institutional#institutionnel' },
+    { t: L('Foires & Salons professionnels', 'Trade fairs & exhibitions'), i: L('Foires internationales · Salons sectoriels · Trade shows · Pavillons pays · ConfEx', 'International fairs · Sector shows · Trade shows · Country pavilions · ConfEx'), to: '/business-events#salons', img: tradeshow },
+    { t: L('Conférences & grands rendez-vous', 'Conferences & major gatherings'), i: L('Forums économiques · Sommets · Congrès · Symposiums · Assises', 'Economic forums · Summits · Congresses · Symposiums'), to: '/business-events#conferences', img: conference },
+    { t: 'B2B & Business Matching', i: 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings', to: '/business-events#b2b', img: b2b },
+    { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Roadshows', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions', img: delegation },
+    { t: 'Corporate Events', i: L('Conventions · Séminaires · Kick-off · AG · Incentives · Team building', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate', img: corporateSeminar },
+    { t: 'Networking', i: 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking', to: '/corporate-institutional#corporate', img: vipReception },
+    { t: L('Innovation & formation', 'Innovation & training'), i: L('Workshops · Masterclasses · Bootcamps · Tech Summits (IA, sécurité, productivité) · Startup events', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services', img: workshop },
+    { t: 'Awards & Galas', i: L('Remises de prix · Galas · Trophées · Dîners officiels · Réceptions VIP', 'Awards · Galas · Trophies · Official dinners · VIP receptions'), to: '/corporate-institutional#institutionnel', img: gala },
   ];
 
   const process = [
