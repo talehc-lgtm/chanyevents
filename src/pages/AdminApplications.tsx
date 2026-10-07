@@ -25,7 +25,7 @@ interface Application {
   ai_recommendation: string | null;
   evaluated_at: string | null;
   age?: number | null; height_cm?: number | null; speaks_french?: boolean | null; speaks_english?: boolean | null;
-  full_availability?: boolean | null; cv_url?: string | null; photo_urls?: string[];
+  full_availability?: boolean | null; cv_url?: string | null; photo_urls?: string[]; profile?: Record<string, unknown> | null;
 }
 
 interface QuoteRequest {
