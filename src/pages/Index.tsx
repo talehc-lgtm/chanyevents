@@ -8,6 +8,10 @@ import conference from '@/assets/biz-conference.jpg';
 import tradeshow from '@/assets/biz-tradeshow.jpg';
 import b2b from '@/assets/biz-b2b.jpg';
 import delegation from '@/assets/biz-delegation.jpg';
+import corporateSeminar from '@/assets/biz-corporate-seminar.jpg';
+import workshop from '@/assets/biz-workshop.jpg';
+import gala from '@/assets/biz-gala.jpg';
+import vipReception from '@/assets/chany-vip-reception.jpg';
 import weddingArch from '@/assets/chany-wedding-arch-couple.png';
 import invinoPosterAsset from '@/assets/invino-douala-poster-portrait.png.asset.json';
 
@@ -15,14 +19,14 @@ const Index: React.FC = () => {
   const L = useL();
 
   const expertises = [
-    { t: L('Foires & Salons professionnels', 'Trade fairs & exhibitions'), i: L('Foires internationales · Salons sectoriels · Trade shows · Pavillons pays · ConfEx', 'International fairs · Sector shows · Trade shows · Country pavilions · ConfEx'), to: '/business-events#salons' },
-    { t: L('Conférences & grands rendez-vous', 'Conferences & major gatherings'), i: L('Forums économiques · Sommets · Congrès · Symposiums · Assises', 'Economic forums · Summits · Congresses · Symposiums'), to: '/business-events#conferences' },
-    { t: 'B2B & Business Matching', i: 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings', to: '/business-events#b2b' },
-    { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Roadshows', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions' },
-    { t: 'Corporate Events', i: L('Conventions · Séminaires · Kick-off · AG · Incentives · Team building', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate' },
-    { t: 'Networking', i: 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking', to: '/corporate-institutional#corporate' },
-    { t: L('Innovation & formation', 'Innovation & training'), i: L('Workshops · Masterclasses · Bootcamps · Tech Summits (IA, sécurité, productivité) · Startup events', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services' },
-    { t: 'Awards & Galas', i: L('Remises de prix · Galas · Trophées · Dîners officiels · Réceptions VIP', 'Awards · Galas · Trophies · Official dinners · VIP receptions'), to: '/corporate-institutional#institutionnel' },
+    { t: L('Foires & Salons professionnels', 'Trade fairs & exhibitions'), i: L('Foires internationales · Salons sectoriels · Trade shows · Pavillons pays · ConfEx', 'International fairs · Sector shows · Trade shows · Country pavilions · ConfEx'), to: '/business-events#salons', img: tradeshow },
+    { t: L('Conférences & grands rendez-vous', 'Conferences & major gatherings'), i: L('Forums économiques · Sommets · Congrès · Symposiums · Assises', 'Economic forums · Summits · Congresses · Symposiums'), to: '/business-events#conferences', img: conference },
+    { t: 'B2B & Business Matching', i: 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings', to: '/business-events#b2b', img: b2b },
+    { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Roadshows', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions', img: delegation },
+    { t: 'Corporate Events', i: L('Conventions · Séminaires · Kick-off · AG · Incentives · Team building', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate', img: corporateSeminar },
+    { t: 'Networking', i: 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking', to: '/corporate-institutional#corporate', img: vipReception },
+    { t: L('Innovation & formation', 'Innovation & training'), i: L('Workshops · Masterclasses · Bootcamps · Tech Summits (IA, sécurité, productivité) · Startup events', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services', img: workshop },
+    { t: 'Awards & Galas', i: L('Remises de prix · Galas · Trophées · Dîners officiels · Réceptions VIP', 'Awards · Galas · Trophies · Official dinners · VIP receptions'), to: '/corporate-institutional#institutionnel', img: gala },
   ];
 
   const process = [
@@ -118,13 +122,16 @@ const Index: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-x-12">
             {expertises.map((e, i) => (
               <Reveal key={e.t} delay={(i % 2) * 0.08}>
-                <Link to={e.to} className="group flex gap-6 py-7 border-t border-border">
-                  <span className="text-xs font-semibold text-primary tracking-widest pt-2">{String(i + 1).padStart(2, '0')}</span>
-                  <div className="flex-1">
-                    <h3 className="font-serif text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors">{e.t}</h3>
+                <Link to={e.to} className="group flex items-center gap-5 md:gap-6 py-6 border-t border-border">
+                  <div className="shrink-0 w-24 h-24 md:w-28 md:h-28 overflow-hidden rounded-sm">
+                    <img src={e.img} alt={e.t} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-xs font-semibold text-primary tracking-widest">{String(i + 1).padStart(2, '0')}</span>
+                    <h3 className="font-serif text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors mt-1">{e.t}</h3>
                     <p className="text-muted-foreground text-sm mt-2">{e.i}</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-primary mt-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  <ArrowRight className="w-5 h-5 shrink-0 text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </Link>
               </Reveal>
             ))}
