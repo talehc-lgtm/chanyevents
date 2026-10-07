@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,500;0,6..96,600;1,6..96,500&family=Manrope:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -75,17 +75,17 @@
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Bodoni Moda', serif;
-    font-weight: 500;
-    line-height: 1.1;
-    letter-spacing: -0.012em;
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    line-height: 1.12;
+    letter-spacing: 0;
     text-wrap: balance;
   }
   p { text-wrap: pretty; }
   body { font-size: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem); line-height: 1.7; font-weight: 400; }
   nav a, nav button { font-weight: 500; }
   button, label { font-weight: 600; }
-  h1 em, h2 em { font-style: italic; font-weight: 500; }
+  h1 em, h2 em { font-style: italic; font-weight: 400; }
   ::selection { background: hsl(var(--primary) / 0.18); }
   :focus-visible { outline: 2px solid hsl(var(--ring)); outline-offset: 3px; }
   img { transition: transform 0.7s cubic-bezier(.2,.7,.2,1); }

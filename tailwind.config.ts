@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Manrope', 'sans-serif'],
-        serif: ['Bodoni Moda', 'serif'],
+        serif: ['DM Serif Display', 'serif'],
       },
       fontSize: {
         display: ['clamp(2.375rem, 1.4rem + 4.2vw, 5.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
