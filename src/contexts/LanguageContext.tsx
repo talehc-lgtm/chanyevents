@@ -17,7 +17,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.portfolio': 'Réalisations',
     'nav.quote': 'Devis',
     'nav.careers': 'Nous Recrutons',
-    'nav.contact': 'Contact',
+    'nav.contact': 'Contacts',
     
     // Hero
     'hero.subtitle': 'Agence Événementielle Premium',
@@ -103,7 +103,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.portfolio': 'Portfolio',
     'nav.quote': 'Quote',
     'nav.careers': 'Careers',
-    'nav.contact': 'Contact',
+    'nav.contact': 'Contacts',
     
     // Hero
     'hero.subtitle': 'Premium Event Agency',
