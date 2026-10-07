@@ -37,60 +37,60 @@ const Careers: React.FC = () => {
   const { toast } = useToast();
   const [selectedPosition, setSelectedPosition] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [form, setForm] = useState({
-    full_name: '',
-    phone: '',
-    email: '',
-    city: '',
-    experience: '',
-    message: '',
-  });
+  const emptyForm = {
+    full_name: '', phone: '', email: '', city: '', experience: '', message: '',
+    age: '', height_cm: '', speaks_french: false, speaks_english: false, full_availability: false,
+  };
+  const [form, setForm] = useState(emptyForm);
+  const [cvFile, setCvFile] = useState<File | null>(null);
+  const [photoFiles, setPhotoFiles] = useState<File[]>([]);
 
   const offers: JobOffer[] = [
     {
       id: 'hotesses',
-      title: "Hôtesses d'accueil",
+      title: 'Hôtesse événementielle',
       intro:
-        "CHANY EVENT'S organise le casting et le recrutement d'hôtesses expérimentées, basées à Douala, pour le salon In Vino Italia Douala.",
+        "Pour le 1er Salon des Vins Italiens en Afrique Centrale, nous recrutons notre équipe opérationnelle : hôtesses expérimentées résidant à Douala.",
       missions: [
-        'Accueil des visiteurs',
-        'Renseignements et orientation',
-        'Gestion des entrées',
-        'Tenue du stand des verres',
+        'Accueil, orientation et information des visiteurs',
+        'Gestion des entrées et du stand des verres',
+        'Appui aux activités du salon',
       ],
       profile: [
-        'Expérience en accueil événementiel',
-        'Bonne présentation',
-        'Sens du contact et du service',
+        'Âgée de 21 à 30 ans',
         'Résidant à Douala',
-        'Disponibilité sur toute la durée du salon',
+        'Mesurant au minimum 1,75 m',
+        'Bonne présentation',
+        "Maîtrise du français et de l'anglais",
+        "Expérience dans l'événementiel",
+        "Disponible pendant toute la période de l'événement",
+        "Dynamique, organisée et à l'aise avec le public",
       ],
     },
     {
       id: 'personnel-appui',
       title: "Personnel d'appui",
       intro:
-        "CHANY EVENT'S organise le casting et le recrutement du personnel d'appui expérimenté, basé à Douala, pour le salon In Vino Italia Douala.",
+        "Pour le 1er Salon des Vins Italiens en Afrique Centrale, nous recrutons notre personnel d'appui expérimenté, résidant à Douala.",
       missions: [
-        'Suivi de la dernière phase de préparation',
-        'Tenue du secrétariat du salon',
-        'Appui logistique et coordination',
-        'Interface avec les exposants et partenaires',
+        'Préparation et organisation du salon',
+        'Secrétariat, coordination et suivi logistique',
+        'Interface avec exposants, partenaires et prestataires',
       ],
       profile: [
-        "Expérience en organisation d'événements",
-        'Bon niveau de rédaction et de communication',
-        'Maîtrise des outils bureautiques',
-        "Sens de l'organisation et de la confidentialité",
         'Résidant à Douala',
-        'Disponibilité sur toute la durée du salon',
+        'Expérience en événementiel, logistique ou secrétariat',
+        "Maîtrise du français et de l'anglais",
+        "Disponible pendant toute la période de l'événement",
+        "Organisé, ponctuel et à l'aise en équipe",
       ],
     },
   ];
+  const isHostess = selectedPosition === offers[0].title;
 
   const whatsappApply = (positionTitle: string) => {
     const text = encodeURIComponent(
-      `Bonjour, je souhaite postuler au poste « ${positionTitle} » pour le salon In Vino Italia Douala (26–28 novembre 2026).`
+      `Bonjour, je souhaite postuler au poste « ${positionTitle} » pour le salon In Vino Italia Douala (26–28 novembre 2026). Je joins mon CV${positionTitle === offers[0].title ? ' et deux photos récentes en pied' : ''}.`
     );
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
@@ -100,32 +100,44 @@ const Careers: React.FC = () => {
     document.getElementById('candidature')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const fail = (fr: string, en: string) =>
+    toast({ title: language === 'fr' ? 'Formulaire incomplet' : 'Incomplete form', description: language === 'fr' ? fr : en, variant: 'destructive' });
+
+  const upload = async (file: File, folder: string) => {
+    const ext = file.name.split('.').pop()?.toLowerCase().replace(/[^a-z0-9]/g, '') || 'bin';
+    const path = `${folder}/${crypto.randomUUID()}.${ext}`;
+    const { error } = await supabase.storage.from('applications').upload(path, file, { contentType: file.type || undefined });
+    if (error) throw error;
+    return path;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!selectedPosition) {
-      toast({
-        title: language === 'fr' ? 'Choisissez un poste' : 'Choose a position',
-        description:
-          language === 'fr'
-            ? 'Veuillez sélectionner le poste auquel vous postulez.'
-            : 'Please select the position you are applying for.',
-        variant: 'destructive',
-      });
-      return;
-    }
+    if (!selectedPosition) return fail('Veuillez sélectionner le poste auquel vous postulez.', 'Please select the position you are applying for.');
 
     const parsed = applicationSchema.safeParse(form);
-    if (!parsed.success) {
-      toast({
-        title: language === 'fr' ? 'Formulaire incomplet' : 'Incomplete form',
-        description: parsed.error.errors[0]?.message,
-        variant: 'destructive',
-      });
+    if (!parsed.success) return fail(parsed.error.errors[0]?.message ?? '', parsed.error.errors[0]?.message ?? '');
+    if (!form.experience.trim()) return fail('Décrivez votre expérience.', 'Describe your experience.');
+    if (isHostess && (!form.age || !form.height_cm)) return fail('Indiquez votre âge et votre taille.', 'Enter your age and height.');
+    if (!cvFile) return fail('Joignez votre CV.', 'Attach your CV.');
+    if (isHostess && photoFiles.length < 2) return fail('Joignez deux photos récentes en pied.', 'Attach two recent full-length photos.');
+    const tooBig = [cvFile, ...photoFiles].some((f) => f.size > 10 * 1024 * 1024);
+    if (tooBig) return fail('Chaque fichier doit faire moins de 10 Mo.', 'Each file must be under 10 MB.');
+
+    setIsSubmitting(true);
+    let cv_path: string | null = null;
+    let photo_paths: string[] | null = null;
+    try {
+      const folder = crypto.randomUUID();
+      cv_path = await upload(cvFile, folder);
+      if (isHostess) photo_paths = await Promise.all(photoFiles.map((f) => upload(f, folder)));
+    } catch {
+      setIsSubmitting(false);
+      toast({ title: language === 'fr' ? 'Erreur' : 'Error', description: language === 'fr' ? "L'envoi des fichiers a échoué. Réessayez ou postulez via WhatsApp." : 'File upload failed. Try again or apply via WhatsApp.', variant: 'destructive' });
       return;
     }
 
-    setIsSubmitting(true);
-    const { error } = await supabase.from('job_applications').insert({
+    const payload = {
       position: selectedPosition,
       full_name: parsed.data.full_name,
       phone: parsed.data.phone,
@@ -133,7 +145,15 @@ const Careers: React.FC = () => {
       city: parsed.data.city || null,
       experience: parsed.data.experience || null,
       message: parsed.data.message || null,
-    });
+      age: form.age ? Number(form.age) : null,
+      height_cm: isHostess && form.height_cm ? Number(form.height_cm) : null,
+      speaks_french: form.speaks_french,
+      speaks_english: form.speaks_english,
+      full_availability: form.full_availability,
+      cv_path,
+      photo_paths,
+    };
+    const { error } = await supabase.from('job_applications').insert(payload);
     setIsSubmitting(false);
 
     if (error) {
@@ -148,29 +168,19 @@ const Careers: React.FC = () => {
       return;
     }
 
-    // Trigger automatic evaluation (fire-and-forget)
-    supabase.functions
-      .invoke('evaluate-application', {
-        body: {
-          position: selectedPosition,
-          full_name: parsed.data.full_name,
-          phone: parsed.data.phone,
-          email: parsed.data.email || null,
-          city: parsed.data.city || null,
-          experience: parsed.data.experience || null,
-          message: parsed.data.message || null,
-        },
-      })
-      .catch(() => {});
+    supabase.functions.invoke('evaluate-application', { body: payload }).catch(() => {});
 
     toast({
       title: language === 'fr' ? 'Candidature envoyée !' : 'Application sent!',
       description:
         language === 'fr'
-          ? 'Merci ! Notre équipe vous recontactera très vite.'
-          : 'Thank you! Our team will get back to you very soon.',
+          ? 'Merci ! Les profils présélectionnés seront contactés.'
+          : 'Thank you! Shortlisted candidates will be contacted.',
     });
-    setForm({ full_name: '', phone: '', email: '', city: '', experience: '', message: '' });
+    setForm(emptyForm);
+    setCvFile(null);
+    setPhotoFiles([]);
+    (e.target as HTMLFormElement).reset();
     setSelectedPosition('');
   };
 
@@ -408,11 +418,34 @@ const Careers: React.FC = () => {
                   className="mt-2"
                 />
               </div>
+              <div>
+                <Label htmlFor="age" className="text-foreground">{language === 'fr' ? 'Âge' : 'Age'}{isHostess ? ' *' : ''}</Label>
+                <Input id="age" type="number" min={16} max={70} value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} className="mt-2" />
+              </div>
+              {isHostess && (
+                <div>
+                  <Label htmlFor="height" className="text-foreground">{language === 'fr' ? 'Taille (cm) *' : 'Height (cm) *'}</Label>
+                  <Input id="height" type="number" min={140} max={220} placeholder="175" value={form.height_cm} onChange={(e) => setForm({ ...form, height_cm: e.target.value })} className="mt-2" />
+                </div>
+              )}
+            </div>
+
+            <div className="grid sm:grid-cols-3 gap-3">
+              {([
+                ['speaks_french', language === 'fr' ? 'Je maîtrise le français' : 'I am fluent in French'],
+                ['speaks_english', language === 'fr' ? "Je maîtrise l'anglais" : 'I am fluent in English'],
+                ['full_availability', language === 'fr' ? 'Disponible les 26, 27 et 28 nov.' : 'Available on 26, 27 & 28 Nov.'],
+              ] as const).map(([k, label]) => (
+                <label key={k} className="flex items-center gap-2 text-sm text-foreground border border-border rounded-sm px-3 py-3 cursor-pointer">
+                  <input type="checkbox" checked={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.checked })} className="accent-primary w-4 h-4" />
+                  {label}
+                </label>
+              ))}
             </div>
 
             <div>
               <Label htmlFor="experience" className="text-foreground">
-                {language === 'fr' ? 'Expérience événementielle' : 'Event experience'}
+                {language === 'fr' ? 'Expérience (événementiel, logistique, secrétariat) *' : 'Experience (events, logistics, secretarial) *'}
               </Label>
               <Textarea
                 id="experience"
@@ -423,11 +456,27 @@ const Careers: React.FC = () => {
                 className="mt-2"
                 placeholder={
                   language === 'fr'
-                    ? 'Décrivez brièvement vos expériences en événementiel…'
-                    : 'Briefly describe your event experience…'
+                    ? 'Décrivez brièvement vos expériences…'
+                    : 'Briefly describe your experience…'
                 }
               />
             </div>
+
+            <div className="grid sm:grid-cols-2 gap-6">
+              <div>
+                <Label htmlFor="cv" className="text-foreground">{language === 'fr' ? 'CV actualisé (PDF, Word ou image) *' : 'Updated CV (PDF, Word or image) *'}</Label>
+                <Input id="cv" type="file" accept=".pdf,.doc,.docx,image/*" onChange={(e) => setCvFile(e.target.files?.[0] ?? null)} className="mt-2" />
+              </div>
+              {isHostess && (
+                <div>
+                  <Label htmlFor="photos" className="text-foreground">{language === 'fr' ? 'Deux photos récentes en pied *' : 'Two recent full-length photos *'}</Label>
+                  <Input id="photos" type="file" accept="image/*" multiple onChange={(e) => setPhotoFiles(Array.from(e.target.files ?? []).slice(0, 2))} className="mt-2" />
+                </div>
+              )}
+            </div>
+            <p className="text-xs text-muted-foreground">
+              {language === 'fr' ? 'Seules les candidatures complètes répondant aux critères seront examinées. Les profils présélectionnés seront contactés.' : 'Only complete applications meeting the criteria will be reviewed. Shortlisted candidates will be contacted.'}
+            </p>
 
             <div>
               <Label htmlFor="message" className="text-foreground">
