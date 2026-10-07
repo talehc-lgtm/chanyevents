@@ -10,6 +10,7 @@ import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
 import Quote from "./pages/Quote";
 import Careers from "./pages/Careers";
+import AdminApplications from "./pages/AdminApplications";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 

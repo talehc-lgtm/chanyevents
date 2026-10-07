@@ -147,6 +147,21 @@ const Careers: React.FC = () => {
       return;
     }
 
+    // Trigger automatic evaluation (fire-and-forget)
+    supabase.functions
+      .invoke('evaluate-application', {
+        body: {
+          position: selectedPosition,
+          full_name: parsed.data.full_name,
+          phone: parsed.data.phone,
+          email: parsed.data.email || null,
+          city: parsed.data.city || null,
+          experience: parsed.data.experience || null,
+          message: parsed.data.message || null,
+        },
+      })
+      .catch(() => {});
+
     toast({
       title: language === 'fr' ? 'Candidature envoyée !' : 'Application sent!',
       description:
