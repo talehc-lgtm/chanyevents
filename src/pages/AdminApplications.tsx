@@ -186,7 +186,7 @@ const AdminApplications: React.FC = () => {
               <span className="text-primary text-sm font-semibold tracking-[0.28em] uppercase">
                 {language === 'fr' ? 'Espace privé' : 'Private area'}
               </span>
-              <h1 className="text-display font-serif font-semibold text-foreground mt-4">
+              <h1 className="text-section font-serif font-semibold text-foreground mt-4">
                 {tab === 'applications' ? (fr ? 'Candidatures reçues' : 'Received applications') : tab === 'quotes' ? (fr ? 'Demandes de devis' : 'Quote requests') : (fr ? 'Messages reçus' : 'Received messages')}
               </h1>
               <p className="text-muted-foreground mt-3">
