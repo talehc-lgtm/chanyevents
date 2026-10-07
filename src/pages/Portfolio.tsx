@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, CalendarDays, MapPin, ArrowRight } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
+import { Seo } from '@/components/common/Blocks';
 import SectionHeading from '@/components/common/SectionHeading';
 import { Button } from '@/components/ui/button';
 import tableDecorImage from '@/assets/chany-table-decor.jpg';
@@ -106,6 +107,7 @@ const Portfolio: React.FC = () => {
 
   return (
     <Layout>
+      <Seo title={language === 'fr' ? "Réalisations — Selected Work | CHANY EVENT'S" : "Selected Work | CHANY EVENT'S"} description={language === 'fr' ? 'Salons, événements corporate, institutionnels et mariages réalisés par CHANY EVENT\'S, dont In Vino Italia Douala.' : 'Trade shows, corporate, institutional events and weddings delivered by CHANY EVENT\'S, including In Vino Italia Douala.'} />
       {/* Hero Section */}
       <section className="pt-40 md:pt-44 pb-20 bg-gradient-to-b from-charcoal to-background">
         <div className="container-luxury px-6">
