@@ -290,7 +290,7 @@ const Index: React.FC = () => {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <span className="block font-serif text-4xl md:text-5xl font-semibold text-gradient-gold mb-2">
+                <span className="block font-serif text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
                   {stat.number}
                 </span>
                 <span className="text-muted-foreground text-sm md:text-base">{stat.label}</span>
