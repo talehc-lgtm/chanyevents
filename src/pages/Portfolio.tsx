@@ -178,8 +178,8 @@ const Portfolio: React.FC = () => {
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
                 {language === 'fr'
-                  ? "In Vino Italia Douala est le tout premier salon des vins italiens en Afrique Centrale : trois journées d'exception pour vivre l'Italie à Douala, entre dégustations de vins d'exception, gastronomie italienne, masterclasses, show-cooking, rencontres privilégiées et business club B2B, dans le cadre prestigieux du Best Western Plus Soaha Hotel."
-                  : "In Vino Italia Douala is the very first Italian wine fair in Central Africa: three exceptional days to experience Italy in Douala, with tastings of outstanding wines, Italian gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaha Hotel."}
+                  ? "In Vino Italia Douala est le tout premier salon des vins italiens en Afrique Centrale : trois journées d'exception pour vivre l'Italie à Douala, entre dégustations de vins d'exception, gastronomie italienne, masterclasses, show-cooking, rencontres privilégiées et business club B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel."
+                  : "In Vino Italia Douala is the very first Italian wine fair in Central Africa: three exceptional days to experience Italy in Douala, with tastings of outstanding wines, Italian gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaho Hotel."}
               </p>
 
               <div className="mb-6">
@@ -218,7 +218,7 @@ const Portfolio: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-3 text-foreground">
                   <MapPin className="w-5 h-5 text-primary" />
-                  <span className="font-medium">Best Western Plus Soaha Hotel, Douala</span>
+                  <span className="font-medium">Best Western Plus Soaho Hotel, Douala</span>
                 </div>
               </div>
 

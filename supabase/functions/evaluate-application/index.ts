@@ -43,7 +43,7 @@ async function aiEvaluate(app: ApplicationPayload): Promise<{ summary: string; r
   if (!apiKey) return null
 
   const prompt = `Tu es un recruteur senior pour une agence événementielle premium au Cameroun.
-Évalue cette candidature pour le poste « ${app.position} » au salon In Vino Italia Douala (26-28 novembre 2026, Best Western Plus Soaha Hotel, Douala).
+Évalue cette candidature pour le poste « ${app.position} » au salon In Vino Italia Douala (26-28 novembre 2026, Best Western Plus Soaho Hotel, Douala).
 Exigences clés : résider à Douala, disponibilité sur toute la durée du salon, expérience événementielle, bonne présentation et sens du service.
 
 Candidature :
