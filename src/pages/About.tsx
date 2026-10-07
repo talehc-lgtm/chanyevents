@@ -43,7 +43,7 @@ const About: React.FC = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 overflow-hidden">
+      <section className="relative pt-40 md:pt-44 pb-20 overflow-hidden">
         <div className="absolute inset-0">
           <img
             src={heroImage}
