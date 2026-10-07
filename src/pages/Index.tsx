@@ -41,10 +41,10 @@ const Index: React.FC = () => {
   ];
 
   const stats = [
-    { number: '500+', label: 'Événements réalisés' },
-    { number: '15+', label: "Années d'expérience" },
-    { number: '98%', label: 'Clients satisfaits' },
-    { number: '3', label: 'Villes au Cameroun' },
+    { number: '+50', label: language === 'fr' ? 'Événements réalisés' : 'Events delivered' },
+    { number: '15+', label: language === 'fr' ? "Années d'expérience" : 'Years of experience' },
+    { number: '250+', label: language === 'fr' ? 'Partenaires' : 'Partners' },
+    { number: '1,000+', label: language === 'fr' ? 'Exposants' : 'Exhibitors' },
   ];
 
   const portfolioItems = [
@@ -290,8 +290,19 @@ const Index: React.FC = () => {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <span className="block font-serif text-4xl md:text-5xl font-semibold text-gradient-gold mb-2">
-                  {stat.number}
+                <span className="block font-serif text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
+                  {stat.number
+                    .split('+')
+                    .flatMap((part, i) => (i === 0 ? [part] : ['+', part]))
+                    .map((part, i) =>
+                      part === '+' ? (
+                        <span key={i} className="font-sans">
+                          +
+                        </span>
+                      ) : (
+                        <span key={i}>{part}</span>
+                      )
+                    )}
                 </span>
                 <span className="text-muted-foreground text-sm md:text-base">{stat.label}</span>
               </motion.div>
