@@ -66,7 +66,6 @@ const Careers: React.FC = () => {
         'Résidant à Douala',
         'Mesurant au minimum 1,75 m',
         'Bonne présentation',
-        "Maîtrise du français et de l'anglais",
         "Expérience dans l'événementiel",
         "Disponible pendant toute la période de l'événement",
         "Dynamique, organisée et à l'aise avec le public",
@@ -85,7 +84,6 @@ const Careers: React.FC = () => {
       profile: [
         'Résidant à Douala',
         'Expérience en événementiel, logistique ou secrétariat',
-        "Maîtrise du français et de l'anglais",
         "Disponible pendant toute la période de l'événement",
         "Organisé, ponctuel et à l'aise en équipe",
       ],
