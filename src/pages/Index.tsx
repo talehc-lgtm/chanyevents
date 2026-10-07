@@ -94,7 +94,7 @@ const Index: React.FC = () => {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
-    }, 6500);
+    }, 8000);
 
     return () => window.clearInterval(timer);
   }, [heroSlides.length]);
