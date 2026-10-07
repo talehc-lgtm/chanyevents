@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Seo } from "@/components/common/Blocks";
 
 const NotFound = () => {
   const location = useLocation();
@@ -10,6 +11,7 @@ const NotFound = () => {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-muted">
+      <Seo title="Page introuvable | CHANY EVENT'S" description="Cette page n'existe pas. Retournez à l'accueil de CHANY EVENT'S." />
       <div className="text-center">
         <h1 className="text-display mb-4 font-bold">404</h1>
         <p className="mb-4 text-xl text-muted-foreground">Oops! Page not found</p>

@@ -14,6 +14,20 @@ export const Seo: React.FC<{ title: string; description: string }> = ({ title, d
     let m = document.querySelector('meta[name="description"]');
     if (!m) { m = document.createElement('meta'); m.setAttribute('name', 'description'); document.head.appendChild(m); }
     m.setAttribute('content', description);
+    const setMeta = (attr: string, key: string, val: string) => {
+      let el = document.querySelector(`meta[${attr}="${key}"]`);
+      if (!el) { el = document.createElement('meta'); el.setAttribute(attr, key); document.head.appendChild(el); }
+      el.setAttribute('content', val);
+    };
+    const url = `https://chanyevents.com${window.location.pathname === '/' ? '/' : window.location.pathname}`;
+    setMeta('property', 'og:title', title);
+    setMeta('property', 'og:description', description);
+    setMeta('property', 'og:url', url);
+    setMeta('name', 'twitter:title', title);
+    setMeta('name', 'twitter:description', description);
+    let c = document.querySelector('link[rel="canonical"]');
+    if (!c) { c = document.createElement('link'); c.setAttribute('rel', 'canonical'); document.head.appendChild(c); }
+    c.setAttribute('href', url);
   }, [title, description]);
   return null;
 };
