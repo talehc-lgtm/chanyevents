@@ -8,7 +8,6 @@ import SectionHeading from '@/components/common/SectionHeading';
 import { Button } from '@/components/ui/button';
 import tableDecorImage from '@/assets/chany-table-decor.jpg';
 import promote2017TeamImage from '@/assets/chany-promote-2017-team.jpg';
-import informationDeskImage from '@/assets/chany-information-desk.jpg';
 import registrationTeamImage from '@/assets/chany-registration-team.jpg';
 import brandTeamImage from '@/assets/chany-brand-team.jpg';
 import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
