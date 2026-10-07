@@ -34,7 +34,7 @@ const Header: React.FC = () => {
       { href: '/business-events#pavillons', label: L('Pavillons & Expositions', 'Pavilions & Exhibitions') },
       { href: '/business-events#investment', label: 'Investment Events' },
     ] },
-    { href: '/corporate-institutional', label: 'Corporate & Institutional', children: [
+    { href: '/corporate-institutional', label: L('Institutionnel', 'Institutional'), children: [
       { href: '/corporate-institutional#corporate', label: 'Corporate Events' },
       { href: '/corporate-institutional#institutionnel', label: L('Événements institutionnels', 'Institutional Events') },
       { href: '/corporate-institutional#diplomatique', label: L('Événements diplomatiques', 'Diplomatic Events') },
@@ -60,10 +60,10 @@ const Header: React.FC = () => {
             </span>
           </Link>
 
-          <div className="hidden xl:flex items-center gap-6">
+          <div className="hidden xl:flex items-center gap-5">
             {nav.map((n) => (
               <div key={n.href} className="relative group">
-                <Link to={n.href} className={`flex items-center gap-1 text-[13px] font-medium tracking-wide uppercase transition-colors py-7 ${active(n.href) ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}>
+                <Link to={n.href} className={`flex items-center gap-1 whitespace-nowrap text-[13px] font-medium tracking-wide uppercase transition-colors py-7 ${active(n.href) ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}>
                   {n.label}{n.children && <ChevronDown className="w-3.5 h-3.5" />}
                 </Link>
                 {n.children && (
