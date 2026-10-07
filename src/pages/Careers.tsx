@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Briefcase, CalendarDays, MapPin, MessageCircle, CheckCircle2, Users, ClipboardList, Send } from 'lucide-react';
 import { z } from 'zod';
 import Layout from '@/components/layout/Layout';
+import { Seo } from '@/components/common/Blocks';
 import SectionHeading from '@/components/common/SectionHeading';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -50,7 +51,7 @@ const Careers: React.FC = () => {
       id: 'hotesses',
       title: "Hôtesses d'accueil",
       intro:
-        "Chany's Évents organise le casting et le recrutement d'hôtesses expérimentées, basées à Douala, pour le salon In Vino Italia Douala.",
+        "CHANY EVENT'S organise le casting et le recrutement d'hôtesses expérimentées, basées à Douala, pour le salon In Vino Italia Douala.",
       missions: [
         'Accueil des visiteurs',
         'Renseignements et orientation',
@@ -69,7 +70,7 @@ const Careers: React.FC = () => {
       id: 'personnel-appui',
       title: "Personnel d'appui",
       intro:
-        "Chany's Évents organise le casting et le recrutement du personnel d'appui expérimenté, basé à Douala, pour le salon In Vino Italia Douala.",
+        "CHANY EVENT'S organise le casting et le recrutement du personnel d'appui expérimenté, basé à Douala, pour le salon In Vino Italia Douala.",
       missions: [
         'Suivi de la dernière phase de préparation',
         'Tenue du secrétariat du salon',
@@ -175,6 +176,7 @@ const Careers: React.FC = () => {
 
   return (
     <Layout>
+      <Seo title={language === 'fr' ? "Casting & recrutement — CHANY EVENT'S" : "Casting & recruitment — CHANY EVENT'S"} description={language === 'fr' ? 'Rejoignez les équipes de CHANY EVENT\'S : hôtesses et personnel d\'appui pour le salon In Vino Italia Douala.' : 'Join CHANY EVENT\'S teams: hostesses and support staff for the In Vino Italia Douala fair.'} />
       {/* Hero */}
       <section className="relative pt-48 pb-24 bg-charcoal overflow-hidden">
         <div className="absolute inset-0 opacity-10">
@@ -194,7 +196,7 @@ const Careers: React.FC = () => {
             <h1 className="text-display font-serif font-semibold text-foreground mb-8">
               {language === 'fr' ? 'Rejoignez' : 'Join'}{' '}
               <span className="text-gradient-gold">
-                {language === 'fr' ? "l'équipe Chany's Évents" : "the Chany's Évents team"}
+                {language === 'fr' ? "l'équipe CHANY EVENT'S" : "the CHANY EVENT'S team"}
               </span>
             </h1>
             <p className="text-lead text-muted-foreground leading-relaxed">
