@@ -196,6 +196,7 @@ const Careers: React.FC = () => {
     setForm(emptyForm);
     setCvFile(null);
     setPhotoPro(null); setPhotoVille(null);
+    setProfile(emptyProfile);
     (e.target as HTMLFormElement).reset();
     setSelectedPosition('');
   };
