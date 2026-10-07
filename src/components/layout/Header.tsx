@@ -87,11 +87,6 @@ const Header: React.FC = () => {
               <Globe className="w-4 h-4" />
               <span>{language.toUpperCase()}</span>
             </button>
-            <Link to="/quote">
-              <Button variant="default" className="bg-gradient-gold text-primary-foreground hover-gold-glow">
-                {t('hero.cta.quote')}
-              </Button>
-            </Link>
           </div>
 
           {/* Mobile Menu Button */}
