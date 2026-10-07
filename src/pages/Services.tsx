@@ -75,19 +75,6 @@ const Services: React.FC = () => {
       ],
     },
     {
-      icon: Globe,
-      title: t('services.translation.title'),
-      description: t('services.translation.desc'),
-      image: informationDeskImage,
-      features: [
-        'Interprétation simultanée',
-        'Traduction de documents',
-        'Services FR/EN',
-        'Équipement technique',
-        'Interprètes certifiés',
-      ],
-    },
-    {
       icon: Users,
       title: t('services.staffing.title'),
       description: t('services.staffing.desc'),

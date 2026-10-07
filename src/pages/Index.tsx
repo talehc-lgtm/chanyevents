@@ -40,11 +40,6 @@ const Index: React.FC = () => {
       title: t('services.vip.title'),
       description: t('services.vip.desc'),
     },
-    {
-      icon: Globe,
-      title: t('services.translation.title'),
-      description: t('services.translation.desc'),
-    },
   ];
 
   const stats = [
@@ -95,13 +90,6 @@ const Index: React.FC = () => {
       label: t('services.staffing.title'),
       title: 'Personnel Événementiel',
       description: 'Hôtesses, stewards, mannequins et équipes qualifiées pour représenter votre marque avec distinction.',
-    },
-    {
-      image: vipReceptionImage,
-      icon: Globe,
-      label: t('services.translation.title'),
-      title: 'Traduction FR/EN',
-      description: 'Une communication fluide pour vos symposiums, conférences et événements internationaux.',
     },
   ];
 
