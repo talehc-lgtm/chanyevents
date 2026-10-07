@@ -60,6 +60,7 @@ export type Database = {
           phone: string
           photo_paths: string[] | null
           position: string
+          profile: Json | null
           score: number | null
           speaks_english: boolean | null
           speaks_french: boolean | null
@@ -82,6 +83,7 @@ export type Database = {
           phone: string
           photo_paths?: string[] | null
           position: string
+          profile?: Json | null
           score?: number | null
           speaks_english?: boolean | null
           speaks_french?: boolean | null
@@ -104,6 +106,7 @@ export type Database = {
           phone?: string
           photo_paths?: string[] | null
           position?: string
+          profile?: Json | null
           score?: number | null
           speaks_english?: boolean | null
           speaks_french?: boolean | null

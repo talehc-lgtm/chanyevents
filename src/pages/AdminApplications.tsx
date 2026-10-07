@@ -25,7 +25,7 @@ interface Application {
   ai_recommendation: string | null;
   evaluated_at: string | null;
   age?: number | null; height_cm?: number | null; speaks_french?: boolean | null; speaks_english?: boolean | null;
-  full_availability?: boolean | null; cv_url?: string | null; photo_urls?: string[];
+  full_availability?: boolean | null; cv_url?: string | null; photo_urls?: string[]; profile?: Record<string, unknown> | null;
 }
 
 interface QuoteRequest {
@@ -360,6 +360,19 @@ const AdminApplications: React.FC = () => {
                           <a key={u} href={u} target="_blank" rel="noopener noreferrer"><img src={u} alt="" className="h-28 w-20 object-cover rounded-sm border border-border" /></a>
                         ))}
                       </div>
+                    )}
+                    {app.profile && (
+                      <details className="mb-3 text-sm">
+                        <summary className="cursor-pointer text-primary font-semibold">{language === 'fr' ? 'Fiche casting complète' : 'Full casting form'}</summary>
+                        <dl className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-1 mt-3">
+                          {Object.entries(app.profile).filter(([, v]) => v !== '' && v !== false && !(Array.isArray(v) && !v.length)).map(([k, v]) => (
+                            <div key={k} className="flex gap-2 border-b border-border/60 py-1">
+                              <dt className="text-muted-foreground shrink-0">{k.replace(/_/g, ' ')} :</dt>
+                              <dd className="text-foreground break-words">{Array.isArray(v) ? v.join(', ') : v === true ? '✓' : String(v)}</dd>
+                            </div>
+                          ))}
+                        </dl>
+                      </details>
                     )}
 
                     {app.experience && (

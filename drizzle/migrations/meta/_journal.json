@@ -36,6 +36,13 @@
       "when": 1791372067563,
       "tag": "0004_tighten_application_inserts",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1791372869079,
+      "tag": "0005_casting_profile_json",
+      "breakpoints": true
     }
   ]
 }

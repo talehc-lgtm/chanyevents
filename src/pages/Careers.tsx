@@ -12,6 +12,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
+import CastingProfileFields, { emptyProfile, ageFromBirthDate, type CastingProfile } from '@/components/careers/CastingProfileFields';
 
 const WHATSAPP_NUMBER = '237675788550';
 
@@ -42,6 +43,9 @@ const Careers: React.FC = () => {
     age: '', height_cm: '', speaks_french: false, speaks_english: false, full_availability: false,
   };
   const [form, setForm] = useState(emptyForm);
+  const [profile, setProfile] = useState<CastingProfile>(emptyProfile);
+  const setP = (patch: Partial<CastingProfile>) => setProfile((p) => ({ ...p, ...patch }));
+  const L = (fr: string, en: string) => (language === 'fr' ? fr : en);
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [photoPro, setPhotoPro] = useState<File | null>(null);
   const [photoVille, setPhotoVille] = useState<File | null>(null);
@@ -118,8 +122,14 @@ const Careers: React.FC = () => {
 
     const parsed = applicationSchema.safeParse(form);
     if (!parsed.success) return fail(parsed.error.errors[0]?.message ?? '', parsed.error.errors[0]?.message ?? '');
-    if (!form.experience.trim()) return fail('Décrivez votre expérience.', 'Describe your experience.');
-    if (isHostess && (!form.age || !form.height_cm)) return fail('Indiquez votre âge et votre taille.', 'Enter your age and height.');
+    const age = ageFromBirthDate(profile.birth_date);
+    if (age === null) return fail('Indiquez votre date de naissance.', 'Enter your date of birth.');
+    if (!profile.sex) return fail('Indiquez votre sexe.', 'Select your sex.');
+    if (isHostess && !form.height_cm) return fail('Indiquez votre taille.', 'Enter your height.');
+    if (!profile.experience_1.trim()) return fail('Décrivez au moins une expérience récente.', 'Describe at least one recent experience.');
+    if (!profile.lang_fr || !profile.lang_en) return fail('Indiquez votre niveau en français et en anglais.', 'Select your French and English level.');
+    if (!profile.image_rights || profile.signature_name.trim().length < 2) return fail("Acceptez le droit à l'image et signez avec votre nom.", 'Accept the image rights and sign with your name.');
+    if (age < 18 && (!profile.parent_name.trim() || !profile.parent_of.trim() || !profile.parent_signature.trim())) return fail("L'autorisation parentale est obligatoire pour les mineurs.", 'Parental authorisation is required for minors.');
     if (!cvFile) return fail('Joignez votre CV.', 'Attach your CV.');
     if (isHostess && (!photoPro || !photoVille)) return fail('Joignez une photo professionnelle et une photo en tenue de ville.', 'Attach a professional photo and a casual-outfit photo.');
     const photoFiles = [photoPro, photoVille].filter(Boolean) as File[];
@@ -139,21 +149,25 @@ const Careers: React.FC = () => {
       return;
     }
 
+    const experience = [profile.experience_1, profile.experience_2, profile.experience_3]
+      .map((x, i) => x.trim() && `${i + 1}. ${x.trim()}`).filter(Boolean).join('\n').slice(0, 1500);
+    const okLevel = (l: string) => l === 'courant' || l === 'moyen';
     const payload = {
       position: selectedPosition,
       full_name: parsed.data.full_name,
       phone: parsed.data.phone,
       email: parsed.data.email || null,
       city: parsed.data.city || null,
-      experience: parsed.data.experience || null,
+      experience,
       message: parsed.data.message || null,
-      age: form.age ? Number(form.age) : null,
-      height_cm: isHostess && form.height_cm ? Number(form.height_cm) : null,
-      speaks_french: form.speaks_french,
-      speaks_english: form.speaks_english,
+      age: Math.max(16, Math.min(70, age)),
+      height_cm: form.height_cm ? Number(form.height_cm) : null,
+      speaks_french: okLevel(profile.lang_fr),
+      speaks_english: okLevel(profile.lang_en),
       full_availability: form.full_availability,
       cv_path,
       photo_paths,
+      profile,
     };
     const { error } = await supabase.from('job_applications').insert(payload);
     setIsSubmitting(false);
@@ -182,6 +196,7 @@ const Careers: React.FC = () => {
     setForm(emptyForm);
     setCvFile(null);
     setPhotoPro(null); setPhotoVille(null);
+    setProfile(emptyProfile);
     (e.target as HTMLFormElement).reset();
     setSelectedPosition('');
   };
@@ -421,48 +436,18 @@ const Careers: React.FC = () => {
                 />
               </div>
               <div>
-                <Label htmlFor="age" className="text-foreground">{language === 'fr' ? 'Âge' : 'Age'}{isHostess ? ' *' : ''}</Label>
-                <Input id="age" type="number" min={16} max={70} value={form.age} onChange={(e) => setForm({ ...form, age: e.target.value })} className="mt-2" />
+                <Label htmlFor="height" className="text-foreground">{language === 'fr' ? 'Taille (cm)' : 'Height (cm)'}{isHostess ? ' *' : ''}</Label>
+                <Input id="height" type="number" min={140} max={220} placeholder="175" value={form.height_cm} onChange={(e) => setForm({ ...form, height_cm: e.target.value })} className="mt-2" />
               </div>
-              {isHostess && (
-                <div>
-                  <Label htmlFor="height" className="text-foreground">{language === 'fr' ? 'Taille (cm) *' : 'Height (cm) *'}</Label>
-                  <Input id="height" type="number" min={140} max={220} placeholder="175" value={form.height_cm} onChange={(e) => setForm({ ...form, height_cm: e.target.value })} className="mt-2" />
-                </div>
-              )}
             </div>
 
-            <div className="grid sm:grid-cols-3 gap-3">
-              {([
-                ['speaks_french', language === 'fr' ? 'Je maîtrise le français' : 'I am fluent in French'],
-                ['speaks_english', language === 'fr' ? "Je maîtrise l'anglais" : 'I am fluent in English'],
-                ['full_availability', language === 'fr' ? 'Disponible les 26, 27 et 28 nov.' : 'Available on 26, 27 & 28 Nov.'],
-              ] as const).map(([k, label]) => (
-                <label key={k} className="flex items-center gap-2 text-sm text-foreground border border-border rounded-sm px-3 py-3 cursor-pointer">
-                  <input type="checkbox" checked={form[k]} onChange={(e) => setForm({ ...form, [k]: e.target.checked })} className="accent-primary w-4 h-4" />
-                  {label}
-                </label>
-              ))}
-            </div>
+            <CastingProfileFields section="personal" p={profile} set={setP} L={L} />
+            <CastingProfileFields section="rest" p={profile} set={setP} L={L} />
 
-            <div>
-              <Label htmlFor="experience" className="text-foreground">
-                {language === 'fr' ? 'Expérience (événementiel, logistique, secrétariat) *' : 'Experience (events, logistics, secretarial) *'}
-              </Label>
-              <Textarea
-                id="experience"
-                value={form.experience}
-                onChange={(e) => setForm({ ...form, experience: e.target.value })}
-                maxLength={500}
-                rows={3}
-                className="mt-2"
-                placeholder={
-                  language === 'fr'
-                    ? 'Décrivez brièvement vos expériences…'
-                    : 'Briefly describe your experience…'
-                }
-              />
-            </div>
+            <label className="flex items-center gap-2 text-sm text-foreground border border-border rounded-sm px-3 py-3 cursor-pointer">
+              <input type="checkbox" checked={form.full_availability} onChange={(e) => setForm({ ...form, full_availability: e.target.checked })} className="accent-primary w-4 h-4" />
+              {language === 'fr' ? 'Je suis disponible les 26, 27 et 28 novembre 2026 (In Vino Italia Douala)' : 'I am available on 26, 27 & 28 November 2026 (In Vino Italia Douala)'}
+            </label>
 
             <div className="grid sm:grid-cols-3 gap-6">
               <div>
