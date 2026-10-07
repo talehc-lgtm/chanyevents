@@ -8,9 +8,6 @@ export type LangLevel = '' | 'courant' | 'moyen' | 'notions';
 export const emptyProfile = {
   birth_date: '', birth_place: '', marital_status: '', nationality: '', whatsapp: '',
   sex: '', weight_kg: '', shoe_size: '', tshirt_size: '', pants_size: '', shirt_size: '',
-  waist_cm: '', chest_cm: '', hips_cm: '', leg_cm: '', arm_cm: '', heel_max_cm: '',
-  eye_color: '', hair_color: '', swimming: '', silhouette: '',
-  piercing: '', piercing_where: '', tattoo: '', tattoo_where: '',
   skills: [] as string[], skills_other: '',
   availability_period: '',
   experience_1: '', experience_2: '', experience_3: '',
@@ -95,26 +92,6 @@ const CastingProfileFields: React.FC<Props & { section: 'personal' | 'rest' }> =
         <F id="tshirt" label={L('Taille T-shirt', 'T-shirt size')} value={p.tshirt_size} onChange={(v) => set({ tshirt_size: v })} />
         <F id="pants" label={L('Taille pantalon / jupe', 'Trousers / skirt size')} value={p.pants_size} onChange={(v) => set({ pants_size: v })} />
         <F id="shirt" label={L('Taille chemise', 'Shirt size')} value={p.shirt_size} onChange={(v) => set({ shirt_size: v })} />
-        <F id="waist" type="number" label={L('Tour de taille (cm)', 'Waist (cm)')} value={p.waist_cm} onChange={(v) => set({ waist_cm: v })} />
-        <F id="chest" type="number" label={L('Tour de poitrine (cm)', 'Chest (cm)')} value={p.chest_cm} onChange={(v) => set({ chest_cm: v })} />
-        <F id="hips" type="number" label={L('Tour de hanches (cm)', 'Hips (cm)')} value={p.hips_cm} onChange={(v) => set({ hips_cm: v })} />
-        <F id="leg" type="number" label={L('Hauteur jambe (cm)', 'Leg length (cm)')} value={p.leg_cm} onChange={(v) => set({ leg_cm: v })} />
-        <F id="arm" type="number" label={L('Longueur bras (cm)', 'Arm length (cm)')} value={p.arm_cm} onChange={(v) => set({ arm_cm: v })} />
-        <F id="heel" type="number" label={L('Hauteur max talon (cm)', 'Max heel height (cm)')} value={p.heel_max_cm} onChange={(v) => set({ heel_max_cm: v })} />
-        <F id="eyes" label={L('Couleur des yeux', 'Eye colour')} value={p.eye_color} onChange={(v) => set({ eye_color: v })} />
-        <F id="hair" label={L('Couleur des cheveux', 'Hair colour')} value={p.hair_color} onChange={(v) => set({ hair_color: v })} />
-        <F id="silhouette" label="Silhouette" value={p.silhouette} onChange={(v) => set({ silhouette: v })} />
-      </div>
-      <div className="grid md:grid-cols-3 gap-5">
-        <YesNo name="swimming" label={L('Natation', 'Swimming')} value={p.swimming} onChange={(v) => set({ swimming: v })} L={L} />
-        <div className="space-y-2">
-          <YesNo name="piercing" label="Piercing" value={p.piercing} onChange={(v) => set({ piercing: v })} L={L} />
-          {p.piercing === 'oui' && <Input placeholder={L('Si oui, où ?', 'If yes, where?')} maxLength={120} value={p.piercing_where} onChange={(e) => set({ piercing_where: e.target.value })} />}
-        </div>
-        <div className="space-y-2">
-          <YesNo name="tattoo" label={L('Tatouage', 'Tattoo')} value={p.tattoo} onChange={(v) => set({ tattoo: v })} L={L} />
-          {p.tattoo === 'oui' && <Input placeholder={L('Si oui, où ?', 'If yes, where?')} maxLength={120} value={p.tattoo_where} onChange={(e) => set({ tattoo_where: e.target.value })} />}
-        </div>
       </div>
 
       <div>
