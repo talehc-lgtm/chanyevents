@@ -35,36 +35,26 @@ function computeRuleScore(app: ApplicationPayload): number {
   const douala = !!app.city && /douala/i.test(app.city)
   const hasExp = !!app.experience && app.experience.trim().length > 10
   if (isHostessRole(app.position)) {
-    if (app.age != null && app.age >= 21 && app.age <= 30) score += 15
-    if (douala) score += 15
-    if (app.height_cm != null && app.height_cm >= 175) score += 15
-    score += langPts(app, 'lang_fr', 7) + langPts(app, 'lang_en', 8)
-    if (app.full_availability) score += 10
-    if (hasExp) score += 6
-    score += Math.min(expHits(app, ['événement', 'evenement', 'event', 'hôtesse', 'hotesse', 'accueil', 'salon', 'foire', 'protocole', 'stand']) * 3, 9)
+    if (app.age != null && app.age >= 21 && app.age <= 30) score += 18
+    if (douala) score += 18
+    if (app.height_cm != null && app.height_cm >= 175) score += 18
+    if (app.full_availability) score += 12
+    if (hasExp) score += 8
+    score += Math.min(expHits(app, ['événement', 'evenement', 'event', 'hôtesse', 'hotesse', 'accueil', 'salon', 'foire', 'protocole', 'stand']) * 3, 10)
     if (app.cv_path) score += 8
-    if ((app.photo_paths?.length ?? 0) >= 2) score += 7
+    if ((app.photo_paths?.length ?? 0) >= 2) score += 8
   } else {
-    if (douala) score += 20
-    score += langPts(app, 'lang_fr', 10) + langPts(app, 'lang_en', 10)
-    if (app.full_availability) score += 15
-    if (hasExp) score += 10
-    score += Math.min(expHits(app, ['événement', 'evenement', 'event', 'logistique', 'secrétariat', 'secretariat', 'coordination', 'salon', 'organisation', 'exposant', 'prestataire']) * 4, 20)
-    if (app.cv_path) score += 15
+    if (douala) score += 24
+    if (app.full_availability) score += 18
+    if (hasExp) score += 12
+    score += Math.min(expHits(app, ['événement', 'evenement', 'event', 'logistique', 'secrétariat', 'secretariat', 'coordination', 'salon', 'organisation', 'exposant', 'prestataire']) * 4, 26)
+    if (app.cv_path) score += 20
   }
   const pr = app.profile ?? {}
   // Image-rights consent is mandatory: an unsigned application cannot score above 40
   if (!pr.image_rights || !String(pr.signature_name ?? '').trim()) score = Math.min(score, 40)
   if ((app.age ?? 99) < 18 && !String(pr.parent_signature ?? '').trim()) score = Math.min(score, 30)
   return Math.max(0, Math.min(score, 100))
-}
-
-function langPts(app: ApplicationPayload, key: string, max: number) {
-  const lvl = String(app.profile?.[key] ?? '')
-  if (lvl === 'courant') return max
-  if (lvl === 'moyen') return Math.round(max * 0.6)
-  if (lvl === 'notions') return Math.round(max * 0.2)
-  return key === 'lang_fr' ? (app.speaks_french ? max : 0) : (app.speaks_english ? max : 0)
 }
 
 // ---- AI evaluation via Lovable AI Gateway (Responses API, streamed) ----
@@ -74,14 +64,14 @@ async function aiEvaluate(app: ApplicationPayload): Promise<{ summary: string; r
 
   const hostess = isHostessRole(app.position)
   const criteria = hostess
-    ? "âgée de 21 à 30 ans, résidant à Douala, taille minimum 1,75 m, bonne présentation, maîtrise du français et de l'anglais, expérience dans l'événementiel, disponible les 26, 27 et 28 novembre, dynamique, organisée et à l'aise avec le public. Dossier complet : CV + une photo professionnelle + une photo en tenue de ville."
-    : "résidant à Douala, expérience en événementiel, logistique ou secrétariat, maîtrise du français et de l'anglais, disponible pendant toute la période, organisé, ponctuel et à l'aise en équipe. Dossier complet : CV."
+    ? "âgée de 21 à 30 ans, résidant à Douala, taille minimum 1,75 m, bonne présentation, expérience dans l'événementiel, disponible les 26, 27 et 28 novembre, dynamique, organisée et à l'aise avec le public. Dossier complet : CV + une photo professionnelle + une photo en tenue de ville."
+    : "résidant à Douala, expérience en événementiel, logistique ou secrétariat, disponible pendant toute la période, organisé, ponctuel et à l'aise en équipe. Dossier complet : CV."
   const yn = (b?: boolean | null) => (b ? 'oui' : 'non')
 
   const prompt = `Tu es un recruteur senior pour une agence événementielle premium au Cameroun.
 Évalue cette candidature pour le poste « ${app.position} » au salon In Vino Italia Douala (1er Salon des Vins Italiens en Afrique Centrale, 26-28 novembre 2026, Best Western Plus Soaho Hotel, Douala).
 Critères officiels : ${criteria}
-Seules les candidatures complètes répondant aux critères sont examinées : signale clairement tout critère non rempli ou information manquante. Le droit à l'image doit être accepté et signé (et l'autorisation parentale pour les mineurs). Tiens compte des mensurations, du domaine de compétence, des niveaux de langue, des études et de la disponibilité indiqués dans la fiche.
+Seules les candidatures complètes répondant aux critères sont examinées : signale clairement tout critère non rempli ou information manquante. Le droit à l'image doit être accepté et signé (et l'autorisation parentale pour les mineurs). Tiens compte des mensurations, du domaine de compétence, des études et de la disponibilité indiqués dans la fiche.
 
 Candidature :
 - Nom : ${app.full_name}
@@ -89,8 +79,7 @@ Candidature :
 - Email : ${app.email ?? 'non fourni'}
 - Ville : ${app.city ?? 'non fournie'}
 - Âge : ${app.age ?? 'non indiqué'}
-${hostess ? `- Taille : ${app.height_cm ? app.height_cm + ' cm' : 'non indiquée'}\n` : ''}- Français : ${yn(app.speaks_french)} / Anglais : ${yn(app.speaks_english)}
-- Disponible sur toute la période : ${yn(app.full_availability)}
+${hostess ? `- Taille : ${app.height_cm ? app.height_cm + ' cm' : 'non indiquée'}\n` : ''}- Disponible sur toute la période : ${yn(app.full_availability)}
 - CV joint : ${yn(!!app.cv_path)}${hostess ? `\n- Photos jointes (professionnelle + tenue de ville) : ${app.photo_paths?.length ?? 0}/2` : ''}
 - Expériences récentes : ${app.experience ?? 'non renseignées'}
 - Fiche casting complète (JSON) : ${JSON.stringify(app.profile ?? {}).slice(0, 4000)}
