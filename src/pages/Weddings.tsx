@@ -1,7 +1,6 @@
 import React from 'react';
 import Layout from '@/components/layout/Layout';
 import { useL, Seo, PageHero, Reveal, Chips, CtaBand } from '@/components/common/Blocks';
-import arch from '@/assets/chany-wedding-arch-couple.png';
 import aisle from '@/assets/chany-wedding-aisle.jpg';
 import couple from '@/assets/chany-luxury-wedding-couple.png';
 import fireworks from '@/assets/chany-wedding-fireworks.png';
