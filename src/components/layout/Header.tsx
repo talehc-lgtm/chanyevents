@@ -5,7 +5,8 @@ import { Menu, X, Globe, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import logoChanyEvents from '@/assets/logo-chany-events.png';
 
-type NavItem = { href: string; label: string; children?: { href: string; label: string }[] };
+type Sub = { href: string; label: string; accent?: boolean };
+type NavItem = { href: string; label: string; mega?: { title: string; href: string; subs: Sub[] }[] };
 
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -21,56 +22,83 @@ const Header: React.FC = () => {
     window.addEventListener('scroll', h);
     return () => window.removeEventListener('scroll', h);
   }, []);
-  useEffect(() => { setOpen(false); }, [location.pathname, location.hash]);
+  useEffect(() => { setOpen(false); setMobileSub(null); }, [location.pathname, location.hash]);
 
   const nav: NavItem[] = [
     { href: '/', label: t('nav.home') },
-    { href: '/business-events', label: 'Business Events', children: [
-      { href: '/business-events#salons', label: L('Foires & Salons', 'Trade Fairs & Shows') },
-      { href: '/business-events#conferences', label: L('Conférences & Sommets', 'Conferences & Summits') },
-      { href: '/business-events#b2b', label: 'B2B & Business Matching' },
-      { href: '/business-events#missions', label: L('Missions économiques', 'Trade Missions') },
-      { href: '/business-events#roadshows', label: 'Roadshows' },
-      { href: '/business-events#pavillons', label: L('Pavillons & Expositions', 'Pavilions & Exhibitions') },
-      { href: '/business-events#investment', label: 'Investment Events' },
-    ] },
-    { href: '/corporate-institutional', label: L('Corporate & Institutionnel', 'Corporate & Institutional'), children: [
-      { href: '/corporate-institutional#corporate', label: 'Corporate Events' },
-      { href: '/corporate-institutional#institutionnel', label: L('Événements institutionnels', 'Institutional Events') },
-      { href: '/corporate-institutional#diplomatique', label: L('Événements diplomatiques', 'Diplomatic Events') },
-      { href: '/corporate-institutional#delegations', label: L('Délégations', 'Delegations') },
-      { href: '/corporate-institutional#lancements', label: L('Lancements & inaugurations', 'Launches & Inaugurations') },
-    ] },
+    {
+      href: '/business-events',
+      label: L('Événements', 'Events'),
+      mega: [
+        {
+          title: 'Business Events',
+          href: '/business-events',
+          subs: [
+            { href: '/business-events#salons', label: L('Foires & Salons', 'Trade Fairs & Shows') },
+            { href: '/business-events#conferences', label: L('Conférences & Sommets', 'Conferences & Summits') },
+            { href: '/business-events#b2b', label: 'B2B & Business Matching' },
+            { href: '/business-events#missions', label: L('Missions économiques', 'Trade Missions') },
+            { href: '/business-events#roadshows', label: 'Roadshows' },
+            { href: '/business-events#pavillons', label: L('Pavillons & Expositions', 'Pavilions & Exhibitions') },
+            { href: '/business-events#investment', label: 'Investment Events' },
+            { href: '/weddings', label: L('Weddings & Private Events', 'Weddings & Private Events'), accent: true },
+          ],
+        },
+        {
+          title: L('Corporate & Institutionnel', 'Corporate & Institutional'),
+          href: '/corporate-institutional',
+          subs: [
+            { href: '/corporate-institutional#corporate', label: 'Corporate Events' },
+            { href: '/corporate-institutional#institutionnel', label: L('Événements institutionnels', 'Institutional Events') },
+            { href: '/corporate-institutional#diplomatique', label: L('Événements diplomatiques', 'Diplomatic Events') },
+            { href: '/corporate-institutional#delegations', label: L('Délégations', 'Delegations') },
+            { href: '/corporate-institutional#lancements', label: L('Lancements & inaugurations', 'Launches & Inaugurations') },
+          ],
+        },
+      ],
+    },
     { href: '/services', label: t('nav.services') },
-    { href: '/weddings', label: 'Weddings' },
     { href: '/portfolio', label: t('nav.portfolio') },
     { href: '/about', label: t('nav.about') },
     { href: '/contact', label: t('nav.contact') },
   ];
 
   const active = (h: string) => location.pathname === h;
+  const eventsActive = ['/business-events', '/corporate-institutional', '/weddings'].includes(location.pathname);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-[0_6px_24px_-18px_hsl(var(--ink)/0.35)]' : 'bg-background/80 backdrop-blur-sm'}`}>
       <div className="max-w-[1440px] mx-auto">
-        <nav className="flex items-center justify-between h-20 px-6 xl:px-10 gap-6">
+        <nav className="flex items-center justify-between h-20 px-6 lg:px-10 gap-6">
           <Link to="/" className="shrink-0">
             <span className="flex h-14 w-40 xl:w-48 items-center overflow-hidden">
               <img src={logoChanyEvents} alt="CHANY EVENT'S" className="h-full w-full object-contain object-left" />
             </span>
           </Link>
 
-          <div className="hidden xl:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-6">
             {nav.map((n) => (
               <div key={n.href} className="relative group">
-                <Link to={n.href} className={`flex items-center gap-1 whitespace-nowrap text-[13px] font-medium tracking-wide uppercase transition-colors py-7 ${active(n.href) ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}>
-                  {n.label}{n.children && <ChevronDown className="w-3.5 h-3.5" />}
+                <Link to={n.href} className={`flex items-center gap-1 whitespace-nowrap text-[13px] font-medium tracking-wide uppercase transition-colors py-7 ${active(n.href) || (n.mega && eventsActive) ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}>
+                  {n.label}{n.mega && <ChevronDown className="w-3.5 h-3.5" />}
                 </Link>
-                {n.children && (
-                  <div className="absolute left-0 top-full pt-0 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all">
-                    <div className="min-w-64 bg-card border border-border rounded-sm shadow-[var(--shadow-elegant)] py-3">
-                      {n.children.map((c) => (
-                        <Link key={c.href} to={c.href} className="block px-5 py-2 text-sm text-foreground/80 hover:text-primary hover:bg-charcoal">{c.label}</Link>
+                {n.mega && (
+                  <div className="absolute left-1/2 -translate-x-1/2 top-full invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+                    <div className="bg-card border border-border rounded-sm shadow-[var(--shadow-elegant)] p-8 grid grid-cols-2 gap-10 w-[560px]">
+                      {n.mega.map((col) => (
+                        <div key={col.title}>
+                          <Link to={col.href} className="block font-serif text-lg text-foreground hover:text-primary mb-4 pb-3 border-b border-border">{col.title}</Link>
+                          <div className="space-y-1">
+                            {col.subs.map((c) => (
+                              <Link key={c.href} to={c.href}
+                                className={c.accent
+                                  ? 'block mt-3 px-4 py-2.5 text-sm font-semibold rounded-sm bg-champagne/25 text-foreground border border-champagne/60 hover:bg-champagne/40 hover:text-foreground transition-colors'
+                                  : 'block px-1 py-1.5 text-sm text-foreground/75 hover:text-primary transition-colors'}>
+                                {c.label}
+                              </Link>
+                            ))}
+                          </div>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -79,7 +107,7 @@ const Header: React.FC = () => {
             ))}
           </div>
 
-          <div className="hidden xl:flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <button onClick={() => setLanguage(fr ? 'en' : 'fr')} className="flex items-center gap-1.5 text-sm text-foreground/80 hover:text-primary">
               <Globe className="w-4 h-4" />{language.toUpperCase()}
             </button>
@@ -88,7 +116,7 @@ const Header: React.FC = () => {
             </Link>
           </div>
 
-          <button onClick={() => setOpen(!open)} className="xl:hidden p-2 text-foreground" aria-label="Menu">
+          <button onClick={() => setOpen(!open)} className="lg:hidden p-2 text-foreground" aria-label="Menu">
             {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </nav>
@@ -96,21 +124,33 @@ const Header: React.FC = () => {
 
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="xl:hidden bg-background border-b border-border max-h-[calc(100vh-5rem)] overflow-y-auto">
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="lg:hidden bg-background border-b border-border max-h-[calc(100vh-5rem)] overflow-y-auto">
             <div className="px-6 py-6 space-y-1">
               {nav.map((n) => (
                 <div key={n.href}>
                   <div className="flex items-center justify-between">
-                    <Link to={n.href} className={`block py-2.5 text-lg ${active(n.href) ? 'text-primary' : 'text-foreground/85'}`}>{n.label}</Link>
-                    {n.children && (
+                    <Link to={n.href} className={`block py-2.5 text-lg ${active(n.href) || (n.mega && eventsActive) ? 'text-primary' : 'text-foreground/85'}`}>{n.label}</Link>
+                    {n.mega && (
                       <button onClick={() => setMobileSub(mobileSub === n.href ? null : n.href)} className="p-2" aria-label="Sous-menu">
                         <ChevronDown className={`w-5 h-5 transition-transform ${mobileSub === n.href ? 'rotate-180' : ''}`} />
                       </button>
                     )}
                   </div>
-                  {n.children && mobileSub === n.href && (
-                    <div className="pl-4 border-l border-border mb-2">
-                      {n.children.map((c) => <Link key={c.href} to={c.href} className="block py-2 text-muted-foreground">{c.label}</Link>)}
+                  {n.mega && mobileSub === n.href && (
+                    <div className="pl-4 border-l border-border mb-2 space-y-4">
+                      {n.mega.map((col) => (
+                        <div key={col.title}>
+                          <Link to={col.href} className="block py-1 font-serif text-lg text-foreground">{col.title}</Link>
+                          {col.subs.map((c) => (
+                            <Link key={c.href} to={c.href}
+                              className={c.accent
+                                ? 'block my-2 px-4 py-2.5 text-sm font-semibold rounded-sm bg-champagne/25 border border-champagne/60 text-foreground'
+                                : 'block py-1.5 text-muted-foreground'}>
+                              {c.label}
+                            </Link>
+                          ))}
+                        </div>
+                      ))}
                     </div>
                   )}
                 </div>
