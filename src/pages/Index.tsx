@@ -12,6 +12,7 @@ import corporateSeminar from '@/assets/biz-corporate-seminar.jpg';
 import workshop from '@/assets/biz-workshop.jpg';
 import gala from '@/assets/biz-gala.jpg';
 import vipReception from '@/assets/chany-vip-reception.jpg';
+import networking from '@/assets/biz-networking.jpg';
 import weddingArch from '@/assets/chany-wedding-arch-couple.png';
 import invinoLogoAsset from '@/assets/invino-douala-logo.jpg.asset.json';
 
@@ -24,7 +25,7 @@ const Index: React.FC = () => {
     { t: 'B2B & Business Matching', i: 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings', to: '/business-events#b2b', img: b2b },
     { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Roadshows', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions', img: delegation },
     { t: 'Corporate Events', i: L('Conventions · Séminaires · Kick-off · AG · Incentives · Team building', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate', img: corporateSeminar },
-    { t: 'Networking', i: 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking', to: '/corporate-institutional#corporate', img: vipReception },
+    { t: 'Networking', i: 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking', to: '/corporate-institutional#corporate', img: networking },
     { t: L('Innovation & formation', 'Innovation & training'), i: L('Workshops · Masterclasses · Bootcamps · Tech Summits (IA, sécurité, productivité) · Startup events', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services', img: workshop },
     { t: 'Awards & Galas', i: L('Remises de prix · Galas · Trophées · Dîners officiels · Réceptions VIP', 'Awards · Galas · Trophies · Official dinners · VIP receptions'), to: '/corporate-institutional#institutionnel', img: gala },
   ];
