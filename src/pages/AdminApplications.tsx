@@ -2,9 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Loader2, Trash2, FileText, Inbox, Users, Star, Phone, Mail, MapPin, MessageCircle, RefreshCw, User, LogOut,
+  Pencil, Upload, Download,
 } from 'lucide-react';
+import * as XLSX from 'xlsx';
 import Layout from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
@@ -28,6 +34,22 @@ interface Application {
   age?: number | null; height_cm?: number | null; speaks_french?: boolean | null; speaks_english?: boolean | null;
   full_availability?: boolean | null; cv_url?: string | null; photo_urls?: string[]; profile?: Record<string, unknown> | null;
 }
+
+type EditableApplication = Pick<Application, 'position' | 'full_name' | 'phone' | 'email' | 'city' | 'experience' | 'message' | 'age' | 'height_cm' | 'full_availability' | 'score' | 'ai_summary' | 'ai_recommendation'>;
+
+const exportHeaders: Record<keyof EditableApplication | 'created_at', string> = {
+  created_at: 'Date', position: 'Poste', full_name: 'Nom complet', phone: 'Téléphone', email: 'Email', city: 'Ville',
+  age: 'Âge', height_cm: 'Taille (cm)', full_availability: 'Disponibilité complète', experience: 'Expérience', message: 'Message',
+  score: 'Score', ai_summary: 'Résumé automatique', ai_recommendation: 'Recommandation automatique',
+};
+
+const importAliases: Record<string, keyof EditableApplication> = {
+  poste: 'position', position: 'position', 'nom complet': 'full_name', nom: 'full_name', full_name: 'full_name',
+  téléphone: 'phone', telephone: 'phone', phone: 'phone', email: 'email', ville: 'city', city: 'city', âge: 'age', age: 'age',
+  'taille (cm)': 'height_cm', taille: 'height_cm', height_cm: 'height_cm', expérience: 'experience', experience: 'experience',
+  message: 'message', score: 'score', 'disponibilité complète': 'full_availability', full_availability: 'full_availability',
+  'résumé automatique': 'ai_summary', ai_summary: 'ai_summary', 'recommandation automatique': 'ai_recommendation', ai_recommendation: 'ai_recommendation',
+};
 
 interface QuoteRequest {
   id: string; created_at: string; name: string; email: string; phone: string | null; company: string | null;
@@ -53,6 +75,10 @@ const AdminApplications: React.FC = () => {
   const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [tab, setTab] = useState<'applications' | 'quotes' | 'messages'>('applications');
+  const [editing, setEditing] = useState<Application | null>(null);
+  const [editForm, setEditForm] = useState<EditableApplication | null>(null);
+  const [saving, setSaving] = useState(false);
+  const [positionFilter, setPositionFilter] = useState('');
 
   const loadApplications = async () => {
     setLoading(true);
@@ -76,6 +102,69 @@ const AdminApplications: React.FC = () => {
   useEffect(() => { if (admin.authenticated) loadApplications(); }, [admin.authenticated]);
 
   const refresh = () => loadApplications();
+
+  const positions = [...new Set(applications.map((app) => app.position))].sort((a, b) => a.localeCompare(b));
+
+  const openEdit = (app: Application) => {
+    setEditing(app);
+    setEditForm({
+      position: app.position, full_name: app.full_name, phone: app.phone, email: app.email, city: app.city,
+      experience: app.experience, message: app.message, age: app.age ?? null, height_cm: app.height_cm ?? null,
+      full_availability: app.full_availability ?? false, score: app.score, ai_summary: app.ai_summary, ai_recommendation: app.ai_recommendation,
+    });
+  };
+
+  const saveEdit = async () => {
+    if (!editing || !editForm) return;
+    setSaving(true);
+    const { error } = await supabase.functions.invoke('admin-applications', { body: { action: 'update_application', id: editing.id, application: editForm } });
+    setSaving(false);
+    if (error) return toast({ title: fr ? 'Modification impossible' : 'Update failed', variant: 'destructive' });
+    setEditing(null);
+    setEditForm(null);
+    toast({ title: fr ? 'Candidature modifiée' : 'Application updated' });
+    refresh();
+  };
+
+  const exportPosition = () => {
+    const rows = applications.filter((app) => !positionFilter || app.position === positionFilter).map((app) =>
+      Object.fromEntries(Object.entries(exportHeaders).map(([key, label]) => [label, app[key as keyof Application] ?? ''])),
+    );
+    if (!rows.length) return toast({ title: fr ? 'Aucune candidature à exporter' : 'No applications to export' });
+    const sheet = XLSX.utils.json_to_sheet(rows);
+    sheet['!cols'] = Object.keys(exportHeaders).map((key) => ({ wch: ['experience', 'message', 'ai_summary', 'ai_recommendation'].includes(key) ? 40 : 22 }));
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, sheet, 'Candidatures');
+    const slug = (positionFilter || 'tous-les-postes').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/gi, '-').toLowerCase();
+    XLSX.writeFile(workbook, `candidatures-${slug}.xlsx`);
+  };
+
+  const importFile = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = '';
+    if (!file) return;
+    try {
+      const workbook = XLSX.read(await file.arrayBuffer(), { type: 'array' });
+      const firstSheet = workbook.SheetNames[0];
+      if (!firstSheet) throw new Error('empty');
+      const raw = XLSX.utils.sheet_to_json<Record<string, unknown>>(workbook.Sheets[firstSheet], { defval: '' });
+      const applicationsToImport = raw.map((row) => {
+        const mapped: Record<string, unknown> = {};
+        Object.entries(row).forEach(([header, value]) => {
+          const key = importAliases[header.trim().toLowerCase()];
+          if (key) mapped[key] = value;
+        });
+        if (mapped.full_availability !== undefined) mapped.full_availability = ['oui', 'yes', 'true', '1'].includes(String(mapped.full_availability).trim().toLowerCase());
+        return mapped;
+      });
+      const { data, error } = await supabase.functions.invoke('admin-applications', { body: { action: 'import_applications', applications: applicationsToImport } });
+      if (error) throw error;
+      toast({ title: fr ? `${data?.imported ?? applicationsToImport.length} candidature(s) importée(s)` : `${data?.imported ?? applicationsToImport.length} application(s) imported` });
+      refresh();
+    } catch {
+      toast({ title: fr ? 'Import impossible' : 'Import failed', description: fr ? 'Utilisez un fichier Excel ou CSV avec au minimum : Poste, Nom complet et Téléphone.' : 'Use an Excel or CSV file with at least: Position, Full name and Phone.', variant: 'destructive' });
+    }
+  };
 
   const act = async (table: string, id: string, action: 'update_status' | 'delete', status?: string) => {
     if (action === 'delete' && !window.confirm(language === 'fr' ? 'Supprimer définitivement ?' : 'Delete permanently?')) return;
@@ -243,6 +332,22 @@ const AdminApplications: React.FC = () => {
             </p>
           )}
 
+          {tab === 'applications' && applications.length > 0 && (
+            <div className="mb-8 flex flex-col lg:flex-row lg:items-center gap-3 p-4 bg-card border border-border rounded-sm">
+              <div className="flex-1">
+                <Label htmlFor="export-position">{fr ? 'Exporter les candidatures d’un poste' : 'Export applications for a position'}</Label>
+                <select id="export-position" value={positionFilter} onChange={(event) => setPositionFilter(event.target.value)} className="mt-2 h-10 w-full rounded-sm border border-border bg-background px-3 text-sm text-foreground">
+                  <option value="">{fr ? 'Tous les postes' : 'All positions'}</option>
+                  {positions.map((position) => <option key={position} value={position}>{position}</option>)}
+                </select>
+              </div>
+              <Button variant="outline" onClick={exportPosition} className="lg:mt-6"><Download className="w-4 h-4 mr-2" />{fr ? 'Exporter Excel' : 'Export Excel'}</Button>
+              <Button variant="outline" asChild className="lg:mt-6">
+                <label className="cursor-pointer"><Upload className="w-4 h-4 mr-2" />{fr ? 'Importer Excel / CSV' : 'Import Excel / CSV'}<input type="file" accept=".xlsx,.xls,.csv" onChange={importFile} className="sr-only" /></label>
+              </Button>
+            </div>
+          )}
+
           {tab === 'applications' && <div className="space-y-6">
             {applications.map((app) => (
               <motion.article
@@ -369,6 +474,7 @@ const AdminApplications: React.FC = () => {
 
                   {/* Actions */}
                   <div className="shrink-0 flex lg:flex-col gap-3">
+                    <Button variant="outline" onClick={() => openEdit(app)}><Pencil className="w-4 h-4 mr-2" />{fr ? 'Modifier' : 'Edit'}</Button>
                     <a
                       href={`https://wa.me/${app.phone.replace(/\D/g, '')}`}
                       target="_blank"
@@ -385,11 +491,30 @@ const AdminApplications: React.FC = () => {
                         <User className="w-4 h-4" /> Email
                       </a>
                     )}
+                    <Button variant="outline" onClick={() => act('job_applications', app.id, 'delete')} className="text-destructive hover:bg-destructive/10"><Trash2 className="w-4 h-4 mr-2" />{fr ? 'Supprimer' : 'Delete'}</Button>
                   </div>
                 </div>
               </motion.article>
             ))}
           </div>}
+
+          <Dialog open={!!editing} onOpenChange={(open) => { if (!open) { setEditing(null); setEditForm(null); } }}>
+            <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+              <DialogHeader><DialogTitle>{fr ? 'Modifier la candidature' : 'Edit application'}</DialogTitle><DialogDescription>{fr ? 'Corrigez les informations puis enregistrez.' : 'Update the information, then save.'}</DialogDescription></DialogHeader>
+              {editForm && <div className="grid sm:grid-cols-2 gap-4 py-2">
+                {([
+                  ['full_name', fr ? 'Nom complet' : 'Full name', 'text'], ['position', fr ? 'Poste' : 'Position', 'text'],
+                  ['phone', fr ? 'Téléphone' : 'Phone', 'tel'], ['email', 'Email', 'email'], ['city', fr ? 'Ville' : 'City', 'text'],
+                  ['age', fr ? 'Âge' : 'Age', 'number'], ['height_cm', fr ? 'Taille (cm)' : 'Height (cm)', 'number'], ['score', 'Score / 100', 'number'],
+                ] as const).map(([key, label, type]) => <div key={key}><Label htmlFor={`edit-${key}`}>{label}</Label><Input id={`edit-${key}`} type={type} value={editForm[key] == null ? '' : String(editForm[key])} onChange={(event) => setEditForm({ ...editForm, [key]: type === 'number' ? (event.target.value === '' ? null : Number(event.target.value)) : event.target.value })} className="mt-2" /></div>)}
+                {([
+                  ['experience', fr ? 'Expérience' : 'Experience'], ['message', 'Message'], ['ai_summary', fr ? 'Résumé automatique' : 'Automatic summary'], ['ai_recommendation', fr ? 'Recommandation automatique' : 'Automatic recommendation'],
+                ] as const).map(([key, label]) => <div key={key} className="sm:col-span-2"><Label htmlFor={`edit-${key}`}>{label}</Label><Textarea id={`edit-${key}`} value={editForm[key] ?? ''} onChange={(event) => setEditForm({ ...editForm, [key]: event.target.value })} className="mt-2" /></div>)}
+                <label className="sm:col-span-2 flex items-center gap-3 text-sm text-foreground"><input type="checkbox" checked={editForm.full_availability ?? false} onChange={(event) => setEditForm({ ...editForm, full_availability: event.target.checked })} />{fr ? 'Disponibilité complète' : 'Full availability'}</label>
+              </div>}
+              <DialogFooter><Button variant="outline" onClick={() => { setEditing(null); setEditForm(null); }}>{fr ? 'Annuler' : 'Cancel'}</Button><Button onClick={saveEdit} disabled={saving}>{saving && <Loader2 className="w-4 h-4 mr-2 animate-spin" />}{fr ? 'Enregistrer' : 'Save'}</Button></DialogFooter>
+            </DialogContent>
+          </Dialog>
         </div>
       </section>
     </Layout>
