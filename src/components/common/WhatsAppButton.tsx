@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 
 const WhatsAppButton: React.FC = () => {
-  const phoneNumber = '237675788550'; // Replace with actual number
+  const phoneNumber = '237675788550';
   const message = encodeURIComponent('Bonjour, je souhaite en savoir plus sur vos services événementiels.');
 
   return (
