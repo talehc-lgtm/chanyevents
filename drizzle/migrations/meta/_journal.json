@@ -29,6 +29,13 @@
       "when": 1791371536279,
       "tag": "0003_casting_invino_fields",
       "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "7",
+      "when": 1791372067563,
+      "tag": "0004_tighten_application_inserts",
+      "breakpoints": true
     }
   ]
 }
