@@ -105,93 +105,85 @@ const Index: React.FC = () => {
   return (
     <Layout>
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <AnimatePresence mode="wait">
-            <motion.img
-              key={currentHeroSlide.title}
-              src={currentHeroSlide.image}
-              alt={currentHeroSlide.title}
-              className="absolute inset-0 w-full h-full object-cover"
-              initial={{ opacity: 0, scale: 1.04 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 1.02 }}
-              transition={{ duration: 1.1, ease: 'easeOut' }}
-            />
-          </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-b from-background/35 via-background/68 to-background" />
-          <div className="absolute inset-y-0 left-0 w-full bg-gradient-to-r from-background/80 via-background/35 to-transparent" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 container-luxury w-full px-6 pt-32 pb-28">
-          <div className="grid min-h-[68vh] items-center">
+      <section className="relative overflow-hidden bg-background pt-32 md:pt-40 pb-16 md:pb-24">
+        <div className="absolute inset-y-0 right-0 hidden w-[38%] bg-charcoal lg:block" aria-hidden />
+        <div className="relative container-luxury px-6 grid gap-12 lg:grid-cols-12 lg:items-center">
+          <div className="lg:col-span-6 xl:col-span-5 order-2 lg:order-1">
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentHeroSlide.title}
-                initial={{ opacity: 0, y: 28 }}
+                initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -18 }}
-                transition={{ duration: 0.65, ease: 'easeOut' }}
-                className="max-w-3xl"
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
               >
-                <span className="mb-6 inline-flex items-center gap-3 text-primary text-sm font-semibold tracking-[0.28em] uppercase">
-                  <HeroIcon className="h-5 w-5" />
+                <span className="eyebrow mb-6">
+                  <HeroIcon className="h-4 w-4" />
                   {currentHeroSlide.label}
                 </span>
-                <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-semibold text-foreground mb-8 leading-tight">
-                  {currentHeroSlide.title.split(' ').slice(0, 1).join(' ')}
-                  <span className="block text-gradient-gold">
+                <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-medium text-foreground mt-6 mb-6 leading-[1.05]">
+                  {currentHeroSlide.title.split(' ').slice(0, 1).join(' ')}{' '}
+                  <em className="italic text-primary">
                     {currentHeroSlide.title.split(' ').slice(1).join(' ')}
-                  </span>
+                  </em>
                 </h1>
-                <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl mb-12 leading-relaxed">
+                <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-10 leading-relaxed">
                   {currentHeroSlide.description}
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-              <Link to="/services">
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-primary text-primary hover:bg-primary/10 text-lg px-8 py-6"
-                >
-                  {t('hero.cta.discover')}
-                </Button>
-              </Link>
-                </div>
+                <Link to="/services">
+                  <Button size="lg" className="text-base px-8 py-6 hover-gold-glow">
+                    {t('hero.cta.discover')}
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
               </motion.div>
             </AnimatePresence>
 
+            <div className="mt-12 flex items-center gap-4">
+              <span className="font-serif text-sm text-muted-foreground tabular-nums">
+                {String(activeHeroSlide + 1).padStart(2, '0')} / {String(heroSlides.length).padStart(2, '0')}
+              </span>
+              <div className="flex gap-2">
+                {heroSlides.map((slide, index) => (
+                  <button
+                    key={slide.title}
+                    type="button"
+                    onClick={() => setActiveHeroSlide(index)}
+                    aria-label={`${index + 1}. ${slide.label}`}
+                    aria-current={activeHeroSlide === index}
+                    className={`h-1 rounded-full transition-all duration-300 ${
+                      activeHeroSlide === index ? 'w-10 bg-primary' : 'w-5 bg-foreground/20 hover:bg-foreground/40'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
 
-          <div className="absolute bottom-10 left-6 right-6 z-20 lg:hidden">
-            <div className="flex justify-center gap-2">
-              {heroSlides.map((slide, index) => (
-                <button
-                  key={slide.title}
-                  type="button"
-                  onClick={() => setActiveHeroSlide(index)}
-                  aria-label={`Slide ${index + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    activeHeroSlide === index ? 'w-10 bg-primary' : 'w-2 bg-foreground/40'
-                  }`}
-                />
-              ))}
+          <div className="lg:col-span-6 xl:col-span-7 order-1 lg:order-2">
+            <div className="frame-offset relative z-0 rounded-md">
+              <div className="relative aspect-[4/3] lg:aspect-[5/4] overflow-hidden rounded-md shadow-[var(--shadow-elegant)] bg-muted">
+                <AnimatePresence mode="wait">
+                  <motion.img
+                    key={currentHeroSlide.title}
+                    src={currentHeroSlide.image}
+                    alt={currentHeroSlide.title}
+                    fetchPriority="high"
+                    className="absolute inset-0 w-full h-full object-cover"
+                    initial={{ opacity: 0, scale: 1.03 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.9, ease: 'easeOut' }}
+                  />
+                </AnimatePresence>
+              </div>
+              <div className="absolute -bottom-6 left-6 hidden sm:flex items-center gap-3 rounded-md bg-card px-5 py-4 shadow-[var(--shadow-elegant)]">
+                <HeroIcon className="h-5 w-5 text-primary" />
+                <span className="text-sm font-semibold text-foreground">{currentHeroSlide.label}</span>
+              </div>
             </div>
           </div>
         </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
-          <div className="w-6 h-10 border-2 border-primary/50 rounded-full flex justify-center">
-            <div className="w-1.5 h-3 bg-primary rounded-full mt-2" />
-          </div>
-        </motion.div>
       </section>
 
       {/* Featured Event — In Vino Italia Douala */}
@@ -374,14 +366,14 @@ const Index: React.FC = () => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-90 transition-opacity" />
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <span className="text-primary text-sm font-medium tracking-wider uppercase">
+                  <span className="text-champagne text-xs font-semibold tracking-[0.2em] uppercase">
                     {item.category}
                   </span>
-                  <h3 className="font-serif text-xl text-foreground mt-2">{item.title}</h3>
+                  <h3 className="font-serif text-2xl text-cream mt-2">{item.title}</h3>
                 </div>
               </motion.div>
             ))}

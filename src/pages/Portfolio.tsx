@@ -289,15 +289,15 @@ const Portfolio: React.FC = () => {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-90 transition-opacity duration-300" />
                   <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    <span className="text-primary text-xs font-semibold tracking-wider uppercase block mb-2">
+                    <span className="text-champagne text-xs font-semibold tracking-[0.2em] uppercase block mb-2">
                       {filters.find((f) => f.key === item.category)?.label}
                     </span>
-                    <h3 className="font-serif text-xl text-foreground font-semibold">{item.title}</h3>
-                    <p className="text-muted-foreground text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <h3 className="font-serif text-2xl text-cream font-medium">{item.title}</h3>
+                    <p className="text-cream/85 text-sm mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                       {item.location}
                     </p>
                   </div>
