@@ -13,7 +13,7 @@ import workshop from '@/assets/biz-workshop.jpg';
 import gala from '@/assets/biz-gala.jpg';
 import vipReception from '@/assets/chany-vip-reception.jpg';
 import weddingArch from '@/assets/chany-wedding-arch-couple.png';
-import invinoPosterAsset from '@/assets/invino-douala-affiche.jpg.asset.json';
+import invinoLogoAsset from '@/assets/invino-douala-logo.jpg.asset.json';
 
 const Index: React.FC = () => {
   const L = useL();
@@ -243,8 +243,10 @@ const Index: React.FC = () => {
       {/* Featured: In Vino */}
       <section className="section-padding">
         <div className="container-luxury grid lg:grid-cols-2 gap-12 items-center">
-          <Reveal className="relative mx-auto w-full max-w-md">
-            <img src={invinoPosterAsset.url} alt="In Vino Italia Douala" loading="lazy" className="w-full h-auto rounded-sm shadow-[var(--shadow-elegant)]" />
+          <Reveal className="relative mx-auto w-full max-w-md lg:max-w-lg">
+            <div className="frame-offset rounded-sm">
+              <img src={invinoLogoAsset.url} alt="In Vino Italia Douala — Salon des vins italiens en Afrique Centrale" loading="lazy" className="w-full h-auto rounded-sm border border-champagne/40 shadow-[var(--shadow-elegant)]" />
+            </div>
             <span className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-5 py-3 rounded-sm text-sm font-semibold uppercase tracking-wider">{L('Événement à la une', 'Featured event')}</span>
           </Reveal>
           <Reveal delay={0.1}>
