@@ -161,9 +161,9 @@ const Services: React.FC = () => {
                       </li>
                     ))}
                   </ul>
-                  <Link to="/quote">
+                  <Link to="/contact">
                     <Button className="bg-gradient-gold text-primary-foreground hover-gold-glow">
-                      Demander un devis
+                      Nous contacter
                       <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </Link>
@@ -238,9 +238,9 @@ const Services: React.FC = () => {
               vos idées en une expérience exceptionnelle.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/quote">
+              <Link to="/contact">
                 <Button size="lg" className="bg-gradient-gold text-primary-foreground hover-gold-glow">
-                  Demander un devis gratuit
+                  Nous contacter
                 </Button>
               </Link>
               <Link to="/contact">
