@@ -99,17 +99,40 @@ const Index: React.FC = () => {
       </section>
 
       {/* Process */}
-      <section className="section-padding bg-charcoal">
+      <section className="section-padding bg-charcoal overflow-hidden">
         <div className="container-luxury">
-          <Reveal><h2 className="text-section font-serif text-foreground mb-12">{L('Notre méthode en 7 étapes', 'Our 7-step method')}</h2></Reveal>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-7 gap-px bg-border border border-border rounded-sm overflow-hidden">
-            {process.map(([n, d], i) => (
-              <Reveal key={n} delay={i * 0.07} className="bg-background p-6 h-full">
-                <span className="font-serif text-4xl text-primary/40">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="font-serif text-2xl text-foreground mt-3 mb-2">{n}</h3>
-                <p className="text-sm text-muted-foreground">{d}</p>
-              </Reveal>
-            ))}
+          <Reveal className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-16">
+            <h2 className="text-section font-serif text-foreground">{L('Notre méthode en 7 étapes', 'Our 7-step method')}</h2>
+            <p className="text-muted-foreground max-w-sm">{L('Une seule équipe, un fil conducteur : de la première écoute jusqu’au bilan.', 'One team, one through-line: from the first briefing to the final report.')}</p>
+          </Reveal>
+          <div className="relative">
+            {/* Animated connecting line */}
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 1.6, ease: [0.22, 1, 0.36, 1] }}
+              className="hidden lg:block absolute top-[7px] left-0 right-0 h-px bg-primary/40 origin-left"
+            />
+            <div className="grid sm:grid-cols-2 lg:grid-cols-7 gap-y-12 gap-x-6">
+              {process.map(([n, d], i) => (
+                <motion.div
+                  key={n}
+                  initial={{ opacity: 0, y: 28 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-60px' }}
+                  transition={{ duration: 0.6, delay: 0.15 + i * 0.12, ease: [0.22, 1, 0.36, 1] }}
+                  className={`group relative lg:pt-10 ${i % 2 === 1 ? 'lg:translate-y-6' : ''}`}
+                >
+                  {/* Node on the line */}
+                  <span className="hidden lg:block absolute top-0 left-0 w-[15px] h-[15px] rounded-full border-2 border-primary bg-charcoal group-hover:bg-primary transition-colors duration-500" />
+                  <span className="lg:hidden absolute -left-4 top-1 bottom-1 w-px bg-primary/30" />
+                  <span className="block font-serif text-5xl text-primary/35 group-hover:text-primary transition-colors duration-500">{String(i + 1).padStart(2, '0')}</span>
+                  <h3 className="font-serif text-2xl text-foreground mt-3 mb-2 group-hover:text-primary transition-colors duration-500">{n}</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">{d}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
