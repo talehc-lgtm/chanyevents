@@ -11,7 +11,7 @@ export const emptyProfile = {
   skills: [] as string[], skills_other: '',
   availability_period: '',
   experience_1: '', experience_2: '', experience_3: '',
-  student: '', student_other: '', last_diploma: '', current_diploma: '', future_job: '',
+  student: '', student_other: '',
   beauty_contest: '', beauty_contest_which: '', agency: '', agency_which: '',
   knew_agency: '', knew_agency_how: '', heard_casting_from: '',
   image_rights: false, signature_name: '',
@@ -119,10 +119,7 @@ const CastingProfileFields: React.FC<Props & { section: 'personal' | 'rest' }> =
       <div className="grid md:grid-cols-2 gap-5">
         <YesNo name="student" label={L('Êtes-vous étudiant(e) ?', 'Are you a student?')} value={p.student} onChange={(v) => set({ student: v })} L={L} />
         <F id="student_other" label={L('Autre situation', 'Other situation')} value={p.student_other} onChange={(v) => set({ student_other: v })} />
-        <F id="last_diploma" label={L('Dernier diplôme', 'Last diploma')} value={p.last_diploma} onChange={(v) => set({ last_diploma: v })} />
-        <F id="current_diploma" label={L('Diplôme en cours', 'Current diploma')} value={p.current_diploma} onChange={(v) => set({ current_diploma: v })} />
       </div>
-      <F id="future_job" label={L("Quel métier envisagez-vous dans l'avenir ?", 'What job do you plan for the future?')} value={p.future_job} max={200} onChange={(v) => set({ future_job: v })} />
       <div className="grid md:grid-cols-2 gap-5">
         <div className="space-y-2">
           <YesNo name="beauty" label={L('Participation à un concours de beauté ?', 'Taken part in a beauty contest?')} value={p.beauty_contest} onChange={(v) => set({ beauty_contest: v })} L={L} />

@@ -475,12 +475,12 @@ const Careers: React.FC = () => {
               />
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+            <div className="pt-2">
               <Button
                 type="submit"
                 size="lg"
                 disabled={isSubmitting}
-                className="bg-gradient-gold text-primary-foreground hover-gold-glow flex-1"
+                className="w-full bg-gradient-gold text-primary-foreground hover-gold-glow"
               >
                 <Send className="mr-2 w-4 h-4" />
                 {isSubmitting
@@ -490,18 +490,6 @@ const Careers: React.FC = () => {
                   : language === 'fr'
                     ? 'Envoyer ma candidature'
                     : 'Send my application'}
-              </Button>
-              <Button
-                type="button"
-                size="lg"
-                variant="outline"
-                className="border-primary text-primary hover:bg-primary/10 flex-1"
-                onClick={() =>
-                  whatsappApply(selectedPosition || (language === 'fr' ? 'un poste' : 'a position'))
-                }
-              >
-                <MessageCircle className="mr-2 w-4 h-4" />
-                {language === 'fr' ? 'Postuler via WhatsApp' : 'Apply via WhatsApp'}
               </Button>
             </div>
           </motion.form>
