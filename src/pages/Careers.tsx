@@ -91,7 +91,7 @@ const Careers: React.FC = () => {
 
   const whatsappApply = (positionTitle: string) => {
     const text = encodeURIComponent(
-      `Bonjour, je souhaite postuler au poste « ${positionTitle} » pour le salon In Vino Italia Douala (26–28 novembre 2026). Je joins mon CV${positionTitle === offers[0].title ? ' et deux photos récentes en pied' : ''}.`
+      `Bonjour, je souhaite postuler au poste « ${positionTitle} » pour le salon In Vino Italia Douala (26–28 novembre 2026). Je joins mon CV${positionTitle === offers[0].title ? ', une photo professionnelle et une photo en tenue de ville' : ''}.`
     );
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener,noreferrer');
   };
@@ -181,7 +181,7 @@ const Careers: React.FC = () => {
     });
     setForm(emptyForm);
     setCvFile(null);
-    setPhotoFiles([]);
+    setPhotoPro(null); setPhotoVille(null);
     (e.target as HTMLFormElement).reset();
     setSelectedPosition('');
   };

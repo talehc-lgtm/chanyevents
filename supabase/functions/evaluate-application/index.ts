@@ -63,7 +63,7 @@ async function aiEvaluate(app: ApplicationPayload): Promise<{ summary: string; r
 
   const hostess = isHostessRole(app.position)
   const criteria = hostess
-    ? "âgée de 21 à 30 ans, résidant à Douala, taille minimum 1,75 m, bonne présentation, maîtrise du français et de l'anglais, expérience dans l'événementiel, disponible les 26, 27 et 28 novembre, dynamique, organisée et à l'aise avec le public. Dossier complet : CV + deux photos récentes en pied."
+    ? "âgée de 21 à 30 ans, résidant à Douala, taille minimum 1,75 m, bonne présentation, maîtrise du français et de l'anglais, expérience dans l'événementiel, disponible les 26, 27 et 28 novembre, dynamique, organisée et à l'aise avec le public. Dossier complet : CV + une photo professionnelle + une photo en tenue de ville."
     : "résidant à Douala, expérience en événementiel, logistique ou secrétariat, maîtrise du français et de l'anglais, disponible pendant toute la période, organisé, ponctuel et à l'aise en équipe. Dossier complet : CV."
   const yn = (b?: boolean | null) => (b ? 'oui' : 'non')
 
@@ -80,7 +80,7 @@ Candidature :
 - Âge : ${app.age ?? 'non indiqué'}
 ${hostess ? `- Taille : ${app.height_cm ? app.height_cm + ' cm' : 'non indiquée'}\n` : ''}- Français : ${yn(app.speaks_french)} / Anglais : ${yn(app.speaks_english)}
 - Disponible sur toute la période : ${yn(app.full_availability)}
-- CV joint : ${yn(!!app.cv_path)}${hostess ? `\n- Photos en pied jointes : ${app.photo_paths?.length ?? 0}/2` : ''}
+- CV joint : ${yn(!!app.cv_path)}${hostess ? `\n- Photos jointes (professionnelle + tenue de ville) : ${app.photo_paths?.length ?? 0}/2` : ''}
 - Expérience : ${app.experience ?? 'non renseignée'}
 - Message : ${app.message ?? 'aucun'}
 
