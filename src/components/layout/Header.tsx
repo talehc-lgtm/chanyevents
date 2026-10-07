@@ -1,136 +1,125 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Globe } from 'lucide-react';
+import { Menu, X, Globe, ChevronDown } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import logoChanyEvents from '@/assets/logo-chany-events.png';
 
+type NavItem = { href: string; label: string; children?: { href: string; label: string }[] };
+
 const Header: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [mobileSub, setMobileSub] = useState<string | null>(null);
   const { language, setLanguage, t } = useLanguage();
   const location = useLocation();
+  const fr = language === 'fr';
+  const L = (a: string, b: string) => (fr ? a : b);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const h = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', h);
+    return () => window.removeEventListener('scroll', h);
   }, []);
+  useEffect(() => { setOpen(false); }, [location.pathname, location.hash]);
 
-  const navLinks = [
+  const nav: NavItem[] = [
     { href: '/', label: t('nav.home') },
-    { href: '/about', label: t('nav.about') },
+    { href: '/business-events', label: 'Business Events', children: [
+      { href: '/business-events#salons', label: L('Foires & Salons', 'Trade Fairs & Shows') },
+      { href: '/business-events#conferences', label: L('Conférences & Sommets', 'Conferences & Summits') },
+      { href: '/business-events#b2b', label: 'B2B & Business Matching' },
+      { href: '/business-events#missions', label: L('Missions économiques', 'Trade Missions') },
+      { href: '/business-events#roadshows', label: 'Roadshows' },
+      { href: '/business-events#pavillons', label: L('Pavillons & Expositions', 'Pavilions & Exhibitions') },
+      { href: '/business-events#investment', label: 'Investment Events' },
+    ] },
+    { href: '/corporate-institutional', label: L('Corporate & Institutionnel', 'Corporate & Institutional'), children: [
+      { href: '/corporate-institutional#corporate', label: 'Corporate Events' },
+      { href: '/corporate-institutional#institutionnel', label: L('Événements institutionnels', 'Institutional Events') },
+      { href: '/corporate-institutional#diplomatique', label: L('Événements diplomatiques', 'Diplomatic Events') },
+      { href: '/corporate-institutional#delegations', label: L('Délégations', 'Delegations') },
+      { href: '/corporate-institutional#lancements', label: L('Lancements & inaugurations', 'Launches & Inaugurations') },
+    ] },
     { href: '/services', label: t('nav.services') },
+    { href: '/weddings', label: 'Weddings' },
     { href: '/portfolio', label: t('nav.portfolio') },
-    { href: '/quote', label: t('nav.quote') },
-    { href: '/careers', label: t('nav.careers') },
+    { href: '/about', label: t('nav.about') },
     { href: '/contact', label: t('nav.contact') },
   ];
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'fr' ? 'en' : 'fr');
-  };
+  const active = (h: string) => location.pathname === h;
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
-          ? 'bg-background/90 backdrop-blur-md border-b border-border shadow-[0_6px_24px_-18px_hsl(var(--ink)/0.35)]'
-          : 'bg-background/60 backdrop-blur-sm'
-      }`}
-    >
-      <div className="container-luxury">
-        <nav className="flex items-center justify-between h-20 md:h-24 px-6 md:px-12">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
-            <span className="flex h-16 w-48 md:h-20 md:w-64 items-center justify-start overflow-hidden">
-              <img
-                src={logoChanyEvents}
-                alt="CHANY EVENT'S"
-                className="h-full w-full object-contain"
-              />
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-[0_6px_24px_-18px_hsl(var(--ink)/0.35)]' : 'bg-background/80 backdrop-blur-sm'}`}>
+      <div className="max-w-[1440px] mx-auto">
+        <nav className="flex items-center justify-between h-20 px-6 xl:px-10 gap-6">
+          <Link to="/" className="shrink-0">
+            <span className="flex h-14 w-40 xl:w-48 items-center overflow-hidden">
+              <img src={logoChanyEvents} alt="CHANY EVENT'S" className="h-full w-full object-contain object-left" />
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                to={link.href}
-                className={`relative text-sm font-medium tracking-wide uppercase transition-colors duration-300 ${
-                  location.pathname === link.href
-                    ? 'text-primary'
-                    : 'text-foreground/80 hover:text-primary'
-                }`}
-              >
-                {link.label}
-                {location.pathname === link.href && (
-                  <motion.span
-                    layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-primary"
-                  />
+          <div className="hidden xl:flex items-center gap-4">
+            {nav.map((n) => (
+              <div key={n.href} className="relative group">
+                <Link to={n.href} className={`flex items-center gap-1 whitespace-nowrap text-[13px] font-medium tracking-wide uppercase transition-colors py-7 ${active(n.href) ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}>
+                  {n.label}{n.children && <ChevronDown className="w-3.5 h-3.5" />}
+                </Link>
+                {n.children && (
+                  <div className="absolute left-0 top-full pt-0 invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all">
+                    <div className="min-w-64 bg-card border border-border rounded-sm shadow-[var(--shadow-elegant)] py-3">
+                      {n.children.map((c) => (
+                        <Link key={c.href} to={c.href} className="block px-5 py-2 text-sm text-foreground/80 hover:text-primary hover:bg-charcoal">{c.label}</Link>
+                      ))}
+                    </div>
+                  </div>
                 )}
-              </Link>
+              </div>
             ))}
           </div>
 
-          {/* Right Section */}
-          <div className="hidden lg:flex items-center gap-4">
-            <button
-              onClick={toggleLanguage}
-              className="flex items-center gap-2 text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
-            >
-              <Globe className="w-4 h-4" />
-              <span>{language.toUpperCase()}</span>
+          <div className="hidden xl:flex items-center gap-4">
+            <button onClick={() => setLanguage(fr ? 'en' : 'fr')} className="flex items-center gap-1.5 text-sm text-foreground/80 hover:text-primary">
+              <Globe className="w-4 h-4" />{language.toUpperCase()}
             </button>
+            <Link to="/contact#projet" className="hidden 2xl:inline-block px-5 py-2.5 bg-primary text-primary-foreground rounded-sm text-sm font-semibold hover-gold-glow whitespace-nowrap">
+              {L('Démarrer un projet', 'Start a project')}
+            </Link>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="lg:hidden p-2 text-foreground"
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          <button onClick={() => setOpen(!open)} className="xl:hidden p-2 text-foreground" aria-label="Menu">
+            {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
         </nav>
       </div>
 
-      {/* Mobile Menu */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden bg-background border-b border-border"
-          >
-            <div className="container-luxury py-6 px-6 space-y-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  to={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className={`block text-lg font-medium ${
-                    location.pathname === link.href
-                      ? 'text-primary'
-                      : 'text-foreground/80'
-                  }`}
-                >
-                  {link.label}
-                </Link>
+        {open && (
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="xl:hidden bg-background border-b border-border max-h-[calc(100vh-5rem)] overflow-y-auto">
+            <div className="px-6 py-6 space-y-1">
+              {nav.map((n) => (
+                <div key={n.href}>
+                  <div className="flex items-center justify-between">
+                    <Link to={n.href} className={`block py-2.5 text-lg ${active(n.href) ? 'text-primary' : 'text-foreground/85'}`}>{n.label}</Link>
+                    {n.children && (
+                      <button onClick={() => setMobileSub(mobileSub === n.href ? null : n.href)} className="p-2" aria-label="Sous-menu">
+                        <ChevronDown className={`w-5 h-5 transition-transform ${mobileSub === n.href ? 'rotate-180' : ''}`} />
+                      </button>
+                    )}
+                  </div>
+                  {n.children && mobileSub === n.href && (
+                    <div className="pl-4 border-l border-border mb-2">
+                      {n.children.map((c) => <Link key={c.href} to={c.href} className="block py-2 text-muted-foreground">{c.label}</Link>)}
+                    </div>
+                  )}
+                </div>
               ))}
-              <div className="pt-4 border-t border-border flex items-center justify-between">
-                <button
-                  onClick={toggleLanguage}
-                  className="flex items-center gap-2 text-sm font-medium text-foreground/80"
-                >
-                  <Globe className="w-4 h-4" />
-                  <span>{language === 'fr' ? 'Français' : 'English'}</span>
-                </button>
-              </div>
+              <Link to="/careers" className="block py-2.5 text-lg text-foreground/85">{t('nav.careers')}</Link>
+              <Link to="/contact#projet" className="block mt-4 text-center px-5 py-3 bg-primary text-primary-foreground rounded-sm font-semibold">{L('Démarrer un projet', 'Start a project')}</Link>
+              <button onClick={() => setLanguage(fr ? 'en' : 'fr')} className="flex items-center gap-2 pt-4 text-sm text-foreground/80">
+                <Globe className="w-4 h-4" />{fr ? 'English' : 'Français'}
+              </button>
             </div>
           </motion.div>
         )}

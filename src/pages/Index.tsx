@@ -1,500 +1,261 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Crown, Users, Sparkles, Building2, Star, Megaphone, CalendarDays, MapPin } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import { motion } from 'framer-motion';
+import { ArrowRight, CalendarDays, MapPin } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
-import SectionHeading from '@/components/common/SectionHeading';
-import { Button } from '@/components/ui/button';
-import vipImage from '@/assets/vip-event.jpg';
-import tableDecorImage from '@/assets/chany-table-decor.jpg';
-import promote2017TeamImage from '@/assets/chany-promote-2017-team.jpg';
-import brandTeamImage from '@/assets/chany-brand-team.jpg';
-import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
-import exnessConsultationImage from '@/assets/chany-exness-consultation.jpg';
-import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
-import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
-import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
-import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
+import { useL, Seo, Reveal } from '@/components/common/Blocks';
+import conference from '@/assets/biz-conference.jpg';
+import tradeshow from '@/assets/biz-tradeshow.jpg';
+import b2b from '@/assets/biz-b2b.jpg';
+import delegation from '@/assets/biz-delegation.jpg';
+import weddingArch from '@/assets/chany-wedding-arch-couple.png';
 import invinoPosterAsset from '@/assets/invino-douala-poster-portrait.png.asset.json';
 
 const Index: React.FC = () => {
-  const { t, language } = useLanguage();
-  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
+  const L = useL();
 
-  const services = [
-    {
-      icon: Building2,
-      title: t('services.corporate.title'),
-      description: t('services.corporate.desc'),
-    },
-    {
-      icon: Crown,
-      title: t('services.weddings.title'),
-      description: t('services.weddings.desc'),
-    },
-    {
-      icon: Sparkles,
-      title: t('services.vip.title'),
-      description: t('services.vip.desc'),
-    },
+  const expertises = [
+    { t: L('Foires & Salons professionnels', 'Trade fairs & exhibitions'), i: L('Foires internationales · Salons sectoriels · Trade shows · Pavillons pays · ConfEx', 'International fairs · Sector shows · Trade shows · Country pavilions · ConfEx'), to: '/business-events#salons' },
+    { t: L('Conférences & grands rendez-vous', 'Conferences & major gatherings'), i: L('Forums économiques · Sommets · Congrès · Symposiums · Assises', 'Economic forums · Summits · Congresses · Symposiums'), to: '/business-events#conferences' },
+    { t: 'B2B & Business Matching', i: 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings', to: '/business-events#b2b' },
+    { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Roadshows', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions' },
+    { t: 'Corporate Events', i: L('Conventions · Séminaires · Kick-off · AG · Incentives · Team building', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate' },
+    { t: 'Networking', i: 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking', to: '/corporate-institutional#corporate' },
+    { t: L('Innovation & formation', 'Innovation & training'), i: L('Workshops · Masterclasses · Bootcamps · Tech Summits (IA, sécurité, productivité) · Startup events', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services' },
+    { t: 'Awards & Galas', i: L('Remises de prix · Galas · Trophées · Dîners officiels · Réceptions VIP', 'Awards · Galas · Trophies · Official dinners · VIP receptions'), to: '/corporate-institutional#institutionnel' },
   ];
+
+  const process = [
+    ['Understand', L('Écoute, contexte, enjeux', 'Listening, context, stakes')],
+    ['Think', L('Concept, objectifs, publics, format', 'Concept, goals, audiences, format')],
+    ['Plan', L('Budget, planning, prestataires, sponsors, exposants', 'Budget, schedule, suppliers, sponsors, exhibitors')],
+    ['Connect', L('Invitations, buyers, speakers, investisseurs, délégations', 'Invitations, buyers, speakers, investors, delegations')],
+    ['Produce', L('Scénographie, stands, technique, signalétique, accueil', 'Scenography, stands, tech, signage, welcome')],
+    ['Deliver', L('Coordination terrain, régie, VIP, exposants', 'On-site coordination, stage, VIPs, exhibitors')],
+    ['Measure', L('Reporting, leads, rencontres, bilan post-event', 'Reporting, leads, meetings, post-event review')],
+  ];
+
+  const zones = [
+    { n: L('Afrique centrale', 'Central Africa'), c: L('Cameroun · Gabon · Congo · RDC · Centrafrique · Tchad · Guinée équatoriale · São Tomé-et-Príncipe', 'Cameroon · Gabon · Congo · DRC · CAR · Chad · Equatorial Guinea · São Tomé and Príncipe') },
+    { n: L("Afrique de l'Ouest", 'West Africa'), c: L("Côte d'Ivoire · Sénégal · Nigeria · Ghana · Bénin · Togo · Guinée · Mali · Burkina Faso · Niger · Cap-Vert", "Côte d'Ivoire · Senegal · Nigeria · Ghana · Benin · Togo · Guinea · Mali · Burkina Faso · Niger · Cape Verde") },
+    { n: L("Afrique de l'Est", 'East Africa'), c: L('Kenya · Rwanda · Ouganda · Tanzanie · Éthiopie · Djibouti · Burundi', 'Kenya · Rwanda · Uganda · Tanzania · Ethiopia · Djibouti · Burundi') },
+  ];
+
+  const clients = [L('Entreprises', 'Companies'), 'Multinationales', L('Institutions publiques', 'Public institutions'), L('Ministères', 'Ministries'), L('Organisations internationales', 'International organisations'), L('Ambassades', 'Embassies'), L('Chambres de commerce', 'Chambers of commerce'), L('Fédérations professionnelles', 'Trade federations'), L('Organisateurs de salons', 'Trade show organisers'), L('Associations professionnelles', 'Professional associations'), L('Investisseurs', 'Investors'), L('Banques', 'Banks'), 'ONG', 'Startups', L('Marques', 'Brands'), L('Promoteurs immobiliers', 'Real estate developers'), L('Hôtels', 'Hotels'), L('Particuliers premium', 'Premium private clients')];
+  const sectors = [L('Finance & Banque', 'Finance & Banking'), L('Assurance', 'Insurance'), L('Technologie', 'Technology'), L('Intelligence Artificielle', 'Artificial Intelligence'), L('Télécommunications', 'Telecoms'), L('Énergie', 'Energy'), 'Oil & Gas', L('Mines', 'Mining'), L('Agriculture', 'Agriculture'), L('Agro-industrie', 'Agribusiness'), L('Industrie', 'Industry'), L('Construction', 'Construction'), L('Infrastructure', 'Infrastructure'), L('Immobilier', 'Real estate'), L('Transport', 'Transport'), L('Logistique', 'Logistics'), L('Tourisme', 'Tourism'), L('Hôtellerie', 'Hospitality'), L('Santé', 'Healthcare'), L('Commerce', 'Trade'), L('Distribution', 'Retail'), 'Supply Chain', L('Éducation', 'Education'), L('Environnement', 'Environment'), L('Industries créatives', 'Creative industries')];
 
   const stats = [
-    { number: '+50', label: language === 'fr' ? 'Événements réalisés' : 'Events delivered' },
-    { number: '15+', label: language === 'fr' ? "Années d'expérience" : 'Years of experience' },
-    { number: '250+', label: language === 'fr' ? 'Partenaires' : 'Partners' },
-    { number: '1,000+', label: language === 'fr' ? 'Exposants' : 'Exhibitors' },
+    ['+50', L('Événements réalisés', 'Events delivered')],
+    ['15+', L("Années d'expérience", 'Years of experience')],
+    ['250+', L('Partenaires', 'Partners')],
+    ['1,000+', L('Exposants', 'Exhibitors')],
   ];
-
-  const portfolioItems = [
-    { image: exnessConsultationImage, title: 'Stand Exness', category: 'Corporate' },
-    { image: weddingArchCoupleImage, title: 'Mariage de prestige', category: 'Mariage' },
-    { image: weddingFireworksImage, title: 'Final spectaculaire', category: 'VIP' },
-  ];
-
-  const heroSlides = [
-    {
-      image: exnessConsultationImage,
-      icon: Building2,
-      label: t('services.corporate.title'),
-      title: 'Événements Corporate',
-      description: 'Conférences, séminaires et lancements de produits conçus pour renforcer votre image et marquer vos invités.',
-    },
-    {
-      image: weddingArchCoupleImage,
-      icon: Crown,
-      label: t('services.weddings.title'),
-      title: 'Mariages & Célébrations',
-      description: 'Des célébrations raffinées, profondément humaines, orchestrées avec élégance et précision jusque dans le moindre détail.',
-    },
-    {
-      image: weddingFireworksImage,
-      icon: Sparkles,
-      label: t('services.vip.title'),
-      title: 'Événements VIP',
-      description: 'Réceptions privées, galas et soirées exclusives avec un service discret, fluide et irréprochable.',
-    },
-    {
-      image: brandTeamImage,
-      icon: Megaphone,
-      label: t('services.fairs.title'),
-      title: 'Salons & Foires',
-      description: 'Des espaces événementiels premium pensés pour attirer, engager et convertir votre audience professionnelle.',
-    },
-    {
-      image: promoteInformationTeamImage,
-      icon: Users,
-      label: t('services.staffing.title'),
-      title: 'Personnel Événementiel',
-      description: 'Hôtesses, stewards, mannequins et équipes qualifiées pour représenter votre marque avec distinction.',
-    },
-  ];
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setActiveHeroSlide((current) => (current + 1) % heroSlides.length);
-    }, 8000);
-
-    return () => window.clearInterval(timer);
-  }, [heroSlides.length]);
-
-  const currentHeroSlide = heroSlides[activeHeroSlide];
-  const HeroIcon = currentHeroSlide.icon;
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-background pt-32 md:pt-40 pb-16 md:pb-24">
-        <div className="absolute inset-y-0 right-0 hidden w-[38%] bg-charcoal lg:block" aria-hidden />
-        <div className="relative container-luxury px-6 grid gap-12 lg:grid-cols-12 lg:items-center">
-          <div className="lg:col-span-6 xl:col-span-5 order-2 lg:order-1">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={currentHeroSlide.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -12 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-              >
-                <span className="eyebrow mb-6">
-                  <HeroIcon className="h-4 w-4" />
-                  {currentHeroSlide.label}
-                </span>
-                <h1 className="text-display font-serif font-medium text-foreground mt-6 mb-6">
-                  {currentHeroSlide.title.split(' ').slice(0, 1).join(' ')}{' '}
-                  <em className="italic text-primary">
-                    {currentHeroSlide.title.split(' ').slice(1).join(' ')}
-                  </em>
-                </h1>
-                <p className="text-lg md:text-xl text-muted-foreground max-w-xl mb-10 leading-relaxed">
-                  {currentHeroSlide.description}
-                </p>
-                <Link to="/services">
-                  <Button size="lg" className="text-base px-8 py-6 hover-gold-glow">
-                    {t('hero.cta.discover')}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-              </motion.div>
-            </AnimatePresence>
+      <Seo title={L("CHANY EVENT'S | Agence Business, Corporate & Institutional Events en Afrique", "CHANY EVENT'S | Business, Corporate & Institutional Event Agency in Africa")}
+        description={L("Agence événementielle au Cameroun : salons professionnels, conférences, B2B, missions économiques, événements corporate et institutionnels en Afrique centrale, de l'Ouest et de l'Est.", 'Event agency in Cameroon: trade shows, conferences, B2B matching, trade missions, corporate and institutional events across Central, West and East Africa.')} />
 
-            <div className="mt-12 flex items-center gap-4">
-              <span className="font-serif text-sm text-muted-foreground tabular-nums">
-                {String(activeHeroSlide + 1).padStart(2, '0')} / {String(heroSlides.length).padStart(2, '0')}
-              </span>
-              <div className="flex gap-2">
-                {heroSlides.map((slide, index) => (
-                  <button
-                    key={slide.title}
-                    type="button"
-                    onClick={() => setActiveHeroSlide(index)}
-                    aria-label={`${index + 1}. ${slide.label}`}
-                    aria-current={activeHeroSlide === index}
-                    className={`h-1 rounded-full transition-all duration-300 ${
-                      activeHeroSlide === index ? 'w-10 bg-primary' : 'w-5 bg-foreground/20 hover:bg-foreground/40'
-                    }`}
-                  />
-                ))}
-              </div>
+      {/* Hero */}
+      <section className="relative min-h-[92vh] flex items-end overflow-hidden">
+        <img src={conference} alt={L('Conférence professionnelle', 'Business conference')} className="absolute inset-0 w-full h-full object-cover" width={1600} height={1008} />
+        <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/40 to-ink/10" />
+        <div className="relative container-luxury px-6 md:px-12 pb-16 md:pb-24 pt-40 w-full">
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-4xl">
+            <p className="text-xs md:text-sm font-semibold tracking-[0.25em] uppercase text-cream/80 mb-6">Business • Corporate • Institutional • Signature Events</p>
+            <h1 className="text-display font-serif text-cream mb-6">We design events that move <em>business</em> forward.</h1>
+            <p className="text-lead text-cream/85 max-w-2xl mb-4">
+              {L('Foires, salons, conférences, missions économiques, rencontres B2B, événements corporate, institutionnels et signature events.', 'Trade fairs, exhibitions, conferences, trade missions, B2B meetings, corporate, institutional and signature events.')}
+            </p>
+            <p className="text-sm font-semibold tracking-[0.2em] uppercase text-cream mb-10">Central Africa • West Africa • East Africa</p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link to="/contact#projet" className="inline-flex items-center justify-center px-8 py-4 bg-primary text-primary-foreground rounded-sm font-semibold hover-gold-glow">
+                {L('Démarrer un projet', 'Start a project')} <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+              <a href="#expertises" className="inline-flex items-center justify-center px-8 py-4 border border-cream/60 text-cream rounded-sm font-semibold hover:bg-cream/10 transition-colors">
+                {L('Découvrir nos expertises', 'Explore our expertise')}
+              </a>
             </div>
-          </div>
-
-          <div className="lg:col-span-6 xl:col-span-7 order-1 lg:order-2">
-            <div className="frame-offset relative z-0 rounded-md">
-              <div className="relative aspect-[4/3] lg:aspect-[5/4] overflow-hidden rounded-md shadow-[var(--shadow-elegant)] bg-muted">
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={currentHeroSlide.title}
-                    src={currentHeroSlide.image}
-                    alt={currentHeroSlide.title}
-                    fetchPriority="high"
-                    className="absolute inset-0 w-full h-full object-cover"
-                    initial={{ opacity: 0, scale: 1.03 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.9, ease: 'easeOut' }}
-                  />
-                </AnimatePresence>
-              </div>
-              <div className="absolute -bottom-6 left-6 hidden sm:flex items-center gap-3 rounded-md bg-card px-5 py-4 shadow-[var(--shadow-elegant)]">
-                <HeroIcon className="h-5 w-5 text-primary" />
-                <span className="text-sm font-semibold text-foreground">{currentHeroSlide.label}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Event — In Vino Italia Douala */}
-      <section className="section-padding bg-charcoal border-y border-border relative overflow-hidden">
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-gradient-gold" />
-        </div>
-        <div className="container-luxury relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="relative mx-auto w-full max-w-md"
-            >
-              <div className="rounded-sm overflow-hidden border border-primary/30 shadow-2xl">
-                <img
-                  src={invinoPosterAsset.url}
-                  alt="In Vino Italia Douala — 1er salon du vin italien au Cameroun"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-              <div className="absolute -top-4 -right-4 bg-primary px-5 py-3 rounded-sm shadow-lg">
-                <p className="text-primary-foreground text-sm font-semibold tracking-wider uppercase">
-                  {language === 'fr' ? 'Événement à la une' : 'Featured event'}
-                </p>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">
-                {language === 'fr' ? 'Nous organisons' : 'We are organizing'}
-              </span>
-              <h2 className="text-section font-serif font-semibold text-foreground mb-6">
-                In Vino Italia Douala
-                <span className="block text-gradient-gold text-2xl md:text-3xl mt-3">
-                  {language === 'fr'
-                    ? '1er salon du vin italien au Cameroun'
-                    : 'The first Italian wine fair in Cameroon'}
-                </span>
-              </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
-                {language === 'fr'
-                  ? "CHANY EVENT'S accompagne l'organisation du tout premier salon des vins italiens en Afrique Centrale. Trois journées d'exception pour vivre l'Italie à Douala : vins d'exception, gastronomie, masterclasses, show-cooking, rencontres privilégiées et business club B2B, dans le cadre prestigieux du Best Western Plus Soaha Hotel."
-                  : "CHANY EVENT'S is supporting the organization of the very first Italian wine fair in Central Africa. Three exceptional days to experience Italy in Douala: exceptional wines, gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaha Hotel."}
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 mb-8">
-                <div className="flex items-center gap-3 text-foreground">
-                  <CalendarDays className="w-5 h-5 text-primary" />
-                  <span className="font-medium">
-                    26 – 28 {language === 'fr' ? 'novembre' : 'November'} 2026
-                  </span>
-                </div>
-                <div className="flex items-center gap-3 text-foreground">
-                  <MapPin className="w-5 h-5 text-primary" />
-                  <span className="font-medium">Best Western Plus Soaha Hotel, Douala</span>
-                </div>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="https://www.invinodouala.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button
-                    size="lg"
-                    className="bg-gradient-gold text-primary-foreground hover-gold-glow"
-                  >
-                    {language === 'fr' ? 'Découvrir le salon' : 'Discover the fair'}
-                    <ArrowRight className="ml-2 w-5 h-5" />
-                  </Button>
-                </a>
-                <Link to="/careers">
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-primary text-primary hover:bg-primary/10"
-                  >
-                    {language === 'fr' ? 'Rejoindre l’équipe du salon' : 'Join the event team'}
-                  </Button>
-                </Link>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-20 bg-charcoal border-y border-border">
-        <div className="container-luxury px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {stats.map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center"
-              >
-                <span className="block font-serif text-4xl md:text-5xl font-bold text-gradient-gold mb-2">
-                  {stat.number
-                    .split('+')
-                    .flatMap((part, i) => (i === 0 ? [part] : ['+', part]))
-                    .map((part, i) =>
-                      part === '+' ? (
-                        <span key={i} className="font-sans">
-                          +
-                        </span>
-                      ) : (
-                        <span key={i}>{part}</span>
-                      )
-                    )}
-                </span>
-                <span className="text-muted-foreground text-sm md:text-base">{stat.label}</span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Services Preview */}
-      <section className="section-padding">
-        <div className="container-luxury">
-          <SectionHeading
-            subtitle={t('services.subtitle')}
-            title={t('services.title')}
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group p-8 bg-card border border-border rounded-sm hover:border-primary/50 transition-all duration-300"
-              >
-                <service.icon className="w-12 h-12 text-primary mb-6" />
-                <h3 className="font-serif text-2xl font-semibold text-foreground mb-4">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {service.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Link to="/services">
-              <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10">
-                Voir tous nos services
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
           </motion.div>
         </div>
       </section>
 
-      {/* Portfolio Preview */}
+      {/* Promise */}
+      <section className="section-padding">
+        <div className="container-luxury grid lg:grid-cols-12 gap-10">
+          <Reveal className="lg:col-span-7">
+            <span className="eyebrow mb-6">From Strategy to Execution</span>
+            <h2 className="text-display font-serif text-foreground mt-6">{L('De la réflexion à ', 'From strategy to ')}<em>{L("l'exécution.", 'execution.')}</em></h2>
+          </Reveal>
+          <Reveal delay={0.1} className="lg:col-span-5 self-end">
+            <p className="text-lead text-muted-foreground mb-6">{L("CHANY EVENT'S peut prendre en charge l'intégralité de votre projet événementiel ou uniquement les étapes pour lesquelles vous avez besoin de nous.", "CHANY EVENT'S can manage your entire event project, or only the stages where you need us.")}</p>
+            <p className="font-serif text-2xl text-primary">{L('Confiez-nous tout. Ou simplement la partie qui vous manque.', 'Trust us with everything. Or just the part you are missing.')}</p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Process */}
       <section className="section-padding bg-charcoal">
         <div className="container-luxury">
-          <SectionHeading
-            subtitle={t('portfolio.subtitle')}
-            title={t('portfolio.title')}
-          />
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {portfolioItems.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="group relative aspect-[4/5] overflow-hidden rounded-sm"
-              >
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/20 to-transparent opacity-90 transition-opacity" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <span className="text-champagne text-xs font-semibold tracking-[0.2em] uppercase">
-                    {item.category}
-                  </span>
-                  <h3 className="font-serif text-2xl text-cream mt-2">{item.title}</h3>
-                </div>
-              </motion.div>
+          <Reveal><h2 className="text-section font-serif text-foreground mb-12">{L('Notre méthode en 7 étapes', 'Our 7-step method')}</h2></Reveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-7 gap-px bg-border border border-border rounded-sm overflow-hidden">
+            {process.map(([n, d], i) => (
+              <Reveal key={n} delay={i * 0.07} className="bg-background p-6 h-full">
+                <span className="font-serif text-4xl text-primary/40">{String(i + 1).padStart(2, '0')}</span>
+                <h3 className="font-serif text-2xl text-foreground mt-3 mb-2">{n}</h3>
+                <p className="text-sm text-muted-foreground">{d}</p>
+              </Reveal>
             ))}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-center mt-12"
-          >
-            <Link to="/portfolio">
-              <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary/10">
-                Découvrir nos réalisations
-                <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
-            </Link>
-          </motion.div>
         </div>
       </section>
 
-      {/* Values Section */}
-      <section className="section-padding">
+      {/* Expertises */}
+      <section id="expertises" className="section-padding scroll-mt-24">
         <div className="container-luxury">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">
-                {t('about.values.title')}
-              </span>
-              <h2 className="text-section font-serif font-semibold text-foreground mb-8">
-                Ce qui nous distingue
-              </h2>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                Chaque événement est une œuvre unique, façonnée par notre passion pour l'excellence et notre engagement envers votre satisfaction.
-              </p>
-              <div className="grid grid-cols-2 gap-6">
-                {[
-                  { icon: Star, label: t('about.values.elegance') },
-                  { icon: Crown, label: t('about.values.excellence') },
-                  { icon: Users, label: t('about.values.human') },
-                  { icon: Sparkles, label: t('about.values.detail') },
-                ].map((value, index) => (
-                  <div key={value.label} className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <value.icon className="w-5 h-5 text-primary" />
-                    </div>
-                    <span className="text-foreground font-medium">{value.label}</span>
+          <Reveal className="mb-12"><span className="eyebrow">{L('Nos expertises', 'Our expertise')}</span>
+            <h2 className="text-section font-serif text-foreground mt-6 max-w-3xl">{L('Huit familles d’événements, une même exigence', 'Eight event families, one standard')}</h2></Reveal>
+          <div className="grid md:grid-cols-2 gap-x-12">
+            {expertises.map((e, i) => (
+              <Reveal key={e.t} delay={(i % 2) * 0.08}>
+                <Link to={e.to} className="group flex gap-6 py-7 border-t border-border">
+                  <span className="text-xs font-semibold text-primary tracking-widest pt-2">{String(i + 1).padStart(2, '0')}</span>
+                  <div className="flex-1">
+                    <h3 className="font-serif text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors">{e.t}</h3>
+                    <p className="text-muted-foreground text-sm mt-2">{e.i}</p>
                   </div>
-                ))}
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="relative"
-            >
-              <div className="aspect-square rounded-sm overflow-hidden">
-                <img
-                  src={promoteInformationTeamImage}
-                  alt="Excellence événementielle"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="absolute -bottom-6 -left-6 bg-primary p-6 rounded-sm">
-                <p className="font-serif text-2xl text-primary-foreground font-semibold">15+</p>
-                <p className="text-primary-foreground/80 text-sm">Années d'excellence</p>
-              </div>
-            </motion.div>
+                  <ArrowRight className="w-5 h-5 text-primary mt-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                </Link>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="section-padding bg-charcoal relative overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-gold" />
+      {/* Business events value */}
+      <section className="section-padding bg-charcoal">
+        <div className="container-luxury grid lg:grid-cols-12 gap-12 items-center">
+          <Reveal className="lg:col-span-5"><img src={b2b} alt="Business matching" loading="lazy" className="w-full aspect-[4/5] object-cover rounded-sm" /></Reveal>
+          <Reveal delay={0.1} className="lg:col-span-7">
+            <span className="eyebrow mb-6">Business Events</span>
+            <h2 className="text-section font-serif text-foreground my-6">{L('Un événement doit produire des résultats', 'An event must produce results')}</h2>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 font-serif text-2xl text-foreground/80 mb-8">
+              {[L('connexions', 'connections'), L('opportunités', 'opportunities'), 'leads', L('contrats', 'contracts'), L('visibilité', 'visibility'), L('investissements', 'investments'), L('partenariats', 'partnerships'), L('influence', 'influence')].map((w) => <span key={w}><em>{w}</em></span>)}
+            </div>
+            <p className="text-lg text-muted-foreground border-l-2 border-primary pl-6">{L("Nous ne mesurons pas seulement le succès d'un événement au nombre de participants, mais aux rencontres, aux opportunités et aux résultats qu'il génère.", "We don't measure an event's success by attendance alone, but by the meetings, opportunities and results it generates.")}</p>
+            <Link to="/business-events" className="inline-flex items-center mt-8 text-primary font-semibold">{L('Découvrir Business Events', 'Explore Business Events')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
+          </Reveal>
         </div>
-        <div className="container-luxury relative z-10">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <h2 className="text-section font-serif font-semibold text-foreground mb-6">
-              {t('cta.title')}
-            </h2>
-            <p className="text-xl text-muted-foreground mb-10">
-              {t('cta.description')}
-            </p>
-            <Link to="/quote">
-              <Button
-                size="lg"
-                className="bg-gradient-gold text-primary-foreground hover-gold-glow text-lg px-10 py-6"
-              >
-                {t('cta.button')}
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-          </motion.div>
+      </section>
+
+      {/* Africa */}
+      <section className="section-padding">
+        <div className="container-luxury">
+          <Reveal className="text-center max-w-3xl mx-auto mb-14">
+            <span className="eyebrow">Africa Event Partner</span>
+            <h2 className="text-section font-serif text-foreground mt-6 mb-5">Central Africa • West Africa • East Africa</h2>
+            <p className="text-muted-foreground text-lg">{L("Basée au Cameroun, CHANY EVENT'S accompagne ses clients sur plusieurs marchés africains grâce à sa capacité d'intervention, son réseau de partenaires locaux et une coordination régionale multi-pays.", "Based in Cameroon, CHANY EVENT'S supports clients across several African markets through its delivery capacity, network of local partners and multi-country regional coordination.")}</p>
+          </Reveal>
+          <div className="grid md:grid-cols-3 gap-6">
+            {zones.map((z, i) => (
+              <Reveal key={z.n} delay={i * 0.1} className="p-8 border border-border rounded-sm bg-card h-full">
+                <span className="block w-10 h-10 rounded-full bg-primary/10 border border-primary/30 mb-6" style={{ opacity: 1 - i * 0.2 }} />
+                <h3 className="font-serif text-3xl text-foreground mb-4">{z.n}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">{z.c}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
+      </section>
+
+      {/* Who we work with */}
+      <section className="section-padding bg-charcoal">
+        <div className="container-luxury grid lg:grid-cols-2 gap-14">
+          <Reveal>
+            <span className="eyebrow">Who we work with</span>
+            <h2 className="text-section font-serif text-foreground mt-6 mb-8">{L('Nos clients', 'Our clients')}</h2>
+            <div className="flex flex-wrap gap-2">{clients.map((c) => <span key={c} className="px-3 py-1.5 text-sm border border-border rounded-full bg-background">{c}</span>)}</div>
+          </Reveal>
+          <Reveal delay={0.1} className="bg-background p-8 md:p-10 rounded-sm border border-border">
+            <h3 className="font-serif text-3xl text-foreground mb-4">International companies entering Africa</h3>
+            <p className="text-muted-foreground mb-6">{L("Nous sommes le partenaire local des entreprises étrangères qui souhaitent :", 'We are the local partner for foreign companies looking to:')}</p>
+            <ul className="space-y-3 text-foreground">
+              {[L('organiser une conférence', 'host a conference'), L('lancer un produit', 'launch a product'), L('faire une mission commerciale', 'run a trade mission'), L('rencontrer des distributeurs', 'meet distributors'), L('organiser un roadshow', 'run a roadshow'), L('participer à un salon', 'exhibit at a trade show')].map((x) => (
+                <li key={x} className="flex items-center gap-3"><span className="h-px w-6 bg-primary" />{x}</li>
+              ))}
+            </ul>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Sectors */}
+      <section className="section-padding">
+        <div className="container-luxury">
+          <Reveal><h2 className="text-section font-serif text-foreground mb-10">{L('Secteurs', 'Sectors')}</h2></Reveal>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 border-t border-l border-border">
+            {sectors.map((s) => <div key={s} className="border-r border-b border-border px-4 py-5 text-sm font-medium text-foreground/80 hover:bg-charcoal hover:text-primary transition-colors">{s}</div>)}
+          </div>
+        </div>
+      </section>
+
+      {/* Stats */}
+      <section className="py-20 bg-charcoal border-y border-border">
+        <div className="container-luxury px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
+          {stats.map(([n, l], i) => (
+            <Reveal key={l} delay={i * 0.1} className="text-center">
+              <span className="block font-serif text-5xl md:text-6xl font-semibold text-primary mb-2">{n.split('+').flatMap((p, j) => (j === 0 ? [p] : ['+', p])).map((p, j) => p === '+' ? <span key={j} className="font-sans font-light">+</span> : <span key={j}>{p}</span>)}</span>
+              <span className="text-muted-foreground text-sm uppercase tracking-widest">{l}</span>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      {/* Featured: In Vino */}
+      <section className="section-padding">
+        <div className="container-luxury grid lg:grid-cols-2 gap-12 items-center">
+          <Reveal className="relative mx-auto w-full max-w-md">
+            <img src={invinoPosterAsset.url} alt="In Vino Italia Douala" loading="lazy" className="w-full h-auto rounded-sm shadow-[var(--shadow-elegant)]" />
+            <span className="absolute -top-4 -right-4 bg-primary text-primary-foreground px-5 py-3 rounded-sm text-sm font-semibold uppercase tracking-wider">{L('Événement à la une', 'Featured event')}</span>
+          </Reveal>
+          <Reveal delay={0.1}>
+            <span className="eyebrow mb-4">{L('Nous organisons', 'We are organizing')}</span>
+            <h2 className="text-section font-serif text-foreground my-5">In Vino Italia Douala<span className="block text-2xl md:text-3xl mt-3 text-primary"><em>{L('1er salon du vin italien au Cameroun', 'The first Italian wine fair in Cameroon')}</em></span></h2>
+            <p className="text-muted-foreground text-lg mb-6">{L("CHANY EVENT'S accompagne l'organisation du tout premier salon des vins italiens en Afrique Centrale. Trois journées d'exception pour vivre l'Italie à Douala : vins d'exception, gastronomie, masterclasses, show-cooking, rencontres privilégiées et business club B2B, dans le cadre prestigieux du Best Western Plus Soaha Hotel.", "CHANY EVENT'S is supporting the organization of the very first Italian wine fair in Central Africa. Three exceptional days to experience Italy in Douala: exceptional wines, gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaha Hotel.")}</p>
+            <div className="flex flex-col sm:flex-row gap-4 mb-8 text-foreground">
+              <span className="flex items-center gap-2"><CalendarDays className="w-5 h-5 text-primary" />26 – 28 {L('novembre', 'November')} 2026</span>
+              <span className="flex items-center gap-2"><MapPin className="w-5 h-5 text-primary" />Best Western Plus Soaha Hotel, Douala</span>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a href="https://www.invinodouala.com" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center px-7 py-3.5 bg-primary text-primary-foreground rounded-sm font-semibold hover-gold-glow">{L('Découvrir le salon', 'Discover the fair')} <ArrowRight className="ml-2 w-4 h-4" /></a>
+              <Link to="/careers" className="inline-flex items-center justify-center px-7 py-3.5 border border-primary text-primary rounded-sm font-semibold hover:bg-primary/10">{L("Rejoindre l'équipe du salon", 'Join the event team')}</Link>
+            </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Weddings band */}
+      <section className="relative py-28 md:py-36 overflow-hidden">
+        <img src={weddingArch} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-ink/55" />
+        <Reveal className="relative container-luxury px-6 text-center max-w-3xl">
+          <span className="text-xs font-semibold tracking-[0.25em] uppercase text-cream/80">Weddings & Signature Events</span>
+          <h2 className="text-section font-serif text-cream mt-6 mb-8">{L('Vos moments personnels méritent la ', 'Your personal moments deserve the ')}<em>{L('même exigence.', 'same standard.')}</em></h2>
+          <Link to="/weddings" className="inline-flex items-center px-8 py-4 border border-cream/70 text-cream rounded-sm font-semibold hover:bg-cream/10">{L('Découvrir', 'Discover')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
+        </Reveal>
+      </section>
+
+      {/* Final CTA */}
+      <section className="section-padding">
+        <div className="container-luxury grid md:grid-cols-3 gap-4 mb-14">
+          {[tradeshow, delegation, conference].map((img, i) => <img key={i} src={img} alt="" loading="lazy" className={`w-full object-cover rounded-sm ${i === 1 ? 'aspect-[3/4] md:-mt-8' : 'aspect-[4/5]'}`} />)}
+        </div>
+        <Reveal className="container-luxury text-center max-w-3xl">
+          <h2 className="text-section font-serif text-foreground mb-5">Tell us about your project</h2>
+          <p className="text-lead text-muted-foreground mb-8">{L('Salon, conférence, mission, délégation ou célébration : parlons-en.', 'Trade show, conference, mission, delegation or celebration: let’s talk.')}</p>
+          <Link to="/contact#projet" className="inline-flex items-center px-8 py-4 bg-primary text-primary-foreground rounded-sm font-semibold hover-gold-glow">{L('Démarrer un projet', 'Start a project')} <ArrowRight className="ml-2 w-5 h-5" /></Link>
+        </Reveal>
       </section>
     </Layout>
   );
 };
-
 export default Index;

@@ -1,258 +1,137 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Phone, Mail, Clock, MessageCircle, Calendar, Send, CheckCircle2 } from 'lucide-react';
-import { useLanguage } from '@/contexts/LanguageContext';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { MapPin, Phone, Mail, MessageCircle, CheckCircle2 } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
-import SectionHeading from '@/components/common/SectionHeading';
-import { Button } from '@/components/ui/button';
+import { useL, Seo, Reveal } from '@/components/common/Blocks';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
+const NEEDS = ['Full Event Management', 'Strategy', 'Planning', 'Production', 'Logistics', 'B2B', 'Exhibition', 'Delegation', 'Communication', 'Other'];
+
 const Contact: React.FC = () => {
-  const { t } = useLanguage();
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+  const L = useL();
+  const location = useLocation();
+  const [sent, setSent] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [needs, setNeeds] = useState<string[]>([]);
+  const [f, setF] = useState({ name: '', organization: '', job_title: '', email: '', phone: '', country: '', city: '', event_type: '', event_date: '', guests: '', budget: '', services: '', details: '' });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  useEffect(() => {
+    if (location.hash === '#projet') setTimeout(() => document.getElementById('projet')?.scrollIntoView({ behavior: 'smooth' }), 100);
+  }, [location.hash]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const set = (k: keyof typeof f) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => setF({ ...f, [k]: e.target.value });
+  const cut = (s: string, n = 200) => s.trim().slice(0, n) || null;
+
+  const submit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const name = formData.name.trim(), email = formData.email.trim(), message = formData.message.trim();
-    if (!name || !/^\S+@\S+\.\S+$/.test(email) || !message) {
-      toast({ title: 'Veuillez remplir tous les champs correctement.', variant: 'destructive' });
+    if (!f.name.trim() || !/^\S+@\S+\.\S+$/.test(f.email.trim())) {
+      toast({ title: L('Veuillez indiquer votre nom et un email valide.', 'Please enter your name and a valid email.'), variant: 'destructive' });
       return;
     }
-    const { error } = await supabase.from('contact_messages').insert({
-      name: name.slice(0, 150), email: email.slice(0, 255), message: message.slice(0, 4000),
+    setBusy(true);
+    const details = [f.services.trim() && `${L('Services recherchés', 'Services sought')}: ${f.services.trim()}`, f.details.trim()].filter(Boolean).join('\n\n');
+    const { error } = await supabase.from('quote_requests').insert({
+      name: f.name.trim().slice(0, 150), email: f.email.trim().slice(0, 255), phone: cut(f.phone, 40),
+      organization: cut(f.organization), company: cut(f.organization), job_title: cut(f.job_title), country: cut(f.country, 100), city: cut(f.city, 100),
+      location: [f.city.trim(), f.country.trim()].filter(Boolean).join(', ') || null,
+      event_type: cut(f.event_type), event_date: cut(f.event_date, 60), guests: cut(f.guests, 60), budget: cut(f.budget, 100),
+      needs, details: details.slice(0, 5000) || null,
     });
-    if (error) {
-      toast({ title: "L'envoi a échoué, veuillez réessayer.", variant: 'destructive' });
-      return;
-    }
-    setIsSubmitted(true);
+    setBusy(false);
+    if (error) { toast({ title: L("L'envoi a échoué, veuillez réessayer.", 'Sending failed, please try again.'), variant: 'destructive' }); return; }
+    setSent(true);
   };
 
-  const locations = [
-    {
-      city: 'Yaoundé',
-      address: 'Centre-ville, Rue Joseph Mballa Eloumden',
-      phone: '+237 675 788 550',
-    },
-  ];
-
-  const whatsappNumber = '237675788550';
-  const whatsappMessage = encodeURIComponent('Bonjour, je souhaite prendre rendez-vous pour discuter de mon projet événementiel.');
+  const field = (k: keyof typeof f, label: string, type = 'text', req = false) => (
+    <div className="space-y-2">
+      <Label htmlFor={k}>{label}{req && ' *'}</Label>
+      <Input id={k} type={type} required={req} value={f[k]} onChange={set(k)} className="bg-background" />
+    </div>
+  );
 
   return (
     <Layout>
-      {/* Hero Section */}
-      <section className="pt-40 md:pt-44 pb-12 bg-gradient-to-b from-charcoal to-background">
-        <div className="container-luxury px-6">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            className="text-center max-w-3xl mx-auto"
-          >
-            <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-6 block">
-              {t('contact.subtitle')}
-            </span>
-            <h1 className="text-display font-serif font-semibold text-foreground mb-6">
-              {t('contact.title')}
-            </h1>
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              {t('contact.description')}
-            </p>
-          </motion.div>
-        </div>
+      <Seo title={L("Contact — Démarrer un projet événementiel | CHANY EVENT'S", "Contact — Start an event project | CHANY EVENT'S")}
+        description={L("Parlez-nous de votre salon, conférence, mission économique, événement corporate ou mariage. CHANY EVENT'S, Yaoundé, Cameroun.", "Tell us about your trade show, conference, trade mission, corporate event or wedding. CHANY EVENT'S, Yaoundé, Cameroon.")} />
+      <section className="pt-36 md:pt-44 pb-12 bg-gradient-to-b from-charcoal to-background">
+        <Reveal className="container-luxury px-6 max-w-4xl">
+          <span className="eyebrow mb-6">{L('Contacts', 'Contact')}</span>
+          <h1 className="text-display font-serif text-foreground mt-6 mb-6">Tell us about your <em>project</em></h1>
+          <p className="text-lead text-muted-foreground max-w-2xl">{L('Confiez-nous tout, ou simplement la partie qui vous manque. Nous revenons vers vous rapidement.', 'Trust us with everything, or just the part you are missing. We will get back to you quickly.')}</p>
+        </Reveal>
       </section>
 
-      {/* Quick Actions */}
-      <section className="py-12 border-b border-border">
-        <div className="container-luxury px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-            <motion.a
-              href={`https://wa.me/${whatsappNumber}?text=${whatsappMessage}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="flex items-center justify-center gap-3 p-6 bg-[#25D366] rounded-sm text-white font-medium hover:opacity-90 transition-opacity"
-            >
-              <MessageCircle className="w-6 h-6" />
-              {t('contact.whatsapp')}
-            </motion.a>
+      <section className="section-padding pt-8">
+        <div className="container-luxury grid lg:grid-cols-12 gap-12">
+          <aside className="lg:col-span-4 space-y-8">
+            <div className="space-y-4">
+              <p className="flex gap-3 text-foreground"><MapPin className="w-5 h-5 text-primary shrink-0" />Yaoundé, {L('Centre-ville, Rue Joseph Mballa Eloumden', 'City centre, Rue Joseph Mballa Eloumden')}, Cameroun</p>
+              <a href="tel:+237675788550" className="flex gap-3 text-foreground hover:text-primary"><Phone className="w-5 h-5 text-primary" />+237 675 788 550</a>
+              <a href="mailto:contacts@chanyevents.com" className="flex gap-3 text-foreground hover:text-primary"><Mail className="w-5 h-5 text-primary" />contacts@chanyevents.com</a>
+            </div>
+            <a href={`https://wa.me/237675788550?text=${encodeURIComponent(L('Bonjour, je souhaite discuter de mon projet événementiel.', 'Hello, I would like to discuss my event project.'))}`} target="_blank" rel="noopener noreferrer"
+              className="flex items-center justify-center gap-3 p-5 border border-primary text-primary rounded-sm font-semibold hover:bg-primary/10">
+              <MessageCircle className="w-5 h-5" />{L('Écrire sur WhatsApp', 'Message us on WhatsApp')}
+            </a>
+            <p className="text-sm text-muted-foreground">Central Africa • West Africa • East Africa</p>
+          </aside>
 
-            <motion.a
-              href={`https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Bonjour, je souhaite prendre rendez-vous.')}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="flex items-center justify-center gap-3 p-6 bg-gradient-gold rounded-sm text-primary-foreground font-medium hover-gold-glow"
-            >
-              <Calendar className="w-6 h-6" />
-              {t('contact.appointment')}
-            </motion.a>
-          </div>
-        </div>
-      </section>
-
-      {/* Main Content */}
-      <section className="section-padding">
-        <div className="container-luxury">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-section font-serif font-semibold text-foreground mb-8">
-                Envoyez-nous un message
-              </h2>
-
-              {isSubmitted ? (
-                <div className="text-center py-12">
-                  <div className="w-16 h-16 mx-auto mb-6 rounded-full bg-primary/10 flex items-center justify-center">
-                    <CheckCircle2 className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="font-serif text-2xl text-foreground mb-2">Message Envoyé !</h3>
-                  <p className="text-muted-foreground">
-                    Nous vous répondrons dans les plus brefs délais.
-                  </p>
-                </div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="space-y-2">
-                    <Label htmlFor="name" className="text-foreground">
-                      {t('contact.name')} *
-                    </Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="bg-muted border-border focus:border-primary"
-                      placeholder="Votre nom complet"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="email" className="text-foreground">
-                      {t('contact.email')} *
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      className="bg-muted border-border focus:border-primary"
-                      placeholder="votre@email.com"
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="text-foreground">
-                      {t('contact.message')} *
-                    </Label>
-                    <Textarea
-                      id="message"
-                      name="message"
-                      required
-                      rows={6}
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="bg-muted border-border focus:border-primary resize-none"
-                      placeholder="Comment pouvons-nous vous aider ?"
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    size="lg"
-                    className="w-full bg-gradient-gold text-primary-foreground hover-gold-glow"
-                  >
-                    {t('contact.send')}
-                    <Send className="ml-2 w-5 h-5" />
-                  </Button>
-                </form>
-              )}
-            </motion.div>
-
-            {/* Locations & Info */}
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-section font-serif font-semibold text-foreground mb-8">
-                {t('contact.locations')}
-              </h2>
-
-              <div className="space-y-8">
-                {locations.map((location) => (
-                  <div
-                    key={location.city}
-                    className="p-6 bg-card border border-border rounded-sm"
-                  >
-                    <h3 className="font-serif text-xl font-semibold text-foreground mb-4">
-                      {location.city}
-                    </h3>
-                    <div className="space-y-3">
-                      <div className="flex items-start gap-3 text-muted-foreground">
-                        <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                        <span>{location.address}</span>
-                      </div>
-                      <div className="flex items-center gap-3 text-muted-foreground">
-                        <Phone className="w-5 h-5 text-primary flex-shrink-0" />
-                        <span>{location.phone}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+          <div id="projet" className="lg:col-span-8 scroll-mt-28 bg-card border border-border rounded-sm p-6 md:p-10">
+            {sent ? (
+              <div className="text-center py-16">
+                <CheckCircle2 className="w-12 h-12 text-primary mx-auto mb-6" />
+                <h2 className="font-serif text-3xl text-foreground mb-3">{L('Merci, votre projet nous est parvenu', 'Thank you, we received your project')}</h2>
+                <p className="text-muted-foreground">{L('Nous vous répondrons dans les plus brefs délais.', 'We will reply as soon as possible.')}</p>
               </div>
-
-              {/* Additional Info */}
-              <div className="mt-8 p-6 bg-card border border-border rounded-sm">
-                <div className="flex items-center gap-3 mb-4">
-                  <Clock className="w-5 h-5 text-primary" />
-                  <span className="text-foreground font-medium">Horaires d'ouverture</span>
+            ) : (
+              <form onSubmit={submit} className="space-y-8">
+                <div className="grid md:grid-cols-2 gap-5">
+                  {field('name', L('Nom', 'Name'), 'text', true)}
+                  {field('organization', L('Organisation', 'Organisation'))}
+                  {field('job_title', L('Fonction', 'Job title'))}
+                  {field('email', 'Email', 'email', true)}
+                  {field('phone', L('Téléphone', 'Phone'), 'tel')}
+                  {field('country', L('Pays', 'Country'))}
+                  {field('city', L('Ville', 'City'))}
+                  <div className="space-y-2">
+                    <Label htmlFor="event_type">{L("Type d'événement", 'Event type')}</Label>
+                    <select id="event_type" value={f.event_type} onChange={set('event_type')} className="flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm">
+                      <option value="">—</option>
+                      {[L('Foire / Salon', 'Trade fair / Show'), L('Conférence / Sommet', 'Conference / Summit'), 'B2B / Business Matching', L('Mission économique', 'Trade mission'), 'Roadshow', L('Pavillon / Exposition', 'Pavilion / Exhibition'), 'Corporate', L('Institutionnel / Diplomatique', 'Institutional / Diplomatic'), L('Délégation', 'Delegation'), L('Mariage / Signature event', 'Wedding / Signature event'), L('Autre', 'Other')].map((o) => <option key={o}>{o}</option>)}
+                    </select>
+                  </div>
+                  {field('event_date', 'Date', 'date')}
+                  {field('guests', L('Nombre de participants', 'Number of attendees'))}
+                  {field('budget', L('Budget indicatif', 'Indicative budget'))}
+                  {field('services', L('Services recherchés', 'Services sought'))}
                 </div>
-                <p className="text-muted-foreground">
-                  Lundi - Vendredi : 8h00 - 18h00<br />
-                  Samedi : 9h00 - 14h00<br />
-                  Dimanche : Sur rendez-vous
-                </p>
-              </div>
-
-              <div className="mt-6 p-6 bg-card border border-border rounded-sm">
-                <div className="flex items-center gap-3 mb-4">
-                  <Mail className="w-5 h-5 text-primary" />
-                  <span className="text-foreground font-medium">Email</span>
+                <fieldset>
+                  <legend className="font-serif text-2xl text-foreground mb-4">{L('De quoi avez-vous besoin ?', 'What do you need?')}</legend>
+                  <div className="flex flex-wrap gap-2">
+                    {NEEDS.map((n) => {
+                      const on = needs.includes(n);
+                      return (
+                        <button type="button" key={n} onClick={() => setNeeds(on ? needs.filter((x) => x !== n) : [...needs, n])}
+                          className={`px-4 py-2 rounded-full border text-sm transition-colors ${on ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-foreground/80 hover:border-primary'}`}>
+                          {n}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </fieldset>
+                <div className="space-y-2">
+                  <Label htmlFor="details">Message</Label>
+                  <Textarea id="details" rows={5} value={f.details} onChange={set('details')} className="bg-background" />
                 </div>
-                <a
-                  href="mailto:contacts@chanyevents.com"
-                  className="text-primary hover:underline"
-                >
-                  contacts@chanyevents.com
-                </a>
-              </div>
-            </motion.div>
+                <button type="submit" disabled={busy} className="w-full md:w-auto px-10 py-4 bg-primary text-primary-foreground rounded-sm font-semibold hover-gold-glow disabled:opacity-60">
+                  {busy ? L('Envoi…', 'Sending…') : 'Tell us about your project'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </section>

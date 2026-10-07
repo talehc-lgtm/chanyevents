@@ -93,11 +93,11 @@ const Portfolio: React.FC = () => {
   ];
 
   const filters = [
-    { key: 'all', label: 'Tous' },
+    { key: 'all', label: language === 'fr' ? 'Tous' : 'All' },
     { key: 'corporate', label: 'Corporate' },
-    { key: 'wedding', label: 'Mariages' },
-    { key: 'vip', label: 'VIP' },
-    { key: 'fair', label: 'Salons' },
+    { key: 'wedding', label: 'Weddings' },
+    { key: 'vip', label: 'Signature & VIP' },
+    { key: 'fair', label: 'Trade Shows' },
   ];
 
   const filteredItems = activeFilter === 'all'

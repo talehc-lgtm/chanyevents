@@ -80,6 +80,10 @@ const Footer: React.FC = () => {
                   {t('nav.portfolio')}
                 </Link>
               </li>
+              <li><Link to="/business-events" className="text-muted-foreground hover:text-primary transition-colors">Business Events</Link></li>
+              <li><Link to="/corporate-institutional" className="text-muted-foreground hover:text-primary transition-colors">Corporate & Institutional</Link></li>
+              <li><Link to="/weddings" className="text-muted-foreground hover:text-primary transition-colors">Weddings & Signature Events</Link></li>
+              <li><Link to="/careers" className="text-muted-foreground hover:text-primary transition-colors">{t('nav.careers')}</Link></li>
               <li>
                 <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
                   {t('nav.contact')}

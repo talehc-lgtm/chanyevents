@@ -30,6 +30,7 @@ interface QuoteRequest {
   id: string; created_at: string; name: string; email: string; phone: string | null; company: string | null;
   event_type: string | null; event_date: string | null; guests: string | null; budget: string | null;
   location: string | null; details: string | null; status: string;
+  organization?: string | null; job_title?: string | null; country?: string | null; city?: string | null; needs?: string[] | null;
 }
 interface ContactMessage { id: string; created_at: string; name: string; email: string; message: string; status: string; }
 
@@ -243,6 +244,7 @@ const AdminApplications: React.FC = () => {
                         {([
                           [fr ? 'Type' : 'Type', q.event_type], [fr ? 'Date' : 'Date', q.event_date],
                           [fr ? 'Invités' : 'Guests', q.guests], ['Budget', q.budget], [fr ? 'Lieu' : 'Location', q.location],
+                          [fr ? 'Organisation' : 'Organisation', q.organization ?? q.company], [fr ? 'Fonction' : 'Job title', q.job_title], [fr ? 'Besoins' : 'Needs', q.needs?.length ? q.needs.join(', ') : null],
                         ] as const).filter(([, v]) => v).map(([k, v]) => (
                           <div key={k} className="p-3 bg-background border border-border rounded-sm">
                             <p className="text-primary text-xs uppercase tracking-wider mb-1">{k}</p>
