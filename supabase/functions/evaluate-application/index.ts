@@ -12,28 +12,47 @@ interface ApplicationPayload {
   city?: string | null
   experience?: string | null
   message?: string | null
+  age?: number | null
+  height_cm?: number | null
+  speaks_french?: boolean | null
+  speaks_english?: boolean | null
+  full_availability?: boolean | null
+  cv_path?: string | null
+  photo_paths?: string[] | null
 }
 
-// ---- Rule-based score (0-100) ----
+const isHostessRole = (p: string) => /h[ôo]tesse/i.test(p)
+
+function expHits(app: ApplicationPayload, keywords: string[]) {
+  const text = `${app.experience ?? ''} ${app.message ?? ''}`.toLowerCase()
+  return keywords.filter((k) => text.includes(k)).length
+}
+
+// ---- Rule-based score (0-100) aligned with the In Vino Italia Douala 2026 casting criteria ----
 function computeRuleScore(app: ApplicationPayload): number {
   let score = 0
-  // Completeness
-  if (app.email) score += 10
-  if (app.city) score += 10
-  if (app.experience && app.experience.trim().length > 10) score += 15
-  if (app.message && app.message.trim().length > 10) score += 5
-  if (app.phone && app.phone.replace(/\D/g, '').length >= 8) score += 10
-  // Douala residency (key requirement)
-  if (app.city && /douala/i.test(app.city)) score += 25
-  // Event experience keywords
-  const text = `${app.experience ?? ''} ${app.message ?? ''}`.toLowerCase()
-  const keywords = [
-    'événement', 'evenement', 'event', 'accueil', 'hôtesse', 'hotesse',
-    'salon', 'foire', 'logistique', 'coordination', 'protocole', 'stand',
-    'animation', 'organisation', 'vip', 'mariage', 'cérémonie',
-  ]
-  const hits = keywords.filter((k) => text.includes(k)).length
-  score += Math.min(hits * 5, 25)
+  const douala = !!app.city && /douala/i.test(app.city)
+  const hasExp = !!app.experience && app.experience.trim().length > 10
+  if (isHostessRole(app.position)) {
+    if (app.age != null && app.age >= 21 && app.age <= 30) score += 15
+    if (douala) score += 15
+    if (app.height_cm != null && app.height_cm >= 175) score += 15
+    if (app.speaks_french) score += 7
+    if (app.speaks_english) score += 8
+    if (app.full_availability) score += 10
+    if (hasExp) score += 6
+    score += Math.min(expHits(app, ['événement', 'evenement', 'event', 'hôtesse', 'hotesse', 'accueil', 'salon', 'foire', 'protocole', 'stand']) * 3, 9)
+    if (app.cv_path) score += 8
+    if ((app.photo_paths?.length ?? 0) >= 2) score += 7
+  } else {
+    if (douala) score += 20
+    if (app.speaks_french) score += 10
+    if (app.speaks_english) score += 10
+    if (app.full_availability) score += 15
+    if (hasExp) score += 10
+    score += Math.min(expHits(app, ['événement', 'evenement', 'event', 'logistique', 'secrétariat', 'secretariat', 'coordination', 'salon', 'organisation', 'exposant', 'prestataire']) * 4, 20)
+    if (app.cv_path) score += 15
+  }
   return Math.min(score, 100)
 }
 
@@ -42,20 +61,31 @@ async function aiEvaluate(app: ApplicationPayload): Promise<{ summary: string; r
   const apiKey = Deno.env.get('LOVABLE_API_KEY')
   if (!apiKey) return null
 
+  const hostess = isHostessRole(app.position)
+  const criteria = hostess
+    ? "âgée de 21 à 30 ans, résidant à Douala, taille minimum 1,75 m, bonne présentation, maîtrise du français et de l'anglais, expérience dans l'événementiel, disponible les 26, 27 et 28 novembre, dynamique, organisée et à l'aise avec le public. Dossier complet : CV + deux photos récentes en pied."
+    : "résidant à Douala, expérience en événementiel, logistique ou secrétariat, maîtrise du français et de l'anglais, disponible pendant toute la période, organisé, ponctuel et à l'aise en équipe. Dossier complet : CV."
+  const yn = (b?: boolean | null) => (b ? 'oui' : 'non')
+
   const prompt = `Tu es un recruteur senior pour une agence événementielle premium au Cameroun.
-Évalue cette candidature pour le poste « ${app.position} » au salon In Vino Italia Douala (26-28 novembre 2026, Best Western Plus Soaha Hotel, Douala).
-Exigences clés : résider à Douala, disponibilité sur toute la durée du salon, expérience événementielle, bonne présentation et sens du service.
+Évalue cette candidature pour le poste « ${app.position} » au salon In Vino Italia Douala (1er Salon des Vins Italiens en Afrique Centrale, 26-28 novembre 2026, Best Western Plus Soaho Hotel, Douala).
+Critères officiels : ${criteria}
+Seules les candidatures complètes répondant aux critères sont examinées : signale clairement tout critère non rempli ou information manquante.
 
 Candidature :
 - Nom : ${app.full_name}
 - Téléphone : ${app.phone}
 - Email : ${app.email ?? 'non fourni'}
 - Ville : ${app.city ?? 'non fournie'}
+- Âge : ${app.age ?? 'non indiqué'}
+${hostess ? `- Taille : ${app.height_cm ? app.height_cm + ' cm' : 'non indiquée'}\n` : ''}- Français : ${yn(app.speaks_french)} / Anglais : ${yn(app.speaks_english)}
+- Disponible sur toute la période : ${yn(app.full_availability)}
+- CV joint : ${yn(!!app.cv_path)}${hostess ? `\n- Photos en pied jointes : ${app.photo_paths?.length ?? 0}/2` : ''}
 - Expérience : ${app.experience ?? 'non renseignée'}
 - Message : ${app.message ?? 'aucun'}
 
 Réponds en JSON avec exactement deux champs :
-- "summary" : résumé du profil en 2-3 phrases en français.
+- "summary" : résumé du profil en 2-3 phrases en français, en citant les critères remplis et non remplis.
 - "recommendation" : avis clair en français ("Profil recommandé", "Profil à considérer" ou "Profil peu adapté") suivi d'une courte justification.`
 
   const body = {

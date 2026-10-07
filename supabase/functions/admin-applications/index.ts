@@ -52,7 +52,17 @@ Deno.serve(async (req) => {
     const err = apps.error || quotes.error || messages.error
     if (err) return json({ error: err.message }, 500)
 
-    return json({ applications: apps.data, quotes: quotes.data, messages: messages.data })
+    const sign = async (path: string) => {
+      const { data } = await supabase.storage.from('applications').createSignedUrl(path, 60 * 60)
+      return data?.signedUrl ?? null
+    }
+    const applications = await Promise.all((apps.data ?? []).map(async (a: any) => ({
+      ...a,
+      cv_url: a.cv_path ? await sign(a.cv_path) : null,
+      photo_urls: a.photo_paths?.length ? (await Promise.all(a.photo_paths.map(sign))).filter(Boolean) : [],
+    })))
+
+    return json({ applications, quotes: quotes.data, messages: messages.data })
   } catch (err) {
     console.error(err)
     return json({ error: 'Internal error' }, 500)

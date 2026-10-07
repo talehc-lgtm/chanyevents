@@ -43,49 +43,70 @@ export type Database = {
       }
       job_applications: {
         Row: {
+          age: number | null
           ai_recommendation: string | null
           ai_summary: string | null
           city: string | null
           created_at: string
+          cv_path: string | null
           email: string | null
           evaluated_at: string | null
           experience: string | null
+          full_availability: boolean | null
           full_name: string
+          height_cm: number | null
           id: string
           message: string | null
           phone: string
+          photo_paths: string[] | null
           position: string
           score: number | null
+          speaks_english: boolean | null
+          speaks_french: boolean | null
         }
         Insert: {
+          age?: number | null
           ai_recommendation?: string | null
           ai_summary?: string | null
           city?: string | null
           created_at?: string
+          cv_path?: string | null
           email?: string | null
           evaluated_at?: string | null
           experience?: string | null
+          full_availability?: boolean | null
           full_name: string
+          height_cm?: number | null
           id?: string
           message?: string | null
           phone: string
+          photo_paths?: string[] | null
           position: string
           score?: number | null
+          speaks_english?: boolean | null
+          speaks_french?: boolean | null
         }
         Update: {
+          age?: number | null
           ai_recommendation?: string | null
           ai_summary?: string | null
           city?: string | null
           created_at?: string
+          cv_path?: string | null
           email?: string | null
           evaluated_at?: string | null
           experience?: string | null
+          full_availability?: boolean | null
           full_name?: string
+          height_cm?: number | null
           id?: string
           message?: string | null
           phone?: string
+          photo_paths?: string[] | null
           position?: string
           score?: number | null
+          speaks_english?: boolean | null
+          speaks_french?: boolean | null
         }
         Relationships: []
       }
