@@ -27,7 +27,7 @@ const Weddings: React.FC = () => {
       <PageHero eyebrow="Weddings & Signature Events"
         title={<>{L('Vos moments personnels méritent la ', 'Your personal moments deserve the ')}<em>{L('même exigence', 'same standard')}</em></>}
         lead={L("Notre héritage : des célébrations raffinées, profondément humaines, orchestrées avec élégance et précision jusque dans le moindre détail.", 'Our heritage: refined, deeply human celebrations, orchestrated with elegance and precision down to the smallest detail.')}
-        image={arch} alt={L('Mariage de prestige', 'Prestige wedding')} />
+        image={w3.url} alt={L('Mariage de prestige', 'Prestige wedding')} />
       <section className="section-padding">
         <div className="container-luxury grid md:grid-cols-12 gap-6">
           <Reveal className="md:col-span-7"><img src={aisle} alt="" loading="lazy" className="w-full aspect-[4/3] object-cover rounded-sm" /></Reveal>
