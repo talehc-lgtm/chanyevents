@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Crown, Sparkles, Globe, Users, Megaphone, CheckCircle2 } from 'lucide-react';
+import { Building2, Crown, Sparkles, Users, Megaphone, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
 import { Button } from '@/components/ui/button';
 import tableDecorImage from '@/assets/chany-table-decor.jpg';
 import promote2017TeamImage from '@/assets/chany-promote-2017-team.jpg';
-import informationDeskImage from '@/assets/chany-information-desk.jpg';
 import registrationTeamImage from '@/assets/chany-registration-team.jpg';
 import brandTeamImage from '@/assets/chany-brand-team.jpg';
 import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
@@ -72,19 +71,6 @@ const Services: React.FC = () => {
         'Animation sur site',
         'Signalétique personnalisée',
         'Gestion des exposants',
-      ],
-    },
-    {
-      icon: Globe,
-      title: t('services.translation.title'),
-      description: t('services.translation.desc'),
-      image: informationDeskImage,
-      features: [
-        'Interprétation simultanée',
-        'Traduction de documents',
-        'Services FR/EN',
-        'Équipement technique',
-        'Interprètes certifiés',
       ],
     },
     {

@@ -49,8 +49,6 @@ const translations: Record<Language, Record<string, string>> = {
     'services.vip.desc': 'Galas, soirées privées, réceptions exclusives — un service discret et irréprochable pour une clientèle exigeante.',
     'services.fairs.title': 'Salons & Foires',
     'services.fairs.desc': 'Conception, logistique et animation de stands et espaces événementiels pour maximiser votre impact.',
-    'services.translation.title': 'Traduction & Interprétation',
-    'services.translation.desc': 'Services de traduction et interprétation FR/EN pour vos événements internationaux.',
     'services.staffing.title': 'Personnel Événementiel',
     'services.staffing.desc': "Hôtesses, stewards, mannequins et figurants qualifiés pour représenter votre marque avec excellence.",
     
@@ -137,8 +135,6 @@ const translations: Record<Language, Record<string, string>> = {
     'services.vip.desc': 'Galas, private parties, exclusive receptions — discreet and impeccable service for discerning clients.',
     'services.fairs.title': 'Trade Shows & Fairs',
     'services.fairs.desc': 'Design, logistics, and animation of booths and event spaces to maximize your impact.',
-    'services.translation.title': 'Translation & Interpretation',
-    'services.translation.desc': 'FR/EN translation and interpretation services for your international events.',
     'services.staffing.title': 'Event Staffing',
     'services.staffing.desc': 'Qualified hostesses, stewards, models, and extras to represent your brand with excellence.',
     

@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Crown, Users, Sparkles, Building2, Globe, Star, Megaphone, CalendarDays, MapPin } from 'lucide-react';
+import { ArrowRight, Crown, Users, Sparkles, Building2, Star, Megaphone, CalendarDays, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
 import { Button } from '@/components/ui/button';
 import vipImage from '@/assets/vip-event.jpg';
-import vipReceptionImage from '@/assets/chany-vip-reception.jpg';
 import tableDecorImage from '@/assets/chany-table-decor.jpg';
 import promote2017TeamImage from '@/assets/chany-promote-2017-team.jpg';
-import informationDeskImage from '@/assets/chany-information-desk.jpg';
 import brandTeamImage from '@/assets/chany-brand-team.jpg';
 import weddingAisleImage from '@/assets/chany-wedding-aisle.jpg';
 import exnessConsultationImage from '@/assets/chany-exness-consultation.jpg';
@@ -39,11 +37,6 @@ const Index: React.FC = () => {
       icon: Sparkles,
       title: t('services.vip.title'),
       description: t('services.vip.desc'),
-    },
-    {
-      icon: Globe,
-      title: t('services.translation.title'),
-      description: t('services.translation.desc'),
     },
   ];
 
@@ -95,13 +88,6 @@ const Index: React.FC = () => {
       label: t('services.staffing.title'),
       title: 'Personnel Événementiel',
       description: 'Hôtesses, stewards, mannequins et équipes qualifiées pour représenter votre marque avec distinction.',
-    },
-    {
-      image: vipReceptionImage,
-      icon: Globe,
-      label: t('services.translation.title'),
-      title: 'Traduction FR/EN',
-      description: 'Une communication fluide pour vos symposiums, conférences et événements internationaux.',
     },
   ];
 
