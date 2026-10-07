@@ -14,8 +14,6 @@ export const emptyProfile = {
   skills: [] as string[], skills_other: '',
   availability_period: '',
   experience_1: '', experience_2: '', experience_3: '',
-  lang_fr: '' as LangLevel, lang_en: '' as LangLevel,
-  other_lang_1: '', other_lang_1_level: '' as LangLevel, other_lang_2: '', other_lang_2_level: '' as LangLevel,
   student: '', student_other: '', last_diploma: '', current_diploma: '', future_job: '',
   beauty_contest: '', beauty_contest_which: '', agency: '', agency_which: '',
   knew_agency: '', knew_agency_how: '', heard_casting_from: '',
@@ -57,19 +55,6 @@ const YesNo: React.FC<{ name: string; label: string; value: string; onChange: (v
     <span className="text-sm text-foreground">{label}</span>
     <div className="flex gap-4 mt-1.5">
       {[['oui', L('Oui', 'Yes')], ['non', L('Non', 'No')]].map(([v, t]) => (
-        <label key={v} className="flex items-center gap-2 text-sm cursor-pointer">
-          <input type="radio" name={name} checked={value === v} onChange={() => onChange(v)} className="accent-primary" /> {t}
-        </label>
-      ))}
-    </div>
-  </div>
-);
-
-const Level: React.FC<{ name: string; label: React.ReactNode; value: LangLevel; onChange: (v: LangLevel) => void; L: Props['L'] }> = ({ name, label, value, onChange, L }) => (
-  <div className="grid grid-cols-[minmax(0,9rem)_1fr] items-center gap-3">
-    <div className="text-sm text-foreground">{label}</div>
-    <div className="flex flex-wrap gap-4">
-      {([['courant', L('Courant', 'Fluent')], ['moyen', L('Moyen', 'Intermediate')], ['notions', L('Notions', 'Basic')]] as const).map(([v, t]) => (
         <label key={v} className="flex items-center gap-2 text-sm cursor-pointer">
           <input type="radio" name={name} checked={value === v} onChange={() => onChange(v)} className="accent-primary" /> {t}
         </label>
@@ -152,17 +137,6 @@ const CastingProfileFields: React.FC<Props & { section: 'personal' | 'rest' }> =
           <Textarea id={`exp${n}`} rows={2} maxLength={400} value={p[`experience_${n}`]} onChange={(e) => set({ [`experience_${n}`]: e.target.value } as Partial<CastingProfile>)} className="mt-1.5" placeholder={L('Événement, rôle, année…', 'Event, role, year…')} />
         </div>
       ))}
-
-      <H>{L('Langues', 'Languages')}</H>
-      <div className="space-y-3">
-        <Level name="lang_fr" label={L('Français *', 'French *')} value={p.lang_fr} onChange={(v) => set({ lang_fr: v })} L={L} />
-        <Level name="lang_en" label={L('Anglais *', 'English *')} value={p.lang_en} onChange={(v) => set({ lang_en: v })} L={L} />
-        {([1, 2] as const).map((n) => (
-          <Level key={n} name={`ol${n}`} L={L}
-            label={<Input placeholder={L('Autre langue', 'Other language')} maxLength={40} value={p[`other_lang_${n}`]} onChange={(e) => set({ [`other_lang_${n}`]: e.target.value } as Partial<CastingProfile>)} />}
-            value={p[`other_lang_${n}_level`]} onChange={(v) => set({ [`other_lang_${n}_level`]: v } as Partial<CastingProfile>)} />
-        ))}
-      </div>
 
       <H>{L('Études et carrière', 'Studies and career')}</H>
       <div className="grid md:grid-cols-2 gap-5">

@@ -40,7 +40,7 @@ const Careers: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const emptyForm = {
     full_name: '', phone: '', email: '', city: '', experience: '', message: '',
-    age: '', height_cm: '', speaks_french: false, speaks_english: false, full_availability: false,
+    age: '', height_cm: '', full_availability: false,
   };
   const [form, setForm] = useState(emptyForm);
   const [profile, setProfile] = useState<CastingProfile>(emptyProfile);
@@ -127,7 +127,6 @@ const Careers: React.FC = () => {
     if (!profile.sex) return fail('Indiquez votre sexe.', 'Select your sex.');
     if (isHostess && !form.height_cm) return fail('Indiquez votre taille.', 'Enter your height.');
     if (!profile.experience_1.trim()) return fail('Décrivez au moins une expérience récente.', 'Describe at least one recent experience.');
-    if (!profile.lang_fr || !profile.lang_en) return fail('Indiquez votre niveau en français et en anglais.', 'Select your French and English level.');
     if (!profile.image_rights || profile.signature_name.trim().length < 2) return fail("Acceptez le droit à l'image et signez avec votre nom.", 'Accept the image rights and sign with your name.');
     if (age < 18 && (!profile.parent_name.trim() || !profile.parent_of.trim() || !profile.parent_signature.trim())) return fail("L'autorisation parentale est obligatoire pour les mineurs.", 'Parental authorisation is required for minors.');
     if (!cvFile) return fail('Joignez votre CV.', 'Attach your CV.');
@@ -151,7 +150,6 @@ const Careers: React.FC = () => {
 
     const experience = [profile.experience_1, profile.experience_2, profile.experience_3]
       .map((x, i) => x.trim() && `${i + 1}. ${x.trim()}`).filter(Boolean).join('\n').slice(0, 1500);
-    const okLevel = (l: string) => l === 'courant' || l === 'moyen';
     const payload = {
       position: selectedPosition,
       full_name: parsed.data.full_name,
@@ -162,8 +160,6 @@ const Careers: React.FC = () => {
       message: parsed.data.message || null,
       age: Math.max(16, Math.min(70, age)),
       height_cm: form.height_cm ? Number(form.height_cm) : null,
-      speaks_french: okLevel(profile.lang_fr),
-      speaks_english: okLevel(profile.lang_en),
       full_availability: form.full_availability,
       cv_path,
       photo_paths,
