@@ -9,7 +9,6 @@ export const emptyProfile = {
   birth_date: '', birth_place: '', marital_status: '', nationality: '', whatsapp: '',
   sex: '', weight_kg: '', shoe_size: '', tshirt_size: '', pants_size: '', shirt_size: '',
   skills: [] as string[], skills_other: '',
-  availability_period: '',
   experience_1: '', experience_2: '', experience_3: '',
   student: '', student_other: '',
   beauty_contest: '', beauty_contest_which: '', agency: '', agency_which: '',
