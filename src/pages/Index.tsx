@@ -122,13 +122,16 @@ const Index: React.FC = () => {
           <div className="grid md:grid-cols-2 gap-x-12">
             {expertises.map((e, i) => (
               <Reveal key={e.t} delay={(i % 2) * 0.08}>
-                <Link to={e.to} className="group flex gap-6 py-7 border-t border-border">
-                  <span className="text-xs font-semibold text-primary tracking-widest pt-2">{String(i + 1).padStart(2, '0')}</span>
-                  <div className="flex-1">
-                    <h3 className="font-serif text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors">{e.t}</h3>
+                <Link to={e.to} className="group flex items-center gap-5 md:gap-6 py-6 border-t border-border">
+                  <div className="shrink-0 w-24 h-24 md:w-28 md:h-28 overflow-hidden rounded-sm">
+                    <img src={e.img} alt={e.t} loading="lazy" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <span className="text-xs font-semibold text-primary tracking-widest">{String(i + 1).padStart(2, '0')}</span>
+                    <h3 className="font-serif text-2xl md:text-3xl text-foreground group-hover:text-primary transition-colors mt-1">{e.t}</h3>
                     <p className="text-muted-foreground text-sm mt-2">{e.i}</p>
                   </div>
-                  <ArrowRight className="w-5 h-5 text-primary mt-2 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  <ArrowRight className="w-5 h-5 shrink-0 text-primary opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
                 </Link>
               </Reveal>
             ))}
