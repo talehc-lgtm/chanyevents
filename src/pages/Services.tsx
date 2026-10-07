@@ -29,7 +29,7 @@ const Services: React.FC = () => {
           {poles.map((p, n) => (
             <Reveal key={p.t} delay={(n % 3) * 0.08} className="bg-card p-8 h-full">
               <span className="text-xs font-semibold tracking-widest text-primary">{String(n + 1).padStart(2, '0')}</span>
-              <h3 className="font-serif text-2xl text-foreground mt-3 mb-1">{p.t}</h3>
+              <h2 className="font-serif text-2xl text-foreground mt-3 mb-1">{p.t}</h2>
               <p className="text-muted-foreground mb-6">{p.d}</p>
               <Chips items={p.i} />
             </Reveal>

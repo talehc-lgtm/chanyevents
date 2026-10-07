@@ -272,7 +272,7 @@ const Index: React.FC = () => {
         <Reveal className="relative container-luxury px-6 text-center max-w-3xl">
           <span className="text-xs font-semibold tracking-[0.25em] uppercase text-cream/80">Weddings & Signature Events</span>
           <h2 className="text-section font-serif text-cream mt-6 mb-8">{L('Vos moments personnels méritent la ', 'Your personal moments deserve the ')}<em>{L('même exigence.', 'same standard.')}</em></h2>
-          <Link to="/weddings" className="inline-flex items-center px-8 py-4 border border-cream/70 text-cream rounded-sm font-semibold hover:bg-cream/10">{L('Découvrir', 'Discover')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
+          <Link to="/weddings" className="inline-flex items-center px-8 py-4 border border-cream/70 text-cream rounded-sm font-semibold hover:bg-cream/10">{L('Découvrir Weddings & Private Events', 'Explore Weddings & Private Events')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
         </Reveal>
       </section>
 
