@@ -60,7 +60,7 @@ const Header: React.FC = () => {
             </span>
           </Link>
 
-          <div className="hidden xl:flex items-center gap-5">
+          <div className="hidden xl:flex items-center gap-4">
             {nav.map((n) => (
               <div key={n.href} className="relative group">
                 <Link to={n.href} className={`flex items-center gap-1 whitespace-nowrap text-[13px] font-medium tracking-wide uppercase transition-colors py-7 ${active(n.href) ? 'text-primary' : 'text-foreground/80 hover:text-primary'}`}>
@@ -79,11 +79,11 @@ const Header: React.FC = () => {
             ))}
           </div>
 
-          <div className="hidden xl:flex items-center gap-5">
+          <div className="hidden xl:flex items-center gap-4">
             <button onClick={() => setLanguage(fr ? 'en' : 'fr')} className="flex items-center gap-1.5 text-sm text-foreground/80 hover:text-primary">
               <Globe className="w-4 h-4" />{language.toUpperCase()}
             </button>
-            <Link to="/contact#projet" className="px-5 py-2.5 bg-primary text-primary-foreground rounded-sm text-sm font-semibold hover-gold-glow whitespace-nowrap">
+            <Link to="/contact#projet" className="hidden 2xl:inline-block px-5 py-2.5 bg-primary text-primary-foreground rounded-sm text-sm font-semibold hover-gold-glow whitespace-nowrap">
               {L('Démarrer un projet', 'Start a project')}
             </Link>
           </div>
