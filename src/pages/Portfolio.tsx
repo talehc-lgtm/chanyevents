@@ -328,7 +328,7 @@ const Portfolio: React.FC = () => {
               onClick={(e) => e.stopPropagation()}
             >
               <button
-                onClick={() => setSelectedItem(null)}
+                onClick={() => setSelectedItem(null)} aria-label="Fermer"
                 className="absolute top-4 right-4 z-10 w-10 h-10 bg-background/80 rounded-full flex items-center justify-center text-foreground hover:text-primary transition-colors"
               >
                 <X className="w-5 h-5" />
