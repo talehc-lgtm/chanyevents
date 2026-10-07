@@ -275,7 +275,7 @@ const Portfolio: React.FC = () => {
         <div className="container-luxury">
           <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence mode="popLayout">
-              {filteredItems.map((item) => (
+              {filteredItems.map((item, index) => (
                 <motion.div
                   key={item.id}
                   layout
@@ -284,7 +284,7 @@ const Portfolio: React.FC = () => {
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3 }}
                   onClick={() => setSelectedItem(item)}
-                  className="group relative aspect-[4/5] overflow-hidden rounded-sm cursor-pointer"
+                  className={`group relative ${index % 4 === 0 ? "aspect-[4/5] md:aspect-[4/6]" : index % 4 === 3 ? "aspect-[4/3]" : "aspect-[4/5]"} overflow-hidden rounded-md cursor-pointer`}
                 >
                   <img
                     src={item.image}
