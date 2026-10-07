@@ -105,8 +105,6 @@ const CastingProfileFields: React.FC<Props & { section: 'personal' | 'rest' }> =
         </div>
         <Input className="mt-3" placeholder={L('Autres (préciser)', 'Other (specify)')} maxLength={120} value={p.skills_other} onChange={(e) => set({ skills_other: e.target.value })} />
       </div>
-      <F id="availability_period" label={L('Période de disponibilité pour collaborer avec nous', 'Availability period to work with us')} value={p.availability_period} max={200} onChange={(v) => set({ availability_period: v })} />
-
       <H>{L('Expériences récentes', 'Recent experience')}</H>
       {([1, 2, 3] as const).map((n) => (
         <div key={n}>
