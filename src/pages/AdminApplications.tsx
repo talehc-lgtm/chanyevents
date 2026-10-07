@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
-  Lock, Loader2, Trash2, FileText, Inbox, Users, Star, Phone, Mail, MapPin, MessageCircle, RefreshCw, User,
+  Loader2, Trash2, FileText, Inbox, Users, Star, Phone, Mail, MapPin, MessageCircle, RefreshCw, User, LogOut,
 } from 'lucide-react';
 import Layout from '@/components/layout/Layout';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
+import AdminLogin from '@/components/admin/AdminLogin';
+import { useAdminAccess } from '@/hooks/useAdminAccess';
 
 interface Application {
   id: string;
@@ -46,26 +47,22 @@ const scoreColor = (score: number | null) => {
 const AdminApplications: React.FC = () => {
   const { language } = useLanguage();
   const { toast } = useToast();
-  const [code, setCode] = useState('');
-  const [authenticated, setAuthenticated] = useState(false);
+  const admin = useAdminAccess();
   const [applications, setApplications] = useState<Application[]>([]);
   const [loading, setLoading] = useState(false);
   const [quotes, setQuotes] = useState<QuoteRequest[]>([]);
   const [messages, setMessages] = useState<ContactMessage[]>([]);
   const [tab, setTab] = useState<'applications' | 'quotes' | 'messages'>('applications');
 
-  const loadApplications = async (accessCode: string) => {
+  const loadApplications = async () => {
     setLoading(true);
-    const { data, error } = await supabase.functions.invoke('admin-applications', {
-      headers: { 'x-admin-code': accessCode },
-    });
+    const { data, error } = await supabase.functions.invoke('admin-applications');
     setLoading(false);
 
     if (error) {
       toast({
         title: language === 'fr' ? 'Accès refusé' : 'Access denied',
-        description:
-          language === 'fr' ? 'Code incorrect. Veuillez réessayer.' : 'Incorrect code. Please try again.',
+          description: language === 'fr' ? 'Votre session a expiré.' : 'Your session has expired.',
         variant: 'destructive',
       });
       return false;
@@ -76,20 +73,13 @@ const AdminApplications: React.FC = () => {
     return true;
   };
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const ok = await loadApplications(code);
-    if (ok) setAuthenticated(true);
-  };
+  useEffect(() => { if (admin.authenticated) loadApplications(); }, [admin.authenticated]);
 
-  const refresh = () => loadApplications(code);
+  const refresh = () => loadApplications();
 
   const act = async (table: string, id: string, action: 'update_status' | 'delete', status?: string) => {
     if (action === 'delete' && !window.confirm(language === 'fr' ? 'Supprimer définitivement ?' : 'Delete permanently?')) return;
-    const { error } = await supabase.functions.invoke('admin-applications', {
-      headers: { 'x-admin-code': code },
-      body: { action, table, id, status },
-    });
+    const { error } = await supabase.functions.invoke('admin-applications', { body: { action, table, id, status } });
     if (error) {
       toast({ title: language === 'fr' ? 'Action impossible' : 'Action failed', variant: 'destructive' });
       return;
@@ -139,46 +129,7 @@ const AdminApplications: React.FC = () => {
     </div>
   );
 
-  if (!authenticated) {
-    return (
-      <Layout>
-        <section className="min-h-screen flex items-center justify-center bg-charcoal pt-32 pb-24">
-          <motion.form
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            onSubmit={handleLogin}
-            className="w-full max-w-md mx-6 p-10 bg-card border border-border rounded-sm text-center"
-          >
-            <Lock className="w-10 h-10 text-primary mx-auto mb-6" />
-            <h1 className="text-display font-serif font-semibold text-foreground mb-3">
-              {language === 'fr' ? 'Espace Administration' : 'Admin Area'}
-            </h1>
-            <p className="text-muted-foreground mb-8">
-              {language === 'fr'
-                ? 'Entrez le code d’accès pour consulter candidatures, devis et messages.'
-                : 'Enter the access code to view applications.'}
-            </p>
-            <Input
-              type="password"
-              value={code}
-              onChange={(e) => setCode(e.target.value)}
-              placeholder={language === 'fr' ? 'Code d’accès' : 'Access code'}
-              className="mb-6 text-center"
-              required
-            />
-            <Button
-              type="submit"
-              size="lg"
-              disabled={loading}
-              className="w-full bg-gradient-gold text-primary-foreground hover-gold-glow"
-            >
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : language === 'fr' ? 'Accéder' : 'Access'}
-            </Button>
-          </motion.form>
-        </section>
-      </Layout>
-    );
-  }
+  if (!admin.authenticated) return <AdminLogin checking={admin.checking} hasAdmin={admin.hasAdmin} onSignIn={admin.signIn} onSetup={admin.createFirstAdmin} />;
 
   return (
     <Layout>
@@ -200,15 +151,15 @@ const AdminApplications: React.FC = () => {
                   : `${messages.length} message(s) — ${newCount(messages)} ${fr ? 'nouveau(x)' : 'new'}`}
               </p>
             </div>
-            <Button
-              variant="outline"
-              onClick={refresh}
-              disabled={loading}
-              className="border-primary text-primary hover:bg-primary/10"
-            >
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4 mr-2" />}
-              {language === 'fr' ? 'Actualiser' : 'Refresh'}
-            </Button>
+            <div className="flex gap-3">
+              <Button variant="outline" onClick={refresh} disabled={loading} className="border-primary text-primary hover:bg-primary/10">
+                {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <RefreshCw className="w-4 h-4 mr-2" />}
+                {language === 'fr' ? 'Actualiser' : 'Refresh'}
+              </Button>
+              <Button variant="outline" onClick={admin.signOut} aria-label={language === 'fr' ? 'Se déconnecter' : 'Sign out'}>
+                <LogOut className="w-4 h-4" />
+              </Button>
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-2 mb-10 border-b border-border">

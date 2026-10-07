@@ -43,6 +43,13 @@
       "when": 1791372869079,
       "tag": "0005_casting_profile_json",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791385060877,
+      "tag": "0006_secure_admin_roles",
+      "breakpoints": true
     }
   ]
 }
