@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Crown, Sparkles, Globe, Users, Megaphone, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Building2, Crown, Sparkles, Globe, Users, Megaphone, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
@@ -233,7 +233,6 @@ const Services: React.FC = () => {
               vos idées en une expérience exceptionnelle.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact">
               <Link to="/contact">
                 <Button size="lg" variant="outline" className="border-primary text-primary hover:bg-primary/10">
                   Nous contacter
