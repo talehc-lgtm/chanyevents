@@ -12,7 +12,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
 
-const WHATSAPP_NUMBER = '237675788560';
+const WHATSAPP_NUMBER = '237675788550';
 
 interface JobOffer {
   id: string;
@@ -316,8 +316,8 @@ const Careers: React.FC = () => {
             title={language === 'fr' ? 'Postulez Maintenant' : 'Apply Now'}
             description={
               language === 'fr'
-                ? 'Remplissez ce formulaire ou envoyez vos photos et CV par WhatsApp au +237 675 788 560.'
-                : 'Fill out this form or send your photos and CV via WhatsApp to +237 675 788 560.'
+                ? 'Remplissez ce formulaire ou envoyez vos photos et CV par WhatsApp au +237 675 788 550.'
+                : 'Fill out this form or send your photos and CV via WhatsApp to +237 675 788 550.'
             }
           />
 
