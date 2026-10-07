@@ -9,9 +9,7 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const locations = [
-    { city: 'Douala', address: 'Cameroun' },
     { city: 'Yaoundé', address: 'Cameroun' },
-    { city: 'Bafoussam', address: 'Cameroun' },
   ];
 
   return (

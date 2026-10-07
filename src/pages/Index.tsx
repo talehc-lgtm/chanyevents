@@ -41,10 +41,10 @@ const Index: React.FC = () => {
   ];
 
   const stats = [
-    { number: '500+', label: 'Événements réalisés' },
-    { number: '15+', label: "Années d'expérience" },
-    { number: '98%', label: 'Clients satisfaits' },
-    { number: '3', label: 'Villes au Cameroun' },
+    { number: '+50', label: language === 'fr' ? 'Événements réalisés' : 'Events delivered' },
+    { number: '15+', label: language === 'fr' ? "Années d'expérience" : 'Years of experience' },
+    { number: '250+', label: language === 'fr' ? 'Partenaires' : 'Partners' },
+    { number: '1,000+', label: language === 'fr' ? 'Exposants' : 'Exhibitors' },
   ];
 
   const portfolioItems = [
