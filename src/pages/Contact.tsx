@@ -32,21 +32,21 @@ const Contact: React.FC = () => {
     {
       city: 'Douala',
       address: 'Akwa, Boulevard de la Liberté',
-      phone: '+237 6XX XXX XXX',
+      phone: '+237 675 788 550',
     },
     {
       city: 'Yaoundé',
       address: 'Centre-ville, Rue Joseph Mballa Eloumden',
-      phone: '+237 6XX XXX XXX',
+      phone: '+237 675 788 550',
     },
     {
       city: 'Bafoussam',
       address: 'Quartier Administratif',
-      phone: '+237 6XX XXX XXX',
+      phone: '+237 675 788 550',
     },
   ];
 
-  const whatsappNumber = '237600000000';
+  const whatsappNumber = '237675788550';
   const whatsappMessage = encodeURIComponent('Bonjour, je souhaite prendre rendez-vous pour discuter de mon projet événementiel.');
 
   return (
