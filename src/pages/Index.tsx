@@ -13,7 +13,7 @@ import workshop from '@/assets/biz-workshop.jpg';
 import gala from '@/assets/biz-gala.jpg';
 import vipReception from '@/assets/chany-vip-reception.jpg';
 import weddingArch from '@/assets/chany-wedding-arch-couple.png';
-import invinoPosterAsset from '@/assets/invino-douala-poster-portrait.png.asset.json';
+import invinoPosterAsset from '@/assets/invino-douala-affiche.jpg.asset.json';
 
 const Index: React.FC = () => {
   const L = useL();
