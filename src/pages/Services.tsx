@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Building2, Crown, Sparkles, Globe, Users, Megaphone, CheckCircle2 } from 'lucide-react';
+import { Building2, Crown, Sparkles, Users, Megaphone, CheckCircle2 } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';

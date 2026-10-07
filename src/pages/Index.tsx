@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
-import { ArrowRight, Crown, Users, Sparkles, Building2, Globe, Star, Megaphone, CalendarDays, MapPin } from 'lucide-react';
+import { ArrowRight, Crown, Users, Sparkles, Building2, Star, Megaphone, CalendarDays, MapPin } from 'lucide-react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import Layout from '@/components/layout/Layout';
 import SectionHeading from '@/components/common/SectionHeading';
