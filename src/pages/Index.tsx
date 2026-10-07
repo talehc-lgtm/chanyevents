@@ -121,7 +121,7 @@ const Index: React.FC = () => {
                   <HeroIcon className="h-4 w-4" />
                   {currentHeroSlide.label}
                 </span>
-                <h1 className="font-serif text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-medium text-foreground mt-6 mb-6 leading-[1.05]">
+                <h1 className="text-display font-serif font-medium text-foreground mt-6 mb-6">
                   {currentHeroSlide.title.split(' ').slice(0, 1).join(' ')}{' '}
                   <em className="italic text-primary">
                     {currentHeroSlide.title.split(' ').slice(1).join(' ')}
@@ -223,7 +223,7 @@ const Index: React.FC = () => {
               <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">
                 {language === 'fr' ? 'Nous organisons' : 'We are organizing'}
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl font-semibold text-foreground mb-6 leading-tight">
+              <h2 className="text-section font-serif font-semibold text-foreground mb-6">
                 In Vino Italia Douala
                 <span className="block text-gradient-gold text-2xl md:text-3xl mt-3">
                   {language === 'fr'
@@ -407,7 +407,7 @@ const Index: React.FC = () => {
               <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">
                 {t('about.values.title')}
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl font-semibold text-foreground mb-8">
+              <h2 className="text-section font-serif font-semibold text-foreground mb-8">
                 Ce qui nous distingue
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-8">
@@ -464,7 +464,7 @@ const Index: React.FC = () => {
             viewport={{ once: true }}
             className="text-center max-w-3xl mx-auto"
           >
-            <h2 className="font-serif text-4xl md:text-5xl font-semibold text-foreground mb-6">
+            <h2 className="text-section font-serif font-semibold text-foreground mb-6">
               {t('cta.title')}
             </h2>
             <p className="text-xl text-muted-foreground mb-10">

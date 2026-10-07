@@ -103,7 +103,7 @@ const Quote: React.FC = () => {
             <div className="w-20 h-20 mx-auto mb-8 rounded-full bg-primary/10 flex items-center justify-center">
               <CheckCircle2 className="w-10 h-10 text-primary" />
             </div>
-            <h2 className="font-serif text-3xl font-semibold text-foreground mb-4">
+            <h2 className="text-section font-serif font-semibold text-foreground mb-4">
               Demande Envoyée !
             </h2>
             <p className="text-muted-foreground text-lg">
@@ -126,10 +126,10 @@ const Quote: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="text-primary text-sm font-semibold tracking-[0.3em] uppercase mb-6 block">
+            <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-6 block">
               {t('quote.subtitle')}
             </span>
-            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">
+            <h1 className="text-display font-serif font-semibold text-foreground mb-6">
               {t('quote.title')}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">

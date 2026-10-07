@@ -99,10 +99,10 @@ const Services: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <span className="text-primary text-sm font-semibold tracking-[0.3em] uppercase mb-6 block">
+            <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-6 block">
               {t('services.subtitle')}
             </span>
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground mb-8">
+            <h1 className="text-display font-serif font-semibold text-foreground mb-8">
               {t('services.title')}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
@@ -132,7 +132,7 @@ const Services: React.FC = () => {
                     <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center">
                       <service.icon className="w-7 h-7 text-primary" />
                     </div>
-                    <h2 className="font-serif text-3xl md:text-4xl font-semibold text-foreground">
+                    <h2 className="text-section font-serif font-semibold text-foreground">
                       {service.title}
                     </h2>
                   </div>
@@ -211,7 +211,7 @@ const Services: React.FC = () => {
             viewport={{ once: true }}
             className="bg-card border border-border p-12 md:p-16 rounded-sm text-center"
           >
-            <h2 className="font-serif text-3xl md:text-4xl font-semibold text-foreground mb-6">
+            <h2 className="text-section font-serif font-semibold text-foreground mb-6">
               Vous avez un projet ?
             </h2>
             <p className="text-muted-foreground text-lg mb-8 max-w-2xl mx-auto">

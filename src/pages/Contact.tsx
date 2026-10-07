@@ -73,10 +73,10 @@ const Contact: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-3xl mx-auto"
           >
-            <span className="text-primary text-sm font-semibold tracking-[0.3em] uppercase mb-6 block">
+            <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-6 block">
               {t('contact.subtitle')}
             </span>
-            <h1 className="font-serif text-5xl md:text-6xl font-semibold text-foreground mb-6">
+            <h1 className="text-display font-serif font-semibold text-foreground mb-6">
               {t('contact.title')}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
@@ -129,7 +129,7 @@ const Contact: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-serif text-3xl font-semibold text-foreground mb-8">
+              <h2 className="text-section font-serif font-semibold text-foreground mb-8">
                 Envoyez-nous un message
               </h2>
 
@@ -210,7 +210,7 @@ const Contact: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-serif text-3xl font-semibold text-foreground mb-8">
+              <h2 className="text-section font-serif font-semibold text-foreground mb-8">
                 {t('contact.locations')}
               </h2>
 
