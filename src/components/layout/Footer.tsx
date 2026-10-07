@@ -39,7 +39,7 @@ const Footer: React.FC = () => {
         <div className="grid gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
           {/* Brand */}
           <div className="lg:col-span-4">
-            <Link to="/" className="mb-5 flex h-40 w-[24rem] max-w-full items-center justify-center overflow-hidden px-1 py-1 drop-shadow-[0_0_22px_hsl(var(--primary)/0.22)]">
+            <Link to="/" className="mb-5 flex h-36 w-36 items-center justify-center overflow-hidden drop-shadow-[0_0_22px_hsl(var(--primary)/0.22)]">
               <img
                 src={logoChanyEvents}
                 alt="CHANY EVENT'S"
