@@ -10,6 +10,7 @@ import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
 import Quote from "./pages/Quote";
 import Careers from "./pages/Careers";
+import AdminApplications from "./pages/AdminApplications";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/quote" element={<Quote />} />
             <Route path="/careers" element={<Careers />} />
+            <Route path="/admin/candidatures" element={<AdminApplications />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
