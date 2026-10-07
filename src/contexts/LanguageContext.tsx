@@ -102,7 +102,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.services': 'Services',
     'nav.portfolio': 'Portfolio',
     'nav.quote': 'Quote',
-    'nav.careers': 'Careers',
+    'nav.careers': 'Casting',
     'nav.contact': 'Contacts',
     
     // Hero
