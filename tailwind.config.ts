@@ -15,7 +15,12 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Manrope', 'sans-serif'],
-        serif: ['Fraunces', 'serif'],
+        serif: ['Bodoni Moda', 'serif'],
+      },
+      fontSize: {
+        display: ['clamp(2.375rem, 1.4rem + 4.2vw, 5.5rem)', { lineHeight: '1.05', letterSpacing: '-0.02em' }],
+        section: ['clamp(1.875rem, 1.35rem + 2vw, 3.5rem)', { lineHeight: '1.1', letterSpacing: '-0.015em' }],
+        lead: ['clamp(1.0625rem, 0.98rem + 0.4vw, 1.25rem)', { lineHeight: '1.65' }],
       },
       colors: {
         border: "hsl(var(--border))",

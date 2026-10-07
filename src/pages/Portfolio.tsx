@@ -115,10 +115,10 @@ const Portfolio: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="text-center max-w-4xl mx-auto"
           >
-            <span className="text-primary text-sm font-semibold tracking-[0.3em] uppercase mb-6 block">
+            <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-6 block">
               {t('portfolio.subtitle')}
             </span>
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground mb-8">
+            <h1 className="text-display font-serif font-semibold text-foreground mb-8">
               {t('portfolio.title')}
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
@@ -166,7 +166,7 @@ const Portfolio: React.FC = () => {
               <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">
                 {language === 'fr' ? 'Notre prochaine grande production' : 'Our next major production'}
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl font-semibold text-foreground mb-6 leading-tight">
+              <h2 className="text-section font-serif font-semibold text-foreground mb-6">
                 In Vino Italia Douala
                 <span className="block text-gradient-gold text-2xl md:text-3xl mt-3">
                   {language === 'fr'
@@ -344,7 +344,7 @@ const Portfolio: React.FC = () => {
                   <span className="text-primary text-xs font-semibold tracking-wider uppercase mb-4">
                     {filters.find((f) => f.key === selectedItem.category)?.label}
                   </span>
-                  <h2 className="font-serif text-3xl font-semibold text-foreground mb-4">
+                  <h2 className="text-section font-serif font-semibold text-foreground mb-4">
                     {selectedItem.title}
                   </h2>
                   <p className="text-muted-foreground leading-relaxed mb-6">

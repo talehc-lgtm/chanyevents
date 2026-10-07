@@ -60,13 +60,13 @@ const About: React.FC = () => {
             transition={{ duration: 0.8 }}
             className="max-w-4xl"
           >
-            <span className="text-primary text-sm font-semibold tracking-[0.3em] uppercase mb-6 block">
+            <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-6 block">
               {t('about.subtitle')}
             </span>
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground mb-8">
+            <h1 className="text-display font-serif font-semibold text-foreground mb-8">
               {t('about.title')}
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+            <p className="text-lead text-muted-foreground leading-relaxed">
               {t('about.description')}
             </p>
           </motion.div>
@@ -82,7 +82,7 @@ const About: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="font-serif text-4xl font-semibold text-foreground mb-6">
+              <h2 className="text-section font-serif font-semibold text-foreground mb-6">
                 Notre Histoire
               </h2>
               <div className="space-y-6 text-muted-foreground leading-relaxed">
@@ -246,10 +246,10 @@ const About: React.FC = () => {
               <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">
                 Le Fondateur
               </span>
-              <h2 className="font-serif text-4xl md:text-5xl font-semibold text-foreground mb-8">
+              <h2 className="text-section font-serif font-semibold text-foreground mb-8">
                 Mario Chany Nguetmi
               </h2>
-              <blockquote className="text-xl md:text-2xl text-muted-foreground italic leading-relaxed mb-8">
+              <blockquote className="text-lead text-muted-foreground italic leading-relaxed mb-8">
                 "Chaque événement est une opportunité de créer de la magie. Notre rôle est de transformer 
                 vos rêves en réalité, avec passion et professionnalisme."
               </blockquote>

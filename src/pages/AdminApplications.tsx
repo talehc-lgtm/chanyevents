@@ -147,7 +147,7 @@ const AdminApplications: React.FC = () => {
             className="w-full max-w-md mx-6 p-10 bg-card border border-border rounded-sm text-center"
           >
             <Lock className="w-10 h-10 text-primary mx-auto mb-6" />
-            <h1 className="font-serif text-3xl font-semibold text-foreground mb-3">
+            <h1 className="text-display font-serif font-semibold text-foreground mb-3">
               {language === 'fr' ? 'Espace Administration' : 'Admin Area'}
             </h1>
             <p className="text-muted-foreground mb-8">
@@ -186,7 +186,7 @@ const AdminApplications: React.FC = () => {
               <span className="text-primary text-sm font-semibold tracking-[0.28em] uppercase">
                 {language === 'fr' ? 'Espace privé' : 'Private area'}
               </span>
-              <h1 className="font-serif text-4xl md:text-5xl font-semibold text-foreground mt-4">
+              <h1 className="text-display font-serif font-semibold text-foreground mt-4">
                 {tab === 'applications' ? (fr ? 'Candidatures reçues' : 'Received applications') : tab === 'quotes' ? (fr ? 'Demandes de devis' : 'Quote requests') : (fr ? 'Messages reçus' : 'Received messages')}
               </h1>
               <p className="text-muted-foreground mt-3">

@@ -191,13 +191,13 @@ const Careers: React.FC = () => {
               <Briefcase className="h-5 w-5" />
               {language === 'fr' ? 'Nous Recrutons' : 'We Are Hiring'}
             </span>
-            <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-semibold text-foreground mb-8 leading-tight">
+            <h1 className="text-display font-serif font-semibold text-foreground mb-8">
               {language === 'fr' ? 'Rejoignez' : 'Join'}{' '}
               <span className="text-gradient-gold">
                 {language === 'fr' ? "l'équipe Chany's Évents" : "the Chany's Évents team"}
               </span>
             </h1>
-            <p className="text-xl md:text-2xl text-muted-foreground leading-relaxed">
+            <p className="text-lead text-muted-foreground leading-relaxed">
               {language === 'fr'
                 ? "Casting et recrutement pour le salon In Vino Italia Douala — Salon des vins italiens en Afrique Centrale."
                 : 'Casting and recruitment for the In Vino Italia Douala fair — Italian wine fair in Central Africa.'}
