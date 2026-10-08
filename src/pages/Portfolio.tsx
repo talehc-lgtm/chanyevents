@@ -95,10 +95,10 @@ const Portfolio: React.FC = () => {
 
   const filters = [
     { key: 'all', label: language === 'fr' ? 'Tous' : 'All' },
-    { key: 'corporate', label: 'Corporate' },
-    { key: 'wedding', label: 'Weddings' },
-    { key: 'vip', label: 'Signature & VIP' },
-    { key: 'fair', label: 'Trade Shows' },
+    { key: 'corporate', label: language === 'fr' ? 'Entreprise' : 'Corporate' },
+    { key: 'wedding', label: language === 'fr' ? 'Mariages' : 'Weddings' },
+    { key: 'vip', label: language === 'fr' ? 'Exception & VIP' : 'Signature & VIP' },
+    { key: 'fair', label: language === 'fr' ? 'Salons' : 'Trade Shows' },
   ];
 
   const filteredItems = activeFilter === 'all'
@@ -107,7 +107,7 @@ const Portfolio: React.FC = () => {
 
   return (
     <Layout>
-      <Seo title={language === 'fr' ? "Réalisations — Selected Work | CHANY EVENT'S" : "Selected Work | CHANY EVENT'S"} description={language === 'fr' ? 'Salons, événements corporate, institutionnels et mariages réalisés par CHANY EVENT\'S, dont In Vino Italia Douala.' : 'Trade shows, corporate, institutional events and weddings delivered by CHANY EVENT\'S, including In Vino Italia Douala.'} />
+      <Seo title={language === 'fr' ? "Réalisations | CHANY EVENT'S" : "Selected Work | CHANY EVENT'S"} description={language === 'fr' ? 'Salons, événements d’entreprise, institutionnels et mariages réalisés par CHANY EVENT\'S, dont In Vino Italia Douala.' : 'Trade shows, corporate, institutional events and weddings delivered by CHANY EVENT\'S, including In Vino Italia Douala.'} />
       {/* Hero Section */}
       <section className="pt-40 md:pt-44 pb-20 bg-gradient-to-b from-charcoal to-background">
         <div className="container-luxury px-6">
@@ -179,7 +179,7 @@ const Portfolio: React.FC = () => {
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
                 {language === 'fr'
-                  ? "In Vino Italia Douala est le tout premier salon des vins italiens en Afrique Centrale : trois journées d'exception pour vivre l'Italie à Douala, entre dégustations de vins d'exception, gastronomie italienne, masterclasses, show-cooking, rencontres privilégiées et business club B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel."
+                  ? "In Vino Italia Douala est le tout premier salon des vins italiens en Afrique Centrale : trois journées d'exception pour vivre l'Italie à Douala, entre dégustations de vins d'exception, gastronomie italienne, ateliers de dégustation, démonstrations culinaires, rencontres privilégiées et club d'affaires B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel."
                   : "In Vino Italia Douala is the very first Italian wine fair in Central Africa: three exceptional days to experience Italy in Douala, with tastings of outstanding wines, Italian gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaho Hotel."}
               </p>
 

@@ -20,13 +20,13 @@ const Index: React.FC = () => {
   const L = useL();
 
   const expertises = [
-    { t: L('Foires & Salons professionnels', 'Trade fairs & exhibitions'), i: L('Foires internationales · Salons sectoriels · Trade shows · Pavillons pays · ConfEx', 'International fairs · Sector shows · Trade shows · Country pavilions · ConfEx'), to: '/business-events#salons', img: tradeshow },
+    { t: L('Foires & Salons professionnels', 'Trade fairs & exhibitions'), i: L('Foires internationales · Salons sectoriels · Salons professionnels · Pavillons pays · Conférences-expositions', 'International fairs · Sector shows · Trade shows · Country pavilions · ConfEx'), to: '/business-events#salons', img: tradeshow },
     { t: L('Conférences & grands rendez-vous', 'Conferences & major gatherings'), i: L('Forums économiques · Sommets · Congrès · Symposiums · Assises', 'Economic forums · Summits · Congresses · Symposiums'), to: '/business-events#conferences', img: conference },
     { t: L('B2B & rencontres d’affaires', 'B2B & Business Matching'), i: L('Programmes acheteurs invités · Rencontres acheteurs-vendeurs · Journées fournisseurs · Rendez-vous express', 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings'), to: '/business-events#b2b', img: b2b },
-    { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Roadshows', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions', img: delegation },
-    { t: L('Événements d’entreprise', 'Corporate Events'), i: L('Conventions · Séminaires · Kick-off · AG · Incentives · Team building', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate', img: corporateSeminar },
+    { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Tournées de promotion', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions', img: delegation },
+    { t: L('Événements d’entreprise', 'Corporate Events'), i: L('Conventions · Séminaires · Lancements d’année · AG · Voyages de motivation · Cohésion d’équipe', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate', img: corporateSeminar },
     { t: L('Réseautage', 'Networking'), i: L('Petits-déjeuners d’affaires · Déjeuners · Dîners · Rencontres de dirigeants · Réseautage exécutif', 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking'), to: '/corporate-institutional#corporate', img: networking },
-    { t: L('Innovation & formation', 'Innovation & training'), i: L('Workshops · Masterclasses · Bootcamps · Tech Summits (IA, sécurité, productivité) · Startup events', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services', img: workshop },
+    { t: L('Innovation & formation', 'Innovation & training'), i: L('Ateliers · Classes de maître · Formations intensives · Sommets technologiques (IA, sécurité, productivité) · Événements de jeunes pousses', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services', img: workshop },
     { t: L('Remises de prix & galas', 'Awards & Galas'), i: L('Remises de prix · Galas · Trophées · Dîners officiels · Réceptions VIP', 'Awards · Galas · Trophies · Official dinners · VIP receptions'), to: '/corporate-institutional#institutionnel', img: gala },
   ];
 
@@ -34,10 +34,10 @@ const Index: React.FC = () => {
     [L('Comprendre', 'Understand'), L('Écoute, contexte, enjeux', 'Listening, context, stakes')],
     [L('Concevoir', 'Think'), L('Concept, objectifs, publics, format', 'Concept, goals, audiences, format')],
     [L('Planifier', 'Plan'), L('Budget, planning, prestataires, sponsors, exposants', 'Budget, schedule, suppliers, sponsors, exhibitors')],
-    [L('Connecter', 'Connect'), L('Invitations, buyers, speakers, investisseurs, délégations', 'Invitations, buyers, speakers, investors, delegations')],
+    [L('Connecter', 'Connect'), L('Invitations, acheteurs, intervenants, investisseurs, délégations', 'Invitations, buyers, speakers, investors, delegations')],
     [L('Produire', 'Produce'), L('Scénographie, stands, technique, signalétique, accueil', 'Scenography, stands, tech, signage, welcome')],
     [L('Livrer', 'Deliver'), L('Coordination terrain, régie, VIP, exposants', 'On-site coordination, stage, VIPs, exhibitors')],
-    [L('Mesurer', 'Measure'), L('Reporting, leads, rencontres, bilan post-event', 'Reporting, leads, meetings, post-event review')],
+    [L('Mesurer', 'Measure'), L('Rapports, contacts qualifiés, rencontres, bilan post-événement', 'Reporting, leads, meetings, post-event review')],
   ];
 
   const zones = [
@@ -46,8 +46,8 @@ const Index: React.FC = () => {
     { n: L("Afrique de l'Est", 'East Africa'), c: L('Kenya · Rwanda · Ouganda · Tanzanie · Éthiopie · Djibouti · Burundi', 'Kenya · Rwanda · Uganda · Tanzania · Ethiopia · Djibouti · Burundi') },
   ];
 
-  const clients = [L('Entreprises', 'Companies'), 'Multinationales', L('Institutions publiques', 'Public institutions'), L('Ministères', 'Ministries'), L('Organisations internationales', 'International organisations'), L('Ambassades', 'Embassies'), L('Chambres de commerce', 'Chambers of commerce'), L('Fédérations professionnelles', 'Trade federations'), L('Organisateurs de salons', 'Trade show organisers'), L('Associations professionnelles', 'Professional associations'), L('Investisseurs', 'Investors'), L('Banques', 'Banks'), 'ONG', 'Startups', L('Marques', 'Brands'), L('Promoteurs immobiliers', 'Real estate developers'), L('Hôtels', 'Hotels'), L('Particuliers premium', 'Premium private clients')];
-  const sectors = [L('Finance & Banque', 'Finance & Banking'), L('Assurance', 'Insurance'), L('Technologie', 'Technology'), L('Intelligence Artificielle', 'Artificial Intelligence'), L('Télécommunications', 'Telecoms'), L('Énergie', 'Energy'), 'Oil & Gas', L('Mines', 'Mining'), L('Agriculture', 'Agriculture'), L('Agro-industrie', 'Agribusiness'), L('Industrie', 'Industry'), L('Construction', 'Construction'), L('Infrastructure', 'Infrastructure'), L('Immobilier', 'Real estate'), L('Transport', 'Transport'), L('Logistique', 'Logistics'), L('Tourisme', 'Tourism'), L('Hôtellerie', 'Hospitality'), L('Santé', 'Healthcare'), L('Commerce', 'Trade'), L('Distribution', 'Retail'), 'Supply Chain', L('Éducation', 'Education'), L('Environnement', 'Environment'), L('Industries créatives', 'Creative industries')];
+  const clients = [L('Entreprises', 'Companies'), L('Multinationales', 'Multinationals'), L('Institutions publiques', 'Public institutions'), L('Ministères', 'Ministries'), L('Organisations internationales', 'International organisations'), L('Ambassades', 'Embassies'), L('Chambres de commerce', 'Chambers of commerce'), L('Fédérations professionnelles', 'Trade federations'), L('Organisateurs de salons', 'Trade show organisers'), L('Associations professionnelles', 'Professional associations'), L('Investisseurs', 'Investors'), L('Banques', 'Banks'), 'ONG', L('Jeunes pousses', 'Startups'), L('Marques', 'Brands'), L('Promoteurs immobiliers', 'Real estate developers'), L('Hôtels', 'Hotels'), L('Particuliers premium', 'Premium private clients')];
+  const sectors = [L('Finance & Banque', 'Finance & Banking'), L('Assurance', 'Insurance'), L('Technologie', 'Technology'), L('Intelligence Artificielle', 'Artificial Intelligence'), L('Télécommunications', 'Telecoms'), L('Énergie', 'Energy'), L('Pétrole & gaz', 'Oil & Gas'), L('Mines', 'Mining'), L('Agriculture', 'Agriculture'), L('Agro-industrie', 'Agribusiness'), L('Industrie', 'Industry'), L('Construction', 'Construction'), L('Infrastructure', 'Infrastructure'), L('Immobilier', 'Real estate'), L('Transport', 'Transport'), L('Logistique', 'Logistics'), L('Tourisme', 'Tourism'), L('Hôtellerie', 'Hospitality'), L('Santé', 'Healthcare'), L('Commerce', 'Trade'), L('Distribution', 'Retail'), L('Chaîne d’approvisionnement', 'Supply Chain'), L('Éducation', 'Education'), L('Environnement', 'Environment'), L('Industries créatives', 'Creative industries')];
 
   const stats = [
     ['+50', L('Événements réalisés', 'Events delivered')],
@@ -59,7 +59,7 @@ const Index: React.FC = () => {
   return (
     <Layout>
       <Seo title={L("CHANY EVENT'S | Agence d’événements d’affaires, d’entreprise et institutionnels en Afrique", "CHANY EVENT'S | Business, Corporate & Institutional Event Agency in Africa")}
-        description={L("Agence événementielle au Cameroun : salons professionnels, conférences, B2B, missions économiques, événements corporate et institutionnels en Afrique centrale, de l'Ouest et de l'Est.", 'Event agency in Cameroon: trade shows, conferences, B2B matching, trade missions, corporate and institutional events across Central, West and East Africa.')} />
+        description={L("Agence événementielle au Cameroun : salons professionnels, conférences, B2B, missions économiques, événements d’entreprise et institutionnels en Afrique centrale, de l'Ouest et de l'Est.", 'Event agency in Cameroon: trade shows, conferences, B2B matching, trade missions, corporate and institutional events across Central, West and East Africa.')} />
 
       {/* Hero */}
       <section className="relative min-h-[92vh] flex items-end overflow-hidden">
@@ -67,10 +67,10 @@ const Index: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-ink/85 via-ink/40 to-ink/10" />
         <div className="relative container-luxury px-6 md:px-12 pb-16 md:pb-24 pt-40 w-full">
           <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }} className="max-w-4xl">
-            <p className="text-xs md:text-sm font-semibold tracking-[0.25em] uppercase text-cream/80 mb-6">Business • Corporate • Institutional • Signature Events</p>
-            <h1 className="text-display font-serif text-cream mb-6">We design events that move <em>business</em> forward.</h1>
+            <p className="text-xs md:text-sm font-semibold tracking-[0.25em] uppercase text-cream/80 mb-6">{L('Affaires • Entreprises • Institutions • Événements d’exception', 'Business • Corporate • Institutional • Signature Events')}</p>
+            <h1 className="text-display font-serif text-cream mb-6">{L('Nous concevons des événements qui font ', 'We design events that move ')}<em>{L('avancer', 'business')}</em>{L(' les affaires.', ' forward.')}</h1>
             <p className="text-lead text-cream/85 max-w-2xl mb-4">
-              {L('Foires, salons, conférences, missions économiques, rencontres B2B, événements corporate, institutionnels et signature events.', 'Trade fairs, exhibitions, conferences, trade missions, B2B meetings, corporate, institutional and signature events.')}
+              {L('Foires, salons, conférences, missions économiques, rencontres B2B, événements d’entreprise, institutionnels et d’exception.', 'Trade fairs, exhibitions, conferences, trade missions, B2B meetings, corporate, institutional and signature events.')}
             </p>
             <p className="text-sm font-semibold tracking-[0.2em] uppercase text-cream mb-10">Central Africa • West Africa • East Africa</p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -171,7 +171,7 @@ const Index: React.FC = () => {
             <span className="eyebrow mb-6">{L('Événements d’affaires', 'Business Events')}</span>
             <h2 className="text-section font-serif text-foreground my-6">{L('Un événement doit produire des résultats', 'An event must produce results')}</h2>
             <div className="flex flex-wrap gap-x-6 gap-y-2 font-serif text-2xl text-foreground/80 mb-8">
-              {[L('connexions', 'connections'), L('opportunités', 'opportunities'), 'leads', L('contrats', 'contracts'), L('visibilité', 'visibility'), L('investissements', 'investments'), L('partenariats', 'partnerships'), L('influence', 'influence')].map((w) => <span key={w}><em>{w}</em></span>)}
+              {[L('connexions', 'connections'), L('opportunités', 'opportunities'), L('prospects', 'leads'), L('contrats', 'contracts'), L('visibilité', 'visibility'), L('investissements', 'investments'), L('partenariats', 'partnerships'), L('influence', 'influence')].map((w) => <span key={w}><em>{w}</em></span>)}
             </div>
             <p className="text-lg text-muted-foreground border-l-2 border-primary pl-6">{L("Nous ne mesurons pas seulement le succès d'un événement au nombre de participants, mais aux rencontres, aux opportunités et aux résultats qu'il génère.", "We don't measure an event's success by attendance alone, but by the meetings, opportunities and results it generates.")}</p>
             <Link to="/business-events" className="inline-flex items-center mt-8 text-primary font-semibold">{L('Découvrir les événements d’affaires', 'Explore Business Events')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
@@ -183,7 +183,7 @@ const Index: React.FC = () => {
       <section className="section-padding">
         <div className="container-luxury">
           <Reveal className="text-center max-w-3xl mx-auto mb-14">
-            <span className="eyebrow">Africa Event Partner</span>
+            <span className="eyebrow">{L('Partenaire événementiel en Afrique', 'Africa Event Partner')}</span>
             <h2 className="text-section font-serif text-foreground mt-6 mb-5">Central Africa • West Africa • East Africa</h2>
             <p className="text-muted-foreground text-lg">{L("Basée au Cameroun, CHANY EVENT'S accompagne ses clients sur plusieurs marchés africains grâce à sa capacité d'intervention, son réseau de partenaires locaux et une coordination régionale multi-pays.", "Based in Cameroon, CHANY EVENT'S supports clients across several African markets through its delivery capacity, network of local partners and multi-country regional coordination.")}</p>
           </Reveal>
@@ -211,7 +211,7 @@ const Index: React.FC = () => {
             <h3 className="font-serif text-3xl text-foreground mb-4">International companies entering Africa</h3>
             <p className="text-muted-foreground mb-6">{L("Nous sommes le partenaire local des entreprises étrangères qui souhaitent :", 'We are the local partner for foreign companies looking to:')}</p>
             <ul className="space-y-3 text-foreground">
-              {[L('organiser une conférence', 'host a conference'), L('lancer un produit', 'launch a product'), L('faire une mission commerciale', 'run a trade mission'), L('rencontrer des distributeurs', 'meet distributors'), L('organiser un roadshow', 'run a roadshow'), L('participer à un salon', 'exhibit at a trade show')].map((x) => (
+              {[L('organiser une conférence', 'host a conference'), L('lancer un produit', 'launch a product'), L('faire une mission commerciale', 'run a trade mission'), L('rencontrer des distributeurs', 'meet distributors'), L('organiser une tournée de promotion', 'run a roadshow'), L('participer à un salon', 'exhibit at a trade show')].map((x) => (
                 <li key={x} className="flex items-center gap-3"><span className="h-px w-6 bg-primary" />{x}</li>
               ))}
             </ul>
@@ -252,7 +252,7 @@ const Index: React.FC = () => {
           <Reveal delay={0.1}>
             <span className="eyebrow mb-4">{L('Nous organisons', 'We are organizing')}</span>
             <h2 className="text-section font-serif text-foreground my-5">In Vino Italia Douala<span className="block text-2xl md:text-3xl mt-3 text-primary"><em>{L('1er salon du vin italien au Cameroun', 'The first Italian wine fair in Cameroon')}</em></span></h2>
-            <p className="text-muted-foreground text-lg mb-6">{L("CHANY EVENT'S accompagne l'organisation du tout premier salon des vins italiens en Afrique Centrale. Trois journées d'exception pour vivre l'Italie à Douala : vins d'exception, gastronomie, masterclasses, show-cooking, rencontres privilégiées et business club B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel.", "CHANY EVENT'S is supporting the organization of the very first Italian wine fair in Central Africa. Three exceptional days to experience Italy in Douala: exceptional wines, gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaho Hotel.")}</p>
+            <p className="text-muted-foreground text-lg mb-6">{L("CHANY EVENT'S accompagne l'organisation du tout premier salon des vins italiens en Afrique Centrale. Trois journées d'exception pour vivre l'Italie à Douala : vins d'exception, gastronomie, ateliers de dégustation, démonstrations culinaires, rencontres privilégiées et club d'affaires B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel.", "CHANY EVENT'S is supporting the organization of the very first Italian wine fair in Central Africa. Three exceptional days to experience Italy in Douala: exceptional wines, gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaho Hotel.")}</p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8 text-foreground">
               <span className="flex items-center gap-2"><CalendarDays className="w-5 h-5 text-primary" />26 – 28 {L('novembre', 'November')} 2026</span>
               <span className="flex items-center gap-2"><MapPin className="w-5 h-5 text-primary" />Best Western Plus Soaho Hotel, Douala</span>

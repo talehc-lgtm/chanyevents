@@ -39,7 +39,7 @@ const Header: React.FC = () => {
             { href: '/business-events#conferences', label: L('Conférences & Sommets', 'Conferences & Summits') },
             { href: '/business-events#b2b', label: L('B2B & rencontres d’affaires', 'B2B & Business Matching') },
             { href: '/business-events#missions', label: L('Missions économiques', 'Trade Missions') },
-            { href: '/business-events#roadshows', label: 'Roadshows' },
+            { href: '/business-events#roadshows', label: L('Tournées de promotion', 'Roadshows') },
             { href: '/business-events#pavillons', label: L('Pavillons & Expositions', 'Pavilions & Exhibitions') },
             { href: '/business-events#investment', label: L('Événements d’investissement', 'Investment Events') },
           ],

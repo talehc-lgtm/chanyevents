@@ -62,7 +62,7 @@ const translations: Record<Language, Record<string, string>> = {
     'quote.title': 'Demandez Votre Devis',
     'quote.description': 'Partagez votre vision, nous la concrétisons. Remplissez ce formulaire détaillé pour recevoir une proposition personnalisée.',
     'quote.name': 'Nom complet',
-    'quote.email': 'Email',
+    'quote.email': 'E-mail',
     'quote.phone': 'Téléphone',
     'quote.company': 'Entreprise (optionnel)',
     'quote.eventType': "Type d'événement",
