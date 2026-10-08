@@ -21,9 +21,9 @@ const Weddings: React.FC = () => {
   const L = useL();
   return (
     <Layout>
-      <Seo title={L("Mariages & Signature Events au Cameroun | CHANY EVENT'S", "Weddings & Signature Events in Cameroon | CHANY EVENT'S")}
+      <Seo title={L("Mariages & événements d’exception au Cameroun | CHANY EVENT'S", "Weddings & Signature Events in Cameroon | CHANY EVENT'S")}
         description={L('Mariages, fiançailles, réceptions privées et destination weddings, organisés avec élégance par CHANY EVENT’S.', 'Weddings, engagements, private receptions and destination weddings, elegantly organised by CHANY EVENT’S.')} />
-      <PageHero eyebrow="Weddings & Signature Events"
+      <PageHero eyebrow={L('Mariages & événements d’exception', 'Weddings & Signature Events')}
         title={<>{L('Vos moments personnels méritent la ', 'Your personal moments deserve the ')}<em>{L('même exigence', 'same standard')}</em></>}
         lead={L("Notre héritage : des célébrations raffinées, profondément humaines, orchestrées avec élégance et précision jusque dans le moindre détail.", 'Our heritage: refined, deeply human celebrations, orchestrated with elegance and precision down to the smallest detail.')}
         image={w3.url} alt={L('Mariage de prestige', 'Prestige wedding')} />

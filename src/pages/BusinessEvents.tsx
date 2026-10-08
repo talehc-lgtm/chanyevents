@@ -17,11 +17,11 @@ const BusinessEvents: React.FC = () => {
   return (
     <Layout>
       <Seo
-        title={L("Business Events en Afrique — Salons, conférences, B2B | CHANY EVENT'S", "Business Events in Africa — Trade shows, conferences, B2B | CHANY EVENT'S")}
+        title={L("Événements d’affaires en Afrique — Salons, conférences, B2B | CHANY EVENT'S", "Business Events in Africa — Trade shows, conferences, B2B | CHANY EVENT'S")}
         description={L("Organisation de foires, salons professionnels, conférences, business matching, missions économiques et roadshows au Cameroun et en Afrique.", "Trade show, conference, B2B business matching, trade mission and roadshow organizer in Cameroon and across Africa.")}
       />
       <PageHero
-        eyebrow="Business Events"
+        eyebrow={L('Événements d’affaires', 'Business Events')}
         title={<>{L('Des événements qui créent des ', 'Events that create ')}<em>{L('opportunités', 'opportunities')}</em></>}
         lead={L("Un événement professionnel ne doit pas seulement réunir du monde. Il doit produire des connexions, des leads, des contrats, des partenariats et de l'influence.", "A business event should not just gather people. It must generate connections, leads, contracts, partnerships and influence.")}
         image={tradeshow}
@@ -65,7 +65,7 @@ const BusinessEvents: React.FC = () => {
             ))}
           </div>
           <div className="grid lg:grid-cols-2 gap-10 items-center">
-            <img src={b2b} alt="Business matching" loading="lazy" className="w-full aspect-[5/4] object-cover rounded-sm" />
+            <img src={b2b} alt={L('Rencontres d’affaires', 'Business matching')} loading="lazy" className="w-full aspect-[5/4] object-cover rounded-sm" />
             <ul className="space-y-4">
               {['Hosted Buyer Programmes', 'Buyer Meetings', 'Supplier Meetings', 'Investor Meetings', 'Dealer Meetings', 'Speed meetings', 'Supplier Days'].map((x) => (
                 <li key={x} className="flex items-center gap-4 border-b border-border pb-4 font-serif text-2xl text-foreground">
