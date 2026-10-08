@@ -22,7 +22,7 @@ const CorporateInstitutional: React.FC = () => {
       />
       <Feature id="corporate" index="01" title={L('Événements d’entreprise', 'Corporate Events')}
         text={L('Fédérer vos équipes, engager vos partenaires et valoriser votre marque.', 'Unite your teams, engage your partners and showcase your brand.')}
-        items={['Conventions', L('Séminaires', 'Seminars'), 'Kick-off meetings', L('Assemblées générales', 'General assemblies'), 'Executive meetings', 'Incentives', 'Team building', 'Leadership events', 'Business breakfasts', 'Business dinners', 'Awards & Galas']}
+        items={['Conventions', L('Séminaires', 'Seminars'), L('Réunions de lancement', 'Kick-off meetings'), L('Assemblées générales', 'General assemblies'), L('Réunions de direction', 'Executive meetings'), L('Voyages de motivation', 'Incentives'), L('Cohésion d’équipe', 'Team building'), L('Événements de leadership', 'Leadership events'), L('Petits-déjeuners d’affaires', 'Business breakfasts'), L('Dîners d’affaires', 'Business dinners'), L('Remises de prix & galas', 'Awards & Galas')]}
         image={corporate} />
       <Feature id="institutionnel" index="02" tone reverse title={L('Événements institutionnels', 'Institutional events')}
         text={L('Cérémonies officielles, forums publics et assises nationales, organisés dans le respect des codes et du protocole.', 'Official ceremonies, public forums and national assemblies, run with full respect for codes and protocol.')}
@@ -32,12 +32,12 @@ const CorporateInstitutional: React.FC = () => {
         text={L('Réceptions d’ambassades, fêtes nationales, visites officielles : discrétion, protocole et sens du détail.', 'Embassy receptions, national days, official visits: discretion, protocol and attention to detail.')}
         items={[L("Réceptions d'ambassade", 'Embassy receptions'), L('Fêtes nationales', 'National days'), L('Visites officielles', 'Official visits'), L('Réceptions VIP', 'VIP receptions')]}
         image={vip} />
-      <Feature id="delegations" index="04" tone title="Delegation Management"
+      <Feature id="delegations" index="04" tone title={L('Gestion des délégations', 'Delegation Management')}
         text={L("Pour gouvernements, entreprises, associations professionnelles, chambres de commerce, ambassades et organisations internationales.", 'For governments, companies, professional associations, chambers of commerce, embassies and international organisations.')}
-        items={[L('Accueil aéroport', 'Airport welcome'), 'Transport', L('Hébergement', 'Accommodation'), L('Programme', 'Programme'), L('Protocole', 'Protocol'), 'Business meetings', L('Interprétation', 'Interpretation'), L('Visites', 'Visits'), 'VIP management', L('Conciergerie business', 'Business concierge')]} />
+        items={[L('Accueil aéroport', 'Airport welcome'), 'Transport', L('Hébergement', 'Accommodation'), L('Programme', 'Programme'), L('Protocole', 'Protocol'), L('Réunions d’affaires', 'Business meetings'), L('Interprétation', 'Interpretation'), L('Visites', 'Visits'), L('Gestion VIP', 'VIP management'), L('Conciergerie business', 'Business concierge')]} />
       <Feature id="lancements" index="05" title={L('Lancements & inaugurations', 'Launches & inaugurations')}
         text={L('Révéler un produit, une marque ou un site avec impact, auprès des bons publics et des médias.', 'Unveil a product, brand or site with impact, before the right audiences and media.')}
-        items={[L('Lancements produit', 'Product launches'), L('Inaugurations', 'Inaugurations'), L('Relations médias', 'Media relations'), L('Conférences de presse', 'Press conferences'), 'Streaming']} />
+        items={[L('Lancements produit', 'Product launches'), L('Inaugurations', 'Inaugurations'), L('Relations médias', 'Media relations'), L('Conférences de presse', 'Press conferences'), L('Diffusion en direct', 'Streaming')]} />
       <CtaBand title={L('De la réflexion à l’exécution.', 'From strategy to execution.')}
         text={L('Présentez-nous votre projet corporate ou institutionnel.', 'Tell us about your corporate or institutional project.')}
         button={L('Démarrer un projet', 'Start a project')} to="/contact#projet" />
