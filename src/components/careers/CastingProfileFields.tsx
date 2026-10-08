@@ -67,7 +67,6 @@ const CastingProfileFields: React.FC<Props & { section: 'personal' | 'rest' }> =
         <F id="birth_place" label={L('Lieu de naissance', 'Place of birth')} value={p.birth_place} onChange={(v) => set({ birth_place: v })} />
         <F id="marital_status" label={L('Situation matrimoniale', 'Marital status')} value={p.marital_status} onChange={(v) => set({ marital_status: v })} />
         <F id="nationality" label={L('Nationalité', 'Nationality')} value={p.nationality} onChange={(v) => set({ nationality: v })} />
-        <F id="whatsapp" type="tel" label="WhatsApp" value={p.whatsapp} max={20} onChange={(v) => set({ whatsapp: v })} />
       </div>
     );
   }

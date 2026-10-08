@@ -133,7 +133,7 @@ const Careers: React.FC = () => {
       if (photoFiles.length) photo_paths = await Promise.all(photoFiles.map((f) => upload(f, folder)));
     } catch {
       setIsSubmitting(false);
-      toast({ title: language === 'fr' ? 'Erreur' : 'Error', description: language === 'fr' ? "L'envoi des fichiers a échoué. Réessayez ou postulez via WhatsApp." : 'File upload failed. Try again or apply via WhatsApp.', variant: 'destructive' });
+      toast({ title: language === 'fr' ? 'Erreur' : 'Error', description: language === 'fr' ? "L'envoi des fichiers a échoué. Réessayez." : 'File upload failed. Try again.', variant: 'destructive' });
       return;
     }
 
@@ -162,8 +162,8 @@ const Careers: React.FC = () => {
         title: language === 'fr' ? 'Erreur' : 'Error',
         description:
           language === 'fr'
-            ? "Votre candidature n'a pas pu être envoyée. Réessayez ou postulez via WhatsApp."
-            : 'Your application could not be sent. Try again or apply via WhatsApp.',
+            ? "Votre candidature n'a pas pu être envoyée. Réessayez."
+            : 'Your application could not be sent. Try again.',
         variant: 'destructive',
       });
       return;
@@ -321,8 +321,8 @@ const Careers: React.FC = () => {
             title={language === 'fr' ? 'Postulez Maintenant' : 'Apply Now'}
             description={
               language === 'fr'
-                ? 'Remplissez ce formulaire ou envoyez vos photos et CV par WhatsApp au +237 675 788 550.'
-                : 'Fill out this form or send your photos and CV via WhatsApp to +237 675 788 550.'
+                ? 'Remplissez ce formulaire pour nous transmettre votre candidature.'
+                : 'Fill out this form to send us your application.'
             }
           />
 
@@ -371,7 +371,7 @@ const Careers: React.FC = () => {
               </div>
               <div>
                 <Label htmlFor="phone" className="text-foreground">
-                  {language === 'fr' ? 'Téléphone / WhatsApp *' : 'Phone / WhatsApp *'}
+                  {language === 'fr' ? 'Téléphone *' : 'Phone *'}
                 </Label>
                 <Input
                   id="phone"
