@@ -171,7 +171,7 @@ const Index: React.FC = () => {
             <span className="eyebrow mb-6">{L('Événements d’affaires', 'Business Events')}</span>
             <h2 className="text-section font-serif text-foreground my-6">{L('Un événement doit produire des résultats', 'An event must produce results')}</h2>
             <div className="flex flex-wrap gap-x-6 gap-y-2 font-serif text-2xl text-foreground/80 mb-8">
-              {[L('connexions', 'connections'), L('opportunités', 'opportunities'), 'leads', L('contrats', 'contracts'), L('visibilité', 'visibility'), L('investissements', 'investments'), L('partenariats', 'partnerships'), L('influence', 'influence')].map((w) => <span key={w}><em>{w}</em></span>)}
+              {[L('connexions', 'connections'), L('opportunités', 'opportunities'), L('prospects', 'leads'), L('contrats', 'contracts'), L('visibilité', 'visibility'), L('investissements', 'investments'), L('partenariats', 'partnerships'), L('influence', 'influence')].map((w) => <span key={w}><em>{w}</em></span>)}
             </div>
             <p className="text-lg text-muted-foreground border-l-2 border-primary pl-6">{L("Nous ne mesurons pas seulement le succès d'un événement au nombre de participants, mais aux rencontres, aux opportunités et aux résultats qu'il génère.", "We don't measure an event's success by attendance alone, but by the meetings, opportunities and results it generates.")}</p>
             <Link to="/business-events" className="inline-flex items-center mt-8 text-primary font-semibold">{L('Découvrir les événements d’affaires', 'Explore Business Events')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
