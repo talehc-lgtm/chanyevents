@@ -99,7 +99,7 @@ const Header: React.FC = () => {
                             {col.feature && (
                               <Link to={col.feature.href} className="block mt-6 pt-5 border-t border-champagne/50 hover:text-primary transition-colors">
                                 <span className="block font-serif text-lg text-foreground mb-3 pb-3 border-b border-border">{col.feature.title}</span>
-                                <span className="block text-sm font-semibold uppercase tracking-[0.12em] text-primary">{col.feature.label}</span>
+                                <span className="block px-1 py-1.5 text-sm text-foreground/75">{col.feature.label}</span>
                               </Link>
                             )}
                           </div>
@@ -154,7 +154,7 @@ const Header: React.FC = () => {
                           {col.feature && (
                             <Link to={col.feature.href} className="block mt-4 pt-4 border-t border-champagne/50 hover:text-primary transition-colors">
                               <span className="block font-serif text-lg text-foreground mb-2 pb-2 border-b border-border">{col.feature.title}</span>
-                              <span className="block text-sm font-semibold uppercase tracking-[0.12em] text-primary">{col.feature.label}</span>
+                              <span className="block py-1.5 text-muted-foreground">{col.feature.label}</span>
                             </Link>
                           )}
                         </div>
