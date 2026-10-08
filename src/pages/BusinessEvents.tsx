@@ -87,7 +87,7 @@ const BusinessEvents: React.FC = () => {
         image={exness} />
       <Feature id="pavillons" index="06" tone title={L('Pavillons nationaux & participation aux salons', 'National pavilions & trade show participation')}
         text={L("Une participation à un salon est une opération commerciale complète : nous la pilotons de la conception du stand jusqu'aux rendez-vous B2B.", 'Exhibiting is a full commercial operation: we run it from stand design to B2B meetings.')}
-        items={[L('Conception', 'Design'), 'Construction', 'Stands', L('Habillage de marque', 'Branding'), L('Mobilier', 'Furniture'), L('Audiovisuel', 'Audiovisual'), L('Coordination des exposants', 'Exhibitor coordination'), 'Transport', L('Douanes', 'Customs'), L('Personnel', 'Staff')', 'Hospitality', 'Communication', 'B2B', 'Side events']} />
+        items={[L('Conception', 'Design'), 'Construction', 'Stands', L('Habillage de marque', 'Branding'), L('Mobilier', 'Furniture'), L('Audiovisuel', 'Audiovisual'), L('Coordination des exposants', 'Exhibitor coordination'), 'Transport', L('Douanes', 'Customs'), L('Personnel', 'Staff'), L('Hospitalité', 'Hospitality'), 'Communication', 'B2B', L('Événements parallèles', 'Side events')]} />
       <Feature id="investment" index="07" title="Investment Events"
         text={L("Rencontres investisseurs, forums d'investissement et présentations de projets, dans un cadre confidentiel et maîtrisé.", 'Investor meetings, investment forums and project pitches, in a confidential and controlled setting.')}
         items={[L('Rencontres investisseurs', 'Investor meetings'), L("Forums d'investissement", 'Investment forums'), 'Deal rooms', L('Présentations de projets', 'Project pitches'), 'Executive networking']} />
