@@ -12,7 +12,7 @@ const BusinessEvents: React.FC = () => {
   const matchingSteps = [
     L('Identification des profils', 'Profile identification'), L('Qualification', 'Qualification'), L('Analyse des besoins', 'Needs analysis'),
     L('Matching', 'Matching'), L('Agenda personnalisé', 'Personalised agenda'), L('Accueil', 'Welcome'),
-    L('Gestion des rendez-vous', 'Meeting management'), L('Suivi', 'Follow-up'), L('Reporting', 'Reporting'),
+    L('Gestion des rendez-vous', 'Meeting management'), L('Suivi', 'Follow-up'), L('Rapports', 'Reporting'),
   ];
   return (
     <Layout>
@@ -38,7 +38,7 @@ const BusinessEvents: React.FC = () => {
 
       <Feature id="salons" index="01" title={L('Foires & Salons professionnels', 'Trade fairs & exhibitions')}
         text={L("Conception, commercialisation et production de salons sectoriels et de foires internationales, de l'appel aux exposants jusqu'au bilan.", 'Design, sales and production of sector trade shows and international fairs, from exhibitor recruitment to post-show report.')}
-        items={[L('Foires internationales', 'International fairs'), L('Salons sectoriels', 'Sector shows'), 'Trade shows', L('Expositions professionnelles', 'Professional exhibitions'), L('Salons B2B', 'B2B shows'), L('Marketplaces professionnelles', 'Professional marketplaces'), 'ConfEx', L('Pavillons pays', 'Country pavilions')]}
+        items={[L('Foires internationales', 'International fairs'), L('Salons sectoriels', 'Sector shows'), L('Salons commerciaux', 'Trade shows'), L('Expositions professionnelles', 'Professional exhibitions'), L('Salons B2B', 'B2B shows'), L('Marketplaces professionnelles', 'Professional marketplaces'), 'ConfEx', L('Pavillons pays', 'Country pavilions')]}
         image={tradeshow} />
       <Feature id="conferences" index="02" tone reverse title={L('Conférences & Sommets', 'Conferences & Summits')}
         text={L('Forums économiques, congrès et grands rendez-vous : programme, speakers, scène, accréditations et expérience participants.', 'Economic forums, congresses and major gatherings: agenda, speakers, stage, accreditation and attendee experience.')}
@@ -87,7 +87,7 @@ const BusinessEvents: React.FC = () => {
         image={exness} />
       <Feature id="pavillons" index="06" tone title={L('Pavillons nationaux & participation aux salons', 'National pavilions & trade show participation')}
         text={L("Une participation à un salon est une opération commerciale complète : nous la pilotons de la conception du stand jusqu'aux rendez-vous B2B.", 'Exhibiting is a full commercial operation: we run it from stand design to B2B meetings.')}
-        items={['Design', 'Construction', 'Stands', 'Branding', L('Mobilier', 'Furniture'), L('Audiovisuel', 'Audiovisual'), L('Coordination des exposants', 'Exhibitor coordination'), 'Transport', L('Douanes', 'Customs'), 'Staff', 'Hospitality', 'Communication', 'B2B', 'Side events']} />
+        items={[L('Conception', 'Design'), 'Construction', 'Stands', L('Habillage de marque', 'Branding'), L('Mobilier', 'Furniture'), L('Audiovisuel', 'Audiovisual'), L('Coordination des exposants', 'Exhibitor coordination'), 'Transport', L('Douanes', 'Customs'), L('Personnel', 'Staff')', 'Hospitality', 'Communication', 'B2B', 'Side events']} />
       <Feature id="investment" index="07" title="Investment Events"
         text={L("Rencontres investisseurs, forums d'investissement et présentations de projets, dans un cadre confidentiel et maîtrisé.", 'Investor meetings, investment forums and project pitches, in a confidential and controlled setting.')}
         items={[L('Rencontres investisseurs', 'Investor meetings'), L("Forums d'investissement", 'Investment forums'), 'Deal rooms', L('Présentations de projets', 'Project pitches'), 'Executive networking']} />

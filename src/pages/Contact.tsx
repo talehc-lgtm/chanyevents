@@ -94,7 +94,7 @@ const Contact: React.FC = () => {
                   {field('name', L('Nom', 'Name'), 'text', true)}
                   {field('organization', L('Organisation', 'Organisation'))}
                   {field('job_title', L('Fonction', 'Job title'))}
-                  {field('email', 'Email', 'email', true)}
+                  {field('email', L('E-mail', 'Email'), 'email', true)}
                   {field('phone', L('Téléphone', 'Phone'), 'tel')}
                   {field('country', L('Pays', 'Country'))}
                   {field('city', L('Ville', 'City'))}
@@ -102,7 +102,7 @@ const Contact: React.FC = () => {
                     <Label htmlFor="event_type">{L("Type d'événement", 'Event type')}</Label>
                     <select id="event_type" value={f.event_type} onChange={set('event_type')} className="flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm">
                       <option value="">—</option>
-                      {[L('Foire / Salon', 'Trade fair / Show'), L('Conférence / Sommet', 'Conference / Summit'), L('B2B / Rencontres d’affaires', 'B2B / Business Matching'), L('Mission économique', 'Trade mission'), 'Roadshow', L('Pavillon / Exposition', 'Pavilion / Exhibition'), L('Entreprise', 'Corporate'), L('Institutionnel / Diplomatique', 'Institutional / Diplomatic'), L('Délégation', 'Delegation'), L('Mariage / Événement d’exception', 'Wedding / Signature event'), L('Autre', 'Other')].map((o) => <option key={o}>{o}</option>)}
+                      {[L('Foire / Salon', 'Trade fair / Show'), L('Conférence / Sommet', 'Conference / Summit'), L('B2B / Rencontres d’affaires', 'B2B / Business Matching'), L('Mission économique', 'Trade mission'), L('Tournée de promotion', 'Roadshow'), L('Pavillon / Exposition', 'Pavilion / Exhibition'), L('Entreprise', 'Corporate'), L('Institutionnel / Diplomatique', 'Institutional / Diplomatic'), L('Délégation', 'Delegation'), L('Mariage / Événement d’exception', 'Wedding / Signature event'), L('Autre', 'Other')].map((o) => <option key={o}>{o}</option>)}
                     </select>
                   </div>
                   {field('event_date', 'Date', 'date')}

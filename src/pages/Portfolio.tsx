@@ -95,9 +95,9 @@ const Portfolio: React.FC = () => {
 
   const filters = [
     { key: 'all', label: language === 'fr' ? 'Tous' : 'All' },
-    { key: 'corporate', label: 'Corporate' },
+    { key: 'corporate', label: language === 'fr' ? 'Entreprise' : 'Corporate' },
     { key: 'wedding', label: 'Weddings' },
-    { key: 'vip', label: 'Signature & VIP' },
+    { key: 'vip', label: language === 'fr' ? 'Exception & VIP' : 'Signature & VIP' },
     { key: 'fair', label: 'Trade Shows' },
   ];
 
@@ -107,7 +107,7 @@ const Portfolio: React.FC = () => {
 
   return (
     <Layout>
-      <Seo title={language === 'fr' ? "Réalisations — Selected Work | CHANY EVENT'S" : "Selected Work | CHANY EVENT'S"} description={language === 'fr' ? 'Salons, événements corporate, institutionnels et mariages réalisés par CHANY EVENT\'S, dont In Vino Italia Douala.' : 'Trade shows, corporate, institutional events and weddings delivered by CHANY EVENT\'S, including In Vino Italia Douala.'} />
+      <Seo title={language === 'fr' ? "Réalisations | CHANY EVENT'S" : "Selected Work | CHANY EVENT'S"} description={language === 'fr' ? 'Salons, événements d’entreprise, institutionnels et mariages réalisés par CHANY EVENT\'S, dont In Vino Italia Douala.' : 'Trade shows, corporate, institutional events and weddings delivered by CHANY EVENT\'S, including In Vino Italia Douala.'} />
       {/* Hero Section */}
       <section className="pt-40 md:pt-44 pb-20 bg-gradient-to-b from-charcoal to-background">
         <div className="container-luxury px-6">
