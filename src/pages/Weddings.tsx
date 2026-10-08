@@ -32,7 +32,7 @@ const Weddings: React.FC = () => {
           <Reveal className="md:col-span-7"><img src={aisle} alt="" loading="lazy" className="w-full aspect-[4/3] object-cover rounded-sm" /></Reveal>
           <Reveal delay={0.1} className="md:col-span-5 flex flex-col justify-center">
             <h2 className="text-section font-serif text-foreground mb-6">{L('Nos célébrations', 'Our celebrations')}</h2>
-            <Chips items={[L('Mariages', 'Weddings'), L('Fiançailles', 'Engagements'), L('Anniversaires', 'Birthdays'), L('Réceptions privées', 'Private receptions'), L('Dîners', 'Dinners'), 'Destination Weddings', L('Cérémonies premium', 'Premium ceremonies')]} />
+            <Chips items={[L('Mariages', 'Weddings'), L('Fiançailles', 'Engagements'), L('Anniversaires', 'Birthdays'), L('Réceptions privées', 'Private receptions'), L('Dîners', 'Dinners'), L('Mariages à destination', 'Destination Weddings'), L('Cérémonies premium', 'Premium ceremonies')]} />
           </Reveal>
           <Reveal className="md:col-span-4"><img src={couple} alt="" loading="lazy" className="w-full aspect-[3/4] object-cover rounded-sm" /></Reveal>
           <Reveal delay={0.1} className="md:col-span-4"><img src={table} alt="" loading="lazy" className="w-full aspect-[3/4] object-cover rounded-sm" /></Reveal>
