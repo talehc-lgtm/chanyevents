@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Briefcase, CalendarDays, MapPin, MessageCircle, CheckCircle2, Users, ClipboardList, Send } from 'lucide-react';
+import { Briefcase, CalendarDays, MapPin, CheckCircle2, Users, ClipboardList, Send } from 'lucide-react';
 import { z } from 'zod';
 import Layout from '@/components/layout/Layout';
 import { Seo } from '@/components/common/Blocks';
@@ -13,8 +13,6 @@ import { useToast } from '@/hooks/use-toast';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { supabase } from '@/integrations/supabase/client';
 import CastingProfileFields, { emptyProfile, ageFromBirthDate, type CastingProfile } from '@/components/careers/CastingProfileFields';
-
-const WHATSAPP_NUMBER = '237675788550';
 
 interface JobOffer {
   id: string;
@@ -90,13 +88,6 @@ const Careers: React.FC = () => {
     },
   ];
   const isHostess = selectedPosition === offers[0].title;
-
-  const whatsappApply = (positionTitle: string) => {
-    const text = encodeURIComponent(
-      `Bonjour, je souhaite postuler au poste « ${positionTitle} » pour le salon In Vino Italia Douala (26–28 novembre 2026). Je joins mon CV${positionTitle === offers[0].title ? ', une photo professionnelle et une photo en tenue de ville' : ''}.`
-    );
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${text}`, '_blank', 'noopener,noreferrer');
-  };
 
   const applyFor = (offer: JobOffer) => {
     setSelectedPosition(offer.title);
@@ -314,15 +305,6 @@ const Careers: React.FC = () => {
                   >
                     <Send className="mr-2 w-4 h-4" />
                     {language === 'fr' ? 'Postuler en ligne' : 'Apply online'}
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="border-primary text-primary hover:bg-primary/10 flex-1"
-                    onClick={() => whatsappApply(offer.title)}
-                  >
-                    <MessageCircle className="mr-2 w-4 h-4" />
-                    WhatsApp
                   </Button>
                 </div>
               </motion.article>
