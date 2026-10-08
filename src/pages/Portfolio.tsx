@@ -179,7 +179,7 @@ const Portfolio: React.FC = () => {
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
                 {language === 'fr'
-                  ? "In Vino Italia Douala est le tout premier salon des vins italiens en Afrique Centrale : trois journées d'exception pour vivre l'Italie à Douala, entre dégustations de vins d'exception, gastronomie italienne, masterclasses, show-cooking, rencontres privilégiées et business club B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel."
+                  ? "In Vino Italia Douala est le tout premier salon des vins italiens en Afrique Centrale : trois journées d'exception pour vivre l'Italie à Douala, entre dégustations de vins d'exception, gastronomie italienne, ateliers de dégustation, démonstrations culinaires, rencontres privilégiées et club d'affaires B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel."
                   : "In Vino Italia Douala is the very first Italian wine fair in Central Africa: three exceptional days to experience Italy in Douala, with tastings of outstanding wines, Italian gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaho Hotel."}
               </p>
 

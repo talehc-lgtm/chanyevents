@@ -23,7 +23,7 @@ const Index: React.FC = () => {
     { t: L('Foires & Salons professionnels', 'Trade fairs & exhibitions'), i: L('Foires internationales · Salons sectoriels · Salons professionnels · Pavillons pays · Conférences-expositions', 'International fairs · Sector shows · Trade shows · Country pavilions · ConfEx'), to: '/business-events#salons', img: tradeshow },
     { t: L('Conférences & grands rendez-vous', 'Conferences & major gatherings'), i: L('Forums économiques · Sommets · Congrès · Symposiums · Assises', 'Economic forums · Summits · Congresses · Symposiums'), to: '/business-events#conferences', img: conference },
     { t: L('B2B & rencontres d’affaires', 'B2B & Business Matching'), i: L('Programmes acheteurs invités · Rencontres acheteurs-vendeurs · Journées fournisseurs · Rendez-vous express', 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings'), to: '/business-events#b2b', img: b2b },
-    { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Roadshows', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions', img: delegation },
+    { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Tournées de promotion', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions', img: delegation },
     { t: L('Événements d’entreprise', 'Corporate Events'), i: L('Conventions · Séminaires · Lancements d’année · AG · Voyages de motivation · Cohésion d’équipe', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate', img: corporateSeminar },
     { t: L('Réseautage', 'Networking'), i: L('Petits-déjeuners d’affaires · Déjeuners · Dîners · Rencontres de dirigeants · Réseautage exécutif', 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking'), to: '/corporate-institutional#corporate', img: networking },
     { t: L('Innovation & formation', 'Innovation & training'), i: L('Ateliers · Classes de maître · Formations intensives · Sommets technologiques (IA, sécurité, productivité) · Événements de jeunes pousses', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services', img: workshop },
@@ -183,7 +183,7 @@ const Index: React.FC = () => {
       <section className="section-padding">
         <div className="container-luxury">
           <Reveal className="text-center max-w-3xl mx-auto mb-14">
-            <span className="eyebrow">Africa Event Partner</span>
+            <span className="eyebrow">{L('Partenaire événementiel en Afrique', 'Africa Event Partner')}</span>
             <h2 className="text-section font-serif text-foreground mt-6 mb-5">Central Africa • West Africa • East Africa</h2>
             <p className="text-muted-foreground text-lg">{L("Basée au Cameroun, CHANY EVENT'S accompagne ses clients sur plusieurs marchés africains grâce à sa capacité d'intervention, son réseau de partenaires locaux et une coordination régionale multi-pays.", "Based in Cameroon, CHANY EVENT'S supports clients across several African markets through its delivery capacity, network of local partners and multi-country regional coordination.")}</p>
           </Reveal>
@@ -211,7 +211,7 @@ const Index: React.FC = () => {
             <h3 className="font-serif text-3xl text-foreground mb-4">International companies entering Africa</h3>
             <p className="text-muted-foreground mb-6">{L("Nous sommes le partenaire local des entreprises étrangères qui souhaitent :", 'We are the local partner for foreign companies looking to:')}</p>
             <ul className="space-y-3 text-foreground">
-              {[L('organiser une conférence', 'host a conference'), L('lancer un produit', 'launch a product'), L('faire une mission commerciale', 'run a trade mission'), L('rencontrer des distributeurs', 'meet distributors'), L('organiser un roadshow', 'run a roadshow'), L('participer à un salon', 'exhibit at a trade show')].map((x) => (
+              {[L('organiser une conférence', 'host a conference'), L('lancer un produit', 'launch a product'), L('faire une mission commerciale', 'run a trade mission'), L('rencontrer des distributeurs', 'meet distributors'), L('organiser une tournée de promotion', 'run a roadshow'), L('participer à un salon', 'exhibit at a trade show')].map((x) => (
                 <li key={x} className="flex items-center gap-3"><span className="h-px w-6 bg-primary" />{x}</li>
               ))}
             </ul>
@@ -252,7 +252,7 @@ const Index: React.FC = () => {
           <Reveal delay={0.1}>
             <span className="eyebrow mb-4">{L('Nous organisons', 'We are organizing')}</span>
             <h2 className="text-section font-serif text-foreground my-5">In Vino Italia Douala<span className="block text-2xl md:text-3xl mt-3 text-primary"><em>{L('1er salon du vin italien au Cameroun', 'The first Italian wine fair in Cameroon')}</em></span></h2>
-            <p className="text-muted-foreground text-lg mb-6">{L("CHANY EVENT'S accompagne l'organisation du tout premier salon des vins italiens en Afrique Centrale. Trois journées d'exception pour vivre l'Italie à Douala : vins d'exception, gastronomie, masterclasses, show-cooking, rencontres privilégiées et business club B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel.", "CHANY EVENT'S is supporting the organization of the very first Italian wine fair in Central Africa. Three exceptional days to experience Italy in Douala: exceptional wines, gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaho Hotel.")}</p>
+            <p className="text-muted-foreground text-lg mb-6">{L("CHANY EVENT'S accompagne l'organisation du tout premier salon des vins italiens en Afrique Centrale. Trois journées d'exception pour vivre l'Italie à Douala : vins d'exception, gastronomie, ateliers de dégustation, démonstrations culinaires, rencontres privilégiées et club d'affaires B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel.", "CHANY EVENT'S is supporting the organization of the very first Italian wine fair in Central Africa. Three exceptional days to experience Italy in Douala: exceptional wines, gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaho Hotel.")}</p>
             <div className="flex flex-col sm:flex-row gap-4 mb-8 text-foreground">
               <span className="flex items-center gap-2"><CalendarDays className="w-5 h-5 text-primary" />26 – 28 {L('novembre', 'November')} 2026</span>
               <span className="flex items-center gap-2"><MapPin className="w-5 h-5 text-primary" />Best Western Plus Soaho Hotel, Douala</span>
