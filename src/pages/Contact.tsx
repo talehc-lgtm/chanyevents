@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { supabase } from '@/integrations/supabase/client';
 import { toast } from '@/hooks/use-toast';
 
+const NEEDS_FR: Record<string,string> = { 'Full Event Management': 'Gestion complète', Strategy: 'Stratégie', Planning: 'Planification', Production: 'Production', Logistics: 'Logistique', B2B: 'B2B', Exhibition: 'Exposition', Delegation: 'Délégation', Communication: 'Communication', Other: 'Autre' };
 const NEEDS = ['Full Event Management', 'Strategy', 'Planning', 'Production', 'Logistics', 'B2B', 'Exhibition', 'Delegation', 'Communication', 'Other'];
 
 const Contact: React.FC = () => {
@@ -101,7 +102,7 @@ const Contact: React.FC = () => {
                     <Label htmlFor="event_type">{L("Type d'événement", 'Event type')}</Label>
                     <select id="event_type" value={f.event_type} onChange={set('event_type')} className="flex h-10 w-full rounded-md border border-input bg-background px-3 text-sm">
                       <option value="">—</option>
-                      {[L('Foire / Salon', 'Trade fair / Show'), L('Conférence / Sommet', 'Conference / Summit'), 'B2B / Business Matching', L('Mission économique', 'Trade mission'), 'Roadshow', L('Pavillon / Exposition', 'Pavilion / Exhibition'), 'Corporate', L('Institutionnel / Diplomatique', 'Institutional / Diplomatic'), L('Délégation', 'Delegation'), L('Mariage / Signature event', 'Wedding / Signature event'), L('Autre', 'Other')].map((o) => <option key={o}>{o}</option>)}
+                      {[L('Foire / Salon', 'Trade fair / Show'), L('Conférence / Sommet', 'Conference / Summit'), L('B2B / Rencontres d’affaires', 'B2B / Business Matching'), L('Mission économique', 'Trade mission'), 'Roadshow', L('Pavillon / Exposition', 'Pavilion / Exhibition'), L('Entreprise', 'Corporate'), L('Institutionnel / Diplomatique', 'Institutional / Diplomatic'), L('Délégation', 'Delegation'), L('Mariage / Événement d’exception', 'Wedding / Signature event'), L('Autre', 'Other')].map((o) => <option key={o}>{o}</option>)}
                     </select>
                   </div>
                   {field('event_date', 'Date', 'date')}
@@ -117,7 +118,7 @@ const Contact: React.FC = () => {
                       return (
                         <button type="button" key={n} onClick={() => setNeeds(on ? needs.filter((x) => x !== n) : [...needs, n])}
                           className={`px-4 py-2 rounded-full border text-sm transition-colors ${on ? 'bg-primary text-primary-foreground border-primary' : 'border-border text-foreground/80 hover:border-primary'}`}>
-                          {n}
+                          {L(NEEDS_FR[n] ?? n, n)}
                         </button>
                       );
                     })}

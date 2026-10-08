@@ -15,12 +15,12 @@ const CorporateInstitutional: React.FC = () => {
         description={L('Conventions, séminaires, événements institutionnels et diplomatiques, gestion de délégations, lancements et inaugurations.', 'Conventions, seminars, institutional and diplomatic events, delegation management, launches and inaugurations.')}
       />
       <PageHero
-        eyebrow="Corporate & Institutional"
+        eyebrow={L('Entreprises & institutions', 'Corporate & Institutional')}
         title={<>{L('Rigueur, protocole et ', 'Rigour, protocol and ')}<em>{L('excellence', 'excellence')}</em></>}
         lead={L("Pour les entreprises, ministères, ambassades, chambres de commerce et organisations internationales : des événements à la hauteur de vos enjeux.", 'For companies, ministries, embassies, chambers of commerce and international organisations: events that match your stakes.')}
         image={delegation} alt={L('Délégation officielle', 'Official delegation')}
       />
-      <Feature id="corporate" index="01" title="Corporate Events"
+      <Feature id="corporate" index="01" title={L('Événements d’entreprise', 'Corporate Events')}
         text={L('Fédérer vos équipes, engager vos partenaires et valoriser votre marque.', 'Unite your teams, engage your partners and showcase your brand.')}
         items={['Conventions', L('Séminaires', 'Seminars'), 'Kick-off meetings', L('Assemblées générales', 'General assemblies'), 'Executive meetings', 'Incentives', 'Team building', 'Leadership events', 'Business breakfasts', 'Business dinners', 'Awards & Galas']}
         image={corporate} />

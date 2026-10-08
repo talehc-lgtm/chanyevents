@@ -22,22 +22,22 @@ const Index: React.FC = () => {
   const expertises = [
     { t: L('Foires & Salons professionnels', 'Trade fairs & exhibitions'), i: L('Foires internationales · Salons sectoriels · Trade shows · Pavillons pays · ConfEx', 'International fairs · Sector shows · Trade shows · Country pavilions · ConfEx'), to: '/business-events#salons', img: tradeshow },
     { t: L('Conférences & grands rendez-vous', 'Conferences & major gatherings'), i: L('Forums économiques · Sommets · Congrès · Symposiums · Assises', 'Economic forums · Summits · Congresses · Symposiums'), to: '/business-events#conferences', img: conference },
-    { t: 'B2B & Business Matching', i: 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings', to: '/business-events#b2b', img: b2b },
+    { t: L('B2B & rencontres d’affaires', 'B2B & Business Matching'), i: L('Programmes acheteurs invités · Rencontres acheteurs-vendeurs · Journées fournisseurs · Rendez-vous express', 'Hosted Buyer Programmes · Buyer-seller meetings · Supplier Days · Speed meetings'), to: '/business-events#b2b', img: b2b },
     { t: L('Missions économiques', 'Trade missions'), i: L('Missions export & import · Délégations · Visites institutionnelles · Roadshows', 'Export & import missions · Delegations · Institutional visits · Roadshows'), to: '/business-events#missions', img: delegation },
-    { t: 'Corporate Events', i: L('Conventions · Séminaires · Kick-off · AG · Incentives · Team building', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate', img: corporateSeminar },
-    { t: 'Networking', i: 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking', to: '/corporate-institutional#corporate', img: networking },
+    { t: L('Événements d’entreprise', 'Corporate Events'), i: L('Conventions · Séminaires · Kick-off · AG · Incentives · Team building', 'Conventions · Seminars · Kick-offs · AGMs · Incentives · Team building'), to: '/corporate-institutional#corporate', img: corporateSeminar },
+    { t: L('Réseautage', 'Networking'), i: L('Petits-déjeuners d’affaires · Déjeuners · Dîners · Rencontres de dirigeants · Réseautage exécutif', 'Business Breakfasts · Lunches · Dinners · CEO Meetings · Executive Networking'), to: '/corporate-institutional#corporate', img: networking },
     { t: L('Innovation & formation', 'Innovation & training'), i: L('Workshops · Masterclasses · Bootcamps · Tech Summits (IA, sécurité, productivité) · Startup events', 'Workshops · Masterclasses · Bootcamps · Tech Summits (AI, security, productivity) · Startup events'), to: '/services', img: workshop },
-    { t: 'Awards & Galas', i: L('Remises de prix · Galas · Trophées · Dîners officiels · Réceptions VIP', 'Awards · Galas · Trophies · Official dinners · VIP receptions'), to: '/corporate-institutional#institutionnel', img: gala },
+    { t: L('Remises de prix & galas', 'Awards & Galas'), i: L('Remises de prix · Galas · Trophées · Dîners officiels · Réceptions VIP', 'Awards · Galas · Trophies · Official dinners · VIP receptions'), to: '/corporate-institutional#institutionnel', img: gala },
   ];
 
   const process = [
-    ['Understand', L('Écoute, contexte, enjeux', 'Listening, context, stakes')],
-    ['Think', L('Concept, objectifs, publics, format', 'Concept, goals, audiences, format')],
-    ['Plan', L('Budget, planning, prestataires, sponsors, exposants', 'Budget, schedule, suppliers, sponsors, exhibitors')],
-    ['Connect', L('Invitations, buyers, speakers, investisseurs, délégations', 'Invitations, buyers, speakers, investors, delegations')],
-    ['Produce', L('Scénographie, stands, technique, signalétique, accueil', 'Scenography, stands, tech, signage, welcome')],
-    ['Deliver', L('Coordination terrain, régie, VIP, exposants', 'On-site coordination, stage, VIPs, exhibitors')],
-    ['Measure', L('Reporting, leads, rencontres, bilan post-event', 'Reporting, leads, meetings, post-event review')],
+    [L('Comprendre', 'Understand'), L('Écoute, contexte, enjeux', 'Listening, context, stakes')],
+    [L('Concevoir', 'Think'), L('Concept, objectifs, publics, format', 'Concept, goals, audiences, format')],
+    [L('Planifier', 'Plan'), L('Budget, planning, prestataires, sponsors, exposants', 'Budget, schedule, suppliers, sponsors, exhibitors')],
+    [L('Connecter', 'Connect'), L('Invitations, buyers, speakers, investisseurs, délégations', 'Invitations, buyers, speakers, investors, delegations')],
+    [L('Produire', 'Produce'), L('Scénographie, stands, technique, signalétique, accueil', 'Scenography, stands, tech, signage, welcome')],
+    [L('Livrer', 'Deliver'), L('Coordination terrain, régie, VIP, exposants', 'On-site coordination, stage, VIPs, exhibitors')],
+    [L('Mesurer', 'Measure'), L('Reporting, leads, rencontres, bilan post-event', 'Reporting, leads, meetings, post-event review')],
   ];
 
   const zones = [
@@ -58,7 +58,7 @@ const Index: React.FC = () => {
 
   return (
     <Layout>
-      <Seo title={L("CHANY EVENT'S | Agence Business, Corporate & Institutional Events en Afrique", "CHANY EVENT'S | Business, Corporate & Institutional Event Agency in Africa")}
+      <Seo title={L("CHANY EVENT'S | Agence d’événements d’affaires, d’entreprise et institutionnels en Afrique", "CHANY EVENT'S | Business, Corporate & Institutional Event Agency in Africa")}
         description={L("Agence événementielle au Cameroun : salons professionnels, conférences, B2B, missions économiques, événements corporate et institutionnels en Afrique centrale, de l'Ouest et de l'Est.", 'Event agency in Cameroon: trade shows, conferences, B2B matching, trade missions, corporate and institutional events across Central, West and East Africa.')} />
 
       {/* Hero */}
@@ -166,15 +166,15 @@ const Index: React.FC = () => {
       {/* Business events value */}
       <section className="section-padding bg-charcoal">
         <div className="container-luxury grid lg:grid-cols-12 gap-12 items-center">
-          <Reveal className="lg:col-span-5"><img src={b2b} alt="Business matching" loading="lazy" className="w-full aspect-[4/5] object-cover rounded-sm" /></Reveal>
+          <Reveal className="lg:col-span-5"><img src={b2b} alt={L('Rencontres d’affaires', 'Business matching')} loading="lazy" className="w-full aspect-[4/5] object-cover rounded-sm" /></Reveal>
           <Reveal delay={0.1} className="lg:col-span-7">
-            <span className="eyebrow mb-6">Business Events</span>
+            <span className="eyebrow mb-6">{L('Événements d’affaires', 'Business Events')}</span>
             <h2 className="text-section font-serif text-foreground my-6">{L('Un événement doit produire des résultats', 'An event must produce results')}</h2>
             <div className="flex flex-wrap gap-x-6 gap-y-2 font-serif text-2xl text-foreground/80 mb-8">
               {[L('connexions', 'connections'), L('opportunités', 'opportunities'), 'leads', L('contrats', 'contracts'), L('visibilité', 'visibility'), L('investissements', 'investments'), L('partenariats', 'partnerships'), L('influence', 'influence')].map((w) => <span key={w}><em>{w}</em></span>)}
             </div>
             <p className="text-lg text-muted-foreground border-l-2 border-primary pl-6">{L("Nous ne mesurons pas seulement le succès d'un événement au nombre de participants, mais aux rencontres, aux opportunités et aux résultats qu'il génère.", "We don't measure an event's success by attendance alone, but by the meetings, opportunities and results it generates.")}</p>
-            <Link to="/business-events" className="inline-flex items-center mt-8 text-primary font-semibold">{L('Découvrir Business Events', 'Explore Business Events')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
+            <Link to="/business-events" className="inline-flex items-center mt-8 text-primary font-semibold">{L('Découvrir les événements d’affaires', 'Explore Business Events')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
           </Reveal>
         </div>
       </section>
@@ -270,9 +270,9 @@ const Index: React.FC = () => {
         <img src={weddingArch} alt="" loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-ink/55" />
         <Reveal className="relative container-luxury px-6 text-center max-w-3xl">
-          <span className="text-xs font-semibold tracking-[0.25em] uppercase text-cream/80">Weddings & Signature Events</span>
+          <span className="text-xs font-semibold tracking-[0.25em] uppercase text-cream/80">{L('Mariages & événements d’exception', 'Weddings & Signature Events')}</span>
           <h2 className="text-section font-serif text-cream mt-6 mb-8">{L('Vos moments personnels méritent la ', 'Your personal moments deserve the ')}<em>{L('même exigence.', 'same standard.')}</em></h2>
-          <Link to="/weddings" className="inline-flex items-center px-8 py-4 border border-cream/70 text-cream rounded-sm font-semibold hover:bg-cream/10">{L('Découvrir Weddings & Private Events', 'Explore Weddings & Private Events')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
+          <Link to="/weddings" className="inline-flex items-center px-8 py-4 border border-cream/70 text-cream rounded-sm font-semibold hover:bg-cream/10">{L('Découvrir les mariages & événements privés', 'Explore Weddings & Private Events')} <ArrowRight className="ml-2 w-4 h-4" /></Link>
         </Reveal>
       </section>
 

@@ -11,9 +11,9 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const events = [
-    { to: '/business-events', label: 'Business Events' },
-    { to: '/corporate-institutional', label: 'Corporate & Institutional' },
-    { to: '/weddings', label: 'Weddings & Signature Events' },
+    { to: '/business-events', label: L('Événements d’affaires', 'Business Events') },
+    { to: '/corporate-institutional', label: L('Entreprises & institutions', 'Corporate & Institutional') },
+    { to: '/weddings', label: L('Mariages & événements d’exception', 'Weddings & Signature Events') },
     { to: '/portfolio', label: t('nav.portfolio') },
   ];
 

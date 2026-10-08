@@ -21,9 +21,9 @@ const Weddings: React.FC = () => {
   const L = useL();
   return (
     <Layout>
-      <Seo title={L("Mariages & Signature Events au Cameroun | CHANY EVENT'S", "Weddings & Signature Events in Cameroon | CHANY EVENT'S")}
+      <Seo title={L("Mariages & événements d’exception au Cameroun | CHANY EVENT'S", "Weddings & Signature Events in Cameroon | CHANY EVENT'S")}
         description={L('Mariages, fiançailles, réceptions privées et destination weddings, organisés avec élégance par CHANY EVENT’S.', 'Weddings, engagements, private receptions and destination weddings, elegantly organised by CHANY EVENT’S.')} />
-      <PageHero eyebrow="Weddings & Signature Events"
+      <PageHero eyebrow={L('Mariages & événements d’exception', 'Weddings & Signature Events')}
         title={<>{L('Vos moments personnels méritent la ', 'Your personal moments deserve the ')}<em>{L('même exigence', 'same standard')}</em></>}
         lead={L("Notre héritage : des célébrations raffinées, profondément humaines, orchestrées avec élégance et précision jusque dans le moindre détail.", 'Our heritage: refined, deeply human celebrations, orchestrated with elegance and precision down to the smallest detail.')}
         image={w3.url} alt={L('Mariage de prestige', 'Prestige wedding')} />
@@ -32,7 +32,7 @@ const Weddings: React.FC = () => {
           <Reveal className="md:col-span-7"><img src={aisle} alt="" loading="lazy" className="w-full aspect-[4/3] object-cover rounded-sm" /></Reveal>
           <Reveal delay={0.1} className="md:col-span-5 flex flex-col justify-center">
             <h2 className="text-section font-serif text-foreground mb-6">{L('Nos célébrations', 'Our celebrations')}</h2>
-            <Chips items={[L('Mariages', 'Weddings'), L('Fiançailles', 'Engagements'), L('Anniversaires', 'Birthdays'), L('Réceptions privées', 'Private receptions'), L('Dîners', 'Dinners'), 'Destination Weddings', L('Cérémonies premium', 'Premium ceremonies')]} />
+            <Chips items={[L('Mariages', 'Weddings'), L('Fiançailles', 'Engagements'), L('Anniversaires', 'Birthdays'), L('Réceptions privées', 'Private receptions'), L('Dîners', 'Dinners'), L('Mariages à destination', 'Destination Weddings'), L('Cérémonies premium', 'Premium ceremonies')]} />
           </Reveal>
           <Reveal className="md:col-span-4"><img src={couple} alt="" loading="lazy" className="w-full aspect-[3/4] object-cover rounded-sm" /></Reveal>
           <Reveal delay={0.1} className="md:col-span-4"><img src={table} alt="" loading="lazy" className="w-full aspect-[3/4] object-cover rounded-sm" /></Reveal>
