@@ -20,6 +20,7 @@ interface JobOffer {
   intro: string;
   missions: string[];
   profile: string[];
+  deadline: { fr: string; en: string };
 }
 
 const applicationSchema = z.object({
@@ -68,6 +69,7 @@ const Careers: React.FC = () => {
         L("Disponible pendant toute la période de l'événement", 'Available for the entire event period'),
         L("Dynamique, organisée et à l'aise avec le public", 'Energetic, organised and comfortable with the public'),
       ],
+      deadline: { fr: 'Date limite de candidature : 15 octobre 2026', en: 'Application deadline: 15 October 2026' },
     },
     {
       id: 'personnel-appui',
