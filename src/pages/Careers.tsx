@@ -87,6 +87,7 @@ const Careers: React.FC = () => {
         L("Disponible pendant toute la période de l'événement", 'Available for the entire event period'),
         L("Organisé, ponctuel et à l'aise en équipe", 'Organised, punctual and a good team player'),
       ],
+      deadline: { fr: 'Date limite de candidature : 15 octobre 2026', en: 'Application deadline: 15 October 2026' },
     },
   ];
   const isHostess = selectedPosition === offers[0].title;
@@ -267,6 +268,10 @@ const Careers: React.FC = () => {
                 <h3 className="font-serif text-3xl font-semibold text-foreground mb-4">
                   {L(offer.title, offer.id === 'hotesses' ? 'Event Hostess' : 'Support Staff')}
                 </h3>
+                <p className="inline-flex items-center gap-2 text-sm font-semibold text-primary mb-4">
+                  <CalendarDays className="w-4 h-4" />
+                  {L(offer.deadline.fr, offer.deadline.en)}
+                </p>
                 <p className="text-muted-foreground leading-relaxed mb-8">{offer.intro}</p>
 
                 <div className="mb-8">
