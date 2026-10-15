@@ -20,6 +20,7 @@ import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
 import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
 import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
 import invinoPosterAsset from '@/assets/invino-douala-affiche.jpg.asset.json';
+import sispiLogoAsset from '@/assets/sispi-logo.jpg.asset.json';
 
 interface PortfolioItem {
   id: number;
@@ -242,6 +243,100 @@ const Portfolio: React.FC = () => {
                     {language === 'fr' ? 'Rejoindre l’équipe du salon' : 'Join the event team'}
                   </Button>
                 </Link>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Event — SISPI */}
+      <section className="section-padding bg-charcoal border-b border-border relative overflow-hidden">
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-gradient-gold" />
+        </div>
+        <div className="container-luxury relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">
+                {language === 'fr' ? 'Nouvelle production à venir' : 'New production coming up'}
+              </span>
+              <h2 className="text-section font-serif font-semibold text-foreground mb-6">
+                SISPI
+                <span className="block text-gradient-gold text-2xl md:text-3xl mt-3">
+                  {language === 'fr'
+                    ? 'Salon International de la Sous-traitance et du Partenariat Industriel'
+                    : 'International Exhibition of Industrial Subcontracting and Partnership'}
+                </span>
+              </h2>
+              <p className="text-muted-foreground text-lg leading-relaxed mb-6">
+                {language === 'fr'
+                  ? "Le SISPI est la vitrine d'une offre d'expertise régionale en matière de sous-traitance industrielle. Pendant quatre jours, ce salon placé sous le Haut Patronage du Premier Ministre met en relation les donneurs d'ordres, les sous-traitants, les institutions et les professionnels du secteur, autour de rencontres d'affaires et de partenariats industriels."
+                  : "SISPI is the showcase of regional expertise in industrial subcontracting. Over four days, held under the High Patronage of the Prime Minister, the fair connects buyers, subcontractors, institutions and industry professionals around business meetings and industrial partnerships."}
+              </p>
+
+              <div className="mb-6">
+                <h3 className="text-foreground font-serif text-xl font-semibold mb-4">
+                  {language === 'fr' ? "Le rôle de CHANY EVENT'S" : "CHANY EVENT'S' role"}
+                </h3>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 rounded-full bg-primary shrink-0" />
+                    <span>
+                      {language === 'fr'
+                        ? "Organisation générale et coordination du salon"
+                        : "General organization and coordination of the fair"}
+                    </span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4 mb-8">
+                <div className="flex items-center gap-3 text-foreground">
+                  <CalendarDays className="w-5 h-5 text-primary" />
+                  <span className="font-medium">
+                    {language === 'fr' ? 'Dates à venir' : 'Dates to be announced'}
+                  </span>
+                </div>
+                <div className="flex items-center gap-3 text-foreground">
+                  <MapPin className="w-5 h-5 text-primary" />
+                  <span className="font-medium">Douala, Cameroun</span>
+                </div>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a href="https://www.sispicm.com" target="_blank" rel="noopener noreferrer">
+                  <Button size="lg" className="bg-gradient-gold text-primary-foreground hover-gold-glow">
+                    {language === 'fr' ? 'Visiter le site du salon' : 'Visit the fair’s website'}
+                    <ArrowRight className="ml-2 w-5 h-5" />
+                  </Button>
+                </a>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="relative mx-auto w-full max-w-md"
+            >
+              <div className="rounded-sm overflow-hidden border border-primary/30 shadow-2xl bg-background p-8 md:p-12 flex items-center justify-center">
+                <img
+                  src={sispiLogoAsset.url}
+                  alt="SISPI — Salon International de la Sous-traitance et du Partenariat Industriel"
+                  className="w-full h-auto object-contain"
+                  loading="lazy"
+                />
+              </div>
+              <div className="absolute -top-4 -right-4 bg-primary px-5 py-3 rounded-sm shadow-lg">
+                <p className="text-primary-foreground text-sm font-semibold tracking-wider uppercase">
+                  {language === 'fr' ? 'À venir' : 'Upcoming'}
+                </p>
               </div>
             </motion.div>
           </div>
