@@ -263,7 +263,7 @@ const Portfolio: React.FC = () => {
               transition={{ duration: 0.6 }}
             >
               <span className="text-primary text-sm font-semibold tracking-[0.2em] uppercase mb-4 block">
-                {language === 'fr' ? 'Notre prochaine grande production' : 'Our next major production'}
+                {language === 'fr' ? 'Nouvelle production à venir' : 'New production coming up'}
               </span>
               <h2 className="text-section font-serif font-semibold text-foreground mb-6">
                 SISPI
