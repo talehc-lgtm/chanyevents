@@ -145,19 +145,19 @@ const Portfolio: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative mx-auto w-full max-w-md"
+              className="relative mx-auto w-full max-w-lg"
             >
+              <div className="mb-4 w-fit bg-primary px-5 py-3 rounded-sm shadow-lg">
+                <p className="text-primary-foreground text-sm font-semibold tracking-wider uppercase">
+                  {language === 'fr' ? 'Événement à la une' : 'Featured event'}
+                </p>
+              </div>
               <div className="rounded-sm overflow-hidden border border-primary/30 shadow-2xl">
                 <img
                   src={invinoPosterAsset.url}
                   alt="Affiche In Vino Italia Douala 2026 — 1ère édition du salon des vins italiens en Afrique centrale, 26–28 novembre 2026, SOAHO Douala Airport Hôtel"
                   className="w-full h-auto object-cover"
                 />
-              </div>
-              <div className="absolute -top-4 -right-4 bg-primary px-5 py-3 rounded-sm shadow-lg">
-                <p className="text-primary-foreground text-sm font-semibold tracking-wider uppercase">
-                  {language === 'fr' ? 'Événement à la une' : 'Featured event'}
-                </p>
               </div>
             </motion.div>
 
