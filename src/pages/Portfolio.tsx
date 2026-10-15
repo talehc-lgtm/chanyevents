@@ -19,7 +19,7 @@ import luxuryWeddingCoupleImage from '@/assets/chany-luxury-wedding-couple.png';
 import weddingFireworksImage from '@/assets/chany-wedding-fireworks.png';
 import weddingArchCoupleImage from '@/assets/chany-wedding-arch-couple.png';
 import promoteInformationTeamImage from '@/assets/chany-promote-information-team.png';
-import invinoPosterAsset from '@/assets/invino-douala-affiche.jpg.asset.json';
+import invinoPosterAsset from '@/assets/invino-douala-affiche-2026.jpg.asset.json';
 import sispiLogoAsset from '@/assets/sispi-logo.jpg.asset.json';
 
 interface PortfolioItem {
@@ -145,19 +145,19 @@ const Portfolio: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative mx-auto w-full max-w-md"
+              className="relative mx-auto w-full max-w-lg"
             >
-              <div className="rounded-sm overflow-hidden border border-primary/30 shadow-2xl">
-                <img
-                  src={invinoPosterAsset.url}
-                  alt="In Vino Italia Douala — 1er salon du vin italien au Cameroun"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-              <div className="absolute -top-4 -right-4 bg-primary px-5 py-3 rounded-sm shadow-lg">
+              <div className="mb-4 w-fit bg-primary px-5 py-3 rounded-sm shadow-lg">
                 <p className="text-primary-foreground text-sm font-semibold tracking-wider uppercase">
                   {language === 'fr' ? 'Événement à la une' : 'Featured event'}
                 </p>
+              </div>
+              <div className="rounded-sm overflow-hidden border border-primary/30 shadow-2xl">
+                <img
+                  src={invinoPosterAsset.url}
+                  alt="Affiche In Vino Italia Douala 2026 — 1ère édition du salon des vins italiens en Afrique centrale, 26–28 novembre 2026, SOAHO Douala Airport Hôtel"
+                  className="w-full h-auto object-cover"
+                />
               </div>
             </motion.div>
 
@@ -174,14 +174,14 @@ const Portfolio: React.FC = () => {
                 In Vino Italia Douala
                 <span className="block text-gradient-gold text-2xl md:text-3xl mt-3">
                   {language === 'fr'
-                    ? '1er salon du vin italien au Cameroun'
-                    : 'The first Italian wine fair in Cameroon'}
+                    ? '1ère édition du salon des vins italiens en Afrique centrale'
+                    : 'The first edition of the Italian wine fair in Central Africa'}
                 </span>
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
                 {language === 'fr'
-                  ? "In Vino Italia Douala est le tout premier salon des vins italiens en Afrique Centrale : trois journées d'exception pour vivre l'Italie à Douala, entre dégustations de vins d'exception, gastronomie italienne, ateliers de dégustation, démonstrations culinaires, rencontres privilégiées et club d'affaires B2B, dans le cadre prestigieux du Best Western Plus Soaho Hotel."
-                  : "In Vino Italia Douala is the very first Italian wine fair in Central Africa: three exceptional days to experience Italy in Douala, with tastings of outstanding wines, Italian gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the Best Western Plus Soaho Hotel."}
+                  ? "In Vino Italia Douala est le tout premier salon des vins italiens en Afrique Centrale : trois journées d'exception pour vivre l'Italie à Douala, entre dégustations de vins d'exception, gastronomie italienne, ateliers de dégustation, démonstrations culinaires, rencontres privilégiées et club d'affaires B2B, dans le cadre prestigieux du SOAHO Douala Airport Hôtel."
+                  : "In Vino Italia Douala is the very first Italian wine fair in Central Africa: three exceptional days to experience Italy in Douala, with tastings of outstanding wines, Italian gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the SOAHO Douala Airport Hôtel."}
               </p>
 
               <div className="mb-6">
@@ -220,7 +220,7 @@ const Portfolio: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-3 text-foreground">
                   <MapPin className="w-5 h-5 text-primary" />
-                  <span className="font-medium">Best Western Plus Soaho Hotel, Douala</span>
+                  <span className="font-medium">SOAHO Douala Airport Hôtel, Douala</span>
                 </div>
               </div>
 

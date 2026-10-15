@@ -236,7 +236,7 @@ const Careers: React.FC = () => {
             <div className="flex items-center gap-3">
               <MapPin className="w-6 h-6 text-primary" />
               <span className="text-foreground font-medium text-lg">
-                Best Western Plus Soaho Hotel — Douala, {language === 'fr' ? 'Cameroun' : 'Cameroon'}
+                SOAHO Douala Airport Hôtel — Douala, {language === 'fr' ? 'Cameroun' : 'Cameroon'}
               </span>
             </div>
             <div className="flex items-center gap-3">
