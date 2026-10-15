@@ -80,7 +80,7 @@ const InVinoItalia: React.FC = () => {
           </Reveal>
           <Reveal delay={0.1} className="relative mx-auto w-full max-w-md">
             <div aria-hidden="true" className="absolute inset-0 translate-x-4 translate-y-4 border border-champagne rounded-sm" />
-            <img src={invinoPosterAsset.url} alt={L("Affiche In Vino Italia Douala 2026, 26–28 novembre, SOAHO Douala Airport Hôtel", 'In Vino Italia Douala 2026 poster, 26–28 November, SOAHO Douala Airport Hôtel')} width={900} height={1125} className="relative w-full h-auto rounded-sm border border-champagne/40" />
+            <img src={invinoPosterAsset.url} alt={L("Affiche In Vino Italia Douala 2026, 26–28 novembre, SOAHO Douala Airport Hôtel", 'In Vino Italia Douala 2026 poster, 26–28 November, SOAHO Douala Airport Hôtel')} width={1120} height={948} className="relative w-full h-auto rounded-sm border border-champagne/40" />
           </Reveal>
         </div>
       </section>

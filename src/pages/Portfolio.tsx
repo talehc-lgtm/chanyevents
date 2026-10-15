@@ -150,7 +150,7 @@ const Portfolio: React.FC = () => {
               <div className="rounded-sm overflow-hidden border border-primary/30 shadow-2xl">
                 <img
                   src={invinoPosterAsset.url}
-                  alt="In Vino Italia Douala — 1er salon du vin italien au Cameroun"
+                  alt="Affiche In Vino Italia Douala 2026 — 1ère édition du salon des vins italiens en Afrique centrale, 26–28 novembre 2026, SOAHO Douala Airport Hôtel"
                   className="w-full h-auto object-cover"
                 />
               </div>
@@ -174,8 +174,8 @@ const Portfolio: React.FC = () => {
                 In Vino Italia Douala
                 <span className="block text-gradient-gold text-2xl md:text-3xl mt-3">
                   {language === 'fr'
-                    ? '1er salon du vin italien au Cameroun'
-                    : 'The first Italian wine fair in Cameroon'}
+                    ? '1ère édition du salon des vins italiens en Afrique centrale'
+                    : 'The first edition of the Italian wine fair in Central Africa'}
                 </span>
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-6">
