@@ -1,7 +1,7 @@
 import type {Criterion, Scores, Slot} from '@/lib/casting';
 export type EventRow={id:string;name:string;casting_at:string;location:string;mission_start:string;mission_end:string;mission_location:string;timezone:string;required_evaluations:number;archived:boolean};
 export type Person={id:string;full_name:string;phone:string;details:Record<string,any>};
-export type Application={id:string;person_id:string;number:number;position:string;status:string;arrived_at:string|null;queue_order:number|null;jury_ids:string[];availability:Slot[];briefing_available:boolean;constraints:string;admin_notes:string;dossier_checked:boolean;decision:string;decision_reason:string;demo:boolean};
+export type Application={source_application_id?:string|null;id:string;person_id:string;number:number;position:string;status:string;arrived_at:string|null;queue_order:number|null;jury_ids:string[];availability:Slot[];briefing_available:boolean;constraints:string;admin_notes:string;dossier_checked:boolean;decision:string;decision_reason:string;demo:boolean};
 export type EvalRow={id:string;application_id:string;juror_id:string;scores:Scores;comments:Record<string,string>;appreciation:string;status:string};
 export type Post={id:string;name:string;quota:number;welcome_required:boolean};
 export type Assignment=Slot&{id:string;application_id:string;post_id:string};
