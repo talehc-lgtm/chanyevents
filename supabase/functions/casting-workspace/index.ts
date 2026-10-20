@@ -1,7 +1,7 @@
 import {createClient} from 'npm:@supabase/supabase-js@2';
 import {corsHeaders} from 'npm:@supabase/supabase-js@2/cors';
 import {z} from 'npm:zod@3';
-import {DEFAULT_CRITERIA, FIRST_EVENT, complete, consolidate, expectedDecision, permission, available, overlaps} from './domain.ts';
+import {DEFAULT_CRITERIA, FIRST_EVENT, complete, consolidate, expectedDecision, permission, available, overlaps, welcomeAlert} from './domain.ts';
 const json=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status,headers:{...corsHeaders,'Content-Type':'application/json'}});
 const uuid=z.string().uuid();
 const text=z.string().trim().max(2000);
@@ -130,7 +130,8 @@ Deno.serve(async req=>{
  const post=await check(db.from('cw_posts').select('*').eq('id',uuid.parse(b.post_id)).eq('event_id',event.id).single());
  const assignments=await check(db.from('cw_assignments').select('*').eq('application_id',a.id));
  const occupied=await check(db.from('cw_assignments').select('*').eq('post_id',post.id).eq('day',s.day));
- const warnings=[];if(!available(s,a.availability))warnings.push('Disponibilité incompatible');if(assignments.some((x:any)=>overlaps(x,s)))warnings.push('Conflit d’horaires');if(occupied.filter((x:any)=>overlaps(x,s)).length>=post.quota)warnings.push('Quota dépassé');
+ const es=await check(db.from('cw_evaluations').select('scores,status').eq('application_id',a.id));const result=consolidate(es,rubric.criteria,event.required_evaluations);
+ const warnings=[];if(post.welcome_required&&(result.count===0||welcomeAlert(result.means,true,result.count)))warnings.push('Seuils accueil non atteints');if(result.provisional)warnings.push('Évaluation provisoire');if(!available(s,a.availability))warnings.push('Disponibilité incompatible');if(assignments.some((x:any)=>overlaps(x,s)))warnings.push('Conflit d’horaires');if(occupied.filter((x:any)=>overlaps(x,s)).length>=post.quota)warnings.push('Quota dépassé');
  if(warnings.length&&!b.override_reason)return json({error:warnings.join(' • '),warnings},409);
  const reason=text.parse(b.override_reason??'');if(warnings.length&&reason.trim().length<3)return json({error:'Motif de dérogation requis'},400);
  const saved=await check(db.from('cw_assignments').insert({...s,application_id:a.id,post_id:post.id}).select().single());await audit('assignment_saved',saved.id,{warnings,reason});return json({ok:true,warnings});
