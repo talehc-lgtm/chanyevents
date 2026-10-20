@@ -43,6 +43,7 @@ const App = () => (
             <Route path="/in-vino" element={<Navigate to="/in-vino-italia-douala-2026" replace />} />
             <Route path="/admin/classement" element={<AdminRanking />} />
             <Route path="/admin/casting" element={<AdminCasting />} />
+            <Route path="/casting" element={<AdminCasting />} />
             <Route path="/admin/candidatures" element={<AdminApplications />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="*" element={<NotFound />} />

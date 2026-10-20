@@ -1,0 +1,6 @@
+import {Input} from '@/components/ui/input';
+import {Textarea} from '@/components/ui/textarea';
+import {Label} from '@/components/ui/label';
+export const fieldClass='h-11 w-full rounded-md border border-input bg-background px-3 text-sm';
+export function Field({label,value,onChange,type='text',required=false,multiline=false}:{label:string;value:string|number;onChange:(v:string)=>void;type?:string;required?:boolean;multiline?:boolean}){return <label className="block space-y-1.5"><Label asChild><span>{label}{required?' *':''}</span></Label>{multiline?<Textarea aria-label={label} value={value} onChange={e=>onChange(e.target.value)} />:<Input aria-label={label} type={type} value={value} onChange={e=>onChange(e.target.value)} required={required} className="h-11" />}</label>;}
+export function SelectField({label,value,onChange,options}:{label:string;value:string;onChange:(v:string)=>void;options:Record<string,string>}){return <label className="block space-y-1.5"><span className="text-sm font-semibold">{label}</span><select aria-label={label} className={fieldClass} value={value} onChange={e=>onChange(e.target.value)}>{Object.entries(options).map(([v,l])=><option key={v} value={v}>{l}</option>)}</select></label>;}

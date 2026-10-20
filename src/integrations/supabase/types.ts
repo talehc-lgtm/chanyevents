@@ -86,6 +86,386 @@ export type Database = {
         }
         Relationships: []
       }
+      cw_applications: {
+        Row: {
+          admin_notes: string
+          arrived_at: string | null
+          availability: Json
+          briefing_available: boolean
+          constraints: string
+          created_at: string
+          decision: string
+          decision_reason: string
+          demo: boolean
+          dossier_checked: boolean
+          event_id: string
+          id: string
+          jury_ids: string[]
+          number: number
+          person_id: string
+          position: string
+          queue_order: number | null
+          status: string
+        }
+        Insert: {
+          admin_notes?: string
+          arrived_at?: string | null
+          availability?: Json
+          briefing_available?: boolean
+          constraints?: string
+          created_at?: string
+          decision?: string
+          decision_reason?: string
+          demo?: boolean
+          dossier_checked?: boolean
+          event_id: string
+          id?: string
+          jury_ids?: string[]
+          number?: number
+          person_id: string
+          position: string
+          queue_order?: number | null
+          status?: string
+        }
+        Update: {
+          admin_notes?: string
+          arrived_at?: string | null
+          availability?: Json
+          briefing_available?: boolean
+          constraints?: string
+          created_at?: string
+          decision?: string
+          decision_reason?: string
+          demo?: boolean
+          dossier_checked?: boolean
+          event_id?: string
+          id?: string
+          jury_ids?: string[]
+          number?: number
+          person_id?: string
+          position?: string
+          queue_order?: number | null
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cw_applications_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "cw_events"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cw_applications_person_id_fkey"
+            columns: ["person_id"]
+            isOneToOne: false
+            referencedRelation: "cw_people"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cw_assignments: {
+        Row: {
+          application_id: string
+          day: string
+          end_time: string
+          id: string
+          post_id: string
+          start_time: string
+        }
+        Insert: {
+          application_id: string
+          day: string
+          end_time: string
+          id?: string
+          post_id: string
+          start_time: string
+        }
+        Update: {
+          application_id?: string
+          day?: string
+          end_time?: string
+          id?: string
+          post_id?: string
+          start_time?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cw_assignments_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "cw_applications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cw_assignments_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "cw_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cw_audit: {
+        Row: {
+          action: string
+          actor_id: string
+          created_at: string
+          detail: Json
+          event_id: string
+          id: string
+          target_id: string | null
+        }
+        Insert: {
+          action: string
+          actor_id: string
+          created_at?: string
+          detail?: Json
+          event_id: string
+          id?: string
+          target_id?: string | null
+        }
+        Update: {
+          action?: string
+          actor_id?: string
+          created_at?: string
+          detail?: Json
+          event_id?: string
+          id?: string
+          target_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cw_audit_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "cw_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cw_evaluations: {
+        Row: {
+          application_id: string
+          appreciation: string
+          comments: Json
+          id: string
+          juror_id: string
+          rubric_id: string
+          scores: Json
+          status: string
+          updated_at: string
+          validated_at: string | null
+        }
+        Insert: {
+          application_id: string
+          appreciation?: string
+          comments?: Json
+          id?: string
+          juror_id: string
+          rubric_id: string
+          scores?: Json
+          status?: string
+          updated_at?: string
+          validated_at?: string | null
+        }
+        Update: {
+          application_id?: string
+          appreciation?: string
+          comments?: Json
+          id?: string
+          juror_id?: string
+          rubric_id?: string
+          scores?: Json
+          status?: string
+          updated_at?: string
+          validated_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cw_evaluations_application_id_fkey"
+            columns: ["application_id"]
+            isOneToOne: false
+            referencedRelation: "cw_applications"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "cw_evaluations_rubric_id_fkey"
+            columns: ["rubric_id"]
+            isOneToOne: false
+            referencedRelation: "cw_rubrics"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cw_events: {
+        Row: {
+          archived: boolean
+          casting_at: string
+          created_at: string
+          id: string
+          location: string
+          mission_end: string
+          mission_location: string
+          mission_start: string
+          name: string
+          next_number: number
+          required_evaluations: number
+          timezone: string
+        }
+        Insert: {
+          archived?: boolean
+          casting_at: string
+          created_at?: string
+          id?: string
+          location?: string
+          mission_end: string
+          mission_location?: string
+          mission_start: string
+          name: string
+          next_number?: number
+          required_evaluations?: number
+          timezone?: string
+        }
+        Update: {
+          archived?: boolean
+          casting_at?: string
+          created_at?: string
+          id?: string
+          location?: string
+          mission_end?: string
+          mission_location?: string
+          mission_start?: string
+          name?: string
+          next_number?: number
+          required_evaluations?: number
+          timezone?: string
+        }
+        Relationships: []
+      }
+      cw_members: {
+        Row: {
+          display_name: string
+          event_id: string
+          id: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          display_name: string
+          event_id: string
+          id?: string
+          role: string
+          user_id: string
+        }
+        Update: {
+          display_name?: string
+          event_id?: string
+          id?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cw_members_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "cw_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cw_people: {
+        Row: {
+          created_at: string
+          details: Json
+          full_name: string
+          id: string
+          normalized_phone: string
+          phone: string
+        }
+        Insert: {
+          created_at?: string
+          details?: Json
+          full_name: string
+          id?: string
+          normalized_phone: string
+          phone: string
+        }
+        Update: {
+          created_at?: string
+          details?: Json
+          full_name?: string
+          id?: string
+          normalized_phone?: string
+          phone?: string
+        }
+        Relationships: []
+      }
+      cw_posts: {
+        Row: {
+          event_id: string
+          id: string
+          name: string
+          quota: number
+          welcome_required: boolean
+        }
+        Insert: {
+          event_id: string
+          id?: string
+          name: string
+          quota?: number
+          welcome_required?: boolean
+        }
+        Update: {
+          event_id?: string
+          id?: string
+          name?: string
+          quota?: number
+          welcome_required?: boolean
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cw_posts_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "cw_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      cw_rubrics: {
+        Row: {
+          criteria: Json
+          event_id: string
+          id: string
+          locked_at: string | null
+          version: number
+        }
+        Insert: {
+          criteria: Json
+          event_id: string
+          id?: string
+          locked_at?: string | null
+          version?: number
+        }
+        Update: {
+          criteria?: Json
+          event_id?: string
+          id?: string
+          locked_at?: string | null
+          version?: number
+        }
+        Relationships: [
+          {
+            foreignKeyName: "cw_rubrics_event_id_fkey"
+            columns: ["event_id"]
+            isOneToOne: false
+            referencedRelation: "cw_events"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       job_applications: {
         Row: {
           age: number | null

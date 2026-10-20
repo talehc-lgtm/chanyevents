@@ -1,0 +1,11 @@
+.casting-workspace {
+ --background: 0 0% 100%; --foreground: 220 9% 18%; --card: 0 0% 100%; --card-foreground: 220 9% 18%; --popover: 0 0% 100%; --popover-foreground: 220 9% 18%;
+ --primary: 345 53% 30%; --primary-foreground: 0 0% 100%; --secondary: 220 12% 94%; --secondary-foreground: 220 9% 18%; --muted: 220 15% 97%; --muted-foreground: 220 6% 43%; --accent: 42 42% 90%; --accent-foreground: 345 53% 30%; --border: 220 12% 87%; --input: 220 12% 82%; --ring: 345 53% 30%; --destructive: 0 65% 43%; --destructive-foreground: 0 0% 100%;
+ font-family: 'Manrope', sans-serif; letter-spacing: 0;
+}
+.casting-workspace h1,.casting-workspace h2,.casting-workspace h3 {font-family: 'Manrope',sans-serif;letter-spacing:0;line-height:1.3;}
+.casting-workspace input[type=checkbox] {accent-color: hsl(var(--primary));width:18px;height:18px;flex-shrink:0;}
+.casting-workspace button {letter-spacing:0;text-transform:none;}
+.cw-sidebar {width:240px;position:fixed;inset:0 auto 0 0;z-index:20;overflow-y:auto;}
+.cw-main {margin-left:240px;}
+@media(max-width:1023px){.cw-sidebar {position:static;width:100%;}.cw-sidebar>a,.cw-sidebar>div:first-of-type {display:none;}.cw-sidebar nav{padding-top:12px;}.cw-main{margin-left:0;}}
