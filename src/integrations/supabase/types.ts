@@ -14,6 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
+      casting_evaluations: {
+        Row: {
+          comment: string | null
+          created_at: string
+          decision: string
+          elocution: number | null
+          experience: number | null
+          full_name: string
+          id: string
+          number: number | null
+          phone: string | null
+          posture: number | null
+          presentation: number | null
+          smile: number | null
+        }
+        Insert: {
+          comment?: string | null
+          created_at?: string
+          decision?: string
+          elocution?: number | null
+          experience?: number | null
+          full_name: string
+          id?: string
+          number?: number | null
+          phone?: string | null
+          posture?: number | null
+          presentation?: number | null
+          smile?: number | null
+        }
+        Update: {
+          comment?: string | null
+          created_at?: string
+          decision?: string
+          elocution?: number | null
+          experience?: number | null
+          full_name?: string
+          id?: string
+          number?: number | null
+          phone?: string | null
+          posture?: number | null
+          presentation?: number | null
+          smile?: number | null
+        }
+        Relationships: []
+      }
       contact_messages: {
         Row: {
           created_at: string
