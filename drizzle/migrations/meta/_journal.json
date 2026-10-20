@@ -71,6 +71,13 @@
       "when": 1792539152455,
       "tag": "0009_casting_received_applications",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1792539169724,
+      "tag": "0010_casting_import_message_concat",
+      "breakpoints": true
     }
   ]
 }
