@@ -69,6 +69,10 @@ Deno.serve(async req=>{
  return json({event,role,user_id:user.id,rubric,members,posts,assignments,audit:log,applications:apps.map((a:any)=>role==='jury'?{...a,admin_notes:''}:a),people:people.map((p:any)=>role==='jury'?{...p,phone:'',normalized_phone:'',details:{experiences:p.details.experiences,languages:p.details.languages,training:p.details.training,photo_path:p.details.photo_path}}:p),evaluations:evals,legacy:globalAdmin?await check(db.from('casting_evaluations').select('*').order('created_at')):[]});
  }
  if(event.archived&& !['archive','file_read'].includes(b.action))return json({error:'Cet événement est archivé.'},409);
+ if(b.action==='import_received'){
+ const result=await check(db.rpc('cw_import_received',{_event_id:event.id,_actor_id:user.id}));
+ return json(result);
+ }
  if(b.action==='person_save'){
  const p=z.object({full_name:z.string().trim().min(2).max(100),phone:z.string().trim().min(8).max(25),details:z.object({email:z.union([z.string().email(),z.literal('')]).optional(),whatsapp:z.string().max(25).optional(),city:z.string().max(100).optional(),district:z.string().max(100).optional(),languages:z.record(z.string().max(100)).optional(),training:text.optional(),experiences:z.array(z.object({event:text,role:text,period:text,tasks:text})).max(3).optional(),clothing:z.record(z.string().max(40)).optional(),photo_path:z.string().max(200).optional(),cv_path:z.string().max(200).optional()}).strict()}).parse(b.person);
  for(const k of ['photo_path','cv_path'])if(p.details[k]&&!new RegExp(`^${event.id}/[0-9a-f-]{36}\\.(jpg|jpeg|png|webp|pdf|doc|docx)$`).test(String(p.details[k])))return json({error:'Pièce jointe invalide'},400);
@@ -155,8 +159,10 @@ Deno.serve(async req=>{
  }
  if(b.action==='file_read'){
  if(role==='jury'&&b.kind==='cv_path')return json({error:'Le CV est réservé à l’accueil et à l’administrateur.'},403);
- const a=await ownApp(b.application_id);const p=await check(db.from('cw_people').select('details').eq('id',a.person_id).single());const kind=z.enum(['photo_path','cv_path']).parse(b.kind);const path=p.details[kind];if(!path)return json({error:'Fichier absent'},404);
- const r=await db.storage.from('casting-private').createSignedUrl(path,300);if(r.error)throw r.error;return json({url:r.data.signedUrl});
+ const a=await ownApp(b.application_id);const p=await check(db.from('cw_people').select('details').eq('id',a.person_id).single());const kind=z.enum(['photo_path','photo_city','cv_path']).parse(b.kind);let path=p.details[kind];let bucket='casting-private';
+ if(!path&&a.source_application_id){const source=await check(db.from('job_applications').select('cv_path,photo_paths').eq('id',a.source_application_id).single());path=kind==='cv_path'?source.cv_path:source.photo_paths?.[kind==='photo_city'?1:0];bucket='applications';}
+ if(!path)return json({error:'Fichier absent'},404);
+ const r=await db.storage.from(bucket).createSignedUrl(path,300);if(r.error)throw r.error;return json({url:r.data.signedUrl});
  }
  if(b.action==='demo_create'){
  for(const [i,name] of ['DÉMO — Alice Exemple','DÉMO — Brice Exemple','DÉMO — Carine Exemple'].entries()){
