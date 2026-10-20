@@ -105,6 +105,7 @@ export type Database = {
           person_id: string
           position: string
           queue_order: number | null
+          source_application_id: string | null
           status: string
         }
         Insert: {
@@ -125,6 +126,7 @@ export type Database = {
           person_id: string
           position: string
           queue_order?: number | null
+          source_application_id?: string | null
           status?: string
         }
         Update: {
@@ -145,6 +147,7 @@ export type Database = {
           person_id?: string
           position?: string
           queue_order?: number | null
+          source_application_id?: string | null
           status?: string
         }
         Relationships: [
@@ -624,6 +627,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
+      cw_import_received: {
+        Args: { _actor_id: string; _event_id: string }
+        Returns: Json
+      }
       has_role: {
         Args: {
           _role: Database["public"]["Enums"]["app_role"]
