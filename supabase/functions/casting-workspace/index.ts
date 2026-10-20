@@ -5,7 +5,9 @@ import {DEFAULT_CRITERIA, FIRST_EVENT, complete, consolidate, expectedDecision, 
 const json=(body:unknown,status=200)=>new Response(JSON.stringify(body),{status,headers:{...corsHeaders,'Content-Type':'application/json'}});
 const uuid=z.string().uuid();
 const text=z.string().trim().max(2000);
-const slot=z.object({day:z.string().regex(/^\d{4}-\d{2}-\d{2}$/),start_time:z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/),end_time:z.string().regex(/^\d{2}:\d{2}(:\d{2})?$/)}).refine(s=>s.end_time>s.start_time,'Créneau invalide');
+const calendarDate=z.string().regex(/^\d{4}-\d{2}-\d{2}$/).refine(v=>!Number.isNaN(Date.parse(v))&&new Date(v).toISOString().slice(0,10)===v,'Date invalide');
+const clock=z.string().regex(/^([01]\d|2[0-3]):[0-5]\d(:[0-5]\d)?$/).transform(v=>v.slice(0,5));
+const slot=z.object({day:calendarDate,start_time:clock,end_time:clock}).refine(s=>s.end_time>s.start_time,'Créneau invalide');
 const criteria=z.array(z.object({key:z.string().regex(/^[a-z_]+$/),label:z.string().min(1).max(150),max:z.number().int().min(1).max(100),test:text.optional()})).min(1).max(30).refine(c=>c.reduce((s,x)=>s+x.max,0)===100 && new Set(c.map(x=>x.key)).size===c.length,'La grille doit totaliser 100 points avec des critères uniques');
 Deno.serve(async req=>{
  if(req.method==='OPTIONS')return new Response('ok',{headers:corsHeaders});
@@ -39,7 +41,7 @@ Deno.serve(async req=>{
  }
  if(b.action==='event_save'){
  if(!globalAdmin)return json({error:'Accès refusé'},403);
- const data=z.object({name:z.string().min(2).max(200),casting_at:z.string().datetime(),location:text,mission_start:z.string().regex(/^\d{4}-\d{2}-\d{2}$/),mission_end:z.string().regex(/^\d{4}-\d{2}-\d{2}$/),mission_location:text,timezone:z.literal('Africa/Douala'),required_evaluations:z.number().int().min(1).max(20)}).refine(e=>e.mission_end>=e.mission_start).parse(b.event);
+ const data=z.object({name:z.string().min(2).max(200),casting_at:z.string().datetime(),location:text,mission_start:calendarDate,mission_end:calendarDate,mission_location:text,timezone:z.literal('Africa/Douala'),required_evaluations:z.number().int().min(1).max(20)}).refine(e=>e.mission_end>=e.mission_start).parse(b.event);
  const event=await check(b.event_id?db.from('cw_events').update(data).eq('id',b.event_id).select().single():db.from('cw_events').insert(data).select().single());
  if(!b.event_id)await check(db.from('cw_rubrics').insert({event_id:event.id,criteria:DEFAULT_CRITERIA}));
  await check(db.from('cw_audit').insert({event_id:event.id,actor_id:user.id,action:'event_save'}));
@@ -50,11 +52,11 @@ Deno.serve(async req=>{
  const event=await check(db.from('cw_events').select('*').eq('id',b.event_id).single());
  const audit=async(action:string,target_id?:string,detail:unknown={})=>check(db.from('cw_audit').insert({event_id:event.id,actor_id:user.id,action,target_id,detail}));
  const application=async(id:unknown)=>check(db.from('cw_applications').select('*').eq('id',uuid.parse(id)).eq('event_id',event.id).single());
- const ownApp=async(id:unknown)=>{const a=await application(id);if(role==='jury'&&a.jury_ids.length&&!a.jury_ids.includes(user.id))throw new Error('Candidate affectée à un autre jury');return a;};
+ const ownApp=async(id:unknown)=>{const a=await application(id);if(role==='jury'&&!a.jury_ids.includes(user.id))throw new Error('Candidate non affectée à votre jury');return a;};
  const rubric=await check(db.from('cw_rubrics').select('*').eq('event_id',event.id).order('version',{ascending:false}).limit(1).single());
  if(b.action==='state'){
  const all=await check(db.from('cw_applications').select('*').eq('event_id',event.id).order('number'));
- const apps=role==='jury'?all.filter((a:any)=>!a.jury_ids.length||a.jury_ids.includes(user.id)):all;
+ const apps=role==='jury'?all.filter((a:any)=>a.jury_ids.includes(user.id)):all;
  const ids=apps.map((a:any)=>a.id);
  const people=ids.length?await check(db.from('cw_people').select('*').in('id',apps.map((a:any)=>a.person_id))):[];
  let evals=ids.length?await check(db.from('cw_evaluations').select('*').in('application_id',ids)):[];
@@ -68,17 +70,21 @@ Deno.serve(async req=>{
  }
  if(event.archived&& !['archive','file_read'].includes(b.action))return json({error:'Cet événement est archivé.'},409);
  if(b.action==='person_save'){
- const p=z.object({full_name:z.string().trim().min(2).max(100),phone:z.string().trim().min(8).max(25),details:z.object({email:z.union([z.string().email(),z.literal('')]).optional(),whatsapp:z.string().max(25).optional(),city:z.string().max(100).optional(),district:z.string().max(100).optional(),languages:z.record(z.string().max(100)).optional(),training:text.optional(),experiences:z.array(z.object({event:text,role:text,period:text,tasks:text})).max(3).optional(),clothing:z.record(z.string().max(40)).optional()}).passthrough()}).parse(b.person);
+ const p=z.object({full_name:z.string().trim().min(2).max(100),phone:z.string().trim().min(8).max(25),details:z.object({email:z.union([z.string().email(),z.literal('')]).optional(),whatsapp:z.string().max(25).optional(),city:z.string().max(100).optional(),district:z.string().max(100).optional(),languages:z.record(z.string().max(100)).optional(),training:text.optional(),experiences:z.array(z.object({event:text,role:text,period:text,tasks:text})).max(3).optional(),clothing:z.record(z.string().max(40)).optional(),photo_path:z.string().max(200).optional(),cv_path:z.string().max(200).optional()}).strict()}).parse(b.person);
  for(const k of ['photo_path','cv_path'])if(p.details[k]&&!new RegExp(`^${event.id}/[0-9a-f-]{36}\\.(jpg|jpeg|png|webp|pdf|doc|docx)$`).test(String(p.details[k])))return json({error:'Pièce jointe invalide'},400);
  const normalized_phone=p.phone.replace(/\D/g,'');
- if(b.person_id){await application(b.application_id);const a=await application(b.application_id);if(a.person_id!==b.person_id)return json({error:'Fiche incompatible'},403);}
+ if(b.person_id){const a=await application(b.application_id);if(a.person_id!==b.person_id)return json({error:'Fiche incompatible'},403);if(!globalAdmin){const shared=await check(db.from('cw_applications').select('id').eq('person_id',a.person_id).neq('event_id',event.id).limit(1));if(shared.length)return json({error:'La modification de cette fiche partagée est réservée à l’administrateur.'},403);}}
  const person=await check(b.person_id?db.from('cw_people').update({...p,normalized_phone}).eq('id',uuid.parse(b.person_id)).select().single():db.from('cw_people').insert({...p,normalized_phone}).select().single());
- const duplicates=await check(db.from('cw_people').select('id,full_name').eq('normalized_phone',normalized_phone).neq('id',person.id));
- return json({ok:true,person,duplicates});
+ const eventPeople=await check(db.from('cw_applications').select('person_id').eq('event_id',event.id));
+ const duplicates=globalAdmin?await check(db.from('cw_people').select('id,full_name').eq('normalized_phone',normalized_phone).neq('id',person.id)):eventPeople.length?await check(db.from('cw_people').select('id,full_name').eq('normalized_phone',normalized_phone).neq('id',person.id).in('id',eventPeople.map((a:any)=>a.person_id))):[];
+ const newApplication=b.person_id?null:await check(db.from('cw_applications').insert({event_id:event.id,person_id:person.id,position:'À préciser'}).select('id').single());
+ if(newApplication)await audit('registration',newApplication.id);
+ return json({ok:true,person,duplicates,application_id:newApplication?.id??b.application_id});
  }
  if(b.action==='application_save'){
  const data=z.object({position:z.string().trim().min(2).max(100),availability:z.array(slot).max(100),briefing_available:z.boolean(),constraints:text,admin_notes:text,dossier_checked:z.boolean()}).parse(b.application);
  if(b.application_id){await application(b.application_id);await check(db.from('cw_applications').update(data).eq('id',b.application_id));return json({ok:true});}
+ if(!globalAdmin)return json({error:'La réutilisation d’une fiche est réservée à l’administrateur.'},403);
  const person_id=uuid.parse(b.person_id);await check(db.from('cw_people').select('id').eq('id',person_id).single());
  const a=await check(db.from('cw_applications').insert({...data,event_id:event.id,person_id}).select().single());
  await audit('registration',a.id);return json({ok:true,application:a});
@@ -113,7 +119,7 @@ Deno.serve(async req=>{
  if(decision!==expectedDecision(result.score)&&reason.trim().length<3)return json({error:'Un motif est requis pour une décision différente de la recommandation.'},400);
  await check(db.from('cw_applications').update({decision,decision_reason:reason}).eq('id',a.id));await audit('decision',a.id,{decision,reason});return json({ok:true});
  }
- if(b.action==='rubric_save'){await check(db.from('cw_rubrics').update({criteria:criteria.parse(b.criteria)}).eq('id',rubric.id));await audit('rubric_save',rubric.id);return json({ok:true});}
+ if(b.action==='rubric_save'){if(rubric.locked_at)return json({error:'La grille est verrouillée depuis la première évaluation.'},409);await check(db.from('cw_rubrics').update({criteria:criteria.parse(b.criteria)}).eq('id',rubric.id));await audit('rubric_save',rubric.id);return json({ok:true});}
  if(b.action==='post_save'){
  const p=z.object({name:z.string().min(2).max(100),quota:z.number().int().min(0).max(1000),welcome_required:z.boolean()}).parse(b.post);
  await check(b.post_id?db.from('cw_posts').update(p).eq('id',uuid.parse(b.post_id)).eq('event_id',event.id):db.from('cw_posts').insert({...p,event_id:event.id}));await audit('post_save');return json({ok:true});
@@ -147,6 +153,7 @@ Deno.serve(async req=>{
  const ext=z.enum(['jpg','jpeg','png','webp','pdf','doc','docx']).parse(b.extension);const path=`${event.id}/${crypto.randomUUID()}.${ext}`;const r=await db.storage.from('casting-private').createSignedUploadUrl(path);if(r.error)throw r.error;return json({ok:true,path,token:r.data.token});
  }
  if(b.action==='file_read'){
+ if(role==='jury'&&b.kind==='cv_path')return json({error:'Le CV est réservé à l’accueil et à l’administrateur.'},403);
  const a=await ownApp(b.application_id);const p=await check(db.from('cw_people').select('details').eq('id',a.person_id).single());const kind=z.enum(['photo_path','cv_path']).parse(b.kind);const path=p.details[kind];if(!path)return json({error:'Fichier absent'},404);
  const r=await db.storage.from('casting-private').createSignedUrl(path,300);if(r.error)throw r.error;return json({url:r.data.signedUrl});
  }
