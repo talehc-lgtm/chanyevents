@@ -67,7 +67,7 @@ const InVinoItalia: React.FC = () => {
             <span className="eyebrow">{L('Événement à la une', 'Featured event')}</span>
             <h1 className="text-display font-serif text-foreground my-5">In Vino Italia Douala <em>2026</em></h1>
             <p className="text-lead text-primary font-serif mb-6"><em>{L('1er Salon des Vins Italiens en Afrique Centrale', 'The first Italian Wine Fair in Central Africa')}</em></p>
-            <p className="text-muted-foreground text-lg mb-8">{L("CHANY EVENT'S accompagne l'organisation du tout premier salon des vins italiens en Afrique Centrale. Trois journées d'exception pour vivre l'Italie à Douala : vins d'exception, gastronomie, ateliers de dégustation, démonstrations culinaires, rencontres privilégiées et club d'affaires B2B, dans le cadre prestigieux du SOAHO Douala Airport Hôtel.", "CHANY EVENT'S is supporting the organization of the very first Italian wine fair in Central Africa. Three exceptional days to experience Italy in Douala: exceptional wines, gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the SOAHO Douala Airport Hôtel.")}</p>
+            <p className="text-muted-foreground text-lg mb-8">{L("Mandatée par DAS CAMEROUN, CHANY EVENT'S assure la conception, la production et la coordination d'In Vino Italia Douala 2026. Trois journées d'exception pour vivre l'Italie à Douala : vins d'exception, gastronomie, ateliers de dégustation, démonstrations culinaires, rencontres privilégiées et club d'affaires B2B, dans le cadre prestigieux du SOAHO Douala Airport Hôtel.", "Appointed by DAS CAMEROUN, CHANY EVENT'S is responsible for the design, production and coordination of In Vino Italia Douala 2026. Three exceptional days to experience Italy in Douala: exceptional wines, gastronomy, masterclasses, show-cooking, exclusive encounters and a B2B business club, in the prestigious setting of the SOAHO Douala Airport Hôtel.")}</p>
             <dl className="grid sm:grid-cols-2 gap-4 mb-8 text-foreground">
               <div className="flex items-center gap-3"><CalendarDays className="w-5 h-5 text-primary" /><div><dt className="sr-only">Dates</dt><dd>26 – 28 {L('novembre', 'November')} 2026</dd></div></div>
               <div className="flex items-center gap-3"><MapPin className="w-5 h-5 text-primary" /><div><dt className="sr-only">{L('Lieu', 'Venue')}</dt><dd>SOAHO Douala Airport Hôtel, Douala</dd></div></div>
@@ -85,14 +85,29 @@ const InVinoItalia: React.FC = () => {
         </div>
       </section>
       <section className="section-padding bg-secondary/40">
-        <div className="container-luxury max-w-3xl">
+        <div className="container-luxury">
           <h2 className="text-section font-serif text-foreground mb-6">{L("Le rôle de CHANY EVENT'S", "CHANY EVENT'S role")}</h2>
-          <ul className="space-y-3 text-foreground/85">
-            {[L('Coordination générale', 'General coordination'), L('Recrutement et encadrement des hôtesses et stewards', 'Recruitment and supervision of hostesses and stewards'), L('Accueil et gestion des flux', 'Welcome and visitor flow management'), L('Logistique', 'Logistics'), L('Tenue des stands', 'Stand management')].map((t) => (
-              <li key={t} className="flex gap-3"><span className="text-primary">—</span>{t}</li>
+          <p className="text-lg text-muted-foreground max-w-3xl mb-10">{L("De la préparation au bilan final, notre mandat couvre l'organisation du salon pour le compte de DAS CAMEROUN, avec un pilotage global et une coordination opérationnelle sur site.", 'From preparation to the final report, our mandate covers the organization of the fair on behalf of DAS CAMEROUN, with overall project management and on-site operational coordination.')}</p>
+          <ul className="grid md:grid-cols-2 gap-x-12 gap-y-8">
+            {[
+              { title: L('Conception générale & scénographie', 'Event design & scenography'), description: L('Conception du salon, parcours visiteur, plan de salle et identité visuelle opérationnelle.', 'Fair concept, visitor journey, floor plan and operational visual identity.') },
+              { title: L('Supports de prospection', 'Outreach materials'), description: L('Conception des supports de prospection du salon.', 'Design of outreach materials for the fair.') },
+              { title: L('Coordination des exposants', 'Exhibitor coordination'), description: L('Suivi des dossiers, coordination logistique et accueil des exposants sur site.', 'Application follow-up, logistics coordination and on-site exhibitor reception.') },
+              { title: L('Aménagement & habillage du site', 'Venue layout & branding'), description: L("Supervision des stands, de l'électricité, du podium, du secrétariat, des espaces B2B, du club d'acheteurs et des ateliers de dégustation ; signalétique, fléchage, habillage et décoration.", 'Supervision of stands, electricity, stage, secretariat, B2B spaces, buyer club and masterclass area; signage, wayfinding, venue branding and decoration.') },
+              { title: L('Direction des équipes', 'Team management'), description: L('Recrutement et supervision des hôtesses et auxiliaires ; coordination de la sécurité, des techniciens, du secrétariat, des journalistes, du maître de cérémonie et du sommelier.', 'Recruitment and supervision of hostesses and support staff; coordination of security, technicians, secretariat, journalists, master of ceremonies and sommelier.') },
+              { title: L('Coordination du programme', 'Programme coordination'), description: L('Pilotage des trois jours : animations, podium, démonstrations culinaires, défilé, tombola et soirée NOTTE ITALIA.', 'Coordination of the three-day programme: entertainment, stage activities, show-cooking, fashion show, raffle and NOTTE ITALIA evening.') },
+              { title: L('Site internet trilingue', 'Trilingual website'), description: L('Conception du site internet trilingue dédié au salon.', 'Design of the trilingual website dedicated to the fair.') },
+              { title: L('Presse, protocole & accréditations', 'Press, protocol & accreditation'), description: L('Gestion des relations presse, du protocole et des accréditations.', 'Management of press relations, protocol and accreditation.') },
+              { title: L('Coordination générale & suivi', 'Overall coordination & monitoring'), description: L("Pilotage des préparatifs, réunions de suivi et coordination avec l'établissement hôtelier sous l'autorité de DAS CAMEROUN.", 'Preparation management, progress meetings and coordination with the hotel under the authority of DAS CAMEROUN.') },
+              { title: L('Bilan après le salon', 'Post-event reporting'), description: L('Rapport de clôture et bilan après le salon, remis au plus tard quinze jours après sa fin.', 'Closing report and post-event review, delivered no later than fifteen days after the fair ends.') },
+            ].map((service) => (
+              <li key={service.title} className="border-t border-border pt-5">
+                <h3 className="font-serif text-2xl text-foreground mb-3">{service.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+              </li>
             ))}
           </ul>
-          <p className="text-sm text-muted-foreground mt-8">{L('Organisé par DAS Sarl', 'Organised by DAS Sarl')} · <a href="https://www.invinodouala.com" target="_blank" rel="noopener noreferrer" className="underline">www.invinodouala.com</a></p>
+          <p className="text-sm text-muted-foreground mt-10">{L("Un événement de DAS CAMEROUN · Organisation et coordination : CHANY EVENT'S", "An event by DAS CAMEROUN · Organization and coordination: CHANY EVENT'S")} · <a href="https://www.invinodouala.com" target="_blank" rel="noopener noreferrer" className="underline">www.invinodouala.com</a></p>
         </div>
       </section>
     </Layout>
