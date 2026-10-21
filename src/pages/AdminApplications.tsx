@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   Loader2, Trash2, FileText, Inbox, Users, Star, Phone, Mail, MapPin, MessageCircle, RefreshCw, User, LogOut,
-  Pencil, Upload, Download,
+  Pencil, Upload, Download, Search, X,
 } from 'lucide-react';
 import * as XLSX from 'xlsx';
 import Layout from '@/components/layout/Layout';
@@ -79,6 +79,7 @@ const AdminApplications: React.FC = () => {
   const [editForm, setEditForm] = useState<EditableApplication | null>(null);
   const [saving, setSaving] = useState(false);
   const [positionFilter, setPositionFilter] = useState('');
+  const [search, setSearch] = useState('');
 
   const loadApplications = async () => {
     setLoading(true);
