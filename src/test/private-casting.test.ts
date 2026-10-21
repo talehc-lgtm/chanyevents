@@ -11,7 +11,7 @@ describe('private casting rules',()=>{
  it('recommends reserve at 60',()=>expect(recommendation(60)).toBe('Réserve / formation'));
  it('rejects below 60',()=>expect(recommendation(59.9)).toBe('Non retenu recommandé'));
  it('requires welcome 9 and instructions 6 for welcome posts',()=>{expect(welcomeAlert({welcome:9,instructions:6},true,1)).toBe(false);expect(welcomeAlert({welcome:8.9,instructions:6},true,1)).toBe(true);expect(welcomeAlert({welcome:9,instructions:5.9},true,1)).toBe(true);});
- it('only admin can decide or manage access',()=>{expect(permission('jury','decision')).toBe(false);expect(permission('reception','member_save')).toBe(false);expect(permission('admin','decision')).toBe(true);});
+  it('only admin can decide or manage access',()=>{expect(permission('jury','decision')).toBe(false);expect(permission('reception','member_save')).toBe(false);expect(permission('admin','decision')).toBe(true);expect(permission('jury','member_save')).toBe(false);expect(permission('admin','member_save')).toBe(true);});
  it('reception cannot evaluate',()=>{expect(permission('reception','evaluation_save')).toBe(false);expect(permission('jury','evaluation_save')).toBe(true);});
  it('detects time conflict without treating adjacent shifts as overlap',()=>{const a={day:'2026-11-26',start_time:'08:00',end_time:'12:00'};expect(overlaps(a,{...a,start_time:'11:00',end_time:'14:00'})).toBe(true);expect(overlaps(a,{...a,start_time:'12:00',end_time:'14:00'})).toBe(false);expect(available({...a,end_time:'13:00'},[a])).toBe(false);});
  it('sets the first casting to 21 October at 14h in Douala',()=>{expect(FIRST_EVENT.casting_at).toBe('2026-10-21T13:00:00Z');expect(FIRST_EVENT.mission_start).toBe('2026-11-26');expect(FIRST_EVENT.mission_end).toBe('2026-11-28');});

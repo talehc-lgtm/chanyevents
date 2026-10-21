@@ -143,9 +143,14 @@ Deno.serve(async req=>{
  if(b.action==='assignment_delete'){const a=await application(b.application_id);await check(db.from('cw_assignments').delete().eq('id',uuid.parse(b.id)).eq('application_id',a.id));await audit('assignment_deleted',a.id);return json({ok:true});}
  if(b.action==='member_save'){
  const m=z.object({email:z.string().email(),display_name:z.string().min(2).max(100),role:z.enum(['reception','jury'])}).parse(b.member);
+ const initialPassword=z.string().min(8).max(128).optional().parse(b.initial_password);
  const {data,error}=await db.auth.admin.listUsers({perPage:1000});if(error)throw error;
  let member=data.users.find(u=>u.email?.toLowerCase()===m.email.toLowerCase());
- if(!member){const invite=await db.auth.admin.inviteUserByEmail(m.email,{redirectTo:b.redirect_to&&['https://chanyevents.com','https://www.chanyevents.com','https://chanyevents.lovable.app'].some(o=>b.redirect_to===o+'/casting')?b.redirect_to:'https://www.chanyevents.com/casting'});if(invite.error)throw invite.error;member=invite.data.user;}
+ if(member&&initialPassword)return json({error:'Ce compte existe déjà. Son mot de passe ne sera pas modifié.'},409);
+ if(!member){
+ if(initialPassword){const created=await db.auth.admin.createUser({email:m.email,password:initialPassword,email_confirm:true});if(created.error)throw created.error;member=created.data.user;}
+ else{const invite=await db.auth.admin.inviteUserByEmail(m.email,{redirectTo:b.redirect_to&&['https://chanyevents.com','https://www.chanyevents.com','https://chanyevents.lovable.app'].some(o=>b.redirect_to===o+'/casting')?b.redirect_to:'https://www.chanyevents.com/casting'});if(invite.error)throw invite.error;member=invite.data.user;}
+ }
  if(!member)throw new Error('Invitation impossible');
  await check(db.from('cw_members').upsert({event_id:event.id,user_id:member.id,display_name:m.display_name,role:m.role},{onConflict:'event_id,user_id'}));
  const existing=await check(db.from('user_roles').select('id').eq('user_id',member.id).eq('role','user').maybeSingle());if(!existing)await check(db.from('user_roles').insert({user_id:member.id,role:'user'}));
