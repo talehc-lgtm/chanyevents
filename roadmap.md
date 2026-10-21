@@ -1,5 +1,5 @@
 # Private casting workspace
-- [ ] Provision the requested evaluator account and verify jury-only casting access.
+- [x] Provision the requested evaluator account and verify jury-only casting access; login succeeds and server rejects membership administration.
 - [x] Include received online applications in the evaluation workspace without changing originals or duplicating imports; authenticated import and repeated-import verification passed
 - [x] Persistent event, person, application, rubric, jury, assignment and audit storage with protected actions
 - [x] French private interface: dashboard, candidates, queue, evaluations, ranking, assignments, settings
