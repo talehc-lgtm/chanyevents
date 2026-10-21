@@ -345,6 +345,31 @@ const AdminApplications: React.FC = () => {
           {tab === 'applications' && applications.length > 0 && (
             <div className="mb-8 flex flex-col lg:flex-row lg:items-center gap-3 p-4 bg-card border border-border rounded-sm">
               <div className="flex-1">
+                <Label htmlFor="search-applications">{fr ? 'Rechercher une candidature' : 'Search applications'}</Label>
+                <div className="relative mt-2">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" aria-hidden="true" />
+                  <Input
+                    id="search-applications"
+                    type="search"
+                    value={search}
+                    onChange={(event) => setSearch(event.target.value)}
+                    placeholder={fr ? 'Nom, téléphone, e-mail, ville, poste…' : 'Name, phone, e-mail, city, position…'}
+                    className="h-10 pl-9 pr-9 rounded-sm"
+                    aria-label={fr ? 'Rechercher une candidature' : 'Search applications'}
+                  />
+                  {search && (
+                    <button
+                      type="button"
+                      onClick={() => setSearch('')}
+                      aria-label={fr ? 'Effacer la recherche' : 'Clear search'}
+                      className="absolute right-2 top-1/2 -translate-y-1/2 p-1 text-muted-foreground hover:text-foreground"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  )}
+                </div>
+              </div>
+              <div className="flex-1">
                 <Label htmlFor="export-position">{fr ? 'Exporter les candidatures d’un poste' : 'Export applications for a position'}</Label>
                 <select id="export-position" value={positionFilter} onChange={(event) => setPositionFilter(event.target.value)} className="mt-2 h-10 w-full rounded-sm border border-border bg-background px-3 text-sm text-foreground">
                   <option value="">{fr ? 'Tous les postes' : 'All positions'}</option>
@@ -358,8 +383,14 @@ const AdminApplications: React.FC = () => {
             </div>
           )}
 
+          {tab === 'applications' && applications.length > 0 && filteredApplications.length === 0 && (
+            <p className="text-muted-foreground text-center py-20">
+              {fr ? 'Aucune candidature ne correspond à votre recherche.' : 'No application matches your search.'}
+            </p>
+          )}
+
           {tab === 'applications' && <div className="space-y-6">
-            {applications.map((app) => (
+            {filteredApplications.map((app) => (
               <motion.article
                 key={app.id}
                 initial={{ opacity: 0, y: 20 }}
