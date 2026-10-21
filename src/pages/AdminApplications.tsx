@@ -106,6 +106,15 @@ const AdminApplications: React.FC = () => {
 
   const positions = [...new Set(applications.map((app) => app.position))].sort((a, b) => a.localeCompare(b));
 
+  const matchesSearch = (app: Application) => {
+    const query = search.trim().toLowerCase();
+    if (!query) return true;
+    return [app.full_name, app.phone, app.email, app.city, app.position, app.experience]
+      .filter(Boolean)
+      .some((value) => String(value).toLowerCase().includes(query));
+  };
+  const filteredApplications = applications.filter(matchesSearch);
+
   const openEdit = (app: Application) => {
     setEditing(app);
     setEditForm({
@@ -128,7 +137,7 @@ const AdminApplications: React.FC = () => {
   };
 
   const exportPosition = () => {
-    const rows = applications.filter((app) => !positionFilter || app.position === positionFilter).map((app) =>
+    const rows = applications.filter((app) => (!positionFilter || app.position === positionFilter) && matchesSearch(app)).map((app) =>
       Object.fromEntries(Object.entries(exportHeaders).map(([key, label]) => [label, app[key as keyof Application] ?? ''])),
     );
     if (!rows.length) return toast({ title: fr ? 'Aucune candidature à exporter' : 'No applications to export' });
