@@ -84,7 +84,7 @@ Deno.serve(async req=>{
  }
  if(b.action==='report_read'){
  const format=z.enum(['pdf','xlsx']).parse(b.format);const filename=`classement_casting_invino_2026.${format}`;
- const r=await db.storage.from('casting-private').createSignedUrl(`${event.id}/reports/${filename}`,60,{download:filename});if(r.error)throw r.error;
+ const r=await db.storage.from('casting-private').createSignedUrl(`${event.id}/reports/${filename}`,600,{download:filename});if(r.error)throw r.error;
  await audit('report_download',undefined,{format});return json({url:r.data.signedUrl});
  }
  if(event.archived&& !['archive','file_read'].includes(b.action))return json({error:'Cet événement est archivé.'},409);
