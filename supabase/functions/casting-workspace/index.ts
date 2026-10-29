@@ -66,7 +66,11 @@ Deno.serve(async req=>{
  const posts=await check(db.from('cw_posts').select('*').eq('event_id',event.id));
  const assignments=ids.length?await check(db.from('cw_assignments').select('*').in('application_id',ids)):[];
  const log=globalAdmin?await check(db.from('cw_audit').select('*').eq('event_id',event.id).order('created_at',{ascending:false}).limit(100)):[];
- return json({event,role,user_id:user.id,rubric,members,posts,assignments,audit:log,applications:apps.map((a:any)=>role==='jury'?{...a,admin_notes:''}:a),people:people.map((p:any)=>role==='jury'?{...p,phone:'',normalized_phone:'',details:{experiences:p.details.experiences,languages:p.details.languages,training:p.details.training,photo_path:p.details.photo_path}}:p),evaluations:evals,legacy:globalAdmin?await check(db.from('casting_evaluations').select('*').order('created_at')):[]});
+ const srcIds=apps.map((a:any)=>a.source_application_id).filter(Boolean);
+ const srcs=srcIds.length?await check(db.from('job_applications').select('id,cv_path,photo_paths').in('id',srcIds)):[];
+ const srcMap=Object.fromEntries(srcs.map((s:any)=>[s.id,s]));
+ const withFiles=(a:any)=>{const s=a.source_application_id?srcMap[a.source_application_id]:null;const out={...a,source_files:s?{cv:!!s.cv_path,photos:(s.photo_paths||[]).length}:null};return role==='jury'?{...out,admin_notes:''}:out;};
+ return json({event,role,user_id:user.id,rubric,members,posts,assignments,audit:log,applications:apps.map(withFiles),people:people.map((p:any)=>role==='jury'?{...p,phone:'',normalized_phone:'',details:{experiences:p.details.experiences,languages:p.details.languages,training:p.details.training,photo_path:p.details.photo_path}}:p),evaluations:evals,legacy:globalAdmin?await check(db.from('casting_evaluations').select('*').order('created_at')):[]});
  }
  if(event.archived&& !['archive','file_read'].includes(b.action))return json({error:'Cet événement est archivé.'},409);
  if(b.action==='import_received'){
@@ -166,7 +170,7 @@ Deno.serve(async req=>{
  if(role==='jury'&&b.kind==='cv_path')return json({error:'Le CV est réservé à l’accueil et à l’administrateur.'},403);
  const a=await ownApp(b.application_id);const p=await check(db.from('cw_people').select('details').eq('id',a.person_id).single());const kind=z.enum(['photo_path','photo_city','cv_path']).parse(b.kind);let path=p.details[kind];let bucket='casting-private';
  if(!path&&a.source_application_id){const source=await check(db.from('job_applications').select('cv_path,photo_paths').eq('id',a.source_application_id).single());path=kind==='cv_path'?source.cv_path:source.photo_paths?.[kind==='photo_city'?1:0];bucket='applications';}
- if(!path)return json({error:'Fichier absent'},404);
+ if(!path)return json({error:kind==='cv_path'?'Aucun CV enregistré pour cette fiche.':kind==='photo_city'?'Aucune photo en tenue de ville enregistrée pour cette fiche.':'Aucune photo professionnelle enregistrée pour cette fiche.'},404);
  const r=await db.storage.from(bucket).createSignedUrl(path,300);if(r.error)throw r.error;return json({url:r.data.signedUrl});
  }
  if(b.action==='demo_create'){
