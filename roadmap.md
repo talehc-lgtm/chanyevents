@@ -1,6 +1,6 @@
 # Private casting workspace
-- [ ] Add protected downloads for the existing full casting PDF and Excel reports and verify both downloads.
-- [ ] Send both reports to the requested email address and confirm acceptance by the email service.
+- [x] Add protected downloads for the existing full casting PDF and Excel reports; both authenticated browser downloads verified.
+- [x] Send both reports to the requested email address; delivery confirmed by the email service.
 - [x] Provision the requested evaluator account and verify jury-only casting access; login succeeds and server rejects membership administration.
 - [x] Include received online applications in the evaluation workspace without changing originals or duplicating imports; authenticated import and repeated-import verification passed
 - [x] Persistent event, person, application, rubric, jury, assignment and audit storage with protected actions
