@@ -72,6 +72,21 @@ Deno.serve(async req=>{
  const withFiles=(a:any)=>{const s=a.source_application_id?srcMap[a.source_application_id]:null;const out={...a,source_files:s?{cv:!!s.cv_path,photos:(s.photo_paths||[]).length}:null};return role==='jury'?{...out,admin_notes:''}:out;};
  return json({event,role,user_id:user.id,rubric,members,posts,assignments,audit:log,applications:apps.map(withFiles),people:people.map((p:any)=>role==='jury'?{...p,phone:'',normalized_phone:'',details:{experiences:p.details.experiences,languages:p.details.languages,training:p.details.training,photo_path:p.details.photo_path}}:p),evaluations:evals,legacy:globalAdmin?await check(db.from('casting_evaluations').select('*').order('created_at')):[]});
  }
+ if(b.action==='report_upload'){
+ const format=z.enum(['pdf','xlsx']).parse(b.format);
+ const path=`${event.id}/reports/classement_casting_invino_2026.${format}`;
+ const r=await db.storage.from('casting-private').createSignedUploadUrl(path,{upsert:true});if(r.error)throw r.error;
+ return json({path,token:r.data.token});
+ }
+ if(b.action==='report_list'){
+ const r=await db.storage.from('casting-private').list(`${event.id}/reports`,{limit:10});if(r.error)throw r.error;
+ return json({formats:['pdf','xlsx'].filter(f=>r.data.some(x=>x.name===`classement_casting_invino_2026.${f}`))});
+ }
+ if(b.action==='report_read'){
+ const format=z.enum(['pdf','xlsx']).parse(b.format);const filename=`classement_casting_invino_2026.${format}`;
+ const r=await db.storage.from('casting-private').createSignedUrl(`${event.id}/reports/${filename}`,60,{download:filename});if(r.error)throw r.error;
+ await audit('report_download',undefined,{format});return json({url:r.data.signedUrl});
+ }
  if(event.archived&& !['archive','file_read'].includes(b.action))return json({error:'Cet événement est archivé.'},409);
  if(b.action==='import_received'){
  const result=await check(db.rpc('cw_import_received',{_event_id:event.id,_actor_id:user.id}));
