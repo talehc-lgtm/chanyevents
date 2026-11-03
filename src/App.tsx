@@ -16,6 +16,8 @@ import AdminApplications from "./pages/AdminApplications";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
 import AdminRanking from "./pages/AdminRanking";
+import Hostesses from './pages/Hostesses';
+import AdminHostesses from './pages/AdminHostesses';
 import InVinoItalia from "./pages/InVinoItalia";
 import AdminCasting from "./pages/AdminCasting";
 
@@ -41,6 +43,8 @@ const App = () => (
             <Route path="/career" element={<Careers />} />
             <Route path="/in-vino-italia-douala-2026" element={<InVinoItalia />} />
             <Route path="/in-vino" element={<Navigate to="/in-vino-italia-douala-2026" replace />} />
+            <Route path="/hotesses" element={<Hostesses />} />
+            <Route path="/admin/hotesses" element={<AdminHostesses />} />
             <Route path="/admin/classement" element={<AdminRanking />} />
             <Route path="/admin/casting" element={<AdminCasting />} />
             <Route path="/casting" element={<AdminCasting />} />
