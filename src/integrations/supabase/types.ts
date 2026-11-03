@@ -469,6 +469,42 @@ export type Database = {
           },
         ]
       }
+      hostess_directory: {
+        Row: {
+          city: string | null
+          created_at: string
+          email: string | null
+          full_name: string
+          id: string
+          phone: string | null
+          photo: string | null
+          position: string
+          sort_order: number
+        }
+        Insert: {
+          city?: string | null
+          created_at?: string
+          email?: string | null
+          full_name: string
+          id?: string
+          phone?: string | null
+          photo?: string | null
+          position: string
+          sort_order?: number
+        }
+        Update: {
+          city?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string
+          id?: string
+          phone?: string | null
+          photo?: string | null
+          position?: string
+          sort_order?: number
+        }
+        Relationships: []
+      }
       job_applications: {
         Row: {
           age: number | null
