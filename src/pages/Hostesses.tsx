@@ -12,7 +12,6 @@ const Hostesses: React.FC = () => {
       <Seo
         title={fr ? "Nos hôtesses | CHANY EVENT'S" : "Our hostesses | CHANY EVENT'S"}
         description={fr ? "Le répertoire des hôtesses et stewards retenus par CHANY EVENT'S pour In Vino Italia Douala 2026." : "The hostesses and stewards selected by CHANY EVENT'S for In Vino Italia Douala 2026."}
-        path="/hotesses"
       />
       <section className="pt-36 pb-24 container-luxury px-6">
         <span className="eyebrow">In Vino Italia Douala 2026</span>
