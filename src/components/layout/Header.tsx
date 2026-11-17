@@ -87,19 +87,19 @@ const Header: React.FC = () => {
                 </Link>
                 {n.mega && (
                   <div className="absolute left-1/2 -translate-x-1/2 top-full invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
-                    <div className="bg-card border border-border rounded-sm shadow-[var(--shadow-elegant)] p-8 grid grid-cols-2 gap-10 w-[560px]">
+                    <div className="bg-card border border-border rounded-sm shadow-[var(--shadow-elegant)] p-6 grid grid-cols-2 gap-6 w-[600px]">
                       {n.mega.map((col) => (
-                        <div key={col.title}>
-                          <Link to={col.href} className="block font-serif text-lg text-foreground hover:text-primary mb-4 pb-3 border-b border-border">{col.title}</Link>
-                          <div className="space-y-1">
+                        <div key={col.title} className="flex flex-col">
+                          <Link to={col.href} className="block font-serif text-lg text-foreground hover:text-primary mb-2 pb-2 border-b border-border">{col.title}</Link>
+                          <div className="flex flex-1 flex-col justify-between gap-0.5">
                             {col.subs.map((c) => (
                               <Link key={c.href} to={c.href} className="block px-1 py-1.5 text-sm text-foreground/75 hover:text-primary transition-colors">
                                 {c.label}
                               </Link>
                             ))}
                             {col.feature && (
-                              <Link to={col.feature.href} className="block mt-6 pt-5 border-t border-champagne/50 hover:text-primary transition-colors">
-                                <span className="block font-serif text-lg text-foreground mb-3 pb-3 border-b border-border">{col.feature.title}</span>
+                              <Link to={col.feature.href} className="block mt-2 pt-2 hover:text-primary transition-colors">
+                                <span className="block font-serif text-lg text-foreground mb-1 pb-2 border-b border-border">{col.feature.title}</span>
                                 <span className="block px-1 py-1.5 text-sm text-foreground/75">{col.feature.label}</span>
                               </Link>
                             )}
@@ -143,7 +143,7 @@ const Header: React.FC = () => {
                     )}
                   </div>
                   {n.mega && mobileSub === n.href && (
-                    <div className="pl-4 border-l border-border mb-2 space-y-4">
+                    <div className="pl-4 border-l border-border mb-2 space-y-3">
                       {n.mega.map((col) => (
                         <div key={col.title}>
                           <Link to={col.href} className="block py-1 font-serif text-lg text-foreground">{col.title}</Link>
@@ -153,7 +153,7 @@ const Header: React.FC = () => {
                             </Link>
                           ))}
                           {col.feature && (
-                            <Link to={col.feature.href} className="block mt-4 pt-4 border-t border-champagne/50 hover:text-primary transition-colors">
+                            <Link to={col.feature.href} className="block mt-2 pt-2 hover:text-primary transition-colors">
                               <span className="block font-serif text-lg text-foreground mb-2 pb-2 border-b border-border">{col.feature.title}</span>
                               <span className="block py-1.5 text-muted-foreground">{col.feature.label}</span>
                             </Link>
