@@ -1,5 +1,7 @@
 # Project architecture rules
 
+- Keep standalone event-category pages inside the public Layout, using the shared language and Seo helpers; register each in the event navigation and sitemap for consistent discovery.
+
 - Protect all administration operations with authenticated sessions and server-side `user_roles` checks; shared client-side access codes are only allowed for one-time first-admin provisioning.
 - Route application edits, deletion, and bulk imports through the protected administration function so privileged writes are always checked server-side.
 - Keep private casting data separate from public recruitment and legacy casting; the casting-workspace function validates event membership and user_roles on every action, and service-only tables prevent direct API bypass.

@@ -49,6 +49,7 @@ const Header: React.FC = () => {
           href: '/corporate-institutional',
           subs: [
             { href: '/corporate-institutional#corporate', label: L('Événements d’entreprise', 'Corporate Events') },
+            { href: '/formations', label: L('Formations en entreprise et administration', 'Corporate & public-sector training') },
             { href: '/corporate-institutional#institutionnel', label: L('Événements institutionnels', 'Institutional Events') },
             { href: '/corporate-institutional#diplomatique', label: L('Événements diplomatiques', 'Diplomatic Events') },
             { href: '/corporate-institutional#delegations', label: L('Délégations', 'Delegations') },
@@ -66,7 +67,7 @@ const Header: React.FC = () => {
   ];
 
   const active = (h: string) => location.pathname === h;
-  const eventsActive = ['/business-events', '/corporate-institutional', '/weddings'].includes(location.pathname);
+  const eventsActive = ['/business-events', '/corporate-institutional', '/formations', '/weddings'].includes(location.pathname);
 
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'bg-background/95 backdrop-blur-md border-b border-border shadow-[0_6px_24px_-18px_hsl(var(--ink)/0.35)]' : 'bg-background/80 backdrop-blur-sm'}`}>

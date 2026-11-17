@@ -10,6 +10,7 @@ import Services from "./pages/Services";
 import Portfolio from "./pages/Portfolio";
 import BusinessEvents from "./pages/BusinessEvents";
 import CorporateInstitutional from "./pages/CorporateInstitutional";
+import TrainingEvents from "./pages/TrainingEvents";
 import Weddings from "./pages/Weddings";
 import Careers from "./pages/Careers";
 import AdminApplications from "./pages/AdminApplications";
@@ -38,6 +39,7 @@ const App = () => (
             <Route path="/quote" element={<Navigate to="/contact#projet" replace />} />
             <Route path="/business-events" element={<BusinessEvents />} />
             <Route path="/corporate-institutional" element={<CorporateInstitutional />} />
+            <Route path="/formations" element={<TrainingEvents />} />
             <Route path="/weddings" element={<Weddings />} />
             <Route path="/careers" element={<Careers />} />
             <Route path="/career" element={<Careers />} />

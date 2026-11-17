@@ -1,3 +1,7 @@
+# Training events
+- [x] Create the bilingual company and public-administration training page and add desktop/mobile event-menu links.
+- [x] Verify navigation, language switching and mobile display.
+
 # Private casting workspace
 - [x] Add protected downloads for the existing full casting PDF and Excel reports; both authenticated browser downloads verified.
 - [x] Send both reports to the requested email address; delivery confirmed by the email service.
