@@ -13,7 +13,7 @@ const Footer: React.FC = () => {
   const events = [
     { to: '/business-events', label: L('Événements d’affaires', 'Business Events') },
     { to: '/corporate-institutional', label: L('Entreprises & institutions', 'Corporate & Institutional') },
-    { to: '/formations', label: L('Formations en entreprise et administration', 'Corporate & public-sector training') },
+    { to: '/formations', label: L('Formation en entreprise', 'Corporate training') },
     { to: '/weddings', label: L('Mariages & événements d’exception', 'Weddings & Signature Events') },
     { to: '/portfolio', label: t('nav.portfolio') },
   ];

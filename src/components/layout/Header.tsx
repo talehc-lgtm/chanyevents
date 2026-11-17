@@ -49,7 +49,7 @@ const Header: React.FC = () => {
           href: '/corporate-institutional',
           subs: [
             { href: '/corporate-institutional#corporate', label: L('Événements d’entreprise', 'Corporate Events') },
-            { href: '/formations', label: L('Formations en entreprise et administration', 'Corporate & public-sector training') },
+            { href: '/formations', label: L('Formation en entreprise', 'Corporate training') },
             { href: '/corporate-institutional#institutionnel', label: L('Événements institutionnels', 'Institutional Events') },
             { href: '/corporate-institutional#diplomatique', label: L('Événements diplomatiques', 'Diplomatic Events') },
             { href: '/corporate-institutional#delegations', label: L('Délégations', 'Delegations') },
