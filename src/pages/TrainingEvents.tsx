@@ -23,12 +23,12 @@ const TrainingEvents = () => {
 
   return (
     <Layout>
-      <Seo title={L("Organisation des formations en entreprises et administration | CHANY EVENT'S", "Organising training for companies and public administrations | CHANY EVENT'S")}
-        description={L("CHANY EVENT'S assure l’organisation des formations en entreprises et administration au Cameroun : ateliers, séminaires, lieu, équipements, accueil et coordination.", "CHANY EVENT'S organises training for companies and public administrations in Cameroon: workshops, seminars, venues, equipment, reception and coordination.")} />
+      <Seo title={L("Organisation des formations en entreprises et administrations | CHANY EVENT'S", "Organising training for companies and public administrations | CHANY EVENT'S")}
+        description={L("CHANY EVENT'S assure l’organisation des formations en entreprises et administrations au Cameroun : ateliers, séminaires, lieu, équipements, accueil et coordination.", "CHANY EVENT'S organises training for companies and public administrations in Cameroon: workshops, seminars, venues, equipment, reception and coordination.")} />
       <section className="pt-28 md:pt-32 pb-10">
         <div className="container-luxury px-6 md:px-12 pb-8">
           <span className="eyebrow mb-4">{L('Entreprises & institutions', 'Corporate & Institutional')}</span>
-          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl max-w-5xl mb-5">{L('Organisation des formations ', 'Organising training ')}<em>{L('en entreprises et administration', 'for companies and public administrations')}</em></h1>
+          <h1 className="font-serif text-4xl md:text-5xl lg:text-6xl max-w-5xl mb-5">{L('Organisation des formations ', 'Organising training ')}<em>{L('en entreprises et administrations', 'for companies and public administrations')}</em></h1>
           <p className="text-muted-foreground text-lg max-w-3xl">{L('CHANY EVENT’S accompagne les entreprises et les administrations dans l’organisation de leurs formations, ateliers et séminaires. De la préparation à la coordination sur place, nous créons un cadre professionnel pour apprendre, échanger et faire progresser vos équipes.', 'CHANY EVENT’S supports companies and public administrations in organising their training sessions, workshops and seminars. From preparation to on-site coordination, we create a professional setting to learn, share and develop your teams.')}</p>
         </div>
         <img src={workshop} alt={L('Atelier de formation avec une intervenante et des participants', 'Training workshop with a facilitator and participants')} className="w-full h-64 md:h-80 lg:h-96 object-cover object-top" fetchPriority="high" />
